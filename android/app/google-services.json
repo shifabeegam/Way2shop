@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "862022020795",
+    "project_id": "way2shop-a1546",
+    "storage_bucket": "way2shop-a1546.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862022020795:android:ae3e13acd6b4af5cc4439e",
+        "android_client_info": {
+          "package_name": "com.example.a"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm8airTGFet3JD-qEHffaBUvrvn9hfvns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862022020795:android:07539de79e05b620c4439e",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm8airTGFet3JD-qEHffaBUvrvn9hfvns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

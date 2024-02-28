@@ -1,4 +1,5 @@
 import 'package:a/Shopers/Additem.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Shopers/Additem.dart';
 import 'package:a/Shopers/Stockdt.dart';
@@ -15,7 +16,10 @@ import 'Shopers/ShopHome.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
