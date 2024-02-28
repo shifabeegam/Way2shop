@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "862022020795",
-    "project_id": "way2shop-a1546",
-    "storage_bucket": "way2shop-a1546.appspot.com"
+    "project_number": "600442871126",
+    "firebase_url": "https://way2shop-2d39e-default-rtdb.firebaseio.com",
+    "project_id": "way2shop-2d39e",
+    "storage_bucket": "way2shop-2d39e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:862022020795:android:ae3e13acd6b4af5cc4439e",
+        "mobilesdk_app_id": "1:600442871126:android:62e8c40c3ea48db0a68af7",
         "android_client_info": {
           "package_name": "com.example.a"
         }
@@ -15,26 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBm8airTGFet3JD-qEHffaBUvrvn9hfvns"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:862022020795:android:07539de79e05b620c4439e",
-        "android_client_info": {
-          "package_name": "com.example.untitled"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBm8airTGFet3JD-qEHffaBUvrvn9hfvns"
+          "current_key": "AIzaSyDVDVECzBMTVk9s8IQmGiATpz7RUofcV1M"
         }
       ],
       "services": {
