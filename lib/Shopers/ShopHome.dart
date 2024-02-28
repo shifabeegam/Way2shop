@@ -15,19 +15,10 @@ class ShopHome extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: Color(0xff00655F),
-        title: InkWell(
-          onTap: () {
-    final FirebaseFirestore db = FirebaseFirestore.instance;
-
-    db.collection("USERS").where("PHONE_NUMBER", isEqualTo: 8590022047).get().then((value) async {
-      print('db worked');
-    });
-        },
-          child: const Text(
-            "Way2Shop",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+        title: const Text(
+          "Way2Shop",
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
