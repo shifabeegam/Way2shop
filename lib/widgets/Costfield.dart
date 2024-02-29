@@ -10,8 +10,11 @@ class Costfield extends StatelessWidget {
     required this.width,
     required this.hight,
     required this.hintText,
+    this.ItemController,
+
 
   });
+  TextEditingController? ItemController;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class Costfield extends StatelessWidget {
         ],
       ),
 
-      child: TextField(decoration: InputDecoration(
+      child: TextField(controller: ItemController,decoration: InputDecoration(
         //border: OutlineInputBorder(),),
        // fillColor: Colors.white24,
         filled: true,

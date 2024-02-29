@@ -1,5 +1,4 @@
 import 'package:a/Shopers/Additem.dart';
-import 'package:a/widgets/Form.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Shopers/Additem.dart';
@@ -16,6 +15,7 @@ import 'Admin/ViewUsers.dart';
 import 'Shopers/ShopHome.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
+import 'customer/SearchItemdtl.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: fval(),
+      home: SearchItemdtl(),
     );
   }
 }

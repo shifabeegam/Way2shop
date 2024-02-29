@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:a/widgets/Costfield.dart';
 import 'package:a/widgets/HomeButton.dart';
+import 'package:a/providers/MainProvider.dart';
+import 'package:provider/provider.dart';
 
 class Additem extends StatelessWidget {
   const Additem({super.key});
@@ -48,40 +50,49 @@ class Additem extends StatelessWidget {
                   )
                 ],
               ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20,),
-                      Container(
-                      width: 100,
-                      height: 100,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: OvalBorder(
-                          side: BorderSide(width: 1, color: Color(0xFF10706A)),
+                  child: Consumer<MainProvider>(
+                    builder: (context,value,child) {
+                      return Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Container(
+                          width: 100,
+                          height: 100,
+                          decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: OvalBorder(
+                              side: BorderSide(width: 1, color: Color(0xFF10706A)),
+                            ),
+                          ),
+                            child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
                         ),
-                      ),
-                        child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
-                    ),
-                      SizedBox(height: 20,),
-                      Costfield(width:296 , hight: 50, hintText: "Item Name"),
-                      Costfield(width:296 , hight: 50, hintText: "Item Code"),
-                      Costfield(width:296 , hight: 50, hintText: "Price"),
-                      Costfield(width:296 , hight: 50, hintText: "Category"),
-                      Costfield(width:296 , hight: 50, hintText: "Item Name"),
+                          SizedBox(height: 20,),
+                          Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name"),
+                          Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
+                          Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
+                          Costfield(ItemController: value.category,width:296 , hight: 50, hintText: "Category"),
 
-                      SizedBox(height: 30,),
-                      Container(decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),),
-                        child: MaterialButton(onPressed: (){},
-                        child: const Text("Submit"),
-                        highlightColor: Color(0xff0C630A),
-                        splashColor: Colors.grey,
-                          color: Colors.green,
-                        ),
-                      )
 
-                    ]
-                        
+
+
+
+                          SizedBox(height: 30,),
+                          Container(decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),),
+                            child: MaterialButton(onPressed: (){
+                             // MainProvider.upload();
+                            },
+                            child: const Text("Submit"),
+                            highlightColor: Color(0xff0C630A),
+                            splashColor: Colors.grey,
+                              color: Colors.green,
+                            ),
+                          )
+
+                        ]
+
+                      );
+                    }
                   ),
             ),
             ),

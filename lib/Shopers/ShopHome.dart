@@ -78,11 +78,11 @@ class ShopHome extends StatelessWidget {
 
 
 
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const Stockdt()),
-                          // );
+                          Navigator.push(
+                            context,
+                             MaterialPageRoute(
+                              builder: (context) => const Stockdt()),
+                           );
                         },
                         child: HomeButton(
                           textColor: Colors.white,
@@ -198,8 +198,9 @@ class ShopHome extends StatelessWidget {
           Container(
             height: 45,
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.black,
+            decoration: BoxDecoration(               borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+
+            color: Colors.white,
             ),
             child: Text(
               "Order Placed",
