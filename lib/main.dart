@@ -15,6 +15,7 @@ import 'Admin/ViewUsers.dart';
 import 'Shopers/ShopHome.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
+import 'customer/SearchItemdtl.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ShopHome(),
+      home: SearchItemdtl(),
     );
   }
 }

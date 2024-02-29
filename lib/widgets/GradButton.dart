@@ -6,7 +6,7 @@ class GradButton extends StatelessWidget {
   final Color boxshadowColor;
   final Color borderColor;
   final String text;
-  //final Image image;
+  //final AssetImage assetImage;
   double width;
   double hight;
   double fondSize;
@@ -18,7 +18,7 @@ class GradButton extends StatelessWidget {
     required this.borderColor,
 
     required this.text,
-   // required this.image,
+   // required this.assetImage,
     required this.hight,
     required this.width,
     required this.fondSize,
@@ -63,7 +63,8 @@ class GradButton extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              //Container( decoration: BoxDecoration( image: DecorationImage(image: AssetImage("assets/"im)),),
+
+              //Image(image:assetImage), // Using AssetImage
 
                // height: 95,),
               Padding(
