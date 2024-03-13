@@ -2,25 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Costfield extends StatelessWidget {
-  double width;
-  double hight;
   final String hintText;
 
   Costfield({super.key,
-    required this.width,
-    required this.hight,
+    this.width,
+     this.hight,
     required this.hintText,
     this.ItemController,
 
 
   });
   TextEditingController? ItemController;
+  double? width;
+  double? hight;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: hight,
+      width: width??296,
+      height: hight??50,
       decoration: BoxDecoration(
         color: Color(0xFFDBE3E3),
         boxShadow: [
