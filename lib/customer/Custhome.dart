@@ -13,7 +13,7 @@ class Custhome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:const Color(0xff10706A),
+        backgroundColor:const Color(0xff650015),
 
         title: const Text("Way2Shop",
           style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
@@ -27,7 +27,7 @@ class Custhome extends StatelessWidget {
           children: [
             Container(width:double.infinity ,
               height: 130,
-              decoration: const BoxDecoration(color: Color(0xff10706A)),
+              decoration: const BoxDecoration(color: Color(0xff650015)),
               child: Column(
                 children: [
                   Center(
@@ -36,11 +36,11 @@ class Custhome extends StatelessWidget {
                       width:360 ,
 
                       child: const TextField(decoration: InputDecoration(
-                          border: OutlineInputBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
-                          fillColor: Colors.white24,
+                          border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
+                          fillColor: Colors.white10,
                           filled: true,
                           focusedBorder: InputBorder.none,
-                          hintText:"Search...",
+                          hintText:"Search",
                           hintStyle:TextStyle(color: Colors.white),
                           prefixIcon: Icon(Icons.search,color: Colors.white,),
                           suffixIcon: Icon(Icons.mic,color: Colors.white,),
@@ -93,7 +93,7 @@ const SizedBox(height: 30,),
               height: 39,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xff10706A), Color(0xff249992)],
+                    colors: [Color(0xff650015), Color(0xff7E0922)],
 
                     begin: Alignment.bottomCenter, end: Alignment.topCenter,
                   ),
@@ -215,7 +215,7 @@ const SizedBox(height: 30,),
 
 bottomNavigationBar: CurvedNavigationBar(
   backgroundColor:Colors.white ,
-  color: const Color(0xff10706A),
+  color: const Color(0xff650015),
   animationDuration: const Duration(milliseconds: 300),
   onTap: (index){},
   items: [
