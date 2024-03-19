@@ -9,9 +9,11 @@ class Additem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MainProvider mainprovider = Provider.of(context,listen: false);
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar( backgroundColor:Color(0xFF10706A),
+      appBar: AppBar( backgroundColor:Color(0xFF650015),
         /*leading:InkWell(
         onTap: (){},
 
@@ -26,7 +28,7 @@ class Additem extends StatelessWidget {
       Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: Color(0xFF10706A)),
+        decoration: BoxDecoration(color: Color(0xFF650015)),
         child: Column(
           children: [
 
@@ -37,7 +39,7 @@ class Additem extends StatelessWidget {
               width: 296,
               height: 584,
               decoration: ShapeDecoration(
-                color: Color(0xFFDBE3E3),
+                color: Colors.white24,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -61,7 +63,7 @@ class Additem extends StatelessWidget {
                           decoration: ShapeDecoration(
                             color: Colors.white,
                             shape: OvalBorder(
-                              side: BorderSide(width: 1, color: Color(0xFF10706A)),
+                              side: BorderSide(width: 1, color: Color(0xFF650015)),
                             ),
                           ),
                             child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
@@ -70,6 +72,7 @@ class Additem extends StatelessWidget {
                           Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name"),
                           Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
                           Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
+                          Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
                           Costfield(ItemController: value.category,width:296 , hight: 50, hintText: "Category"),
 
 
@@ -80,7 +83,7 @@ class Additem extends StatelessWidget {
                           Container(decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),),
                             child: MaterialButton(onPressed: (){
-                             // MainProvider.upload();
+                              mainprovider.upload();
                             },
                             child: const Text("Submit"),
                             highlightColor: Color(0xff0C630A),
