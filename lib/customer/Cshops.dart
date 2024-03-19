@@ -116,14 +116,7 @@ class Cshops extends StatelessWidget {
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
     SizedBox(width: 1,),
-    GradButton(textColor: Colors.black,
-    backgroundColor:Color(0xffDBE3E3) ,
-    boxshadowColor:Colors.grey ,
-    borderColor: Colors.white,
-    text: " 1 Shop name",
-    hight: 55,
-    width: 185,
-    fondSize: 18),
+    GradButton(text: "asdf",),
 
     GradButton(textColor: Colors.black,
     backgroundColor:Color(0xffDBE3E3) ,
