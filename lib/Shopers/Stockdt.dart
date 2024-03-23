@@ -45,132 +45,139 @@ class Stockdt extends StatelessWidget {
           children: [
             Expanded(
               flex: 4,
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: double.infinity,
-                      height: 115,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFDBE3E3),
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x3F000000),
-                            blurRadius: 4,
-                            offset: Offset(0, 4),
-                            spreadRadius: 0,
-                          )
-                        ],
+              child: Consumer<MainProvider>(
+                builder: (context,value,child) {
+                  return ListView.separated(
+                    itemCount: value.allAdditem.length,
 
-                      ),
-                      child:
-                      Padding(
+                      itemBuilder: (context, index) {
+                      var items = value.allAdditem[index].toString();
+                      print(value.allAdditem[index].name);
+                      print(value.allAdditem[index].quantity);
+                      print(value.allAdditem[index].code);
+                        return Container(
+                          width: double.infinity,
+                          height: 115,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDBE3E3),
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x3F000000),
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                                spreadRadius: 0,
+                              )
+                            ],
 
-                        padding: const EdgeInsets.all(7),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                width: 80,
+                                height: 76,
+                                decoration: ShapeDecoration(
+                                  color: Colors.white,
+                                  shape: OvalBorder(
+                                    side: BorderSide(width: 1, color: Color(0xFF10706A)),
+                                  ),
+                                ),
+                                 child:Icon(Icons.image_outlined,color: Colors.grey,size: 30,),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Text( value.allAdditem[index].name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                    Text( value.allAdditem[index].code,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                  ],
+                                ),
+                               ),
 
-                        child: Row(
 
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 76,
-                              decoration: ShapeDecoration(
-                                color: Colors.white,
-                                shape: OvalBorder(
-                                  side: BorderSide(width: 1, color: Color(0xFF10706A)),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Column(
+                                  children: [
+                                    Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 20)),
+                                    SizedBox(height: 5,),
+                                    InkWell(
+                                      onTap: (){
+                                        showDialog(context: context, builder: (context){
+                                          return Container(
+                                            child: AlertDialog(
+
+                                              actions: [
+                                                Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(15),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                                                        children: [
+
+                                                          InkWell(
+                                                              child: HomeButton(
+                                                                  textColor: Color(0xFA005A54),
+                                                                  backgroundColor: Color(0xFFDBE3E3),
+                                                                  boxshadowColor: Colors.grey,
+                                                                  borderColor: Color(0xFFDBE3E3), text: "-",
+                                                                  hight: 37, width:62 , fondSize: 30)),
+                                                          Text("203",style: TextStyle(fontSize: 40),),
+                                                          InkWell(
+                                                              child: HomeButton(
+                                                                  textColor: Color(0xFA005A54),
+                                                                  backgroundColor: Color(0xFFDBE3E3),
+                                                                  boxshadowColor: Colors.grey,
+                                                                  borderColor: Color(0xFFDBE3E3),
+                                                                  text: "+", hight: 37, width:62 , fondSize: 30)),
+
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Center(
+                                                      child: MaterialButton(onPressed: (){ Navigator.pop(
+                                                        context,
+                                                        /* MaterialPageRoute(
+                                                        builder: (context) => const Additem()),*/
+                                                      );
+
+                                                      },
+                                                        child: const Text("ok"),
+                                                        highlightColor: Color(0xff0C630A),
+                                                        splashColor: Colors.grey,
+                                                        color: Colors.green,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+
+                                              ],
+
+                                            ),
+                                          );
+                                        });
+                                      },
+                                      child: HomeButton(textColor: Colors.black, backgroundColor: Colors.orange, boxshadowColor: Colors.grey, borderColor: Colors.orange, text: "Update", hight: 33, width: 126,
+                                          fondSize: 14),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              child: Icon(Icons.image_outlined,color: Colors.grey,size: 30,),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              //child: Text(value.allAdditem[index].itemName,style: TextStyle(fontSize: 16),),
-                            ),
 
+                            ],
 
-
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Column(
-                                children: [
-                                  //Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 30)),
-                                  SizedBox(height: 5,),
-                                  InkWell(
-                                    onTap: (){
-                                      showDialog(context: context, builder: (context){
-                                        return Container(
-                                          child: AlertDialog(
-
-                                            actions: [
-                                              Column(
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(15),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-                                                      children: [
-
-                                                        InkWell(
-                                                            child: HomeButton(
-                                                                textColor: Color(0xFA005A54),
-                                                                backgroundColor: Color(0xFFDBE3E3),
-                                                                boxshadowColor: Colors.grey,
-                                                                borderColor: Color(0xFFDBE3E3), text: "-",
-                                                                hight: 37, width:62 , fondSize: 30)),
-                                                        Text("203",style: TextStyle(fontSize: 40),),
-                                                        InkWell(
-                                                            child: HomeButton(
-                                                                textColor: Color(0xFA005A54),
-                                                                backgroundColor: Color(0xFFDBE3E3),
-                                                                boxshadowColor: Colors.grey,
-                                                                borderColor: Color(0xFFDBE3E3),
-                                                                text: "+", hight: 37, width:62 , fondSize: 30)),
-
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Center(
-                                                    child: MaterialButton(onPressed: (){ Navigator.pop(
-                                                      context,
-                                                      /* MaterialPageRoute(
-                                                      builder: (context) => const Additem()),*/
-                                                    );
-
-                                                    },
-                                                      child: const Text("ok"),
-                                                      highlightColor: Color(0xff0C630A),
-                                                      splashColor: Colors.grey,
-                                                      color: Colors.green,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-
-                                            ],
-
-                                          ),
-                                        );
-                                      });
-                                    },
-                                    child: HomeButton(textColor: Colors.black, backgroundColor: Colors.orange, boxshadowColor: Colors.grey, borderColor: Colors.orange, text: "Update", hight: 33, width: 126,
-                                        fondSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                          ],
-
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return SizedBox(height: 1,);
-                  },
-                  itemCount: 3),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(color:Colors.green,height: 3,);
+                      },
+                  );
+                }
+              ),
             )
 
           ],

@@ -1,3 +1,4 @@
+import 'package:a/Model/ItemModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,17 +9,19 @@ class MainProvider extends ChangeNotifier {
   TextEditingController price = TextEditingController();
   TextEditingController quantity = TextEditingController();
 
+  TextEditingController cost = TextEditingController();
 
   TextEditingController category = TextEditingController();
-  List allAdditem = [];
+  List <ItemModel> allAdditem = [];
 
 
-
- 
 // Add item Details
 
   void upload() {
+
+
     final user = <String, dynamic>{
+
       "Item Name": itemNm.text,
       "item Code": itemCd.text,
       "Price": price.text,
@@ -28,7 +31,8 @@ class MainProvider extends ChangeNotifier {
 
     };
 
-    db.collection("users").doc(itemNm.text.toString()).set(user);
+
+    db.collection("ITEMS").doc(itemCd.text.toString()).set(user);
     notifyListeners();
     print("Upload Succesfully");
   }
@@ -37,7 +41,7 @@ class MainProvider extends ChangeNotifier {
 
     void getItem(){
 
-      db.collection("users").snapshots().listen((value)
+      db.collection("ITEMS").snapshots().listen((value)
       {
         allAdditem.clear();
        // totalAmount = 0.0;
@@ -45,30 +49,15 @@ class MainProvider extends ChangeNotifier {
         if(value.docs.isNotEmpty){
           for(var element in value.docs) {
             Map<dynamic, dynamic> map = element.data() as Map;
-            print("-------------------------------------------");
-            
-            print(element.data());
-            print(map["Item Name"]);
-            print(map["Price"]);
-
-            // allAdditem.add(AdditemModal(
-            //     map["Item Name"],
-            //     map["Price"].toString() as num,
-            //
-            //
-            //
-            //
-            //     //element.get("A"),
-            //
-            //    // map["Date"].toString()
-            //
-            // ));
-
+           allAdditem.add(ItemModel(
+               map["Item Name"].toString(),
+               map["item Code"].toString(),
+               map["Item Quantity"].toString()));
             notifyListeners();
+
           }
 
           notifyListeners();
-          print("---------------------");
 
         }
       });
@@ -77,16 +66,4 @@ class MainProvider extends ChangeNotifier {
  }
 
 }
-
-// class AdditemModal {
-//   String itemName ;
-//   num quantity;
-//
-//
-//
-//   AdditemModal(this.itemName, this.quantity);
-//
-//
-//
-// }
 
