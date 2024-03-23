@@ -1,5 +1,4 @@
 import 'package:a/Shopers/Additem.dart';
-import 'package:a/customer/Cproduct.dart';
 import 'package:a/customer/Wishlist.dart';
 import 'package:a/providers/MainProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -62,7 +61,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Cproduct(),),
+      home: Cshops(),),
     );
   }
 }
