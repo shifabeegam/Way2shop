@@ -1,3 +1,6 @@
+import 'package:a/customer/Caccount.dart';
+import 'package:a/customer/Ccategory.dart';
+import 'package:a/customer/Cshops.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -91,11 +94,35 @@ class Ctrending extends StatelessWidget {
         color: Color(0xff10706A),
         animationDuration: Duration(milliseconds: 300),
         onTap: (index){},
+        // items: [
+        //   Icon(Icons.trending_up,color: Colors.white,),
+        //   Icon(Icons.category_outlined,color: Colors.white),
+        //   Icon(Icons.shop_2_outlined,color: Colors.white),
+        //   Icon(Icons.account_circle_outlined,color: Colors.white)
+        //
+        // ],
         items: [
-          Icon(Icons.trending_up,color: Colors.white,),
-          Icon(Icons.category_outlined,color: Colors.white),
-          Icon(Icons.shop_2_outlined,color: Colors.white),
-          Icon(Icons.account_circle_outlined,color: Colors.white)
+          InkWell(onTap: (){ Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Ctrending()),
+          );
+          },child: const Icon(Icons.trending_up,color: Colors.white,)),
+          InkWell(onTap: (){Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Ccategory()),
+          );}, child: const Icon(Icons.category_outlined,color: Colors.white)),
+          InkWell(onTap: (){Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Cshops()),
+          );}, child: const Icon(Icons.shop_2_outlined,color: Colors.white)),
+          InkWell(onTap: (){Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Caccount()),
+          );}, child: const Icon(Icons.account_circle_outlined,color: Colors.white))
 
 
         ],

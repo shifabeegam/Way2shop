@@ -1,4 +1,5 @@
 import 'package:a/Shopers/Additem.dart';
+import 'package:a/customer/Cproduct.dart';
 import 'package:a/customer/Wishlist.dart';
 import 'package:a/providers/MainProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,13 +36,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers:[
       ChangeNotifierProvider(create: (context) => MainProvider())
-    ])
+    ],
     child: MaterialApp(
     title: 'Flutter Demo',
     theme: ThemeData(
     primarySwatch: Colors.blue,
     ),
-      home: Cshops(),
+      home: Cproduct(),
+    ),
     );
   }
 }
