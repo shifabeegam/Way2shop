@@ -9,10 +9,11 @@ class Additem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MainProvider mainProvider = Provider.of(context,listen: false);
+    MainProvider mainprovider = Provider.of(context,listen: false);
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar( backgroundColor:Color(0xFF10706A),
+      appBar: AppBar( backgroundColor:Color(0xFF650015),
         /*leading:InkWell(
         onTap: (){},
 
@@ -27,91 +28,82 @@ class Additem extends StatelessWidget {
       Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: Color(0xFF10706A)),
-        child: Column(
-          children: [
-
-
-            SizedBox(height: 50,),
-            Center(
-                child:Container(
-              width: 296,
-              height: 584,
-              decoration: ShapeDecoration(
-                color: Color(0xFFDBE3E3),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                shadows: [
-                  BoxShadow(
-                    color: Color(0x3F000000),
-                    blurRadius: 4,
-                    offset: Offset(9, 8),
-                    spreadRadius: 0,
-                  )
-                ],
-              ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20,),
-                      Container(
-                      width: 100,
-                      height: 100,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: OvalBorder(
-                          side: BorderSide(width: 1, color: Color(0xFF10706A)),
-                        ),
-                      ),
-                        child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
-                    ),
-                      SizedBox(height: 20,),
-                      Consumer<MainProvider>(builder: (context, value, child) {
-                        return Costfield(ItemController: value.itemNm, hintText: "Item Name");
-                      },),
-                      SizedBox(height: 8,),
-                      Consumer<MainProvider>(
-                          builder: (context,value,child) {
-                            return Costfield(ItemController: value.itemCd,hintText: "Item Code");
-                          }
-                      ),
-                      Consumer<MainProvider>(
-                          builder: (context,value,child) {
-                            return Costfield(ItemController: value.price, hintText: "Price");
-                          }
-                      ),
-                      Consumer<MainProvider>(
-                          builder: (context,value,child) {
-                            return Costfield(ItemController: value.category, hintText: "Catagory");
-                          }
-                      ),
-                      ElevatedButton(onPressed: () {
-                        //MainProvider.uoload();
-                      }, child: Text("asdsa")),
-
-
-
-
-
-                      SizedBox(height: 30,),
-                      Container(decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),),
-                        child: MaterialButton(onPressed: (){
-                          mainProvider.upload();
-                        },
-                        child: const Text("Submit"),
-                        highlightColor: Color(0xff0C630A),
-                        splashColor: Colors.grey,
-                          color: Colors.green,
-                        ),
-                      )
-
-                    ]
-
+        decoration: BoxDecoration(color: Color(0xFF650015)),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+          
+          
+              SizedBox(height: 50,),
+              Center(
+                  child:Container(
+                width: 296,
+                height: 584,
+                decoration: ShapeDecoration(
+                  color: Colors.white24,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
                   ),
-            ),
-            ),
-          ],
+                  shadows: [
+                    BoxShadow(
+                      color: Color(0x3F000000),
+                      blurRadius: 4,
+                      offset: Offset(9, 8),
+                      spreadRadius: 0,
+                    )
+                  ],
+                ),
+                    child: Consumer<MainProvider>(
+                      builder: (context,value,child) {
+                        return Column(
+                          children: [
+                            SizedBox(height: 20,),
+                            Container(
+                            width: 100,
+                            height: 100,
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: OvalBorder(
+                                side: BorderSide(width: 1, color: Color(0xFF650015)),
+                              ),
+                            ),
+                              child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
+                          ),
+                            SizedBox(height: 20,),
+                            Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name"),
+                            Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
+                            Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
+                            Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
+
+                            Costfield(ItemController: value.category,width:296 , hight: 50, hintText: "Category"),
+
+          
+          
+          
+          
+          
+                            SizedBox(height: 30,),
+                            Container(decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),),
+                              child: MaterialButton(onPressed: (){
+                                mainprovider.upload();
+                              },
+                              child: const Text("Submit"),
+                              highlightColor: Color(0xff0C630A),
+                              splashColor: Colors.grey,
+                                color: Colors.green,
+                              ),
+                            )
+          
+                          ]
+          
+                        );
+                      }
+                    ),
+              ),
+              ),
+            ],
+          ),
         ),
 
 
