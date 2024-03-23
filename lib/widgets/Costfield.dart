@@ -22,7 +22,7 @@ class Costfield extends StatelessWidget {
       width: width??296,
       height: hight??50,
       decoration: BoxDecoration(
-        color: Color(0xFFDBE3E3),
+        color: Colors.white24,
         boxShadow: [
           BoxShadow(
             color: Color(0x3F000000),

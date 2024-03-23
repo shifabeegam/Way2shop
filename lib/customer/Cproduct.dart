@@ -213,7 +213,7 @@ class Cproduct extends StatelessWidget {
                       Container(
                         width: double.infinity,
                           color: Colors.white
-                          ,child: Text("Product Details",style: TextStyle(fontSize: 30),)),
+                          ,child: Text("Product Details",style: TextStyle(fontSize:25),)),
                       Container(
                         height: 130,
                         width: double.infinity,
@@ -282,7 +282,7 @@ class Cproduct extends StatelessWidget {
 
                                 Row(
                                   children: [
-                                    Icon(Icons.location_on_outlined,size: 44,color: Colors.black38,),
+                                    Icon(Icons.location_on_outlined,size: 36,color: Colors.black38,),
                                     Column(
                                       children: [
                                         Text("SH 72, Down Hill, Malappuram, Kerala 676505",style: TextStyle(fontSize: 12),),
@@ -305,49 +305,6 @@ class Cproduct extends StatelessWidget {
                     ],),
                   ),
                   Divider(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: double.infinity,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              height: 45,
-                              width: 50,
-                              decoration: BoxDecoration(border: Border.all(
-                                  color: Colors.black26),
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Icon(Icons.messenger_outline,),
-                            ),
-                            Container(
-                              height: 45,
-                              width: 120,
-                              decoration: BoxDecoration(border: Border.all(
-                                  color: Colors.black26),
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Center(child: Text("Add To Cart",style: TextStyle(fontSize: 18),)),
-                            ),
-                            Container(
-                              height: 45,
-                              width: 140,
-                              decoration: BoxDecoration(border: Border.all(
-                                  color: Colors.black26),
-                                  borderRadius: BorderRadius.circular(10),
-                                color: Colors.yellow[600]
-                              ),
-                              child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
 
                 ],
               ),
@@ -355,47 +312,84 @@ class Cproduct extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar:BottomAppBar(
 
-
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor:Colors.white ,
-        color: Color(0xff10706A),
-        animationDuration: Duration(milliseconds: 300),
-        onTap: (index){},
-        // items: [
-        //   Icon(Icons.trending_up,color: Colors.white,),
-        //   Icon(Icons.category_outlined,color: Colors.white),
-        //   Icon(Icons.shop_2_outlined,color: Colors.white),
-        //   Icon(Icons.account_circle_outlined,color: Colors.white)
-        //
-        // ],
-        items: [
-          InkWell(onTap: (){ Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Ctrending()),
-          );
-          },child: const Icon(Icons.trending_up,color: Colors.white,)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Ccategory()),
-          );}, child: const Icon(Icons.category_outlined,color: Colors.white)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Cshops()),
-          );}, child: const Icon(Icons.shop_2_outlined,color: Colors.white)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Caccount()),
-          );}, child: const Icon(Icons.account_circle_outlined,color: Colors.white))
-
-
-        ],
-
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              height: 45,
+              width: 50,
+              decoration: BoxDecoration(border: Border.all(
+                  color: Colors.black26),
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Icon(Icons.messenger_outline,),
+            ),
+            Container(
+              height: 45,
+              width: 120,
+              decoration: BoxDecoration(border: Border.all(
+                  color: Colors.black26),
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Center(child: Text("Add To Cart",style: TextStyle(fontSize: 18),)),
+            ),
+            Container(
+              height: 45,
+              width: 140,
+              decoration: BoxDecoration(border: Border.all(
+                  color: Colors.black26),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.yellow[600]
+              ),
+              child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
+            ),
+          ],
+        ),
       ),
+
+
+      // bottomNavigationBar: CurvedNavigationBar(
+      //   backgroundColor:Colors.white ,
+      //   color: Color(0xff10706A),
+      //   animationDuration: Duration(milliseconds: 300),
+      //   onTap: (index){},
+      //   // items: [
+      //   //   Icon(Icons.trending_up,color: Colors.white,),
+      //   //   Icon(Icons.category_outlined,color: Colors.white),
+      //   //   Icon(Icons.shop_2_outlined,color: Colors.white),
+      //   //   Icon(Icons.account_circle_outlined,color: Colors.white)
+      //   //
+      //   // ],
+      //   items: [
+      //     InkWell(onTap: (){ Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (context) => const Ctrending()),
+      //     );
+      //     },child: const Icon(Icons.trending_up,color: Colors.white,)),
+      //     InkWell(onTap: (){Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (context) => const Ccategory()),
+      //     );}, child: const Icon(Icons.category_outlined,color: Colors.white)),
+      //     InkWell(onTap: (){Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (context) => const Cshops()),
+      //     );}, child: const Icon(Icons.shop_2_outlined,color: Colors.white)),
+      //     InkWell(onTap: (){Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (context) => const Caccount()),
+      //     );}, child: const Icon(Icons.account_circle_outlined,color: Colors.white))
+      //
+      //
+      //   ],
+      //
+      // ),
 
 
     );
