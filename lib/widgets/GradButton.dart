@@ -37,7 +37,7 @@ class GradButton extends StatelessWidget {
         height: hight??55,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xff8FC7C3), Colors.white],
+            colors: [Color(0xffC0939D), Colors.white],
 
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
