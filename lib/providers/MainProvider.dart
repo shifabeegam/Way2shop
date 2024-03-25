@@ -12,7 +12,9 @@ class MainProvider extends ChangeNotifier {
   TextEditingController cost = TextEditingController();
 
   TextEditingController category = TextEditingController();
+
   List <ItemModel> allAdditem = [];
+  TextEditingController addcategory = TextEditingController();
 
 
 // Add item Details
@@ -63,6 +65,16 @@ class MainProvider extends ChangeNotifier {
       });
 
 
+
+ }
+
+ void uploadcatergory(){
+    final category = <String, dynamic>{
+      "Category":addcategory.text,
+    };
+    db.collection("CATEGORIES").doc(addcategory.text.toString()).set(category);
+    notifyListeners();
+    print("upload Successfully");
  }
 
 }

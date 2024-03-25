@@ -20,7 +20,7 @@ class Cproduct extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xff10706A),
+        backgroundColor:Color(0xff650015),
 
 
         title: Text("Way2Shop",
@@ -37,7 +37,7 @@ class Cproduct extends StatelessWidget {
           children: [
             Container(width:double.infinity ,
               height: 130,
-              decoration: BoxDecoration(color: Color(0xff10706A)),
+              decoration: BoxDecoration(color: Color(0xff650015)),
               child: Column(
                 children: [
                   Center(
@@ -73,7 +73,7 @@ class Cproduct extends StatelessWidget {
               height: 39,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xff10706A), Color(0xff249992)],
+                  colors: [Color(0xff650015), Color(0xff7E0922)],
 
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -359,7 +359,7 @@ class Cproduct extends StatelessWidget {
 
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor:Colors.white ,
-        color: Color(0xff10706A),
+        color: Color(0xff650015),
         animationDuration: Duration(milliseconds: 300),
         onTap: (index){},
         // items: [

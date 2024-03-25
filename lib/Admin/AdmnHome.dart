@@ -1,3 +1,4 @@
+import 'package:a/Admin/AddCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Admin/ViewShops.dart';
 import 'package:a/Admin/ViewUsers.dart';
@@ -90,7 +91,7 @@ class AdmnHome extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ViewUsers()),
+                      builder: (context) => const AddCategory()),
                 );
               },
               child: HomeButton(textColor: Colors.white,
