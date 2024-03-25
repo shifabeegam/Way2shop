@@ -23,7 +23,7 @@ class Stockdt extends StatelessWidget {
 
     return Scaffold( backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xFF10706A),
+        backgroundColor:Color(0xff650015),
 
         title: Text("Stock Details",
           style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),
@@ -59,7 +59,7 @@ class Stockdt extends StatelessWidget {
                           width: double.infinity,
                           height: 115,
                           decoration: BoxDecoration(
-                            color: Color(0xFFDBE3E3),
+                            color: Colors.transparent,
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                             boxShadow: [
                               BoxShadow(
@@ -80,7 +80,7 @@ class Stockdt extends StatelessWidget {
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: OvalBorder(
-                                    side: BorderSide(width: 1, color: Color(0xFF10706A)),
+                                    side: BorderSide(width: 1, color: Color(0xff650015)),
                                   ),
                                 ),
                                  child:Icon(Icons.image_outlined,color: Colors.grey,size: 30,),
@@ -100,7 +100,7 @@ class Stockdt extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Column(
                                   children: [
-                                    Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 20)),
+                                    Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 24)),
                                     SizedBox(height: 5,),
                                     InkWell(
                                       onTap: (){
@@ -160,7 +160,7 @@ class Stockdt extends StatelessWidget {
                                           );
                                         });
                                       },
-                                      child: HomeButton(textColor: Colors.black, backgroundColor: Colors.orange, boxshadowColor: Colors.grey, borderColor: Colors.orange, text: "Update", hight: 33, width: 126,
+                                      child: HomeButton(textColor: Colors.black, backgroundColor: Colors.blueAccent, boxshadowColor: Colors.grey, borderColor: Colors.blueAccent, text: "Update", hight: 33, width: 126,
                                           fondSize: 14),
                                     ),
                                   ],
@@ -173,7 +173,7 @@ class Stockdt extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return Divider(color:Colors.green,height: 3,);
+                        return Divider(color:Color(0xff650015),height: 3,);
                       },
                   );
                 }

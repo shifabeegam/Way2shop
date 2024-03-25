@@ -28,7 +28,13 @@ class AddCategory extends StatelessWidget {
         Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(color: Color(0xFF650015)),
+          decoration: BoxDecoration(//color: Color(0xff650015),
+            gradient: LinearGradient(
+              colors: [ Colors.white,Color(0xff650015)],
+
+              begin: Alignment.bottomCenter, end: Alignment.topCenter,
+            ),
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -40,9 +46,9 @@ class AddCategory extends StatelessWidget {
                     builder: (context,value,child) {
                       return Container(
                         width: 250,
-                        height: 200,
+                        height: 230,
                         decoration: ShapeDecoration(
-                          color: Colors.white24,
+                          color: Colors.white10,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
@@ -58,10 +64,13 @@ class AddCategory extends StatelessWidget {
                         child:
                         Column(
                           children: [
-                            SizedBox(height: 10,),
-                            Text("Add Category",style: TextStyle(color: Colors.grey,fontSize: 20,fontWeight: FontWeight.bold),),
-                            SizedBox(height: 15,),
-                            Costfield(ItemController: value.addcategory ,width:296 , hight: 50, hintText: "Category"),
+                            SizedBox(height: 20,),
+                            Text("Add Category",style: TextStyle(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),),
+                            SizedBox(height: 20,),
+                            Container(
+                                height:50,
+                                width:200,
+                                child: Costfield(ItemController: value.addcategory ,width:296 , hight: 50, hintText: "Category")),
                             SizedBox(height: 20,),
                             Container(decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),),

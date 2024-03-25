@@ -14,7 +14,7 @@ class ShopHome extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: false,
-        backgroundColor: Color(0xff00655F),
+        backgroundColor: Color(0xff650015),
         title: const Text(
           "Way2Shop",
           style: TextStyle(
@@ -26,7 +26,7 @@ class ShopHome extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 280,
-            decoration: BoxDecoration(color: Color(0xFF10706A)),
+            decoration: BoxDecoration(color: Color(0xff650015)),
             child: Column(
               children: [
                 SizedBox(

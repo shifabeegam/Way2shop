@@ -10,7 +10,7 @@ class ViewShops extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xFF10706A),
+        backgroundColor:Color(0xff650015),
 
         title: Text("Shops",
           style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),
@@ -22,19 +22,25 @@ class ViewShops extends StatelessWidget {
           MaterialPageRoute(
               builder: (context) => const AdmnHome()),
         );
-        }, child: Image.asset("lib/icons/img_1.png")
+        }, child: Icon(Icons.arrow_back_ios_new_outlined)
         ),
       ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: Color(0xFF10706A),
+        decoration: BoxDecoration(//color: Color(0xff650015),
+          gradient: LinearGradient(
+            colors: [ Colors.white,Color(0xff650015)],
+
+            begin: Alignment.bottomCenter, end: Alignment.topCenter,
+          ),
+        ),
         child: ListView(
           children: [Container(
             width: double.infinity,
             height: 120,
             decoration: BoxDecoration(
-              color: Color(0xFFDBE3E3),
+              color: Colors.white70,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
               boxShadow: [
                 BoxShadow(
@@ -83,10 +89,10 @@ class ViewShops extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 10),
                     child: Column(
                       children: [
-                        HomeButton(textColor: Colors.black, backgroundColor: Color(0xFFDBE3E3), boxshadowColor: Colors.grey, borderColor: Colors.orange, text: "Status update", hight: 33, width: 126,
+                        HomeButton(textColor: Colors.black, backgroundColor: Colors.lightBlueAccent, boxshadowColor: Colors.grey, borderColor: Colors.lightBlueAccent, text: "Status update", hight: 33, width: 126,
                             fondSize: 14),
                         SizedBox(height: 5,),
-                        HomeButton(textColor: Colors.black, backgroundColor: Color(0xFFDBE3E3), boxshadowColor: Colors.grey, borderColor: Colors.red, text: "Block", hight: 33, width: 126,
+                        HomeButton(textColor: Colors.black, backgroundColor: Colors.orangeAccent, boxshadowColor: Colors.grey, borderColor: Colors.orangeAccent, text: "Block", hight: 33, width: 126,
                             fondSize: 14),
                       ],
                     ),
@@ -101,7 +107,7 @@ class ViewShops extends StatelessWidget {
               width: double.infinity,
               height: 120,
               decoration: BoxDecoration(
-                color: Color(0xFFDBE3E3),
+                color: Colors.white70,
                 //borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                 boxShadow: [
                   BoxShadow(
@@ -168,7 +174,7 @@ class ViewShops extends StatelessWidget {
               width: double.infinity,
               height: 120,
               decoration: BoxDecoration(
-                color: Color(0xFFDBE3E3),
+                color: Colors.white70,
                 //borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                 boxShadow: [
                   BoxShadow(

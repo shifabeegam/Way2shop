@@ -28,7 +28,13 @@ class Additem extends StatelessWidget {
       Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: Color(0xFF650015)),
+        decoration: BoxDecoration(//color: Color(0xff650015),
+          gradient: LinearGradient(
+            colors: [ Colors.white,Color(0xff650015)],
+
+            begin: Alignment.bottomCenter, end: Alignment.topCenter,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -40,7 +46,7 @@ class Additem extends StatelessWidget {
                 width: 296,
                 height: 584,
                 decoration: ShapeDecoration(
-                  color: Colors.white24,
+                  color: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),

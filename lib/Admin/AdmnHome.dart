@@ -13,7 +13,7 @@ class AdmnHome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xff00655F),
+        backgroundColor:Color(0xff650015),
 
         title: Text("Way2Shop",
           style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
@@ -25,7 +25,14 @@ class AdmnHome extends StatelessWidget {
       Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: Color(0xFF10706A)),
+        decoration: BoxDecoration(//color: Color(0xff650015),
+        gradient: LinearGradient(
+          colors: [ Colors.white,Color(0xff650015)],
+
+          begin: Alignment.bottomCenter, end: Alignment.topCenter,
+        ),
+      ),
+
         child:
         Column(
           children: [
@@ -34,9 +41,9 @@ class AdmnHome extends StatelessWidget {
           width: 316,
           height: 35,
           decoration: ShapeDecoration(
-            color: Color(0xFF00645E),
+            color: Colors.white10,
             shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1, color: Color(0xFF10585D)),
+              side: BorderSide(width: 1, color: Color(0xff650015)),
               borderRadius: BorderRadius.circular(15),
             ),
           ),
@@ -61,9 +68,9 @@ class AdmnHome extends StatelessWidget {
                 );
               },
               child: HomeButton(textColor: Colors.white,
-                backgroundColor: Color(0xff0066B65),
+                backgroundColor: Colors.white10,
                 boxshadowColor: Color(0x3F000000) ,
-                borderColor: Color(0xff0066B65) ,
+                borderColor: Colors.white10 ,
                 text: "Shops",
                 hight:65,
                 width:230, fondSize: 20,),
@@ -78,9 +85,9 @@ class AdmnHome extends StatelessWidget {
                 );
               },
               child: HomeButton(textColor: Colors.white,
-                backgroundColor: Color(0xff0066B65),
+                backgroundColor:  Colors.white10,
                 boxshadowColor: Color(0x3F000000) ,
-                borderColor: Color(0xff0066B65) ,
+                borderColor:  Colors.white10 ,
                 text: "Users",
                 hight:65,
                 width:230, fondSize: 20,),
@@ -94,10 +101,11 @@ class AdmnHome extends StatelessWidget {
                       builder: (context) => const AddCategory()),
                 );
               },
+
               child: HomeButton(textColor: Colors.white,
-                backgroundColor: Color(0xff0066B65),
+                backgroundColor:  Colors.white10,
                 boxshadowColor: Color(0x3F000000) ,
-                borderColor: Color(0xff0066B65) ,
+                borderColor:  Colors.white10 ,
                 text: "Category",
                 hight:65,
                 width:230, fondSize: 20,),

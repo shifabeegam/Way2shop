@@ -37,6 +37,7 @@ class Costfield extends StatelessWidget {
         //border: OutlineInputBorder(),),
        // fillColor: Colors.white24,
         filled: true,
+        fillColor: Colors.transparent,
         focusedBorder: InputBorder.none,
         hintText:hintText,
         hintStyle:TextStyle(color: Colors.grey),

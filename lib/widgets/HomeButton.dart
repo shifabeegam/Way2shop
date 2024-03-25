@@ -42,6 +42,7 @@ class HomeButton extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
+
             color: boxshadowColor,
             blurRadius: 4,
             offset: Offset(0, 4),
@@ -51,7 +52,9 @@ class HomeButton extends StatelessWidget {
       ),
         child: Center(
           child: Text(text,
+
             style: TextStyle(
+
               color: textColor,
               fontSize: fondSize,
               fontFamily: 'Inter',
