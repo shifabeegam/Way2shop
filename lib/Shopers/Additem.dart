@@ -46,7 +46,7 @@ class Additem extends StatelessWidget {
                 width: 296,
                 height: 584,
                 decoration: ShapeDecoration(
-                  color: Colors.transparent,
+                  color: Colors.black45,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),

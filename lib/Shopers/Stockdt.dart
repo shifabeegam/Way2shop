@@ -12,14 +12,27 @@ import '../widgets/HomeButton.dart';
 class Stockdt extends StatelessWidget {
   const Stockdt({super.key});
 
- // get index => null;
 
-  //get index => num;
 
   @override
   Widget build(BuildContext context) {
     MainProvider mainProvider =   Provider.of<MainProvider>(context, listen: false);
+
+    // String myString = mainProvider.quantity as String;
+     //int myInteger = int.parse(mainProvider.q);
+   /* void incrementInteger() {
+      setState(() {
+        myInteger++; // Incrementing the integer value
+      });
+    }
+*/
+
     mainProvider.getItem();
+    int myInteger ;
+    int scode;
+
+
+
 
     return Scaffold( backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
@@ -118,14 +131,33 @@ class Stockdt extends StatelessWidget {
 
                                                         children: [
 
-                                                          InkWell(
-                                                              child: HomeButton(
-                                                                  textColor: Color(0xFA005A54),
-                                                                  backgroundColor: Color(0xFFDBE3E3),
-                                                                  boxshadowColor: Colors.grey,
-                                                                  borderColor: Color(0xFFDBE3E3), text: "-",
-                                                                  hight: 37, width:62 , fondSize: 30)),
-                                                          Text("203",style: TextStyle(fontSize: 40),),
+
+                                                          Consumer<MainProvider>(
+                                                            builder: (context,value,child) {
+                                                              return InkWell(onTap: () {
+                                                                print("tap------------------");
+                                                                 myInteger = int.parse(value.allAdditem[index].quantity);
+                                                                 print(myInteger);
+                                                                 value.Upquantity.text = myInteger.toString();
+                                                                 scode = int.parse(value.allAdditem[index].code);
+                                                                 print(scode);
+                                                                 value.incrementInteger();
+
+
+
+                                                              },
+
+
+                                                                child: HomeButton(
+                                                                    textColor: Color(0xFA005A54),
+                                                                    backgroundColor: Color(0xFFDBE3E3),
+                                                                    boxshadowColor: Colors.grey,
+                                                                    borderColor: Color(0xFFDBE3E3), text: "-",
+                                                                    hight: 37, width:62 , fondSize: 30),
+                                                              );
+                                                            }
+                                                          ),
+                                                          Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 40)),
                                                           InkWell(
                                                               child: HomeButton(
                                                                   textColor: Color(0xFA005A54),

@@ -1,320 +1,160 @@
-import 'package:flutter/material.dart';
-
-class Clogin extends StatelessWidget {
-  const Clogin({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body:
-      Container(
-        width: 360,
-        height: 800,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(color: Colors.white),
-        child: Stack(
-          children: [
-            Positioned(
-              left: 53,
-              top: 14,
-              child: SizedBox(
-                width: 87,
-                height: 20,
-                child: Text(
-                  'Way2Shop',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 14,
-              top: 10,
-              child: Container(
-                width: 26,
-                height: 25,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/26x25"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              top: 45,
-              child: Container(
-                width: 360,
-                height: 130,
-                decoration: BoxDecoration(color: Color(0xFF380039)),
-              ),
-            ),
-            Positioned(
-              left: 277,
-              top: 123,
-              child: Container(
-                width: 31.50,
-                height: 29,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/31x29"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 159,
-              top: 123,
-              child: Container(
-                width: 29,
-                height: 29,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/29x29"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 48,
-              top: 123,
-              child: Container(
-                width: 24,
-                height: 22,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/24x22"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 282,
-              top: 67,
-              child: Container(
-                width: 18,
-                height: 18,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/18x18"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 257,
-              top: 67,
-              child: Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/20x20"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 130,
-              top: 68,
-              child: Text(
-                'Search Items',
-                style: TextStyle(
-                  color: Color(0xFF9B9393),
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 56,
-              top: 178,
-              child: Text(
-                'Choosed  Location',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 54,
-              top: 344,
-              child: Container(
-                width: 254,
-                height: 382,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF38003A)),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 71,
-              top: 557,
-              child: Text(
-                'Email',
-                style: TextStyle(
-                  color: Color(0xFF38003A),
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 70,
-              top: 484,
-              child: Text(
-                'Phone Number',
-                style: TextStyle(
-                  color: Color(0xFF38003A),
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 70,
-              top: 406,
-              child: Text(
-                'Name',
-                style: TextStyle(
-                  color: Color(0xFF38003A),
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 110,
-              top: 650,
-              child: Container(
-                width: 139,
-                height: 40,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF0C9C00)),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 155,
-              top: 661,
-              child: Text(
-                'Submit',
-                style: TextStyle(
-                  color: Color(0xFF38003A),
-                  fontSize: 15,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 66,
-              top: 582,
-              child: Container(
-                width: 228,
-                height: 40,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF38003A)),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 65,
-              top: 506,
-              child: Container(
-                width: 228,
-                height: 40,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF38003A)),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 66,
-              top: 430,
-              child: Container(
-                width: 228,
-                height: 40,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF38003A)),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 130,
-              top: 280,
-              child: Container(
-                width: 100,
-                height: 100,
-                decoration: ShapeDecoration(
-                  color: Color(0xFFD9D9D9),
-                  shape: OvalBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF38003A)),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 147,
-              top: 298,
-              child: Container(
-                width: 65,
-                height: 62,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://via.placeholder.com/65x62"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+// import 'package:a/customer/varification.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+//
+// import '../providers/MainProvider.dart';
+//
+// class Clogin extends StatelessWidget {
+//   const Clogin({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body:
+//       Container(
+//         width: double.infinity,
+//         height: double.infinity,
+//         decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/img_15.png'),fit: BoxFit.cover)),
+//         child:
+//
+//         Center(
+//           child: Column(
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 80),
+//                 child: Container(
+//                   child :Image(
+//                     image: AssetImage("assets/login .webp"),
+//                     width: 300,
+//                   ),
+//                 ),
+//               ),
+//
+//
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 50),
+//                 child: Container(
+//                   height: 372,
+//                   width: 306,
+//                   child: Column(
+//                     children: [
+//                       Text("What is your phone number ?",textAlign: TextAlign.center,style: TextStyle(color: Color(0xffD9D9D9),fontSize: 20),),
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 25,bottom: 40),
+//                         child: Text("Please confirm your country code and enter your Mobile Number",textAlign: TextAlign.center,style: TextStyle(color: Color(0xffD9D9D9),fontSize: 14),),
+//                       ),
+//
+//                       Consumer<MainProvider>(
+//                           builder: (context,value,child) {
+//
+//                             return Container(
+//                               height: 50,
+//                               decoration: BoxDecoration(border: Border.all(width: 1,color: Color(0xffD9D9D9)),borderRadius: BorderRadius.circular(15)),
+//                               child: Row(
+//                                 children: [
+//                                   SizedBox(
+//                                     width:10 ,
+//                                   ),
+//                                   SizedBox(
+//                                     width: 40,
+//                                     child: TextField(
+//                                       style: TextStyle(color: Colors.white),
+//                                       keyboardType: TextInputType.phone,
+//                                       //controller: value.phonecont,
+//
+//
+//
+//                                       decoration: InputDecoration(
+//                                           border:InputBorder.none,
+//                                           hintText: "+91",hintStyle: TextStyle(fontSize:14,color: Colors.grey)
+//                                       ),
+//                                     ),
+//                                   ),
+//
+//                                   Text("|",style:TextStyle(fontSize: 33,color: Color(0xffD9D9D9) ) ,),
+//                                   SizedBox(
+//                                     width:10 ,
+//                                   ),
+//
+//                                   Expanded(
+//
+//
+//                                     child: TextField(style: TextStyle(color: Colors.white),
+//                                      // controller:value.phoneotp ,
+//                                       keyboardType: TextInputType.phone,
+//                                       decoration: InputDecoration(
+//
+//                                           border:InputBorder.none,hintText: "Enter your phone number",hintStyle: TextStyle(fontSize:14,color: Colors.grey)),
+//                                     ),
+//                                   ), ],
+//                               ),
+//                             );
+//                           }
+//                       ),
+//
+//   SizedBox(
+//                         width: 250,
+//                         child: Padding(
+//                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//                           child: Consumer<MainProvider>(
+//                               builder: (context,value,child) {
+//                                 return TextFormField(
+//                                   keyboardType: TextInputType.phone,
+//
+//                                  // controller:value.phoneotp ,
+//                                   decoration: const InputDecoration(
+//                                     border: UnderlineInputBorder(borderSide: Radius.circular(15)),
+//                                     labelText: 'Enter your Mobile Number',labelStyle: TextStyle(color: Colors.white),
+//                                   ),
+//                                 );
+//                               }
+//                           ),
+//                         ),
+//                       ),
+//
+//
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 30),
+//                         child: SizedBox(
+//                           width: double.infinity,height: 45,
+//                           child: Consumer<MainProvider>(
+//                               builder: (context,value,child) {
+//                                 return MaterialButton(onPressed: () async{
+//  await FirebaseAuth.instance.verifyPhoneNumber(
+//                                     phoneNumber:value.phonecont.text+value.phoneotp.text,
+//                                     verificationCompleted: (PhoneAuthCredential credential) {},
+//                                     verificationFailed: (FirebaseAuthException e) {},
+//                                     codeSent: (String verificationId, int? resendToken) {
+//                                       Login.verify=verificationId;
+//
+//                                       Navigator.push(
+//                                         context,
+//                                         MaterialPageRoute(
+//                                             builder: (context) =>  Verification()),);
+//
+//
+//                                     },
+//                                  //   codeAutoRetrievalTimeout: (String verificationId) {},
+//                                   );
+//
+//                                 },
+//                                 //  child: Text("Send the code"), color:   Color(0xffCECDCD),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+//
+//                                 );
+//                               }
+//                           ),),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//
+//             ],
+//           ),
+//         ),
+//
+//       )
+//       ,
+//     );
+//   }
+// }
