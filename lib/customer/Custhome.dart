@@ -1,3 +1,6 @@
+import 'package:a/customer/Ordersummery.dart';
+import 'package:a/customer/Wishlist.dart';
+import 'package:a/customer/cartpage.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:a/customer/Caccount.dart';
@@ -22,14 +25,14 @@ class Custhome extends StatelessWidget {
         ),
       ),
       body:
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(width:double.infinity ,
-              height: 130,
-              decoration: const BoxDecoration(color: Color(0xff650015)),
-              child: Column(
-                children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(width:double.infinity ,
+                        height: 130,
+                        decoration: const BoxDecoration(color: Color(0xff650015)),
+                        child: Column(
+                          children: [
                   Center(
                     child: Container(
                       height: 50,
@@ -54,21 +57,33 @@ const SizedBox(height: 30,),
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       InkWell(
-                        onTap: (){},
+                        onTap: (){Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Wishlist()),
+                        );},
                         child: Container(
 
                           width:30,
                         child: Image.asset("lib/icons/img.png")),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: (){Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const cartpage()),
+                        );},
                         child: Container(
 
                             width:30,
                             child: Image.asset("lib/icons/cart.png")),
                       ),
                       InkWell(
-                       onTap: (){},
+                       onTap: (){Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                             builder: (context) => const Ordersummery()),
+                       );},
                         child: Container(
 
                             width:30,

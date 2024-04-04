@@ -72,7 +72,8 @@ class Stockdt extends StatelessWidget {
                           width: double.infinity,
                           height: 115,
                           decoration: BoxDecoration(
-                            color: Colors.transparent,
+                            color: Colors.white30,
+
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                             boxShadow: [
                               BoxShadow(
@@ -119,7 +120,8 @@ class Stockdt extends StatelessWidget {
                                       onTap: (){
                                         showDialog(context: context, builder: (context){
                                           return Container(
-                                            child: AlertDialog(
+                                            child: AlertDialog(backgroundColor: Colors.white,
+                                              elevation: 0,
 
                                               actions: [
                                                 Column(

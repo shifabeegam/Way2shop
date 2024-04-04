@@ -44,8 +44,8 @@ dependencies:
   provider: ^6.1.2
   carousel_slider: ^4.2.1
   firebase_auth: ^4.6.2
-  pinput: ^2.2.31
-
+  pinput: ^4.0.0
+  file_picker: ^4.0.0
 
 dev_dependencies:
   flutter_test:

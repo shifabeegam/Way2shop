@@ -20,6 +20,17 @@ class MainProvider extends ChangeNotifier {
   List <ItemModel> allAdditem = [];
   TextEditingController addcategory = TextEditingController();
 
+  TextEditingController owname = TextEditingController();
+  TextEditingController phnu = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController shopname = TextEditingController();
+  TextEditingController shopdetails = TextEditingController();
+  TextEditingController  idprooof= TextEditingController();
+  TextEditingController  licence= TextEditingController();
+  TextEditingController reciept = TextEditingController();
+  TextEditingController licenceid = TextEditingController();
+
 
 // Add item Details
 
@@ -139,7 +150,42 @@ class MainProvider extends ChangeNotifier {
     db.collection("CATEGORIES").doc(addcategory.text.toString()).set(category);
     notifyListeners();
     print("upload Successfully");
+
  }
+
+  void Shopupload() {
+
+
+    final shop = <String, dynamic>{
+      "Licence Id":licenceid.text,
+      "Owner Name": owname.text,
+      "Phone No:": phnu.text,
+      "Email": price.text,
+      "Address": quantity.text,
+      "Shop Name": shopname.text,
+      "Shop Details": shopdetails.text,
+      //"Upload Id Proof":idprooof.,
+     // "Licence of Shop"
+
+
+    };
+
+
+    db.collection("SHOPS").doc(licenceid.text.toString()).set(shop);
+    notifyListeners();
+    print("Upload Succesfully");
+  }
+
+  String _pdfDownloadURL = '';
+
+  // Getter for PDF download URL
+  String get pdfDownloadURL => _pdfDownloadURL;
+
+  // Method to set PDF download URL
+  void setPdfDownloadURL(String url) {
+    _pdfDownloadURL = url;
+    notifyListeners(); // Notify listeners that the state has changed
+  }
 
 }
 

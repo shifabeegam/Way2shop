@@ -21,8 +21,10 @@ class Costfield extends StatelessWidget {
     return Container(
       width: width??296,
       height: hight??50,
-      decoration: BoxDecoration(
-        color: Colors.white24,
+      decoration: BoxDecoration(border: Border.all(width: 1,color: Color(0xff650015)),borderRadius: BorderRadius.circular(15),
+
+
+
         boxShadow: [
           BoxShadow(
             color: Color(0x3F000000),
@@ -46,5 +48,7 @@ class Costfield extends StatelessWidget {
       ),
       ),
     );
+
+
   }
 }

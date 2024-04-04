@@ -4,8 +4,26 @@ import 'package:a/widgets/HomeButton.dart';
 import 'package:a/providers/MainProvider.dart';
 import 'package:provider/provider.dart';
 
+String dropdownvalue = 'Item 1';
+
+// List of items in our dropdown menu
+var items = [
+  'Item 1',
+  'Item 2',
+  'Item 3',
+  'Item 4',
+  'Item 5',
+];
+
+
+
+
+const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+
 class Additem extends StatelessWidget {
   const Additem({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,23 +60,9 @@ class Additem extends StatelessWidget {
           
               SizedBox(height: 50,),
               Center(
-                  child:Container(
-                width: 296,
-                height: 584,
-                decoration: ShapeDecoration(
-                  color: Colors.black45,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x3F000000),
-                      blurRadius: 4,
-                      offset: Offset(9, 8),
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
+
+
+
                     child: Consumer<MainProvider>(
                       builder: (context,value,child) {
                         return Column(
@@ -77,18 +81,53 @@ class Additem extends StatelessWidget {
                           ),
                             SizedBox(height: 20,),
                             Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name"),
+                            SizedBox(height: 10,),
                             Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
+                            SizedBox(height: 10,),
+
                             Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
+                            SizedBox(height: 10,),
+
                             Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
+                            SizedBox(height: 10,),
 
-                            Costfield(ItemController: value.category,width:296 , hight: 50, hintText: "Category"),
 
-          
-          
-          
-          
-          
-                            SizedBox(height: 30,),
+                            DropdownButton(
+
+                              // Initial Value
+                              value: dropdownvalue,
+
+                              // Down Arrow Icon
+                              icon: const Icon(Icons.keyboard_arrow_down),
+
+                              // Array list of items
+                              items: items.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  dropdownvalue = newValue!;
+                                });
+                              },
+                            ),
+                            SizedBox(height: 10,),
+
+
+
+
+
+
+
+
+
+
+
+  SizedBox(height: 30,),
                             Container(decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),),
                               child: MaterialButton(onPressed: (){
@@ -106,7 +145,7 @@ class Additem extends StatelessWidget {
                         );
                       }
                     ),
-              ),
+
               ),
             ],
           ),
@@ -118,4 +157,8 @@ class Additem extends StatelessWidget {
 
     );
   }
+
+  void setState(Null Function() param0) {}
+
+
 }

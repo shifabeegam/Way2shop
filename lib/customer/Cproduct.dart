@@ -315,7 +315,8 @@ class Cproduct extends StatelessWidget {
       bottomNavigationBar:BottomAppBar(
 
 
-        //color: Colors.white,
+        color: Colors.transparent,
+        elevation: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
