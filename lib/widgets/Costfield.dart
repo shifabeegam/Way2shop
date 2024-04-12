@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 class Costfield extends StatelessWidget {
   final String hintText;
 
+  var validator;
+
   Costfield({super.key,
     this.width,
      this.hight,
     required this.hintText,
     this.ItemController,
-
+    this.validator,
+   // required String? Function(dynamic value) validator,
 
   });
   TextEditingController? ItemController;
