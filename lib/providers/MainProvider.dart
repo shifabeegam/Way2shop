@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:a/Model/ItemModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +11,8 @@ class MainProvider extends ChangeNotifier {
   TextEditingController itemNm = TextEditingController();
   TextEditingController itemCd = TextEditingController();
   TextEditingController price = TextEditingController();
+  TextEditingController color = TextEditingController();
+  TextEditingController description = TextEditingController();
   TextEditingController quantity = TextEditingController();
   TextEditingController Upquantity = TextEditingController();
   TextEditingController Upid = TextEditingController();
@@ -42,7 +46,10 @@ class MainProvider extends ChangeNotifier {
       "Item Name": itemNm.text,
       "item Code": itemCd.text,
       "Price": price.text,
+      "color": color.text,
+      "description": description.text,
       "Item Quantity": quantity.text,
+
       "Category": category.text,
 
 
@@ -186,6 +193,15 @@ class MainProvider extends ChangeNotifier {
     _pdfDownloadURL = url;
     notifyListeners(); // Notify listeners that the state has changed
   }
+  File? _imageFile;
+
+  File? get imageFile => _imageFile;
+
+  void setImageFile(File ?file) {
+    _imageFile = file;
+    notifyListeners();
+  }
+
 
 }
 

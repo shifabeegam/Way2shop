@@ -4,24 +4,14 @@ import 'package:a/widgets/HomeButton.dart';
 import 'package:a/providers/MainProvider.dart';
 import 'package:provider/provider.dart';
 
-String dropdownvalue = 'Item 1';
-
-// List of items in our dropdown menu
-var items = [
-  'Item 1',
-  'Item 2',
-  'Item 3',
-  'Item 4',
-  'Item 5',
-];
-
-
-
-
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+var categories=['men','women','chilldren'];
+var currentcategory='women';
+//const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
 class Additem extends StatelessWidget {
   const Additem({super.key});
+
+  set currentcategory(String currentcategory) {}
 
 
 
@@ -56,8 +46,8 @@ class Additem extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-          
-          
+
+
               SizedBox(height: 50,),
               Center(
 
@@ -87,34 +77,14 @@ class Additem extends StatelessWidget {
 
                             Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
                             SizedBox(height: 10,),
+                            Costfield(ItemController: value.color,width:296 , hight: 50, hintText: "color"),
+                            SizedBox(height: 10,),
+                            Costfield(ItemController: value.description,width:296 , hight: 50, hintText: "discription"),
+                            SizedBox(height: 10,),
 
                             Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
                             SizedBox(height: 10,),
 
-
-                            DropdownButton(
-
-                              // Initial Value
-                              value: dropdownvalue,
-
-                              // Down Arrow Icon
-                              icon: const Icon(Icons.keyboard_arrow_down),
-
-                              // Array list of items
-                              items: items.map((String items) {
-                                return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(items),
-                                );
-                              }).toList(),
-                              // After selecting the desired option,it will
-                              // change button value to selected value
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  dropdownvalue = newValue!;
-                                });
-                              },
-                            ),
                             SizedBox(height: 10,),
 
 
@@ -139,9 +109,9 @@ class Additem extends StatelessWidget {
                                 color: Colors.green,
                               ),
                             )
-          
+
                           ]
-          
+
                         );
                       }
                     ),

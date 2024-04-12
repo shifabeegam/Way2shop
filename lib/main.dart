@@ -16,6 +16,7 @@ import 'package:a/customer/Cshops.dart';
 import 'package:provider/provider.dart';
 import 'package:a/customer/search.dart';
 import 'package:a/Shopers/Shopkeeperlogin.dart';
+import 'package:a/Shopers/camera.dart';
 
 import 'Admin/AdmnHome.dart';
 import 'Admin/ViewShops.dart';
@@ -26,6 +27,7 @@ import 'customer/Custhome.dart';
 import 'customer/SearchItemdtl.dart';
 import 'customer/search.dart';
 import 'Shopers/Shopkeeperlogin.dart';
+import 'Shopers/camera.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,9 +70,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Shopkeeperlogin(),
+      home: Custhome(),
         ),
     );
   }
 }
+
 
