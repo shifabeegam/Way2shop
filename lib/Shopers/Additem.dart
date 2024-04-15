@@ -36,12 +36,12 @@ class Additem extends StatelessWidget {
       Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(//color: Color(0xff650015),
-          gradient: LinearGradient(
-            colors: [ Colors.white,Color(0xff650015)],
-
-            begin: Alignment.bottomCenter, end: Alignment.topCenter,
-          ),
+        decoration: BoxDecoration(color: Colors.white,
+          // gradient: LinearGradient(
+          //   colors: [ Colors.white,Color(0xff650015)],
+          //
+          //   begin: Alignment.bottomCenter, end: Alignment.topCenter,
+          // ),
         ),
         child: SingleChildScrollView(
           child: Column(
