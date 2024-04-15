@@ -72,7 +72,7 @@ class Stockdt extends StatelessWidget {
                           width: double.infinity,
                           height: 115,
                           decoration: BoxDecoration(
-                            color: Colors.white30,
+                            color: Color(0xffDED6D7),
 
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                             boxShadow: [

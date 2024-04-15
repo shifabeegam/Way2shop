@@ -36,9 +36,9 @@ class ShopHome extends StatelessWidget {
                   width: 316,
                   height: 35,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF00645E),
+                    color: Colors.black26,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFF10585D)),
+                      side: BorderSide(width: 1, color: Colors.black26),
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
@@ -86,9 +86,9 @@ class ShopHome extends StatelessWidget {
                         },
                         child: HomeButton(
                           textColor: Colors.white,
-                          backgroundColor: Color(0xff0066B65),
-                          boxshadowColor: Color(0x3F000000),
-                          borderColor: Color(0xff0066B65),
+                          backgroundColor: Colors.black26,
+                          boxshadowColor: Colors.black12,
+                          borderColor: Colors.black26,
                           text: "Stock details",
                           hight: 61,
                           width: 147,
@@ -98,9 +98,9 @@ class ShopHome extends StatelessWidget {
                     ),
                     HomeButton(
                       textColor: Colors.white,
-                      backgroundColor: Color(0xff0066B65),
-                      boxshadowColor: Color(0x3F000000),
-                      borderColor: Color(0xff0066B65),
+                      backgroundColor: Colors.black26,
+                      boxshadowColor: Colors.black12,
+                      borderColor: Colors.black26,
                       text: "",
                       hight: 61,
                       width: 147,
@@ -118,9 +118,9 @@ class ShopHome extends StatelessWidget {
                   width: 280,
                   height: 28,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF00645E),
+                    color:  Colors.black26,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFF10585D)),
+                      side: BorderSide(width: 1, color:  Colors.black26),
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
@@ -157,9 +157,9 @@ class ShopHome extends StatelessWidget {
                   width: 280,
                   height: 28,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF00645E),
+                    color:  Colors.black26,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFF10585D)),
+                      side: BorderSide(width: 1, color:  Colors.black26),
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),

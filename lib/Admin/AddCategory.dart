@@ -45,8 +45,8 @@ class AddCategory extends StatelessWidget {
                   child:Consumer<MainProvider>(
                     builder: (context,value,child) {
                       return Container(
-                        width: 250,
-                        height: 230,
+                        width: 280,
+                        height: 380,
                         decoration: ShapeDecoration(
                           color: Colors.white10,
                           shape: RoundedRectangleBorder(
@@ -66,6 +66,19 @@ class AddCategory extends StatelessWidget {
                           children: [
                             SizedBox(height: 20,),
                             Text("Add Category",style: TextStyle(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),),
+                            SizedBox(height: 20,),
+
+                            Container(
+                              width: 100,
+                              height: 100,
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: OvalBorder(
+                                  side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                ),
+                              ),
+                              child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
+                            ),
                             SizedBox(height: 20,),
                             Container(
                                 height:50,

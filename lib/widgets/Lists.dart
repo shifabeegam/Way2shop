@@ -24,7 +24,7 @@ class Lists extends StatelessWidget {
         width: width,
         height: hight,
         decoration: BoxDecoration(
-          color: Color(0xFFDBE3E3),
+          color: Color(0xffDED6D7),
           boxShadow: [
             BoxShadow(
               color: Color(0x3F000000),
