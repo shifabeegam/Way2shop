@@ -227,38 +227,6 @@ class Cshops extends StatelessWidget {
     ),
       ),
 
-    bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor:Colors.white ,
-        color: const Color(0xff650015),
-        animationDuration: const Duration(milliseconds: 300),
-        onTap: (index){},
-        items: [
-          InkWell(onTap: (){ Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Ctrending()),
-          );
-          },child: const Icon(Icons.trending_up,color: Colors.white,)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Ccategory()),
-          );}, child: const Icon(Icons.category_outlined,color: Colors.white)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Cshops()),
-          );}, child: const Icon(Icons.shop_2_outlined,color: Colors.white)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Caccount()),
-          );}, child: const Icon(Icons.account_circle_outlined,color: Colors.white))
-
-
-        ],
-
-      ),
 
 
     );

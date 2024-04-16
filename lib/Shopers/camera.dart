@@ -14,7 +14,8 @@ class camera extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
+    MainProvider mainProvider =
+        Provider.of<MainProvider>(context, listen: false);
 
     // Function to handle image upload
     Future<void> _handleImageUpload() async {
@@ -42,8 +43,10 @@ class camera extends StatelessWidget {
     Future<void> _uploadImageToFirebase(File file) async {
       try {
         FirebaseStorage storage = FirebaseStorage.instance;
-        String fileName = 'image_${DateTime.now().millisecondsSinceEpoch}.jpg'; // Generate a unique file name
-        Reference ref = storage.ref().child('images').child(fileName); // Set the path where the file will be stored in Firebase Storage
+        String fileName =
+            'image_${DateTime.now().millisecondsSinceEpoch}.jpg'; // Generate a unique file name
+        Reference ref = storage.ref().child('images').child(
+            fileName); // Set the path where the file will be stored in Firebase Storage
         await ref.putFile(file);
         String downloadUrl = await ref.getDownloadURL();
         print('File uploaded to Firebase Storage: $downloadUrl');
@@ -99,30 +102,69 @@ class camera extends StatelessWidget {
                           decoration: ShapeDecoration(
                             color: Colors.white,
                             shape: CircleBorder(
-                              side: BorderSide(width: 1, color: Color(0xFF650015)),
+                              side: BorderSide(
+                                  width: 1, color: Color(0xFF650015)),
                             ),
                           ),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              if (value.imageFile != null)
-                                Image.file(value.imageFile!, width: double.infinity, height: double.infinity, fit: BoxFit.cover)
-                              else
-                                InkWell(
-                                  onTap: _handleImageUpload,
-                                  child: Icon(Icons.add_a_photo_outlined, color: Colors.grey, size: 40),
-                                ),
-                              if (value.imageFile != null)
-                                Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: IconButton(
-                                    icon: Icon(Icons.remove_circle, color: Colors.red),
-                                    onPressed: () => _removeImage(mainProvider),
+                          // child: Stack(
+                          child: InkWell(
+                            onTap: () {
+                              showBottomSheet(context);
+                            },
+                            child: value.categoryfileimg != null
+                                ? Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF650015)),
+                                        ),
+                                        image: DecorationImage(
+                                            image: FileImage(
+                                              value.categoryfileimg!,
+                                            ),
+                                            fit: BoxFit.fill)),
+                                  )
+                                : Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: ShapeDecoration(
+                                      color: Colors.white,
+                                      shape: OvalBorder(
+                                        side: BorderSide(
+                                            width: 1, color: Color(0xFF650015)),
+                                      ),
+                                    ),
+                                    child: Icon(
+                                      Icons.add_a_photo_outlined,
+                                      color: Colors.grey,
+                                      size: 40,
+                                    ),
                                   ),
-                                ),
-                            ],
                           ),
+                          //   alignment: Alignment.center,
+                          //   children: [
+                          //     if (value.imageFile != null)
+                          //       Image.file(value.imageFile!, width: double.infinity, height: double.infinity, fit: BoxFit.cover)
+                          //     else
+                          //       InkWell(
+                          //         onTap: _handleImageUpload,
+                          //         child: Icon(Icons.add_a_photo_outlined, color: Colors.grey, size: 40),
+                          //       ),
+                          //     if (value.imageFile != null)
+                          //       Positioned(
+                          //         top: 0,
+                          //         right: 0,
+                          //         child: IconButton(
+                          //           icon: Icon(Icons.remove_circle, color: Colors.red),
+                          //           onPressed: () => _removeImage(mainProvider),
+                          //         ),
+                          //       ),
+                          //   ],
+                          // ),
                         ),
                         SizedBox(height: 10),
                         ElevatedButton(
@@ -132,25 +174,35 @@ class camera extends StatelessWidget {
                         SizedBox(height: 30),
                         Column(
                           children: [
-                            SizedBox(height: 20,),
-                            Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name"),
-                            SizedBox(height: 10,),
-                            Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
-                            SizedBox(height: 10,),
-
-                            Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
-                            SizedBox(height: 10,),
-                            Container( height: 50,
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Costfield(
+                                ItemController: value.itemNm,
                                 width: 296,
+                                hight: 50,
+                                hintText: "Item Name"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            // Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
+                            //SizedBox(height: 10,),
 
-
-                                decoration: BoxDecoration(border: Border.all(
-                                    width: 1,
-                                    color: Color(0xff650015)),
+                            Costfield(
+                                ItemController: value.price,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Price"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                                height: 50,
+                                width: 296,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1, color: Color(0xff650015)),
                                   borderRadius: BorderRadius.circular(15),
-
-
-
                                   boxShadow: [
                                     BoxShadow(
                                       color: Color(0x3F000000),
@@ -159,59 +211,92 @@ class camera extends StatelessWidget {
                                       spreadRadius: 0,
                                     )
                                   ],
-                                ),child: Row(
+                                ),
+                                child: Row(
                                   children: [
-                                    Text("color",style: TextStyle(color: Colors.grey,fontSize: 20),),
-                                    SizedBox(width: 40,),
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: OvalBorder(
-                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
-                                        ),
-                                      ),
-                                      child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 20,)),
+                                    Text(
+                                      "  color",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 18),
                                     ),
-                                    SizedBox(width: 10,),
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: OvalBorder(
-                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
-                                        ),
-                                      ),
-                                      child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 20,)),
+                                    SizedBox(
+                                      width: 40,
                                     ),
-                                    SizedBox(width: 10,),
                                     Container(
                                       width: 30,
                                       height: 30,
                                       decoration: ShapeDecoration(
                                         color: Colors.white,
                                         shape: OvalBorder(
-                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                          side: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF650015)),
                                         ),
                                       ),
-                                      child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 20,)),
+                                      child: InkWell(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.add_a_photo_outlined,
+                                            color: Colors.grey,
+                                            size: 20,
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF650015)),
+                                        ),
+                                      ),
+                                      child: InkWell(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.add_a_photo_outlined,
+                                            color: Colors.grey,
+                                            size: 20,
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF650015)),
+                                        ),
+                                      ),
+                                      child: InkWell(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.add_a_photo_outlined,
+                                            color: Colors.grey,
+                                            size: 20,
+                                          )),
                                     ),
                                   ],
                                 )),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
 
-
-                            Container( width: 296,
-
-                                decoration: BoxDecoration(border: Border.all(
-                                    width: 1,
-                                    color: Color(0xff650015)),
+                            Container(
+                                width: 296,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1, color: Color(0xff650015)),
                                   borderRadius: BorderRadius.circular(15),
-
-
-
                                   boxShadow: [
                                     BoxShadow(
                                       color: Color(0x3F000000),
@@ -220,56 +305,125 @@ class camera extends StatelessWidget {
                                       spreadRadius: 0,
                                     )
                                   ],
-                                ),child: TextField(maxLines: 5,decoration: InputDecoration(hintText: "description"),)),
-                            SizedBox(height: 10,),
+                                ),
+                                child: Consumer<MainProvider>(
+                                    builder: (context, value, child) {
+                                  return TextField(
+                                    controller: mainProvider.description,
+                                    maxLines: 5,
+                                    decoration: InputDecoration(
+                                      hintText: "  description",
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                  );
+                                })),
+                            SizedBox(
+                              height: 10,
+                            ),
 
-
-                            Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "Offers"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "variation"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "Color"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "Brand"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "Product Dimensions"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "Assembly Required"),
-                            SizedBox(height: 10,),
-                            Costfield(width:296 , hight: 50,hintText: "Product Care"),
-                            SizedBox(height: 10,),
-                           Container( width: 296,
-
-                               decoration: BoxDecoration(border: Border.all(
-                                   width: 1,
-                                   color: Color(0xff650015)),
-                                 borderRadius: BorderRadius.circular(15),
-
-
-
-                                 boxShadow: [
-                                   BoxShadow(
-                                     color: Color(0x3F000000),
-                                     blurRadius: 4,
-                                     offset: Offset(0, 4),
-                                     spreadRadius: 0,
-                                   )
-                                 ],
-                               ),child: TextField(maxLines: 10,decoration: InputDecoration(hintText: "Instructions"),)),
-                            SizedBox(height: 10,),
-
-
-
+                            Costfield(
+                                ItemController: value.quantity,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Item Quantity"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.offers,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Offers"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.variations,
+                                width: 296,
+                                hight: 50,
+                                hintText: "variation"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.color,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Color"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.brand,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Brand"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.productcare,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Product Dimensions"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.requirements,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Assembly Required"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Costfield(
+                                ItemController: value.productcare,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Product Care"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                                width: 296,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1, color: Color(0xff650015)),
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: Consumer<MainProvider>(
+                                    builder: (context, value, child) {
+                                  return TextField(
+                                    controller: mainProvider.instruction,
+                                    maxLines: 10,
+                                    decoration: InputDecoration(
+                                        hintText: "  Instructions",hintStyle: TextStyle(color: Colors.grey),),
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  );
+                                })),
+                            SizedBox(
+                              height: 10,
+                            ),
                           ],
                         ),
                         Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15)),
                           child: MaterialButton(
                             onPressed: () async {
                               if (mainProvider.imageFile != null) {
-                                await _uploadImageToFirebase(mainProvider.imageFile!);
+                                await _uploadImageToFirebase(
+                                    mainProvider.imageFile!);
                                 // Perform submission or any other action after uploading to Firebase
                               } else {
                                 // Show an error message or handle accordingly if no image is selected
@@ -291,5 +445,42 @@ class camera extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showBottomSheet(BuildContext context) {
+    MainProvider provider = Provider.of<MainProvider>(context, listen: false);
+    showModalBottomSheet(
+        elevation: 10,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+        )),
+        context: context,
+        builder: (BuildContext bc) {
+          return Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading: Icon(
+                    Icons.camera_enhance_sharp,
+                    color: Colors.red,
+                  ),
+                  title: const Text(
+                    'Camera',
+                  ),
+                  onTap: () =>
+                      {provider.getImagecamera(), Navigator.pop(context)}),
+              ListTile(
+                  leading: Icon(Icons.photo, color: Colors.red),
+                  title: const Text(
+                    'Gallery',
+                  ),
+                  onTap: () =>
+                      {provider.getImagegallery(), Navigator.pop(context)}),
+            ],
+          );
+        });
+    // ImageSource
   }
 }

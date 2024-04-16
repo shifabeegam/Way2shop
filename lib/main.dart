@@ -7,7 +7,6 @@ import 'package:a/customer/Wishlist.dart';
 import 'package:a/customer/cartpage.dart';
 import 'package:a/providers/MainProvider.dart';
 import 'package:a/providers/loginprovider.dart';
-import 'package:a/test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Shopers/Additem.dart';
@@ -24,6 +23,7 @@ import 'Admin/AdmnHome.dart';
 import 'Admin/ViewShops.dart';
 import 'Admin/ViewUsers.dart';
 import 'Shopers/ShopHome.dart';
+import 'bottamnavigationbar.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
 import 'customer/SearchItemdtl.dart';
@@ -58,11 +58,8 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-
-           ),
-          // home: Clogin(),
-          // home: Custhome(),
-          home: Ccategory(),
+      ),
+      home: Ccategory(),
         ),
     );
   }

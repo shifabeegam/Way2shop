@@ -102,21 +102,21 @@ class Caccount extends StatelessWidget {
 
 
 
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor:Colors.white ,
-        color: Color(0xff650015),
-        animationDuration: Duration(milliseconds: 300),
-        onTap: (index){},
-        items: [
-          Icon(Icons.trending_up,color: Colors.white,),
-          Icon(Icons.category_outlined,color: Colors.white),
-          Icon(Icons.shop_2_outlined,color: Colors.white),
-          Icon(Icons.account_circle_outlined,color: Colors.white)
-
-
-        ],
-
-      ),
+      // bottomNavigationBar: CurvedNavigationBar(
+      //   backgroundColor:Colors.white ,
+      //   color: Color(0xff650015),
+      //   animationDuration: Duration(milliseconds: 300),
+      //   onTap: (index){},
+      //   items: [
+      //     Icon(Icons.trending_up,color: Colors.white,),
+      //     Icon(Icons.category_outlined,color: Colors.white),
+      //     Icon(Icons.shop_2_outlined,color: Colors.white),
+      //     Icon(Icons.account_circle_outlined,color: Colors.white)
+      //
+      //
+      //   ],
+      //
+      // ),
 
 
     );

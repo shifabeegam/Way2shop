@@ -13,11 +13,6 @@ class Ccategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MainProvider mainProvider =   Provider.of<MainProvider>(context, listen: false);
-    mainProvider.getcategoy();
-
-
-
     return Scaffold(
 
 
@@ -218,7 +213,6 @@ class Ccategory extends StatelessWidget {
           ],
         ),
       ),
-
 
 
 
