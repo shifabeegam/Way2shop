@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'bottamnavigationbar.dart';
+
 
 
 class SplashScreen extends StatefulWidget {
@@ -41,8 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
   //  mainProvider.getCarouselimg();
 
 
-    Timer(const Duration(seconds: 5), () {
-       Navigator.push(context, MaterialPageRoute(builder: (context) => Custhome(),));
+    Timer(const Duration(seconds: 44444), () {
+       Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
 
       // if (loginUser == null) {
       //   callNextReplacement(context, Custhome());
