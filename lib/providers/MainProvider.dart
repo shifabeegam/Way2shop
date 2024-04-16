@@ -1,13 +1,22 @@
+import 'dart:collection';
 import 'dart:io';
 
 import 'package:a/Model/ItemModel.dart';
+import 'package:a/providers/loginprovider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class MainProvider extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
+
+  Reference ref = FirebaseStorage.instance.ref("IMAGE URL");
+
+
   TextEditingController itemNm = TextEditingController();
   TextEditingController itemCd = TextEditingController();
   TextEditingController price = TextEditingController();
@@ -149,16 +158,122 @@ class MainProvider extends ChangeNotifier {
   }
 
 
- void uploadcatergory(){
+  void adduser(BuildContext context,String type){
+    LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
-    final category = <String, dynamic>{
-      "Category":addcategory.text,
-    };
-    db.collection("CATEGORIES").doc(addcategory.text.toString()).set(category);
-    notifyListeners();
-    print("upload Successfully");
+    String id = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    HashMap<String, Object> usermap = HashMap();
+    usermap["USER_ID"]= id;
+    usermap["USER_NAME"]= loginProvider.loginusername.text;
+    usermap["PHONE_NUMBER"]= "+91"+loginProvider.Loginphnnumber.text;
+    usermap["TYPE"]= type;
+    usermap["STATUS"]= "ACTIVE";
+    db.collection("USERS").doc(id).set(usermap);
 
+  }
+
+
+
+
+
+
+
+
+  File? categoryfileimg;
+  String categoryimg  ="";
+
+
+ Future<void> uploadcatergory() async {
+   String id = DateTime
+       .now()
+       .millisecondsSinceEpoch
+       .toString();
+   HashMap<String, Object> categorymap = HashMap();
+
+   categorymap["CATEGORY_NAME"] = addcategory.text;
+   categorymap["CATEGORY_ID"] = id;
+
+   if (categoryfileimg != null) {
+     String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+     ref = FirebaseStorage.instance.ref().child(photoId);
+     await ref.putFile(categoryfileimg!).whenComplete(() async {
+       await ref.getDownloadURL().then((value) {
+         categorymap["PHOTO"] = value;
+         notifyListeners();
+       });
+       notifyListeners();
+     });
+     notifyListeners();
+   } else {
+     categorymap['PHOTO'] = categoryimg;
+     // editMap['IMAGE_URL'] = imageUrl;
+   }
+   db.collection("CATEGORIES").doc(id).set(categorymap);
+   getcategoy();
+   notifyListeners();
+   print("upload Successfully");
  }
+
+  void setImage(File image) {
+    categoryfileimg = image;
+    notifyListeners();
+  }
+
+  Future getImagegallery() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setImage(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  Future getImagecamera() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setImage(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  void categoryclear(){
+    addcategory.clear();
+    categoryfileimg=null;
+    categoryimg="";
+ }
+
+  List<Categorymodel> categorylist=[];
+  void getcategoy(){
+    db.collection("CATEGORIES").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        categorylist.clear();
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data();
+          categorylist.add(Categorymodel(
+              map["CATEGORY_ID"].toString(),
+               map["CATEGORY_NAME"].toString(),
+              map["PHOTO"].toString()));
+          notifyListeners();
+        }
+
+      }
+      notifyListeners();
+    });
+  }
+
+
+
+
+
+
+
 
   void Shopupload() {
 

@@ -36,15 +36,13 @@ class AddCategory extends StatelessWidget {
             ),
           ),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-
-
-                SizedBox(height: 240,),
+            child:
+                // SizedBox(height: 240,),
                 Center(
                   child:Consumer<MainProvider>(
                     builder: (context,value,child) {
                       return Container(
+                         margin: EdgeInsets.only(top: 100),
                         width: 280,
                         height: 380,
                         decoration: ShapeDecoration(
@@ -68,16 +66,35 @@ class AddCategory extends StatelessWidget {
                             Text("Add Category",style: TextStyle(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),),
                             SizedBox(height: 20,),
 
-                            Container(
-                              width: 100,
-                              height: 100,
-                              decoration: ShapeDecoration(
-                                color: Colors.white,
-                                shape: OvalBorder(
-                                  side: BorderSide(width: 1, color: Color(0xFF650015)),
-                                ),
-                              ),
-                              child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
+                            Consumer<MainProvider>(
+                              builder: (context,value,child) {
+                                return InkWell(
+                                  onTap: () {
+                                    showBottomSheet(context);
+                                  },
+                                  child: value.categoryfileimg!=null?Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: ShapeDecoration(
+                                      color: Colors.white,
+                                      shape: OvalBorder(
+                                        side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                      ),
+                                      image: DecorationImage(image: FileImage(value.categoryfileimg!,),fit: BoxFit.fill)
+                                    ),
+                                  ):Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: ShapeDecoration(
+                                      color: Colors.white,
+                                      shape: OvalBorder(
+                                        side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                      ),
+                                    ),
+                                    child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,),
+                                  ),
+                                );
+                              }
                             ),
                             SizedBox(height: 20,),
                             Container(
@@ -89,6 +106,7 @@ class AddCategory extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15),),
                               child: MaterialButton(onPressed: (){
                                 mainprovider.uploadcatergory();
+                                Navigator.pop(context);
                               },
                                 child: const Text("Submit"),
                                 highlightColor: Color(0xff0C630A),
@@ -103,8 +121,7 @@ class AddCategory extends StatelessWidget {
                   ),
 
                 ),
-              ],
-            ),
+
           ),
 
 
@@ -113,4 +130,36 @@ class AddCategory extends StatelessWidget {
 
         );
     }
+  void showBottomSheet(BuildContext context) {
+    MainProvider provider =Provider.of<MainProvider>(context,listen: false);
+    showModalBottomSheet(
+        elevation: 10,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10.0),
+              topRight: Radius.circular(10.0),
+            )
+        ),
+        context: context,
+        builder: (BuildContext bc) {
+          return Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading:  Icon(
+                    Icons.camera_enhance_sharp,
+                    color: Colors.red,
+                  ),
+                  title: const Text('Camera',),
+                  onTap: () => { provider.getImagecamera(), Navigator.pop(context)}),
+              ListTile(
+                  leading:  Icon(Icons.photo, color: Colors.red),
+                  title: const Text('Gallery',),
+                  onTap: () => {provider.getImagegallery(),Navigator.pop(context)}),
+            ],
+          );
+        });
+    // ImageSource
+  }
+
 }

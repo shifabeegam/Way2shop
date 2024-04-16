@@ -27,6 +27,7 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
   flutter:
     sdk: flutter
@@ -47,6 +48,7 @@ dependencies:
   pinput: ^4.0.0
   file_picker: ^4.0.0
   url_launcher: ^6.0.0
+  image_picker: ^1.0.8
 
 dev_dependencies:
   flutter_test:

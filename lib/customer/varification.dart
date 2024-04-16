@@ -5,6 +5,7 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/MainProvider.dart';
+import '../providers/loginprovider.dart';
 import 'Clogin.dart';
 
 class Verification extends StatelessWidget {
@@ -46,10 +47,7 @@ class Verification extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(backgroundColor: Colors.transparent,
       elevation: 0,
-      leading:IconButton(onPressed:(){
-        Navigator.pop(context);
-      },
-        icon: Icon(Icons.arrow_back_ios_new_outlined), ),),
+     ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -81,12 +79,19 @@ class Verification extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 25,bottom: 30),
                           child: Text("Please enter the varification code sent to given Mobile Number",textAlign: TextAlign.center,style: TextStyle(color: Color(0xff650015),fontSize: 14),),
                         ),
-                    Pinput(
-              
-              
-              
-                      showCursor: true,
-              
+                        Consumer<LoginProvider>(
+                            builder: (context, value, child) {
+                        return Pinput(
+                          length: 6,
+                          showCursor: true,
+                          controller:value.otpverifycontroller ,
+                          onCompleted: (pin){
+                            value.verify(context);
+
+                          },
+
+                        );
+                      }
                     ),
               
                     SizedBox(
@@ -123,7 +128,7 @@ class Verification extends StatelessWidget {
               // // and use it to show a SnackBar.
               //                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
               //                           }
-              
+
                           },
 
                             child: Text("Verify Your Number",style: TextStyle(color: Colors.white),),color:   Color(0xff650015),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),),
@@ -132,13 +137,13 @@ class Verification extends StatelessWidget {
                         ),
               
               
-                        TextButton(onPressed:(){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Clogin()),
-                          );
-                        }, child:Text("Edit Phone Number ?",style: TextStyle(color: Color(0xffD9D9D9)),))
+                        // TextButton(onPressed:(){
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>  Clogin()),
+                        //   );
+                        // }, child:Text("Edit Phone Number ?",style: TextStyle(color: Color(0xffD9D9D9)),))
               
                       ],
                     ),
