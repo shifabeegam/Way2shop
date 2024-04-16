@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 class GradButton extends StatelessWidget {
@@ -98,7 +100,7 @@ class GradButtonImg extends StatelessWidget {
   final Color? boxshadowColor;
   final Color? borderColor;
   final String text;
-  AssetImage assetImage;
+  Image assetImage;
   double? width;
   double? hight;
   double? fondSize;
@@ -152,8 +154,8 @@ class GradButtonImg extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image(
-                    image: assetImage,
+                  child: Image.network(
+                     assetImage.toString(),
                     height: 95,
                     width: 95,
                   ),

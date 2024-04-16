@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
            ),
           // home: Clogin(),
           // home: Custhome(),
-          home: BottomNavBar(),
+          home: Ccategory(),
         ),
     );
   }

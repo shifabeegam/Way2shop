@@ -1,6 +1,8 @@
 import 'package:a/customer/Caccount.dart';
+import 'package:a/providers/MainProvider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/GradButton.dart';
 import 'Cshops.dart';
@@ -11,6 +13,11 @@ class Ccategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MainProvider mainProvider =   Provider.of<MainProvider>(context, listen: false);
+    mainProvider.getcategoy();
+
+
+
     return Scaffold(
 
 
@@ -111,42 +118,99 @@ class Ccategory extends StatelessWidget {
             //ListView(
             // children: [
 
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButtonImg(text: "asdf",
-                  assetImage: AssetImage('assets/img.png'),),
-                SizedBox(width: 1,),
-                GradButtonImg(text: 'text', assetImage: AssetImage('assets/img.png')),
-                SizedBox(width: 1,),
-              ],
+            Consumer<MainProvider>(
+              builder: (context,value,child) {
+                return GridView.builder(
+                    itemCount: value.categorylist.length,
+                    physics: ScrollPhysics(),
+                    gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 0.8
+                    ),
+                    itemBuilder: (BuildContext context,int index){
+                      return  InkWell(
+                        onTap: (){},
+                        child: Container(
+                          width: 146,
+                          height: 144,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xff8FC7C3), Colors.white],
+
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+
+                            //color: backgroundColor,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border(
+                              left: BorderSide(color:Colors.white),
+                              top: BorderSide(color:Colors.white),
+                              right: BorderSide(color:Colors.white),
+                              bottom: BorderSide(width: 1.20, color: Colors.white),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                                spreadRadius: 0,
+                              )
+                            ],
+                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.network(
+                                    value.categorylist[index].photo,
+                                    height: 95,
+                                    width: 95,
+                                  ),
+                                ),
+                                Text(value.categorylist[index].name,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                    height: 0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ) ,
+
+
+
+                        ),
+                      );
+
+
+
+
+
+
+
+                     });
+              }
             ),
+
             SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButtonImg(text: "asdf",
-                  assetImage: AssetImage('assets/img.png'),),
-                SizedBox(width: 1,),
-                GradButtonImg(text: 'text', assetImage: AssetImage('assets/img.png')),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButtonImg(text: "asdf",
-                  assetImage: AssetImage('assets/img.png'),),
-                SizedBox(width: 1,),
-                GradButtonImg(text: 'text', assetImage: AssetImage('assets/img.png')),
-                SizedBox(width: 1,),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     SizedBox(width: 1,),
+            //
+            //     SizedBox(width: 1,),
+            //     GradButtonImg(text: 'text', assetImage: AssetImage('assets/img.png')),
+            //     SizedBox(width: 1,),
+            //   ],
+            // ),
+
 
 
 
@@ -155,38 +219,7 @@ class Ccategory extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor:Colors.white ,
-        color: const Color(0xff650015),
-        animationDuration: const Duration(milliseconds: 300),
-        onTap: (index){},
-        items: [
-          InkWell(onTap: (){ Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Ctrending()),
-          );
-          },child: const Icon(Icons.trending_up,color: Colors.white,)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Ccategory()),
-          );}, child: const Icon(Icons.category_outlined,color: Colors.white)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Cshops()),
-          );}, child: const Icon(Icons.shop_2_outlined,color: Colors.white)),
-          InkWell(onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Caccount()),
-          );}, child: const Icon(Icons.account_circle_outlined,color: Colors.white))
 
-
-        ],
-
-      ),
 
 
     );

@@ -24,8 +24,8 @@ class CategoryList extends StatelessWidget {
       child: Scaffold(
         floatingActionButton: Consumer<MainProvider>(
           builder: (context,value,child) {
-            return FloatingActionButton(backgroundColor: Color(0x91FC1C1C),shape: CircleBorder(),
-              child:Icon(Icons.add,color: Colors.black) ,
+            return FloatingActionButton(backgroundColor: Color(0xff650015),shape: CircleBorder(),
+              child:Icon(Icons.add,color: Colors.white) ,
               onPressed: () {
               value.categoryclear();
                 Navigator.push(context, MaterialPageRoute(builder: (context) => AddCategory(),));
@@ -40,12 +40,12 @@ class CategoryList extends StatelessWidget {
               itemCount: value.categorylist.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    width: 250,
-                    height: 250,
+                    width: 180,
+                    height: 180,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Image.network(value.categorylist[index].photo,scale: 15,),
+                        Image.network(value.categorylist[index].photo,scale: 5,),
                         Text(value.categorylist[index].name)
                       ],
                     ),
