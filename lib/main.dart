@@ -2,6 +2,7 @@ import 'package:a/Admin/AddCategory.dart';
 import 'package:a/Shopers/Additem.dart';
 import 'package:a/Shopers/Shopkeeperlogin.dart';
 import 'package:a/Shopers/camera.dart';
+import 'package:a/SplashScreen.dart';
 import 'package:a/customer/Cproduct.dart';
 import 'package:a/customer/Wishlist.dart';
 import 'package:a/customer/cartpage.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: camera(),
+      home: SplashScreen(),
         ),
     );
   }
