@@ -13,6 +13,8 @@ class Ccategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   MainProvider provider = Provider.of<MainProvider>(context,listen: true);
+   provider.getcategoy();
     return Scaffold(
 
 
@@ -118,69 +120,73 @@ class Ccategory extends StatelessWidget {
                 return GridView.builder(
                     itemCount: value.categorylist.length,
                     physics: ScrollPhysics(),
+                    shrinkWrap: true,
                     gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                         childAspectRatio: 0.8
                     ),
-                    itemBuilder: (BuildContext context,int index){
+                    itemBuilder: (BuildContext context, index){
                       return  InkWell(
                         onTap: (){},
-                        child: Container(
-                          width: 146,
-                          height: 144,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0xff8FC7C3), Colors.white],
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10,left: 2),
+                          child: Container(
+                            width: 100,
+                            height: 70,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0xffB99AA0), Colors.white],
 
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
 
-                            //color: backgroundColor,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border(
-                              left: BorderSide(color:Colors.white),
-                              top: BorderSide(color:Colors.white),
-                              right: BorderSide(color:Colors.white),
-                              bottom: BorderSide(width: 1.20, color: Colors.white),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                                spreadRadius: 0,
-                              )
-                            ],
-                          ),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Image.network(
-                                    value.categorylist[index].photo,
-                                    height: 95,
-                                    width: 95,
-                                  ),
-                                ),
-                                Text(value.categorylist[index].name,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                ),
+                              //color: backgroundColor,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border(
+                                left: BorderSide(color:Colors.white),
+                                top: BorderSide(color:Colors.white),
+                                right: BorderSide(color:Colors.white),
+                                bottom: BorderSide(width: 1.20, color: Colors.white),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 4),
+                                  spreadRadius: 0,
+                                )
                               ],
                             ),
-                          ) ,
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Image.network(
+                                      value.categorylist[index].photo,
+                                      height: 120,
+                                      width: 120,
+                                    ),
+                                  ),
+                                  Text(value.categorylist[index].name,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ) ,
 
 
 
+                          ),
                         ),
                       );
 
@@ -195,6 +201,7 @@ class Ccategory extends StatelessWidget {
             ),
 
             SizedBox(height: 10,),
+
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceAround,
             //   children: [

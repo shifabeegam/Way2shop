@@ -1,3 +1,4 @@
+import 'package:a/Shopers/Shoplog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,35 @@ class Caccount extends StatelessWidget {
               ),
             ),
 
-          )
+          ),
+
+          SizedBox(height: 50,),
+
+          Text("Do you want to Add your Shop", style: TextStyle(color: Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold),),
+          SizedBox(height: 30,),
+          InkWell(
+            onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const Shopkeeperlogin()),
+    );
+
+
+            },
+            child: Container(
+              height: 45,
+              width: 140,
+              decoration: BoxDecoration(border: Border.all(
+                  color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xff650015),
+              ),
+              child: Center(child: Text("Next",style: TextStyle(fontSize: 18,color: Colors.white),)),
+            ),
+          ),
+
+
         ],
       ),
 
