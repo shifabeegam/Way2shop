@@ -1,9 +1,12 @@
 import 'package:a/Admin/AddCategory.dart';
+import 'package:a/providers/MainProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Admin/ViewShops.dart';
 import 'package:a/Admin/ViewUsers.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/HomeButton.dart';
+import 'categoryslist.dart';
 
 class AdmnHome extends StatelessWidget {
   const AdmnHome({super.key});
@@ -93,22 +96,27 @@ class AdmnHome extends StatelessWidget {
                 width:230, fondSize: 20,),
             ),
             SizedBox(height: 30 ,),
-            InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AddCategory()),
-                );
-              },
+            Consumer<MainProvider>(
+              builder: (context,value,child) {
+                return InkWell(
+                  onTap: (){
+                    value.getcategoy();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CategoryList()),
+                    );
+                  },
 
-              child: HomeButton(textColor: Colors.white,
-                backgroundColor:  Colors.white10,
-                boxshadowColor: Color(0x3F000000) ,
-                borderColor:  Colors.white10 ,
-                text: "Category",
-                hight:65,
-                width:230, fondSize: 20,),
+                  child: HomeButton(textColor: Colors.white,
+                    backgroundColor:  Colors.white10,
+                    boxshadowColor: Color(0x3F000000) ,
+                    borderColor:  Colors.white10 ,
+                    text: "Category",
+                    hight:65,
+                    width:230, fondSize: 20,),
+                );
+              }
             ),
         ],
         ),

@@ -140,13 +140,127 @@ class camera extends StatelessWidget {
 
                             Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
                             SizedBox(height: 10,),
-                            Costfield(ItemController: value.color,width:296 , hight: 50, hintText: "color"),
+                            Container( height: 50,
+                                width: 296,
+
+
+                                decoration: BoxDecoration(border: Border.all(
+                                    width: 1,
+                                    color: Color(0xff650015)),
+                                  borderRadius: BorderRadius.circular(15),
+
+
+
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),child: Row(
+                                  children: [
+                                    Text("color",style: TextStyle(color: Colors.grey,fontSize: 20),),
+                                    SizedBox(width: 40,),
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                        ),
+                                      ),
+                                      child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 20,)),
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                        ),
+                                      ),
+                                      child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 20,)),
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                        ),
+                                      ),
+                                      child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 20,)),
+                                    ),
+                                  ],
+                                )),
                             SizedBox(height: 10,),
-                            Costfield(ItemController: value.description,width:296 , hight: 50, hintText: "description"),
+
+
+                            Container( width: 296,
+
+                                decoration: BoxDecoration(border: Border.all(
+                                    width: 1,
+                                    color: Color(0xff650015)),
+                                  borderRadius: BorderRadius.circular(15),
+
+
+
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),child: TextField(maxLines: 5,decoration: InputDecoration(hintText: "description"),)),
                             SizedBox(height: 10,),
+
 
                             Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
                             SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "Offers"),
+                            SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "variation"),
+                            SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "Color"),
+                            SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "Brand"),
+                            SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "Product Dimensions"),
+                            SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "Assembly Required"),
+                            SizedBox(height: 10,),
+                            Costfield(width:296 , hight: 50,hintText: "Product Care"),
+                            SizedBox(height: 10,),
+                           Container( width: 296,
+
+                               decoration: BoxDecoration(border: Border.all(
+                                   width: 1,
+                                   color: Color(0xff650015)),
+                                 borderRadius: BorderRadius.circular(15),
+
+
+
+                                 boxShadow: [
+                                   BoxShadow(
+                                     color: Color(0x3F000000),
+                                     blurRadius: 4,
+                                     offset: Offset(0, 4),
+                                     spreadRadius: 0,
+                                   )
+                                 ],
+                               ),child: TextField(maxLines: 10,decoration: InputDecoration(hintText: "Instructions"),)),
+                            SizedBox(height: 10,),
+
+
 
                           ],
                         ),
