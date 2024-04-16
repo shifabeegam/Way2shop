@@ -3,6 +3,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'Admin/AdmnHome.dart';
 import 'Shopers/ShopHome.dart';
+import 'customer/Caccount.dart';
+import 'customer/Ccategory.dart';
+import 'customer/Cshops.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
 
@@ -19,20 +22,23 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final Screen = [
     Custhome(),
-    ShopHome(),
-    AdmnHome(),
+    Ccategory(),
+    Cshops(),
+    Caccount()
+
   ];
 
   final  items= <Widget>[
-  Icon(Icons.add, size: 30),
-  Icon(Icons.list, size: 30),
-  Icon(Icons.compare_arrows, size: 30),
-
+    Icon(Icons.trending_up,color: Colors.white,),
+    Icon(Icons.category_outlined,color: Colors.white),
+    Icon(Icons.shop_2_outlined,color: Colors.white),
+    Icon(Icons.account_circle_outlined,color: Colors.white)
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
         bottomNavigationBar: CurvedNavigationBar(
              items: items,
           index: index,
@@ -41,9 +47,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             this.index=index;
           }),
 
-          color: Colors.white,
-          buttonBackgroundColor: Colors.white,
-          backgroundColor: Colors.blueAccent,
+          color: Color(0xff650015),
+          // buttonBackgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           animationCurve: Curves.easeInOut,
           animationDuration: Duration(milliseconds: 600),
 
