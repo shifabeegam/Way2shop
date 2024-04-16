@@ -41,6 +41,14 @@ class MainProvider extends ChangeNotifier {
   TextEditingController  licence= TextEditingController();
   TextEditingController reciept = TextEditingController();
   TextEditingController licenceid = TextEditingController();
+  TextEditingController offers = TextEditingController();
+  TextEditingController variations = TextEditingController();
+  TextEditingController brand = TextEditingController();
+  TextEditingController diamention = TextEditingController();
+  TextEditingController requirements = TextEditingController();
+  TextEditingController productcare = TextEditingController();
+  TextEditingController instruction = TextEditingController();
+
 
 
 // Add item Details
@@ -51,15 +59,19 @@ class MainProvider extends ChangeNotifier {
     final user = <String, dynamic>{
 
       "Item Name": itemNm.text,
-      "item Code": itemCd.text,
+      //"item Code": itemCd.text,
       "Price": price.text,
       "color": color.text,
       "description": description.text,
       "Item Quantity": quantity.text,
-
       "Category": category.text,
-
-
+      "Offers" :offers.text,
+      "variation":variations.text,
+      "Brand":brand.text,
+      "Product Dimensions":diamention.text,
+      "Assembly Required":requirements.text,
+      "Product Care":productcare.text,
+      "Instructions":instruction.text,
     };
 
 
@@ -87,7 +99,8 @@ class MainProvider extends ChangeNotifier {
            allAdditem.add(ItemModel(
                map["Item Name"].toString(),
                map["item Code"].toString(),
-              map["Item Quantity"].toString()));
+              map["Item Quantity"].toString()
+           ));
 
             notifyListeners();
 
