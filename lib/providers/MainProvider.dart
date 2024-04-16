@@ -2,12 +2,14 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:a/Model/ItemModel.dart';
+import 'package:a/providers/loginprovider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class MainProvider extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -169,7 +171,31 @@ class MainProvider extends ChangeNotifier {
   }
 
 
-   File? categoryfileimg;
+  void adduser(BuildContext context,String type){
+    LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
+
+    String id = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    HashMap<String, Object> usermap = HashMap();
+    usermap["USER_ID"]= id;
+    usermap["USER_NAME"]= loginProvider.loginusername.text;
+    usermap["PHONE_NUMBER"]= "+91"+loginProvider.Loginphnnumber.text;
+    usermap["TYPE"]= type;
+    usermap["STATUS"]= "ACTIVE";
+    db.collection("USERS").doc(id).set(usermap);
+
+  }
+
+
+
+
+
+
+
+
+  File? categoryfileimg;
   String categoryimg  ="";
 
 

@@ -1,10 +1,12 @@
 import 'package:a/Admin/AddCategory.dart';
 import 'package:a/providers/MainProvider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Admin/ViewShops.dart';
 import 'package:a/Admin/ViewUsers.dart';
 import 'package:provider/provider.dart';
 
+import '../customer/Clogin.dart';
 import '../widgets/HomeButton.dart';
 import 'categoryslist.dart';
 
@@ -20,9 +22,80 @@ class AdmnHome extends StatelessWidget {
 
         title: Text("Way2Shop",
           style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
-
-
         ),
+          actions:[
+            InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      backgroundColor: Colors.white,
+                      elevation: 20,
+                      content:  Text(
+                          "Do you want to Logout ?",style: TextStyle(
+                          fontSize:17,
+
+                          fontFamily:'ink nut',
+                          fontWeight: FontWeight.w700,
+                          color: Colors.red)),
+                      actions: <Widget>[
+                        Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                FirebaseAuth auth = FirebaseAuth.instance;
+                                auth.signOut();
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Clogin(),
+                                    ));
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 90,
+                                decoration: BoxDecoration(
+                                    color:Colors.white ,
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color(0x26000000),
+                                        blurRadius: 2.0, // soften the shadow
+                                        spreadRadius: 1.0, //extend the shadow
+                                      ),
+                                    ] ),
+                                child: Center(child:  Text("yes",style: TextStyle( color: Colors.black,fontSize: 17,fontWeight: FontWeight.w700))),
+                              ),
+                            ),
+                            TextButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  height: 45,
+                                  width: 90,
+
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.red,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color(0x26000000),
+                                        blurRadius: 2.0, // soften the shadow
+                                        spreadRadius: 1.0, //extend the shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Center(child: Text("No",style: TextStyle( color: Colors.black,fontSize: 17,fontWeight: FontWeight.w700))),
+                                ))
+                          ],
+                        )
+
+                      ],
+                    ),
+                  );
+                },
+                child: Icon(Icons.logout_outlined,color: Colors.white,size:30,)),SizedBox(width: 15,)]
       ),
       body:
       Container(
