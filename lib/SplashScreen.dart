@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
   //  mainProvider.getCarouselimg();
 
 
-    Timer(const Duration(seconds: 44444), () {
+    Timer(const Duration(seconds: 5), () {
        Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
 
       // if (loginUser == null) {
@@ -75,9 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   bottom: BorderSide(width: 1.20, color: Color(0xff650015)),
                 ),
                 boxShadow: [
-                  BoxShadow(
-
-                    color: Colors.grey,
+                  BoxShadow(color: Colors.grey,
                     blurRadius: 4,
                     offset: Offset(0, 4),
                     spreadRadius: 0,

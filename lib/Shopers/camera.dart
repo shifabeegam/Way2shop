@@ -424,6 +424,9 @@ class camera extends StatelessWidget {
                               if (mainProvider.imageFile != null) {
                                 await _uploadImageToFirebase(
                                     mainProvider.imageFile!);
+
+
+
                                 // Perform submission or any other action after uploading to Firebase
                               } else {
                                 // Show an error message or handle accordingly if no image is selected

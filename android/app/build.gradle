@@ -38,7 +38,7 @@ android {
     }
     defaultConfig {
 
-        versionCode 2 // Increment this for each new version
+          2 // Increment this for each new version
 
     }
 
