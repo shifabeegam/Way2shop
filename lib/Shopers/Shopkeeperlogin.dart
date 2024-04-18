@@ -152,19 +152,24 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                         Costfield(ItemController: value.address, width: 296, hight: 50, hintText: "Address"),
                         SizedBox(height: 10),
                         Costfield(ItemController: value.shopdetails, width: 296, hight: 50, hintText: "Shop Details"),
+
                         SizedBox(height: 10),
+
                         _buildFileUploadWidget(
                           _selectedIdProof,
                           _selectedIdProof != null ? _selectedIdProof!.path.split('/').last : "Upload Id Proof",
                           FileType.custom,
                         ),
                         SizedBox(height: 10),
+
                         _buildFileUploadWidget(
                           _selectedLicence,
                           _selectedLicence != null ? _selectedLicence!.path.split('/').last : "Licence of Shop",
                           FileType.custom,
                         ),
+
                         SizedBox(height: 10),
+
                         _buildFileUploadWidget(
                           _selectedTaxReceipt,
                           _selectedTaxReceipt != null ? _selectedTaxReceipt!.path.split('/').last : "Tax Payment Receipt",

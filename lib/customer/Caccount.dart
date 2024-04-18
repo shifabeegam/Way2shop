@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import '../Shopers/Shopkeeperlogin.dart';
+
 class Caccount extends StatelessWidget {
   const Caccount({super.key});
 
@@ -38,7 +40,7 @@ class Caccount extends StatelessWidget {
                       fillColor: Colors.white24,
                       filled: true,
                       focusedBorder: InputBorder.none,
-                      hintText:"Search...",
+                      hintText:"Search..... ",
                       hintStyle:TextStyle(color: Colors.white),
                       prefixIcon: Icon(Icons.search,color: Colors.white,),
                       suffixIcon: Icon(Icons.mic,color: Colors.white,),
@@ -75,14 +77,6 @@ class Caccount extends StatelessWidget {
                     ),
                   ],
                 ),
-
-
-
-
-
-
-
-
               ],
             ),
 

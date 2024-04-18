@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 
 
-class Shopkeeperlogin extends StatelessWidget {
-  const Shopkeeperlogin({super.key});
+class Shopkeeperl extends StatelessWidget {
+  const Shopkeeperl({super.key});
 
 
 

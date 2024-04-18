@@ -19,59 +19,6 @@ class camera extends StatelessWidget {
     MainProvider mainProvider =
         Provider.of<MainProvider>(context, listen: false);
 
-    // Function to handle image upload
-    Future<void> _handleImageUpload() async {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowCompression: true,
-      );
-
-      if (result != null) {
-        if (result.files.isNotEmpty) {
-          File file = File(result.files.single.path!);
-          // Update the selected image file in the provider
-          mainProvider.setImageFile(file);
-        } else {
-          // Handle the case where the file list is empty
-          print('No file selected');
-        }
-      } else {
-        // Handle the case where the user cancels the file picker
-        print('User canceled the file picker');
-      }
-    }
-
-    // Function to upload image to Firebase Storage
-    Future<void> _uploadImageToFirebase(File file) async {
-      try {
-        FirebaseStorage storage = FirebaseStorage.instance;
-        String fileName =
-            'image_${DateTime.now().millisecondsSinceEpoch}.jpg'; // Generate a unique file name
-        Reference ref = storage.ref().child('images').child(
-            fileName); // Set the path where the file will be stored in Firebase Storage
-        await ref.putFile(file);
-        String downloadUrl = await ref.getDownloadURL();
-        print('File uploaded to Firebase Storage: $downloadUrl');
-        // Do something with the downloadUrl if needed
-      } catch (e) {
-        print('Error uploading file to Firebase Storage: $e');
-      }
-    }
-
-    // Function to open browser for uploading
-    void _openBrowserForUpload() async {
-      const url = 'https://example.com/upload'; // Your upload URL
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        throw 'Could not launch $url';
-      }
-    }
-
-    // Function to remove the uploaded image
-    void _removeImage(MainProvider mainProvider) {
-      mainProvider.setImageFile(null);
-    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -113,7 +60,7 @@ class camera extends StatelessWidget {
                             onTap: () {
                               showBottomSheet(context);
                             },
-                            child: value.categoryfileimg != null
+                            child: value.itemfileimage != null
                                 ? Container(
                                     width: 100,
                                     height: 100,
@@ -126,7 +73,7 @@ class camera extends StatelessWidget {
                                         ),
                                         image: DecorationImage(
                                             image: FileImage(
-                                              value.categoryfileimg!,
+                                              value.itemfileimage!,
                                             ),
                                             fit: BoxFit.fill)),
                                   )
@@ -169,10 +116,7 @@ class camera extends StatelessWidget {
                           // ),
                         ),
                         SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: _openBrowserForUpload,
-                          child: Text("Upload Image"),
-                        ),
+                        Text("Upload Image"),
                         SizedBox(height: 30),
                         Column(
                           children: [
@@ -296,39 +240,39 @@ class camera extends StatelessWidget {
                               height: 10,
                             ),
 
-                            Container(
-                                height: 50,
-                                width: 296,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1, color: Color(0xff650015)),
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color(0x3F000000),
-                                      blurRadius: 4,
-                                      offset: Offset(0, 4),
-                                      spreadRadius: 0,
-                                    )
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      " Category",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      width: 40,
-                                    ),
-
-
-
-
-
-                                  ],
-                                )),
+                            // Container(
+                            //     height: 50,
+                            //     width: 296,
+                            //     decoration: BoxDecoration(
+                            //       border: Border.all(
+                            //           width: 1, color: Color(0xff650015)),
+                            //       borderRadius: BorderRadius.circular(15),
+                            //       boxShadow: [
+                            //         BoxShadow(
+                            //           color: Color(0x3F000000),
+                            //           blurRadius: 4,
+                            //           offset: Offset(0, 4),
+                            //           spreadRadius: 0,
+                            //         )
+                            //       ],
+                            //     ),
+                            //     child: Row(
+                            //       children: [
+                            //         Text(
+                            //           " Category",
+                            //           style: TextStyle(
+                            //               color: Colors.grey, fontSize: 18),
+                            //         ),
+                            //         SizedBox(
+                            //           width: 40,
+                            //         ),
+                            //
+                            //
+                            //
+                            //
+                            //
+                            //       ],
+                            //     )),
 
 
 
@@ -574,31 +518,22 @@ class camera extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15)),
-                          child: MaterialButton(
-                            onPressed: () async {
-                              if (mainProvider.imageFile != null) {
-                                await _uploadImageToFirebase(
-                                    mainProvider.imageFile!);
-                                //mainprovider.upload();
-
-
-                                // Perform submission or any other action after uploading to Firebase
-                              } else {
-
-
-
-                                // Show an error message or handle accordingly if no image is selected
-                              }
+                        Consumer<MainProvider>(
+                          builder: (context,value,child) {
+                            return InkWell(onTap: () {
+                              value.upload();
                             },
+                              child: Container(
+                                width:150 ,
+                                height: 50,
 
-                            child: const Text("Submit"),
-                            highlightColor: Color(0xff0C630A),
-                            splashColor: Colors.grey,
-                            color: Colors.green,
-                          ),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Center(child: const Text("Submit")),
+                              ),
+                            );
+                          }
                         ),
                       ],
                     );
@@ -635,14 +570,14 @@ class camera extends StatelessWidget {
                     'Camera',
                   ),
                   onTap: () =>
-                      {provider.getImagecamera(), Navigator.pop(context)}),
+                      {provider.getitemImagecamera(), Navigator.pop(context)}),
               ListTile(
                   leading: Icon(Icons.photo, color: Colors.red),
                   title: const Text(
                     'Gallery',
                   ),
                   onTap: () =>
-                      {provider.getImagegallery(), Navigator.pop(context)}),
+                      {provider.getitemImagegallery(), Navigator.pop(context)}),
             ],
           );
         });
