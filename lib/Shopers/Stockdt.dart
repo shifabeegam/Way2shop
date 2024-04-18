@@ -1,3 +1,4 @@
+import 'package:a/Shopers/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Shopers/Additem.dart';
@@ -227,9 +228,9 @@ bottomNavigationBar:
       child: MaterialButton(onPressed: (){ Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const Additem()),
+            builder: (context) => const camera()),
       );
-        //mainProvider.getItem();
+        mainProvider.getcategoy();
         print("fun.............................................");
 
       },

@@ -51,7 +51,7 @@ class MainProvider extends ChangeNotifier {
   TextEditingController productcare = TextEditingController();
   TextEditingController instruction = TextEditingController();
 
-
+  String productSelectedCategoryID="";
 
 // Add item Details
 
@@ -64,9 +64,10 @@ class MainProvider extends ChangeNotifier {
       //"item Code": itemCd.text,
       "Price": price.text,
       "color": color.text,
+      "Category": addcategory.text,
       "description": description.text,
       "Item Quantity": quantity.text,
-      "Category": category.text,
+
       "Offers" :offers.text,
       "variation":variations.text,
       "Brand":brand.text,

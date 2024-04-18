@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:a/Admin/categoryslist.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
@@ -7,6 +8,7 @@ import 'package:a/providers/MainProvider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:a/widgets/HomeButton.dart';
 
+import '../Model/ItemModel.dart';
 import '../widgets/Costfield.dart';
 
 class camera extends StatelessWidget {
@@ -222,6 +224,8 @@ class camera extends StatelessWidget {
                                     SizedBox(
                                       width: 40,
                                     ),
+
+
                                     Container(
                                       width: 30,
                                       height: 30,
@@ -287,9 +291,163 @@ class camera extends StatelessWidget {
                                     ),
                                   ],
                                 )),
+
                             SizedBox(
                               height: 10,
                             ),
+
+                            Container(
+                                height: 50,
+                                width: 296,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1, color: Color(0xff650015)),
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      " Category",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 18),
+                                    ),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+
+
+
+
+
+                                  ],
+                                )),
+
+
+
+                            SizedBox(
+                              height: 10,
+                            ),
+
+
+                            Autocomplete<Categorymodel>(
+                              optionsBuilder: (TextEditingValue textEditingValue) {
+                                return value.categorylist
+                                    .where((Categorymodel item) => item.name
+                                    .toLowerCase()
+                                    .contains(textEditingValue.text.toLowerCase()))
+                                    .toList();
+                              },
+                              displayStringForOption: (Categorymodel option) =>
+                              option.name,
+                              fieldViewBuilder: (BuildContext context,
+                                  TextEditingController fieldTextEditingController,
+                                  FocusNode fieldFocusNode,
+                                  VoidCallback onFieldSubmitted) {
+                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                  fieldTextEditingController.text = value.addcategory.text;
+                                });
+
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width / 1.1,
+                                      child: TextFormField(
+                                        cursorColor: Colors.brown,
+                                        maxLines: 1,
+                                        style: const TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w200),
+                                        decoration: InputDecoration(
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.black),
+                                              borderRadius: BorderRadius.circular(10)),
+                                          hintText: "Category name",
+                                          hintStyle: const TextStyle(
+                                              color: Colors.black45, fontFamily: 'cantata'),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        onChanged: (txt) {},
+                                        controller: fieldTextEditingController,
+                                        focusNode: fieldFocusNode,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              onSelected: (Categorymodel selection) {
+                                value.addcategory.text = selection.name;
+                                value.productSelectedCategoryID = selection.id;
+                              },
+                              optionsViewBuilder: (BuildContext context,
+                                  AutocompleteOnSelected<Categorymodel> onSelected,
+                                  Iterable<Categorymodel> options) {
+                                return Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Material(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius: BorderRadius.circular(15)),
+                                      width: 200,
+                                      height: 200,
+                                      child: ListView.builder(
+                                        padding: const EdgeInsets.all(10.0),
+                                        itemCount: options.length,
+                                        itemBuilder: (BuildContext context, int index) {
+                                          final Categorymodel option = options.elementAt(index);
+
+                                          return GestureDetector(
+                                            onTap: () {
+                                              onSelected(option);
+                                            },
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    // border: Border(left: BorderSide(color: Colors.white,width: .6,
+                                                    // ))
+                                                  ),
+                                                  height: 30,
+                                                  width: 200,
+                                                  child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Center(
+                                                          child: Text(option.name,
+                                                              style: const TextStyle(
+                                                                fontFamily: 'cantata',
+                                                                color: Colors.black,
+                                                              )),
+                                                        ),
+                                                      ]),
+                                                ),
+                                                Divider(
+                                                  thickness: 1,
+                                                  color: Colors.black,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+
+
 
                             Container(
                                 width: 296,
@@ -362,7 +520,7 @@ class camera extends StatelessWidget {
                               height: 10,
                             ),
                             Costfield(
-                                ItemController: value.productcare,
+                                ItemController: value.diamention,
                                 width: 296,
                                 hight: 50,
                                 hintText: "Product Dimensions"),
@@ -424,14 +582,18 @@ class camera extends StatelessWidget {
                               if (mainProvider.imageFile != null) {
                                 await _uploadImageToFirebase(
                                     mainProvider.imageFile!);
-
+                                //mainprovider.upload();
 
 
                                 // Perform submission or any other action after uploading to Firebase
                               } else {
+
+
+
                                 // Show an error message or handle accordingly if no image is selected
                               }
                             },
+
                             child: const Text("Submit"),
                             highlightColor: Color(0xff0C630A),
                             splashColor: Colors.grey,
@@ -487,3 +649,5 @@ class camera extends StatelessWidget {
     // ImageSource
   }
 }
+
+
