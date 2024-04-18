@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../providers/MainProvider.dart';
-
 
 class search extends StatelessWidget {
   @override
@@ -53,10 +51,6 @@ class search extends StatelessWidget {
                   ],
                 ),
               ),
-
-
-              SizedBox(height: 10,),
-
             ],
           ),
         ),
@@ -65,3 +59,16 @@ class search extends StatelessWidget {
   }
 }
 
+class SearchScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Search Screen'),
+      ),
+      body: Center(
+        child: Text('This is the search screen'),
+      ),
+    );
+  }
+}

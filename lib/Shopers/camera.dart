@@ -303,22 +303,45 @@ class camera extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
                                     child: SizedBox(
-                                      width: MediaQuery.of(context).size.width / 1.1,
+                                      width: 295,
+                                      height: 50,
                                       child: TextFormField(
+
                                         cursorColor: Colors.brown,
                                         maxLines: 1,
                                         style: const TextStyle(
-                                            color: Colors.black, fontWeight: FontWeight.w200),
-                                        decoration: InputDecoration(
+                                            color: Colors.grey, fontSize: 16),
+                                        // decoration: BoxDecoration(
+                                        //   border: Border.all(
+                                        //       width: 1, color: Color(0xff650015)),
+                                        //   borderRadius: BorderRadius.circular(15),
+                                        //   boxShadow: [
+                                        //     BoxShadow(
+                                        //       color: Color(0x3F000000),
+                                        //       blurRadius: 4,
+                                        //       offset: Offset(0, 4),
+                                        //       spreadRadius: 0,
+                                        //     )
+                                        //   ],
+                                        // ),
+                                        decoration:
+                                        InputDecoration(
+
                                           focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.black),
+
+                                               borderSide: BorderSide(color: Color(0xff650015),),
                                               borderRadius: BorderRadius.circular(10)),
+
                                           hintText: "Category name",
                                           hintStyle: const TextStyle(
                                               color: Colors.black45, fontFamily: 'cantata'),
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(20),
+                                            //borderSide: BorderSide(width: 1,color: Color(0xff650015),),
+                                            borderRadius: BorderRadius.circular(15),
+                                            //  borderSide: BorderSide(color: Colors.white, width: 3.0))
+
                                           ),
+
                                         ),
                                         onChanged: (txt) {},
                                         controller: fieldTextEditingController,

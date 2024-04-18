@@ -27,7 +27,7 @@ import 'SplashScreen.dart';
 import 'bottamnavigationbar.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
-import 'customer/SearchItemdtl.dart';
+
 import 'customer/search.dart';
 import 'Shopers/Shopkeeperlogin.dart';
 
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: search(),
+      home: camera(),
 
         ),
     );
