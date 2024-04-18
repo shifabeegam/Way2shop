@@ -44,7 +44,6 @@ class MainProvider extends ChangeNotifier {
   TextEditingController reciept = TextEditingController();
   TextEditingController licenceid = TextEditingController();
   TextEditingController offers = TextEditingController();
-  TextEditingController variations = TextEditingController();
   TextEditingController brand = TextEditingController();
   TextEditingController diamention = TextEditingController();
   TextEditingController requirements = TextEditingController();
@@ -79,9 +78,6 @@ class MainProvider extends ChangeNotifier {
     itemmap["Product Care"] = productcare.text;
     itemmap["Instructions"] =instruction.text;
     itemmap["Category_id"] =productSelectedCategoryID;
-
-
-
     if (itemfileimage != null) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
@@ -127,19 +123,9 @@ class MainProvider extends ChangeNotifier {
     }
   }
 
-
-
-
-
-
   // View the Items
-  
-
-
-    void getItem(){
-
-
-      db.collection("ITEMS").snapshots().listen((value)
+   void getItem(String catid){
+    db.collection("ITEMS").where("Category_id",isEqualTo: catid).get().then((value)
       {
         allAdditem.clear();
        // totalAmount = 0.0;
@@ -147,13 +133,23 @@ class MainProvider extends ChangeNotifier {
         if(value.docs.isNotEmpty){
           for(var element in value.docs) {
             Map<dynamic, dynamic> map = element.data() as Map;
-
-           allAdditem.add(ItemModel(
-               map["Item Name"].toString(),
-               map["item Code"].toString(),
-              map["Item Quantity"].toString()
-           ));
-
+            allAdditem.add(ItemModel(
+           map["Item Id"].toString(),
+           map["PHOTO"].toString(),
+           map["Item Name"].toString(),
+           map["Price"].toString(),
+           map["Category"].toString(),
+           map["Category_id"].toString(),
+           map["description"].toString(),
+           map["Item Quantity"].toString(),
+           map["Offers"].toString(),
+           map["color"].toString(),
+           map["Brand"].toString(),
+           map["Product Dimensions"].toString(),
+           map["Assembly Required"].toString(),
+           map["Product Care"].toString(),
+           map["Instructions"].toString(),
+            ));
             notifyListeners();
 
           }
@@ -161,12 +157,8 @@ class MainProvider extends ChangeNotifier {
 
         }
       });
+  }
 
-
-
-
-
-    }
   var q;
   var Uid;
   void incrementInteger() {

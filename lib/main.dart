@@ -27,7 +27,7 @@ import 'SplashScreen.dart';
 import 'bottamnavigationbar.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
-
+import 'customer/SearchItemdtl.dart';
 import 'customer/search.dart';
 import 'Shopers/Shopkeeperlogin.dart';
 
@@ -62,6 +62,8 @@ class MyApp extends StatelessWidget {
       ),
       home: camera(),
 
+      // home: Stockdt(),
+      home: BottomNavBar(),
         ),
     );
   }

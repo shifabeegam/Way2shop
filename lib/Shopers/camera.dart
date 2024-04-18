@@ -462,14 +462,14 @@ class camera extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Costfield(
-                                ItemController: value.variations,
-                                width: 296,
-                                hight: 50,
-                                hintText: "variation"),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            // Costfield(
+                            //     ItemController: value.variations,
+                            //     width: 296,
+                            //     hight: 50,
+                            //     hintText: "variation"),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
                             Costfield(
                                 ItemController: value.color,
                                 width: 296,

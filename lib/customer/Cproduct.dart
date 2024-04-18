@@ -13,7 +13,25 @@ import 'package:flutter/widgets.dart';
 import 'Ctrending.dart';
 
 class Cproduct extends StatelessWidget {
-  const Cproduct({super.key});
+  String itemid;
+  String photo;
+  String itemname;
+  String price;
+  String category;
+  String categoryid;
+  String description;
+  String itemquartity;
+  String offers;
+  String color;
+  String brand;
+  String productdiemension;
+  String assmbly;
+  String productcare;
+  String instruction;
+   Cproduct({super.key,required this.itemid,required this.photo,required this.itemname,required this.price,
+     required this.category,required this.categoryid,required this.description,required this.itemquartity,required this.offers,required this.color,required this.brand,required this.productdiemension,required this.assmbly,required this.productcare,
+     required this.instruction,
+   });
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +107,6 @@ class Cproduct extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: CarouselSlider(
                       items: [
-                        imgSlide(Pruduct_image: AssetImage("assets/image_demo.png"),img_number: "1/5",),
                         imgSlide(Pruduct_image: AssetImage("assets/img_1.png"),img_number: "2/5",),
                         imgSlide(Pruduct_image: AssetImage("assets/kurta1.png"),img_number: "3/5",),
                         imgSlide(Pruduct_image: AssetImage("assets/toys.png"),img_number: "4/5",)
@@ -112,15 +129,17 @@ class Cproduct extends StatelessWidget {
                           Container(
                               width: double.infinity,
                               child: Text("Kidonex",style: TextStyle(fontSize: 24,color: Colors.black54),)),
-                          Text("House of Quirk Electric Baby Rocker,Bassinet on Bed , "
-                              "Height Adjustable Cot Bed with Comfortable Mattress,"
-                              "Portable Baby Nursey with 82 cm Sleeping Basket and 5 Swing Speeds(Grey)"),
+                          Text(description
+                              // "House of Quirk Electric Baby Rocker,Bassinet on Bed , "
+                              // "Height Adjustable Cot Bed with Comfortable Mattress,"
+                              // "Portable Baby Nursey with 82 cm Sleeping Basket and 5 Swing Speeds(Grey)"
+                          ),
                           Row(
                             children: [
-                              Text("20%off",style: TextStyle(fontSize: 18,color: Colors.green),),
+                              Text(offers+ "%off",style: TextStyle(fontSize: 18,color: Colors.green),),
                               SizedBox(width: 10,),
                               Icon(Icons.currency_rupee,size: 30,),
-                              Text("8,999",style: TextStyle(fontSize: 30),),
+                              Text(price,style: TextStyle(fontSize: 30),),
                             ],
                           ),
                           Row(
@@ -223,11 +242,11 @@ class Cproduct extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("dataColour           "+" Green "),
-                              Text("Brand                "+" Green "),
-                              Text("Product Dimensions   "+" Green "),
-                              Text("Assembly Required    "+" Green "),
-                              Text("Product Care         "+" Green "),
+                              Text("dataColour           "+color),
+                              Text("Brand                "+brand),
+                              Text("Product Dimensions   "+productdiemension),
+                              Text("Assembly Required    "+assmbly),
+                              Text("Product Care         "+productcare),
 
                             ],
                           ),
@@ -239,9 +258,10 @@ class Cproduct extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(children: [
-                            Text("\u2022  "+"Space-saving and portable: this baby swing has a very strong folding function and saves space."),
-                            Text("\u2022  "+"ADJUSTABLE HEIGHT: Simply change the height of the baby bed according to your needs."),
-                            Text("\u2022  "+"Music: Can Be Connected to the Mobile Phone to Play the Baby‘s Favorite Music"),
+                            Text(instruction),
+                            // Text("\u2022  "+"Space-saving and portable: this baby swing has a very strong folding function and saves space."),
+                            // Text("\u2022  "+"ADJUSTABLE HEIGHT: Simply change the height of the baby bed according to your needs."),
+                            // Text("\u2022  "+"Music: Can Be Connected to the Mobile Phone to Play the Baby‘s Favorite Music"),
                           ],),
                         ),
                       ),

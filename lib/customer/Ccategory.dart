@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/GradButton.dart';
+import 'Cproductlist.dart';
 import 'Cshops.dart';
 import 'Ctrending.dart';
 
@@ -84,14 +85,6 @@ class Ccategory extends StatelessWidget {
                       ),
                     ],
                   ),
-
-
-
-
-
-
-
-
                 ],
               ),
 
@@ -129,7 +122,10 @@ class Ccategory extends StatelessWidget {
                     ),
                     itemBuilder: (BuildContext context, index){
                       return  InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          value.getItem(value.categorylist[index].id);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.categorylist[index].id ,) ,));
+                        },
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10,left: 2),
                           child: Container(
@@ -190,13 +186,7 @@ class Ccategory extends StatelessWidget {
                         ),
                       );
 
-
-
-
-
-
-
-                     });
+                    });
               }
             ),
 

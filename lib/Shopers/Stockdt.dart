@@ -28,7 +28,7 @@ class Stockdt extends StatelessWidget {
     }
 */
 
-    mainProvider.getItem();
+    // mainProvider.getItem();
     int myInteger ;
     int scode;
 
@@ -66,9 +66,9 @@ class Stockdt extends StatelessWidget {
 
                       itemBuilder: (context, index) {
                       var items = value.allAdditem[index].toString();
-                      print(value.allAdditem[index].name);
-                      print(value.allAdditem[index].quantity);
-                      print(value.allAdditem[index].code);
+                      // print(value.allAdditem[index].name);
+                      // print(value.allAdditem[index].quantity);
+                      // print(value.allAdditem[index].code);
                         return Container(
                           width: double.infinity,
                           height: 115,
@@ -104,8 +104,8 @@ class Stockdt extends StatelessWidget {
                                 padding: const EdgeInsets.all(10),
                                 child: Column(
                                   children: [
-                                    Text( value.allAdditem[index].name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                                    Text( value.allAdditem[index].code,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                    // Text( value.allAdditem[index].name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                    // Text( value.allAdditem[index].code,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                                   ],
                                 ),
                                ),
@@ -115,7 +115,7 @@ class Stockdt extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Column(
                                   children: [
-                                    Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 24)),
+                                    // Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 24)),
                                     SizedBox(height: 5,),
                                     InkWell(
                                       onTap: (){
@@ -139,12 +139,12 @@ class Stockdt extends StatelessWidget {
                                                             builder: (context,value,child) {
                                                               return InkWell(onTap: () {
                                                                 print("tap------------------");
-                                                                 myInteger = int.parse(value.allAdditem[index].quantity);
-                                                                 print(myInteger);
-                                                                 value.Upquantity.text = myInteger.toString();
-                                                                 scode = int.parse(value.allAdditem[index].code);
-                                                                 print(scode);
-                                                                 value.incrementInteger();
+                                                                 // myInteger = int.parse(value.allAdditem[index].quantity);
+                                                                 // print(myInteger);
+                                                                 // value.Upquantity.text = myInteger.toString();
+                                                                 // scode = int.parse(value.allAdditem[index].code);
+                                                                 // print(scode);
+                                                                 // value.incrementInteger();
 
 
 
@@ -160,7 +160,7 @@ class Stockdt extends StatelessWidget {
                                                               );
                                                             }
                                                           ),
-                                                          Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 40)),
+                                                          // Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 40)),
                                                           InkWell(
                                                               child: HomeButton(
                                                                   textColor: Color(0xFA005A54),
