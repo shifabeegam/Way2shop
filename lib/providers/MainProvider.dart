@@ -78,6 +78,7 @@ class MainProvider extends ChangeNotifier {
     itemmap["Assembly Required"] = requirements.text;
     itemmap["Product Care"] = productcare.text;
     itemmap["Instructions"] =instruction.text;
+    itemmap["Category_id"] =productSelectedCategoryID;
 
 
 
