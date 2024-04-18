@@ -1,6 +1,8 @@
 import 'package:a/Shopers/Shoplog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Caccount extends StatelessWidget {
   const Caccount({super.key});
