@@ -14,3 +14,8 @@ class Categorymodel {
   Categorymodel(this.id,this.name,this.photo);
 
 }
+
+class AllitemsModel{
+
+
+}

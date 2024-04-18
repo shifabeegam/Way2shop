@@ -76,9 +76,9 @@ class ViewShops extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
-                        Text("Shop Name",style: TextStyle(fontSize: 16),),
+                        Text("Max",style: TextStyle(fontSize: 16),),
                         SizedBox(height: 7,),
-                        Text("Shop Venue",style: TextStyle(fontSize: 16),),
+                        Text("palakkad",style: TextStyle(fontSize: 16),),
                       ],
                     ),
                   ),
@@ -141,9 +141,9 @@ class ViewShops extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Text("Shop Name",style: TextStyle(fontSize: 16),),
+                          Text("Kasavukendra",style: TextStyle(fontSize: 16),),
                           SizedBox(height: 7,),
-                          Text("Shop Venue",style: TextStyle(fontSize: 16),),
+                          Text("manjeri",style: TextStyle(fontSize: 16),),
                         ],
                       ),
                     ),
@@ -208,9 +208,9 @@ class ViewShops extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Text("Shop Name",style: TextStyle(fontSize: 16),),
+                          Text("Sanju fashion",style: TextStyle(fontSize: 16),),
                           SizedBox(height: 7,),
-                          Text("Shop Venue",style: TextStyle(fontSize: 16),),
+                          Text("Sreekrishnapuram",style: TextStyle(fontSize: 16),),
                         ],
                       ),
                     ),
