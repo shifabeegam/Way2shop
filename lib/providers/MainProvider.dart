@@ -55,33 +55,78 @@ class MainProvider extends ChangeNotifier {
 
 // Add item Details
 
-  void upload() {
+  File? itemfileimage=null;
+  String itemimg="";
+
+  Future<void> upload() async {
+    String id = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    HashMap<String, Object> itemmap = HashMap();
+
+    itemmap["Item Name"] = itemNm.text;
+    itemmap["Price"] = price.text;
+    itemmap["color"] = color.text;
+    itemmap["Category"] = addcategory.text;
+    itemmap["description"] =description.text;
+    itemmap["Item Quantity"] = quantity.text;
+    itemmap["Item Id"] = id;
+    itemmap["Offers"] = offers.text;
+    itemmap["Brand"] = brand.text;
+    itemmap["Product Dimensions"] = diamention.text;
+    itemmap["Assembly Required"] = requirements.text;
+    itemmap["Product Care"] = productcare.text;
+    itemmap["Instructions"] =instruction.text;
 
 
-    final user = <String, dynamic>{
 
-      "Item Name": itemNm.text,
-      //"item Code": itemCd.text,
-      "Price": price.text,
-      "color": color.text,
-      "Category": addcategory.text,
-      "description": description.text,
-      "Item Quantity": quantity.text,
-
-      "Offers" :offers.text,
-      "variation":variations.text,
-      "Brand":brand.text,
-      "Product Dimensions":diamention.text,
-      "Assembly Required":requirements.text,
-      "Product Care":productcare.text,
-      "Instructions":instruction.text,
-    };
-
-
-    db.collection("ITEMS").doc(itemCd.text.toString()).set(user);
+    if (itemfileimage != null) {
+      String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+      ref = FirebaseStorage.instance.ref().child(photoId);
+      await ref.putFile(itemfileimage!).whenComplete(() async {
+        await ref.getDownloadURL().then((value) {
+          itemmap ["PHOTO"] = value;
+          notifyListeners();
+        });
+        notifyListeners();
+      });
+      notifyListeners();
+    } else {
+      itemmap['PHOTO'] = itemimg;
+      // editMap['IMAGE_URL'] = imageUrl;
+    }
+    db.collection("ITEMS").doc(id).set(itemmap);
     notifyListeners();
     print("Upload Succesfully");
   }
+  void setImage1(File image) {
+    itemfileimage = image;
+    notifyListeners();
+  }
+
+  Future getitemImagegallery() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setImage1(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  Future getitemImagecamera() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setImage1(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
+
 
   // View the Items
   
@@ -107,12 +152,7 @@ class MainProvider extends ChangeNotifier {
 
             notifyListeners();
 
-
-
           }
-
-
-
           notifyListeners();
 
         }
