@@ -23,6 +23,7 @@ import 'Admin/AdmnHome.dart';
 import 'Admin/ViewShops.dart';
 import 'Admin/ViewUsers.dart';
 import 'Shopers/ShopHome.dart';
+import 'SplashScreen.dart';
 import 'bottamnavigationbar.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';

@@ -32,7 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     Icon(Icons.trending_up,color: Colors.white,),
     Icon(Icons.category_outlined,color: Colors.white),
     Icon(Icons.shop_2_outlined,color: Colors.white),
-    Icon(Icons.account_circle_outlined,color: Colors.white)
+    Icon(Icons.add_home_work_outlined,color: Colors.white)
   ];
 
   @override
