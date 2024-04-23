@@ -61,9 +61,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         // home: Stockdt(),
-        home: AdmnHome(),
-       // home:Shopkeeperlogin(),
-        
+       // home: AdmnHome(),
+       home:AddCategory(),
+       // home: ShopHome(),
+
 
 
 

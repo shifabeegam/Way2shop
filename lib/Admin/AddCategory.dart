@@ -5,7 +5,8 @@ import 'package:a/providers/MainProvider.dart';
 import 'package:provider/provider.dart';
 
 class AddCategory extends StatelessWidget {
-  const AddCategory({super.key});
+   AddCategory({super.key});
+   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,107 +26,129 @@ class AddCategory extends StatelessWidget {
       ),*/
         ),
         body:
-        Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(//color: Color(0xff650015),
-            gradient: LinearGradient(
-              colors: [ Colors.white,Color(0xff650015)],
+        Form(
+          key: formKey,
+          child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(//color: Color(0xff650015),
+              gradient: LinearGradient(
+                colors: [ Colors.white,Color(0xff650015)],
 
-              begin: Alignment.bottomCenter, end: Alignment.topCenter,
+                begin: Alignment.bottomCenter, end: Alignment.topCenter,
+              ),
             ),
-          ),
-          child: SingleChildScrollView(
-            child:
-                // SizedBox(height: 240,),
-                Center(
-                  child:Consumer<MainProvider>(
-                    builder: (context,value,child) {
-                      return Container(
-                         margin: EdgeInsets.only(top: 100),
-                        width: 280,
-                        height: 380,
-                        decoration: ShapeDecoration(
-                          color: Colors.white10,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          shadows: [
-                            BoxShadow(
-                              color: Color(0x3F000000),
-                              blurRadius: 4,
-                              offset: Offset(9, 8),
-                              spreadRadius: 0,
-                            )
-                          ],
-                        ),
-                        child:
-                        Column(
-                          children: [
-                            SizedBox(height: 20,),
-                            Text("Add Category",style: TextStyle(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),),
-                            SizedBox(height: 20,),
-
-                            Consumer<MainProvider>(
-                              builder: (context,value,child) {
-                                return InkWell(
-                                  onTap: () {
-                                    showBottomSheet(context);
-                                  },
-                                  child: value.categoryfileimg!=null?Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: OvalBorder(
-                                        side: BorderSide(width: 1, color: Color(0xFF650015)),
-                                      ),
-                                      image: DecorationImage(image: FileImage(value.categoryfileimg!,),fit: BoxFit.fill)
-                                    ),
-                                  ):Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: OvalBorder(
-                                        side: BorderSide(width: 1, color: Color(0xFF650015)),
-                                      ),
-                                    ),
-                                    child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,),
-                                  ),
-                                );
-                              }
+            child: SingleChildScrollView(
+              child:
+                  // SizedBox(height: 240,),
+                  Center(
+                    child:Consumer<MainProvider>(
+                      builder: (context,value,child) {
+                        return Container(
+                           margin: EdgeInsets.only(top: 100),
+                          width: 280,
+                          height: 380,
+                          decoration: ShapeDecoration(
+                            color: Colors.white10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            SizedBox(height: 20,),
-                            Container(
-                                height:50,
-                                width:200,
-                                child: Costfield(ItemController: value.addcategory ,width:296 , hight: 50, hintText: "Category")),
-                            SizedBox(height: 20,),
-                            Container(decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),),
-                              child: MaterialButton(onPressed: (){
-                                mainprovider.uploadcatergory();
-                                Navigator.pop(context);
-                              },
-                                child: const Text("Submit"),
-                                highlightColor: Color(0xff0C630A),
-                                splashColor: Colors.grey,
-                                color: Colors.green,
+                            shadows: [
+                              BoxShadow(
+                                color: Color(0x3F000000),
+                                blurRadius: 4,
+                                offset: Offset(9, 8),
+                                spreadRadius: 0,
+                              )
+                            ],
+                          ),
+                          child:
+                          Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              Text("Add Category",style: TextStyle(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),),
+                              SizedBox(height: 20,),
+
+                              Consumer<MainProvider>(
+                                builder: (context,value,child) {
+                                  return InkWell(
+                                    onTap: () {
+                                      showBottomSheet(context);
+                                    },
+                                    child: value.categoryfileimg!=null?Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                        ),
+                                        image: DecorationImage(image: FileImage(value.categoryfileimg!,),fit: BoxFit.fill)
+                                      ),
+                                    ):Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: OvalBorder(
+                                          side: BorderSide(width: 1, color: Color(0xFF650015)),
+                                        ),
+                                      ),
+                                      child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,),
+                                    ),
+                                  );
+                                }
                               ),
-                            )
-                          ],
-                        ),
-                      );
-                    }
+                              SizedBox(height: 20,),
+                              Container(
+                                  height:50,
+                                  width:200,
+                                  child: Costfield(ItemController: value.addcategory ,width:296 , hight: 50, hintText: "Category",validator: (value) {
+                                    if (value!.isEmpty) {
+
+                                      return "Enter Category ";
+                                    } else {}
+                                  },type: TextInputType.name,),),
+                              SizedBox(height: 20,),
+                              Container(decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),),
+                                child: MaterialButton(onPressed: (){
+
+                                  // Navigator.pop(context);
+                                  final FormState? form = formKey.currentState;
+                                  if (form!.validate()) {
+                                    if (value.categoryfileimg!= null) {
+                                      mainprovider.uploadcatergory(context);
+                                    }
+                                    else{
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(backgroundColor: Colors.red,
+                                            content: Text(
+                                                "Upload Category Image ")),
+                                      );
+                                    }
+                                  }
+                                },
+                                  child: const Text("Submit"),
+                                  highlightColor: Color(0xff0C630A),
+                                  splashColor: Colors.grey,
+                                  color: Colors.green,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                    ),
+
                   ),
 
-                ),
+            ),
+
+
 
           ),
-
-
-
         ),
 
         );

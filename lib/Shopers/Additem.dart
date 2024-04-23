@@ -70,19 +70,49 @@ class Additem extends StatelessWidget {
                               child: InkWell(onTap: (){}, child: Icon(Icons.add_a_photo_outlined,color: Colors.grey,size: 40,)),
                           ),
                             SizedBox(height: 20,),
-                            Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name"),
+                            Costfield(ItemController: value.itemNm,width: 296, hight: 50, hintText: "Item Name",validator: (value) {
+                              if (value!.isEmpty) {
+
+                                return "";
+                              } else {}
+                            },type: TextInputType.name,),
                             SizedBox(height: 10,),
-                            Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code"),
+                            Costfield(ItemController: value.itemCd,width:296 , hight: 50, hintText: "Item Code",validator: (value) {
+                              if (value!.isEmpty) {
+
+                                return "";
+                              } else {}
+                            },type: TextInputType.number,),
                             SizedBox(height: 10,),
 
-                            Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price"),
+                            Costfield(ItemController: value.price,width:296 , hight: 50, hintText: "Price",validator: (value) {
+                              if (value!.isEmpty) {
+
+                                return "";
+                              } else {}
+                            },type: TextInputType.number,),
                             SizedBox(height: 10,),
-                            Costfield(ItemController: value.color,width:296 , hight: 50, hintText: "color"),
+                            Costfield(ItemController: value.color,width:296 , hight: 50, hintText: "color",validator: (value) {
+                              if (value!.isEmpty) {
+
+                                return "";
+                              } else {}
+                            },type: TextInputType.text,),
                             SizedBox(height: 10,),
-                            Costfield(ItemController: value.description,width:296 , hight: 50, hintText: "discription"),
+                            Costfield(ItemController: value.description,width:296 , hight: 50, hintText: "discription",validator: (value) {
+                              if (value!.isEmpty) {
+
+                                return "";
+                              } else {}
+                            },type: TextInputType.text,),
                             SizedBox(height: 10,),
 
-                            Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity"),
+                            Costfield(ItemController: value.quantity,width:296 , hight: 50, hintText: "Item Quantity",validator: (value) {
+                              if (value!.isEmpty) {
+
+                                return "";
+                              } else {}
+                            },type: TextInputType.number,),
                             SizedBox(height: 10,),
 
                             SizedBox(height: 10,),
