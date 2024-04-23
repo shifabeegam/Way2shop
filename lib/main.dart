@@ -27,7 +27,7 @@ import 'SplashScreen.dart';
 import 'bottamnavigationbar.dart';
 import 'customer/Ctrending.dart';
 import 'customer/Custhome.dart';
-import 'customer/SearchItemdtl.dart';
+//mport 'customer/SearchItemdtl.dart';
 import 'customer/search.dart';
 import 'Shopers/Shopkeeperlogin.dart';
 
@@ -45,27 +45,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context)=>MainProvider(),),
-          ChangeNotifierProvider(create: (context)=>LoginProvider(),),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context)=>MainProvider(),),
+        ChangeNotifierProvider(create: (context)=>LoginProvider(),),
 
-        ],
+      ],
 
-        child:  MaterialApp(debugShowCheckedModeBanner: false,
+      child:  MaterialApp(debugShowCheckedModeBanner: false,
 
-          title: 'NewWay2shop',
-          theme: ThemeData(
+        title: 'NewWay2shop',
+        theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: camera(),
-
-      // home: Stockdt(),
-      home: BottomNavBar(),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
         ),
+        // home: Stockdt(),
+        home: AdmnHome(),
+       // home:Shopkeeperlogin(),
+        
+
+
+
+
+
+
+
+
+
+
+
+
+      ),
     );
   }
 }
-

@@ -21,36 +21,45 @@ class Costfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width??296,
-      height: hight??50,
-      decoration: BoxDecoration(border: Border.all(width: 1,color: Color(0xff650015)),borderRadius: BorderRadius.circular(15),
+    return 
+      Opacity(
+        
+        opacity: 1,
+        child: Container(
+        width: width??296,
+        height: hight??50,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
+        
+        
+        
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x3F000000),
+              blurRadius: 4,
+              offset: Offset(0, 4),
+              spreadRadius: 0,
+            )
+          ],
+        ),
+        
+        child: TextField(controller: ItemController,decoration: InputDecoration(
+          //border: OutlineInputBorder(),),
+         // fillColor: Colors.white24,
+          filled: true,
+          fillColor: Color(0xFF650015).withOpacity(0.8),
 
+          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+          enabledBorder:OutlineInputBorder(borderRadius: BorderRadius.circular(15)) ,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
 
-
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x3F000000),
-            blurRadius: 4,
-            offset: Offset(0, 4),
-            spreadRadius: 0,
-          )
-        ],
-      ),
-
-      child: TextField(controller: ItemController,decoration: InputDecoration(
-        //border: OutlineInputBorder(),),
-       // fillColor: Colors.white24,
-        filled: true,
-        fillColor: Colors.transparent,
-        focusedBorder: InputBorder.none,
-        hintText:hintText,
-        hintStyle:TextStyle(color: Colors.grey),
-       // prefixIcon: Icon(Icons.search,color: Colors.white,),
-       // suffixIcon: Icon(Icons.mic,color: Colors.white,),
-      ),
-      ),
-    );
+          hintText:hintText,
+          hintStyle:TextStyle(color: Colors.grey),
+         // prefixIcon: Icon(Icons.search,color: Colors.white,),
+         // suffixIcon: Icon(Icons.mic,color: Colors.white,),
+        ),
+        ),
+            ),
+      );
 
 
   }

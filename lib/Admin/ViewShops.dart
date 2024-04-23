@@ -89,10 +89,10 @@ class ViewShops extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 10),
                     child: Column(
                       children: [
-                        HomeButton(textColor: Colors.black, backgroundColor: Colors.lightBlueAccent, boxshadowColor: Colors.grey, borderColor: Colors.lightBlueAccent, text: "Status update", hight: 33, width: 126,
+                        HomeButton(textColor: Colors.black, backgroundColor: Colors.orangeAccent, boxshadowColor: Colors.grey, borderColor: Colors.orangeAccent, text: "Status update", hight: 33, width: 126,
                             fondSize: 14),
                         SizedBox(height: 5,),
-                        HomeButton(textColor: Colors.black, backgroundColor: Colors.orangeAccent, boxshadowColor: Colors.grey, borderColor: Colors.orangeAccent, text: "Block", hight: 33, width: 126,
+                        HomeButton(textColor: Colors.black, backgroundColor: Colors.red.shade400, boxshadowColor: Colors.grey, borderColor: Colors.red, text: "Block", hight: 33, width: 126,
                             fondSize: 14),
                       ],
                     ),

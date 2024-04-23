@@ -33,3 +33,19 @@ class AllitemsModel{
 
 
 }
+
+
+class ShopModel{
+
+  String licence;
+  String shopname;
+  String ownername;
+  String phone;
+  String email;
+  String place;
+  String idproof;
+  String licenceproof;
+  String receipt;
+  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt);
+
+}

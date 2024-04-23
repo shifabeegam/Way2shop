@@ -272,6 +272,7 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Future getImagegallery() async {
     final imagePicker = ImagePicker();
     final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
@@ -292,6 +293,91 @@ class MainProvider extends ChangeNotifier {
       print('No image selected.');
     }
   }
+  File? prooffileimg;
+  String proofimg  ="";
+  void setImageproof(File image) {
+    prooffileimg = image;
+    notifyListeners();
+  }
+
+  Future getImagecameraProof() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setImageproof(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+  Future getImagegalleryProof() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setImageproof(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  File? receiptfileimg;
+  String receiptimg  ="";
+  void setImagereceipt(File image) {
+    receiptfileimg = image;
+    notifyListeners();
+  }
+
+  Future getImagecameraReceipt() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setImagereceipt(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+  Future getImagegalleryReceipt() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setImagereceipt(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
+
+
+
+
+  File? licencefileimg;
+  String licenceimg  ="";
+  void setImagelicence(File image) {
+    licencefileimg = image;
+    notifyListeners();
+  }
+
+  Future getImagecameraLicence() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setImagelicence(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+  Future getImagegalleryLicence() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setImagelicence(File(pickedImage.path));
+    } else {
+      print('No image selected.');
+    }
+  }
+
 
   void categoryclear(){
     addcategory.clear();
@@ -319,33 +405,106 @@ class MainProvider extends ChangeNotifier {
   }
 
 
+  List<ShopModel> shoplist=[];
+  void getshop(){
+    db.collection("SHOPS").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        shoplist.clear();
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data();
+          shoplist.add(ShopModel(
+              map["Licence Id"].toString(),
+              map["Shop_Name"].toString(),
+              map["Owner Name"].toString(),
+              map["Phone No"].toString(),
+              map["Email"].toString(),
+              map["Place"].toString(),
+              map["proof"].toString(),
+              map["licence"].toString(),
+              map["receipt"].toString()));
+
+
+              }
+          notifyListeners();
+
+
+      }
+      notifyListeners();
+    });
+  }
 
 
 
 
 
 
-  void Shopupload() {
+  void Shopupload() async{
+    String id = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    HashMap<String, Object> shopmap = HashMap();
+
+    shopmap["Licence Id"] = licenceid.text;
+    shopmap["Owner Name"] = owname.text;
+    shopmap["Phone No"] = phnu.text;
+    shopmap["Email"] = email.text;
+    shopmap["Place"] = address.text;
+    shopmap["Shop_Name"] = shopname.text;
+    shopmap["Shop_Details"] = shopdetails.text;
+    shopmap["Shop_ID"] = id;
+    shopmap["Status"] = "Pending";
+
+    if (licencefileimg != null) {
+      String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+      ref = FirebaseStorage.instance.ref().child(photoId);
+      await ref.putFile(licencefileimg!).whenComplete(() async {
+        await ref.getDownloadURL().then((value) {
+          shopmap["licence"] = value;
+          notifyListeners();
+        });
+        notifyListeners();
+      });
+      notifyListeners();
+    } else {
+      shopmap['licence'] = licenceimg;
+      // editMap['IMAGE_URL'] = imageUrl;
+    }
+
+    if (receiptfileimg != null) {
+      String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+      ref = FirebaseStorage.instance.ref().child(photoId);
+      await ref.putFile(receiptfileimg!).whenComplete(() async {
+        await ref.getDownloadURL().then((value) {
+          shopmap["proof"] = value;
+          notifyListeners();
+        });
+        notifyListeners();
+      });
+      notifyListeners();
+    } else {
+      shopmap['proof'] = receiptimg;
+      // editMap['IMAGE_URL'] = imageUrl;
+    }
+    if (receiptfileimg != null) {
+      String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+      ref = FirebaseStorage.instance.ref().child(photoId);
+      await ref.putFile(receiptfileimg!).whenComplete(() async {
+        await ref.getDownloadURL().then((value) {
+          shopmap["receipt"] = value;
+          notifyListeners();
+        });
+        notifyListeners();
+      });
+      notifyListeners();
+    } else {
+      shopmap['receipt'] = receiptimg;
+      // editMap['IMAGE_URL'] = imageUrl;
+    }
 
 
 
-
-    final shop = <String, dynamic>{
-      "Licence Id":licenceid.text,
-      "Owner Name": owname.text,
-      "Phone No:": phnu.text,
-      "Email": price.text,
-      "Address": quantity.text,
-      "Shop Name": shopname.text,
-      "Shop Details": shopdetails.text,
-      //"Upload Id Proof":idprooof.,
-     // "Licence of Shop"
-
-
-    };
-
-
-    db.collection("SHOPS").doc(licenceid.text.toString()).set(shop);
+    db.collection("SHOPS").doc(id.toString()).set(shopmap);
     notifyListeners();
     print("Upload Succesfully");
   }

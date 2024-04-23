@@ -103,22 +103,26 @@ class Cproduct extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: CarouselSlider(
-                      items: [
-                        imgSlide(Pruduct_image: AssetImage("assets/img_1.png"),img_number: "2/5",),
-                        imgSlide(Pruduct_image: AssetImage("assets/kurta1.png"),img_number: "3/5",),
-                        imgSlide(Pruduct_image: AssetImage("assets/toys.png"),img_number: "4/5",)
-
-                      ],
-                      options: CarouselOptions(
-                      height: 250,
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 5),
-                    ),
-                    ),
+                  Container(
+                    child: Image.network(photo),
                   ),
+                  
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 8.0),
+                  //   child: CarouselSlider(
+                  //     items: [
+                  //       imgSlide(Pruduct_image: AssetImage("assets/img_1.png"),img_number: "2/5",),
+                  //       imgSlide(Pruduct_image: AssetImage("assets/kurta1.png"),img_number: "3/5",),
+                  //       imgSlide(Pruduct_image: AssetImage("assets/toys.png"),img_number: "4/5",)
+                  //
+                  //     ],
+                  //     options: CarouselOptions(
+                  //     height: 250,
+                  //     autoPlay: true,
+                  //     autoPlayInterval: Duration(seconds: 5),
+                  //   ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Container(
