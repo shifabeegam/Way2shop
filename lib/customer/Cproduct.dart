@@ -132,7 +132,7 @@ class Cproduct extends StatelessWidget {
                         children: [
                           Container(
                               width: double.infinity,
-                              child: Text("Kidonex",style: TextStyle(fontSize: 24,color: Colors.black54),)),
+                              child: Text("",style: TextStyle(fontSize: 24,color: Colors.black54),)),
                           Text(description
                               // "House of Quirk Electric Baby Rocker,Bassinet on Bed , "
                               // "Height Adjustable Cot Bed with Comfortable Mattress,"

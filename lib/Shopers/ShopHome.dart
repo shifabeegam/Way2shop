@@ -1,8 +1,10 @@
+import 'package:a/providers/MainProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Shopers/Stockdt.dart';
 import 'package:a/widgets/HomeButton.dart';
 import 'package:a/widgets/Lists.dart';
+import 'package:provider/provider.dart';
 
 class ShopHome extends StatelessWidget {
   const ShopHome({super.key});
@@ -64,37 +66,34 @@ class ShopHome extends StatelessWidget {
                     SizedBox(
                       width: 12,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Stockdt()),
+                    Consumer<MainProvider>(
+                      builder: (context,value,child) {
+                        return InkWell(
+                          onTap: () {
+                            value.getallItems();
+
+                            print('clicled');
+
+
+
+                            Navigator.push(
+                              context,
+                               MaterialPageRoute(
+                                builder: (context) => const Stockdt()),
+                             );
+                          },
+                          child: HomeButton(
+                            textColor: Colors.white,
+                            backgroundColor: Colors.black26,
+                            boxshadowColor: Colors.black12,
+                            borderColor: Colors.black26,
+                            text: "Stock details",
+                            hight: 61,
+                            width: 147,
+                            fondSize: 18,
+                          ),
                         );
-                      },
-                      child: InkWell(
-                        onTap: () {
-                          print('clicled');
-
-
-
-                          Navigator.push(
-                            context,
-                             MaterialPageRoute(
-                              builder: (context) => const Stockdt()),
-                           );
-                        },
-                        child: HomeButton(
-                          textColor: Colors.white,
-                          backgroundColor: Colors.black26,
-                          boxshadowColor: Colors.black12,
-                          borderColor: Colors.black26,
-                          text: "Stock details",
-                          hight: 61,
-                          width: 147,
-                          fondSize: 18,
-                        ),
-                      ),
+                      }
                     ),
                     HomeButton(
                       textColor: Colors.white,

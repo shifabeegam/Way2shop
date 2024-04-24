@@ -46,6 +46,8 @@ class ShopModel{
   String idproof;
   String licenceproof;
   String receipt;
-  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt);
+  String id;
+
+  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id);
 
 }

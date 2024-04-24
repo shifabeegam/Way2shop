@@ -1,16 +1,23 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:a/widgets/GradButton.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/MainProvider.dart';
 import 'Caccount.dart';
 import 'Ccategory.dart';
+import 'Cproductlist.dart';
 import 'Ctrending.dart';
+import 'ShopProducts.dart';
 
 class Cshops extends StatelessWidget {
   const Cshops({super.key});
 
   @override
   Widget build(BuildContext context) {
+    MainProvider provider = Provider.of<MainProvider>(context,listen: true);
+    provider.getshop();
+
     return Scaffold(
 
 
@@ -110,118 +117,80 @@ class Cshops extends StatelessWidget {
     ),
     //ListView(
     // children: [
-   
-    SizedBox(height: 10,),
-    Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-    SizedBox(width: 1,),
-    GradButton(text: "Shope name",),
-      SizedBox(width: 1,),
-      GradButton(text: "Shope name",),
-      SizedBox(width: 1,),
-    ],
-    ),
-    SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
+            Consumer<MainProvider>(
+                builder: (context,value,child) {
+                  return GridView.builder(
+                      itemCount: value.shoplist.length,
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 2
+                      ),
+                      itemBuilder: (BuildContext context, index){
+                        return  InkWell(
+                          onTap: (){
+                           value.getshopitem(value.shoplist[index].id);
+                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.shoplist[index].id ,Shopname:value.shoplist[index].shopname ,) ,));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10,left: 2),
+                            child: Container(
+                              width: 100,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [Color(0xffB99AA0), Colors.white],
+
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+
+                                //color: backgroundColor,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border(
+                                  left: BorderSide(color:Colors.white),
+                                  top: BorderSide(color:Colors.white),
+                                  right: BorderSide(color:Colors.white),
+                                  bottom: BorderSide(width: 1.20, color: Colors.white),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                    spreadRadius: 0,
+                                  )
+                                ],
+                              ),
+                              child: Center(
+
+
+
+                                    child :Text(value.shoplist[index].shopname,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                      ),
+                                    ),
+
+
+                              ) ,
+
+
+
+                            ),
+                          ),
+                        );
+
+                      });
+                }
             ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-                GradButton(text: "Shope name",),
-                SizedBox(width: 1,),
-              ],
-            ),
-            SizedBox(height: 10,),
 
     ],
     ),

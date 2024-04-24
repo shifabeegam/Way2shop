@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import '../providers/MainProvider.dart';
 import 'Cproduct.dart';
 
-class Productlist extends StatelessWidget {
-  String categoryid,categoryname;
+class ShopProducts extends StatelessWidget {
+  String shopid,Shopname;
 
-   Productlist({super.key,required this.categoryid,required this.categoryname});
+  ShopProducts({super.key,required this.shopid,required this.Shopname});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class Productlist extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text(categoryname,style: TextStyle(fontSize: 20),),
+              child: Text(Shopname,style: TextStyle(fontSize: 20),),
             ),
             //ListView(
             // children: [
@@ -116,9 +116,9 @@ class Productlist extends StatelessWidget {
                         return  InkWell(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Cproduct(itemid: item.itemid,
-                                photo: item.photo,itemname: item.itemname,price: item.price,category: item.category,categoryid: item.categoryid,
-                                description: item.description,itemquartity: item.itemquartity,offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
-                             assmbly: item.assmbly, productcare: item.productcare,   instruction: item.instruction,
+                              photo: item.photo,itemname: item.itemname,price: item.price,category: item.category,categoryid: item.categoryid,
+                              description: item.description,itemquartity: item.itemquartity,offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
+                              assmbly: item.assmbly, productcare: item.productcare,   instruction: item.instruction,
                             ),));
                           },
                           child: Padding(

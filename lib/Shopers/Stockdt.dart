@@ -66,7 +66,7 @@ class Stockdt extends StatelessWidget {
 
                       itemBuilder: (context, index) {
                       var items = value.allAdditem[index].toString();
-                      // print(value.allAdditem[index].name);
+                      //print(value.allAdditem[index].name);
                       // print(value.allAdditem[index].quantity);
                       // print(value.allAdditem[index].code);
                         return Container(
@@ -98,14 +98,14 @@ class Stockdt extends StatelessWidget {
                                     side: BorderSide(width: 1, color: Color(0xff650015)),
                                   ),
                                 ),
-                                 child:Icon(Icons.image_outlined,color: Colors.grey,size: 30,),
+                                 child:Image.network( value.allAdditem[index].photo,fit: BoxFit.fill,),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Column(
                                   children: [
-                                    // Text( value.allAdditem[index].name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                                    // Text( value.allAdditem[index].code,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                     Text( value.allAdditem[index].itemname,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                    Text( value.allAdditem[index].itemid,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                                   ],
                                 ),
                                ),
@@ -115,7 +115,7 @@ class Stockdt extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Column(
                                   children: [
-                                    // Text(value.allAdditem[index].quantity.toString(),style: TextStyle(fontSize: 24)),
+                                    Text(value.allAdditem[index].itemquartity.toString(),style: TextStyle(fontSize: 24)),
                                     SizedBox(height: 5,),
                                     InkWell(
                                       onTap: (){
@@ -231,6 +231,7 @@ bottomNavigationBar:
             builder: (context) => const camera()),
       );
         mainProvider.getcategoy();
+        mainProvider.getshop();
         print("fun.............................................");
 
       },

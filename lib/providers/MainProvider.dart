@@ -51,6 +51,7 @@ class MainProvider extends ChangeNotifier {
   TextEditingController instruction = TextEditingController();
 
   String productSelectedCategoryID="";
+  String SelectedShopID="";
 
 // Add item Details
 
@@ -68,6 +69,7 @@ class MainProvider extends ChangeNotifier {
     itemmap["Price"] = price.text;
     itemmap["color"] = color.text;
     itemmap["Category"] = addcategory.text;
+    itemmap["Shop name"] = shopname.text;
     itemmap["description"] =description.text;
     itemmap["Item Quantity"] = quantity.text;
     itemmap["Item Id"] = id;
@@ -78,6 +80,7 @@ class MainProvider extends ChangeNotifier {
     itemmap["Product Care"] = productcare.text;
     itemmap["Instructions"] =instruction.text;
     itemmap["Category_id"] =productSelectedCategoryID;
+    itemmap["Shop_id"] =SelectedShopID;
     if (itemfileimage != null) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
@@ -185,6 +188,77 @@ class MainProvider extends ChangeNotifier {
     // db.collection("ITEMS").doc(itemCd.text.toString()).set(user);
     // notifyListeners();
     print("Upload Succesfully");
+  }
+
+  void getallItems(){
+    db.collection("ITEMS").get().then((value)
+    {
+      allAdditem.clear();
+      // totalAmount = 0.0;
+      print("object.................");
+      if(value.docs.isNotEmpty){
+        for(var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data() as Map;
+          allAdditem.add(ItemModel(
+            map["Item Id"].toString(),
+            map["PHOTO"].toString(),
+            map["Item Name"].toString(),
+            map["Price"].toString(),
+            map["Category"].toString(),
+            map["Category_id"].toString(),
+            map["description"].toString(),
+            map["Item Quantity"].toString(),
+            map["Offers"].toString(),
+            map["color"].toString(),
+            map["Brand"].toString(),
+            map["Product Dimensions"].toString(),
+            map["Assembly Required"].toString(),
+            map["Product Care"].toString(),
+            map["Instructions"].toString(),
+          ));
+          notifyListeners();
+
+        }
+        notifyListeners();
+
+      }
+    });
+  }
+
+
+  void getshopitem(String shopid){
+    db.collection("ITEMS").where('Shop_id',isEqualTo :shopid ).get().then((value)
+    {
+      allAdditem.clear();
+      // totalAmount = 0.0;
+      print("object.................");
+      if(value.docs.isNotEmpty){
+        for(var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data() as Map;
+          allAdditem.add(ItemModel(
+            map["Item Id"].toString(),
+            map["PHOTO"].toString(),
+            map["Item Name"].toString(),
+            map["Price"].toString(),
+            map["Category"].toString(),
+            map["Category_id"].toString(),
+            map["description"].toString(),
+            map["Item Quantity"].toString(),
+            map["Offers"].toString(),
+            map["color"].toString(),
+            map["Brand"].toString(),
+            map["Product Dimensions"].toString(),
+            map["Assembly Required"].toString(),
+            map["Product Care"].toString(),
+            map["Instructions"].toString(),
+          ));
+          notifyListeners();
+
+        }
+        notifyListeners();
+
+      }
+    });
   }
 
   void stupload() {
@@ -421,7 +495,9 @@ class MainProvider extends ChangeNotifier {
               map["Place"].toString(),
               map["proof"].toString(),
               map["licence"].toString(),
-              map["receipt"].toString()));
+              map["receipt"].toString(),
+            map["Shop_ID"].toString()
+          ));
 
 
               }
@@ -471,10 +547,10 @@ class MainProvider extends ChangeNotifier {
       // editMap['IMAGE_URL'] = imageUrl;
     }
 
-    if (receiptfileimg != null) {
+    if (prooffileimg != null) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
-      await ref.putFile(receiptfileimg!).whenComplete(() async {
+      await ref.putFile(prooffileimg!).whenComplete(() async {
         await ref.getDownloadURL().then((value) {
           shopmap["proof"] = value;
           notifyListeners();
@@ -483,7 +559,7 @@ class MainProvider extends ChangeNotifier {
       });
       notifyListeners();
     } else {
-      shopmap['proof'] = receiptimg;
+      shopmap['proof'] = proofimg;
       // editMap['IMAGE_URL'] = imageUrl;
     }
     if (receiptfileimg != null) {

@@ -103,7 +103,7 @@ class Ccategory extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text("Shops",style: TextStyle(fontSize: 20),),
+              child: Text("Category",style: TextStyle(fontSize: 20),),
             ),
             //ListView(
             // children: [
@@ -118,13 +118,13 @@ class Ccategory extends StatelessWidget {
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 0.8
+                        childAspectRatio: 0.9
                     ),
                     itemBuilder: (BuildContext context, index){
                       return  InkWell(
                         onTap: (){
                           value.getItem(value.categorylist[index].id);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.categorylist[index].id ,) ,));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.categorylist[index].id ,categoryname: value.categorylist[index].name,) ,));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10,left: 2),
