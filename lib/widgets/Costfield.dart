@@ -1,23 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Costfield extends StatelessWidget {
   final String hintText;
 
+
   var validator;
+
+
 
   Costfield({super.key,
     this.width,
      this.hight,
     required this.hintText,
     this.ItemController,
-    this.validator,
+    required this.validator,
+    required this.type,
    // required String? Function(dynamic value) validator,
 
   });
   TextEditingController? ItemController;
   double? width;
   double? hight;
+  TextInputType type;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,16 @@ class Costfield extends StatelessWidget {
           ],
         ),
         
-        child: TextField(controller: ItemController,decoration: InputDecoration(
+        child: TextFormField(
+          keyboardType: type,
+          inputFormatters: [
+            type== TextInputType.number?FilteringTextInputFormatter.digitsOnly:FilteringTextInputFormatter.allow( RegExp(
+                r'^[a-zA-Z]+$')),
+            LengthLimitingTextInputFormatter(100)
+
+            ],
+
+          controller: ItemController,decoration: InputDecoration(
           //border: OutlineInputBorder(),),
          // fillColor: Colors.white24,
           filled: true,
@@ -57,6 +72,7 @@ class Costfield extends StatelessWidget {
          // prefixIcon: Icon(Icons.search,color: Colors.white,),
          // suffixIcon: Icon(Icons.mic,color: Colors.white,),
         ),
+          validator: validator,
         ),
             ),
       );

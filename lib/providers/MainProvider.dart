@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
+import 'dart:js';
 
 import 'package:a/Model/ItemModel.dart';
 import 'package:a/providers/loginprovider.dart';
@@ -308,9 +309,29 @@ class MainProvider extends ChangeNotifier {
 
   File? categoryfileimg;
   String categoryimg  ="";
+  Future<bool> checkCategoryExist(String phone) async {
+    var data =
+    await db.collection("CATEGORIES").where("CATEGORY_NAME", isEqualTo: phone).get();
+    if (data.docs.isNotEmpty) {
+     // print("ndfjsdbf$checkNumber");
+      return true;
+    } else {
+      return false;
+    }
+  }
+  Future<bool> checklicenceExist(String phone) async {
+    var data =
+    await db.collection("SHOPS").where("Licence Id", isEqualTo: phone).get();
+    if (data.docs.isNotEmpty) {
+      // print("ndfjsdbf$checkNumber");
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
- Future<void> uploadcatergory() async {
+ Future<void> uploadcatergory(BuildContext context) async {
    String id = DateTime
        .now()
        .millisecondsSinceEpoch
@@ -319,23 +340,43 @@ class MainProvider extends ChangeNotifier {
 
    categorymap["CATEGORY_NAME"] = addcategory.text;
    categorymap["CATEGORY_ID"] = id;
+   bool categorycheck;
+   categorycheck = await checkCategoryExist( addcategory.text);
+     // db.collection("USERS").doc(id).set(categorymap);
 
-   if (categoryfileimg != null) {
-     String photoId = DateTime.now().millisecondsSinceEpoch.toString();
-     ref = FirebaseStorage.instance.ref().child(photoId);
-     await ref.putFile(categoryfileimg!).whenComplete(() async {
-       await ref.getDownloadURL().then((value) {
-         categorymap["PHOTO"] = value;
+     if (categoryfileimg != null) {
+       String photoId = DateTime
+           .now()
+           .millisecondsSinceEpoch
+           .toString();
+       ref = FirebaseStorage.instance.ref().child(photoId);
+       await ref.putFile(categoryfileimg!).whenComplete(() async {
+         await ref.getDownloadURL().then((value) {
+           categorymap["PHOTO"] = value;
+           notifyListeners();
+         });
          notifyListeners();
        });
        notifyListeners();
-     });
-     notifyListeners();
-   } else {
-     categorymap['PHOTO'] = categoryimg;
-     // editMap['IMAGE_URL'] = imageUrl;
+     } else {
+       categorymap['PHOTO'] = categoryimg;
+       // editMap['IMAGE_URL'] = imageUrl;
+     }
+   if (!categorycheck) {
+
+     db.collection("CATEGORIES").doc(id).set(categorymap);
    }
-   db.collection("CATEGORIES").doc(id).set(categorymap);
+   else{
+     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+         backgroundColor: Colors.red,
+         content: Center(
+             child: Text(
+               "Category Already Exists",
+               style: TextStyle(fontWeight: FontWeight.w700),
+             ),
+             ),
+         ));
+   }
    getcategoy();
    notifyListeners();
    print("upload Successfully");
@@ -514,7 +555,7 @@ class MainProvider extends ChangeNotifier {
 
 
 
-  void Shopupload() async{
+  void Shopupload(BuildContext context) async{
     String id = DateTime
         .now()
         .millisecondsSinceEpoch
@@ -530,6 +571,23 @@ class MainProvider extends ChangeNotifier {
     shopmap["Shop_Details"] = shopdetails.text;
     shopmap["Shop_ID"] = id;
     shopmap["Status"] = "Pending";
+    bool licencecheck;
+    licencecheck = await checklicenceExist( addcategory.text);
+    if (!licencecheck) {
+
+      db.collection("SHOPS").doc(id).set(shopmap);
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: Colors.red,
+        content: Center(
+          child: Text(
+            "Licence Id Already Exists",
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ));
+    }
 
     if (licencefileimg != null) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();

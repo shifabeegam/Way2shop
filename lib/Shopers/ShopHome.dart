@@ -7,7 +7,8 @@ import 'package:a/widgets/Lists.dart';
 import 'package:provider/provider.dart';
 
 class ShopHome extends StatelessWidget {
-  const ShopHome({super.key});
+   ShopHome({super.key});
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

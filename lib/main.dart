@@ -60,9 +60,23 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-       // home: Ccategory(),
-       home: BottomNavBar(),
-      //  home:Stockdt(),
+        // home: Stockdt(),
+       // home: AdmnHome(),
+       home:AddCategory(),
+       // home: ShopHome(),
+
+
+
+
+
+
+
+
+
+
+
+
+
       ),
     );
   }

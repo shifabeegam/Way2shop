@@ -228,7 +228,7 @@ bottomNavigationBar:
       child: MaterialButton(onPressed: (){ Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const camera()),
+            builder: (context) =>  camera()),
       );
         mainProvider.getcategoy();
         mainProvider.getshop();
