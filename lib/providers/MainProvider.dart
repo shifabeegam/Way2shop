@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
-import 'dart:js';
+
 
 import 'package:a/Model/ItemModel.dart';
 import 'package:a/providers/loginprovider.dart';
@@ -511,8 +511,10 @@ class MainProvider extends ChangeNotifier {
               map["CATEGORY_ID"].toString(),
                map["CATEGORY_NAME"].toString(),
               map["PHOTO"].toString()));
-          notifyListeners();
+
         }
+        filtercategorylist=categorylist;
+        notifyListeners();
 
       }
       notifyListeners();
@@ -539,9 +541,69 @@ class MainProvider extends ChangeNotifier {
               map["receipt"].toString(),
             map["Shop_ID"].toString()
           ));
+          filtershoplist=shoplist;
 
 
               }
+        filtershoplist=shoplist;
+          notifyListeners();
+
+
+      }
+      notifyListeners();
+    });
+  }
+  void getshopPending(){
+    db.collection("SHOPS").where("Status", isEqualTo: "Pending").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        shoplist.clear();
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data();
+          shoplist.add(ShopModel(
+              map["Licence Id"].toString(),
+              map["Shop_Name"].toString(),
+              map["Owner Name"].toString(),
+              map["Phone No"].toString(),
+              map["Email"].toString(),
+              map["Place"].toString(),
+              map["proof"].toString(),
+              map["licence"].toString(),
+              map["receipt"].toString(),
+            map["Shop_ID"].toString()
+          ));
+
+
+              }
+        filtershoplist=shoplist;
+          notifyListeners();
+
+
+      }
+      notifyListeners();
+    });
+  }
+  void getshopAccept(){
+    db.collection("SHOPS").where("Status", isEqualTo: "ACCEPTED").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        shoplist.clear();
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data();
+          shoplist.add(ShopModel(
+              map["Licence Id"].toString(),
+              map["Shop_Name"].toString(),
+              map["Owner Name"].toString(),
+              map["Phone No"].toString(),
+              map["Email"].toString(),
+              map["Place"].toString(),
+              map["proof"].toString(),
+              map["licence"].toString(),
+              map["receipt"].toString(),
+            map["Shop_ID"].toString()
+          ));
+
+
+              }
+        filtershoplist=shoplist;
           notifyListeners();
 
 
@@ -660,6 +722,47 @@ class MainProvider extends ChangeNotifier {
   void setImageFile(File ?file) {
     _imageFile = file;
     notifyListeners();
+  }
+
+  List <ItemModel> filteritem = [];
+
+
+
+  List<Categorymodel> filtercategorylist=[];
+
+  void searchCategory(item) {
+    filtercategorylist = categorylist.where(
+            (a) => a.name.toLowerCase().contains(item.toLowerCase())).toList();
+    print("gdvsg"+filtercategorylist.length.toString());
+
+    notifyListeners();
+  }
+  List<ShopModel> filtershoplist=[];
+
+
+  void searchShop(item) {
+    filtershoplist = shoplist.where(
+            (a) => a.shopname.toLowerCase().contains(item.toLowerCase())).toList();
+    print("gdvsg"+filtershoplist.length.toString());
+
+    notifyListeners();
+  }
+
+  void statusDecln(String id) {
+    Map<String, dynamic> dataMap = HashMap();
+    dataMap["Status"] = "DECLINED";
+    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
+  }
+
+  void statusApprove(String id) {
+    Map<String, dynamic> dataMap = HashMap();
+    dataMap["Status"] = "ACCEPTED";
+    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
+  }
+  void statusblocked(String id) {
+    Map<String, dynamic> dataMap = HashMap();
+    dataMap["Status"] = "BLOCKED";
+    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
   }
 
 

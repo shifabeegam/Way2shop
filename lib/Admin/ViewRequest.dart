@@ -1,10 +1,12 @@
+import 'package:a/providers/MainProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:a/Admin/AdmnHome.dart';
 import 'package:a/widgets/HomeButton.dart';
+import 'package:provider/provider.dart';
 
 class ViewRequest extends StatelessWidget {
-  String id,shpname,ownername,phone,email,place,licence,idproof,receipt;
-  ViewRequest({required this.id,required this.shpname,required this.ownername,required this.phone,required this.email,required this.place,required this.licence,required this.idproof,required this.receipt,super.key});
+  String id,shpname,ownername,phone,email,place,licence,idproof,receipt,shopid;
+  ViewRequest({required this.id,required this.shpname,required this.ownername,required this.phone,required this.email,required this.place,required this.licence,required this.idproof,required this.receipt,required this.shopid,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class ViewRequest extends StatelessWidget {
                               children: [
                                 Text("Licence Id    :   ",style: TextStyle(fontSize: 18),),
 
-                                Text(id,style: TextStyle(fontSize: 18),),
+                                Text(shopid,style: TextStyle(fontSize: 18),),
                               ],
                             ),
                             SizedBox(height: 7,),
@@ -186,43 +188,49 @@ class ViewRequest extends StatelessWidget {
           ),SizedBox(height: 0.5,),
             SizedBox(height: 10),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 150,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: MaterialButton(
-                    onPressed: () {
-                    },
-                    child: const Text("Reject"),
-                    highlightColor: Color(0xff0C630A),
-                    splashColor: Colors.grey,
-                    color: Colors.red,
-                  ),
-                ),
+            Consumer<MainProvider>(
+              builder: (context,val,child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          val.statusDecln(shopid);
+
+                        },
+                        child: const Text("Reject"),
+                        highlightColor: Color(0xff0C630A),
+                        splashColor: Colors.grey,
+                        color: Colors.red,
+                      ),
+                    ),
 
 
-                Container(
-                  width: 150,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: MaterialButton(
-                    onPressed: () {
-
-                    },
-                    child: const Text("Accept"),
-                    highlightColor: Color(0xff0C630A),
-                    splashColor: Colors.grey,
-                    color: Colors.green,
-                  ),
-                )
-              ],
+                    Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                       val.statusApprove(shopid);
+                        },
+                        child: const Text("Accept"),
+                        highlightColor: Color(0xff0C630A),
+                        splashColor: Colors.grey,
+                        color: Colors.green,
+                      ),
+                    )
+                  ],
+                );
+              }
             )
 
 

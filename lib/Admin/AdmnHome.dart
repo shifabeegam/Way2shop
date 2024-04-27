@@ -140,7 +140,7 @@ class AdmnHome extends StatelessWidget {
               builder: (context,value,child) {
                 return InkWell(
                   onTap: (){
-                    value.getshop();
+                    value.getshopPending();
 
                     Navigator.push(
                       context,
@@ -159,21 +159,27 @@ class AdmnHome extends StatelessWidget {
               }
             ),
             SizedBox(height: 30 ,),
-            InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ViewShops()),
+            Consumer<MainProvider>(
+              builder: (context,val,child) {
+                return InkWell(
+                  onTap: (){
+                    val.getshopAccept();
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  ViewShops()),
+                    );
+                  },
+                  child: HomeButton(textColor: Colors.white,
+                    backgroundColor: Colors.white10,
+                    boxshadowColor: Color(0x3F000000) ,
+                    borderColor: Colors.white10 ,
+                    text: "Shops",
+                    hight:65,
+                    width:230, fondSize: 20,),
                 );
-              },
-              child: HomeButton(textColor: Colors.white,
-                backgroundColor: Colors.white10,
-                boxshadowColor: Color(0x3F000000) ,
-                borderColor: Colors.white10 ,
-                text: "Shops",
-                hight:65,
-                width:230, fondSize: 20,),
+              }
             ),
             SizedBox(height: 30 ,),
             InkWell(

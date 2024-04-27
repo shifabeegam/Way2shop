@@ -15,7 +15,6 @@ class Ccategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    MainProvider provider = Provider.of<MainProvider>(context,listen: true);
-   provider.getcategoy();
     return Scaffold(
 
 
@@ -44,16 +43,24 @@ class Ccategory extends StatelessWidget {
                       height: 50,
                       width:360 ,
 
-                      child: const TextField(decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
-                        fillColor: Colors.white10,
-                        filled: true,
-                        focusedBorder: InputBorder.none,
-                        hintText:"Search",
-                        hintStyle:TextStyle(color: Colors.white),
-                        prefixIcon: Icon(Icons.search,color: Colors.white,),
-                        suffixIcon: Icon(Icons.mic,color: Colors.white,),
-                      ),
+                      child: Consumer<MainProvider>(
+                        builder: (context,val,child) {
+                          return  TextField(
+                            onChanged: (value) {
+                              val.searchCategory(value);
+                            },
+                            decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
+                            fillColor: Colors.white10,
+                            filled: true,
+                            focusedBorder: InputBorder.none,
+                            hintText:"Search",
+                            hintStyle:TextStyle(color: Colors.white),
+                            prefixIcon: Icon(Icons.search,color: Colors.white,),
+                            suffixIcon: Icon(Icons.mic,color: Colors.white,),
+                          ),
+                          );
+                        }
                       ),
                     ),
                   ),
@@ -111,7 +118,7 @@ class Ccategory extends StatelessWidget {
             Consumer<MainProvider>(
               builder: (context,value,child) {
                 return GridView.builder(
-                    itemCount: value.categorylist.length,
+                    itemCount: value.filtercategorylist.length,
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
@@ -123,8 +130,8 @@ class Ccategory extends StatelessWidget {
                     itemBuilder: (BuildContext context, index){
                       return  InkWell(
                         onTap: (){
-                          value.getItem(value.categorylist[index].id);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.categorylist[index].id ,categoryname: value.categorylist[index].name,) ,));
+                          value.getItem(value.filtercategorylist[index].id);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.filtercategorylist[index].id ,categoryname: value.filtercategorylist[index].name,) ,));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10,left: 2),
@@ -162,12 +169,12 @@ class Ccategory extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Image.network(
-                                      value.categorylist[index].photo,
+                                      value.filtercategorylist[index].photo,
                                       height: 120,
                                       width: 120,
                                     ),
                                   ),
-                                  Text(value.categorylist[index].name,
+                                  Text(value.filtercategorylist[index].name,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 20,

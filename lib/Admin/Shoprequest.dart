@@ -54,7 +54,7 @@ class Shoprequest extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  ViewRequest(id: items.licence,shpname: items.shopname,ownername: items.ownername,phone: items.phone,email: items.email ,place: items.place,licence: items.licenceproof,idproof: items.idproof,receipt: items.receipt,
+                            builder: (context) =>  ViewRequest(id: items.licence,shpname: items.shopname,ownername: items.ownername,phone: items.phone,email: items.email ,place: items.place,licence: items.licenceproof,idproof: items.idproof,receipt: items.receipt,shopid: items.id,
 
 
                             )),

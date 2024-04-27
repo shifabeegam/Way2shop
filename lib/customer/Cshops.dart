@@ -16,7 +16,7 @@ class Cshops extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainProvider provider = Provider.of<MainProvider>(context,listen: true);
-    provider.getshop();
+    // provider.getshop();
 
     return Scaffold(
 
@@ -46,16 +46,23 @@ class Cshops extends StatelessWidget {
                       height: 50,
                       width:360 ,
 
-                      child: const TextField(decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
-                        fillColor: Colors.white10,
-                        filled: true,
-                        focusedBorder: InputBorder.none,
-                        hintText:"Search",
-                        hintStyle:TextStyle(color: Colors.white),
-                        prefixIcon: Icon(Icons.search,color: Colors.white,),
-                        suffixIcon: Icon(Icons.mic,color: Colors.white,),
-                      ),
+                      child:  Consumer<MainProvider>(
+                        builder: (context,val,child) {
+                          return TextField(onChanged: (value) {
+                            val.searchShop(value);
+                          },
+                            decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
+                            fillColor: Colors.white10,
+                            filled: true,
+                            focusedBorder: InputBorder.none,
+                            hintText:"Search",
+                            hintStyle:TextStyle(color: Colors.white),
+                            prefixIcon: Icon(Icons.search,color: Colors.white,),
+                            suffixIcon: Icon(Icons.mic,color: Colors.white,),
+                          ),
+                          );
+                        }
                       ),
                     ),
                   ),
@@ -120,7 +127,7 @@ class Cshops extends StatelessWidget {
             Consumer<MainProvider>(
                 builder: (context,value,child) {
                   return GridView.builder(
-                      itemCount: value.shoplist.length,
+                      itemCount: value.filtershoplist.length,
                       physics: ScrollPhysics(),
                       shrinkWrap: true,
                       gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
@@ -132,8 +139,8 @@ class Cshops extends StatelessWidget {
                       itemBuilder: (BuildContext context, index){
                         return  InkWell(
                           onTap: (){
-                           value.getshopitem(value.shoplist[index].id);
-                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.shoplist[index].id ,Shopname:value.shoplist[index].shopname ,) ,));
+                           value.getshopitem(value.filtershoplist[index].id);
+                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10,left: 2),
@@ -169,7 +176,7 @@ class Cshops extends StatelessWidget {
 
 
 
-                                    child :Text(value.shoplist[index].shopname,
+                                    child :Text(value.filtershoplist[index].shopname,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
