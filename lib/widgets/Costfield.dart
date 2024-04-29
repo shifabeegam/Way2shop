@@ -34,7 +34,7 @@ class Costfield extends StatelessWidget {
         child: Container(
         width: width??296,
         height: hight??50,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Color(0xFF650015),
         
         
         
@@ -49,6 +49,7 @@ class Costfield extends StatelessWidget {
         ),
         
         child: TextFormField(
+
           keyboardType: type,
           inputFormatters: [
             type== TextInputType.number?FilteringTextInputFormatter.digitsOnly:FilteringTextInputFormatter.allow( RegExp(
@@ -58,14 +59,17 @@ class Costfield extends StatelessWidget {
             ],
 
           controller: ItemController,decoration: InputDecoration(
+
+
+
           //border: OutlineInputBorder(),),
          // fillColor: Colors.white24,
           filled: true,
-          fillColor: Color(0xFF650015).withOpacity(0.8),
+          fillColor:Colors.white, //Color(0xFF650015).withOpacity(0.8),
 
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
           enabledBorder:OutlineInputBorder(borderRadius: BorderRadius.circular(15)) ,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: new BorderSide(color: Color(0xFF650015))),
 
           hintText:hintText,
           hintStyle:TextStyle(color: Colors.grey),

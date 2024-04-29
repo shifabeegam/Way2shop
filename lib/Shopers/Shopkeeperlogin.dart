@@ -107,7 +107,16 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                 child: Container(
                                 width: 296,
                                 height:50,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:  Color(0xFF650015).withOpacity(0.8)),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:  Colors.white,border: Border.all(color:Color(0xFF650015) ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),//(0xFF650015).withOpacity(0.8)),
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                                     children: [
@@ -139,7 +148,15 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                 child: Container(
                                   width: 296,
                                   height:50,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:  Color(0xFF650015).withOpacity(0.8)),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:  Colors.white,border: Border.all(color:Color(0xFF650015) ),
+                                      boxShadow: [
+                                      BoxShadow(
+                                      color: Color(0x3F000000),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 4),
+                                  spreadRadius: 0,
+                                )
+                                ],),
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                                     children: [
@@ -173,7 +190,15 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                 child: Container(
                                   width: 296,
                                   height:50,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:  Color(0xFF650015).withOpacity(0.8)),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:  Colors.white,border: Border.all(color:Color(0xFF650015) ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color(0x3F000000),
+                                        blurRadius: 4,
+                                        offset: Offset(0, 4),
+                                        spreadRadius: 0,
+                                      )
+                                    ],),//(0xFF650015).withOpacity(0.8)),
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                                     children: [
