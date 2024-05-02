@@ -127,6 +127,27 @@ class MainProvider extends ChangeNotifier {
     }
   }
 
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile>? imageFileList = [];
+
+  void selectImages() async {
+    final List<XFile>? selectedImages = await
+    imagePicker.pickMultiImage();
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+    }
+    print("Image List Length:" + imageFileList!.length.toString());
+
+  }
+
+
+  void takePicture() async {
+    final XFile? picture = await imagePicker.pickImage(source: ImageSource.camera);
+    if (picture != null) {
+      imageFileList!.add(picture);
+    }
+    print("Image List Length: ${imageFileList!.length}");
+  }
   // View the Items
    void getItem(String catid){
     db.collection("ITEMS").where("Category_id",isEqualTo: catid).get().then((value)
@@ -309,9 +330,20 @@ class MainProvider extends ChangeNotifier {
 
   File? categoryfileimg;
   String categoryimg  ="";
-  Future<bool> checkCategoryExist(String phone) async {
+  Future<bool> checkPlaceExist(String place) async {
     var data =
-    await db.collection("CATEGORIES").where("CATEGORY_NAME", isEqualTo: phone).get();
+    await db.collection("PLACE").where("PLACE_NAME", isEqualTo: place).get();
+    if (data.docs.isNotEmpty) {
+      // print("ndfjsdbf$checkNumber");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> checkCategoryExist(String name) async {
+    var data =
+    await db.collection("CATEGORIES").where("CATEGORY_NAME", isEqualTo: name).get();
     if (data.docs.isNotEmpty) {
      // print("ndfjsdbf$checkNumber");
       return true;
@@ -392,27 +424,27 @@ class MainProvider extends ChangeNotifier {
 
     placemap["PLACE_NAME"] = address.text;
     placemap["PLACE_ID"] = id;
-   // bool placecheck;
-   // placecheck = await checkCategoryExist( address.text);
-    // db.collection("USERS").doc(id).set(categorymap);
+   bool placecheck;
+    placecheck = await checkPlaceExist( address.text);
+    // db.collection("PLACE").doc(id).set(placemap);
 
 
-// if (!placecheck) {
+if (!placecheck) {
 
       db.collection("PLACE").doc(id).set(placemap);
-    // }
-    // else{
-    //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-    //     backgroundColor: Colors.red,
-    //     content: Center(
-    //       child: Text(
-    //         "Place Already Exists",
-    //         style: TextStyle(fontWeight: FontWeight.w700),
-    //       ),
-    //     ),
-    //   ));
-    // }
-    // getcategoy();
+     }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: Colors.red,
+        content: Center(
+          child: Text(
+            "Place Already Exists",
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ));
+    }
+    getPlace();
     notifyListeners();
     print("upload Successfully");
   }
@@ -556,7 +588,21 @@ class MainProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-
+void clearitem(){
+  imageFileList =[];
+  itemNm.clear();
+  price.clear();
+  addcategory.clear();
+  description.clear();
+  quantity.clear();
+  offers.clear();
+  color.clear();
+  brand.clear();
+  diamention.clear();
+  requirements.clear();
+  productcare.clear();
+  instruction.clear();
+}
 
   List<Categorymodel> categorylist=[];
   void getcategoy(){
@@ -577,6 +623,18 @@ class MainProvider extends ChangeNotifier {
       }
       notifyListeners();
     });
+  }
+  void ShopLogin(String licenceid,String psword){
+    db.collection("SHOPS").where("Licence Id" ,isEqualTo: licenceid)
+        .where("Password" ,isEqualTo: psword).get().then((value) {
+      if (value.docs.isNotEmpty){
+
+      }else{
+
+      }
+
+    });
+
   }
 
 
