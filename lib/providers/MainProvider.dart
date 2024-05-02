@@ -683,25 +683,7 @@ void clearitem(){
 
 
   List<Placemodel> placelist=[];
-  void getPlace(){
-    db.collection("PLACE").get().then((value) {
-      if (value.docs.isNotEmpty) {
-        placelist.clear();
-        for (var element in value.docs) {
-          Map<dynamic, dynamic> map = element.data();
-          placelist.add(Placemodel(
-              map["PLACE_ID"].toString(),
-              map["PLACE_NAME"].toString(),));
 
-
-        }
-       // filtercategorylist=categorylist;
-        notifyListeners();
-
-      }
-      notifyListeners();
-    });
-  }
   void ShopLogin(String licenceid,String psword){
     db.collection("SHOPS").where("Licence Id" ,isEqualTo: licenceid)
         .where("Password" ,isEqualTo: psword).get().then((value) {
