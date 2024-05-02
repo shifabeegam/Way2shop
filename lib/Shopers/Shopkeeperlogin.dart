@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import '../Model/ItemModel.dart';
+
 class Shopkeeperlogin extends StatefulWidget {
    Shopkeeperlogin({Key? key}) : super(key: key);
 
@@ -54,6 +56,13 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                               return "This field is required";
                             } else {}
                             },type: TextInputType.number,),
+                          SizedBox(height: 2),
+                          Costfield(ItemController: value.passwordCtrl, width: 296, hight: 50, hintText: "  Password",validator: (value) {
+                            if (value!.isEmpty) {
+
+                              return "This field is required";
+                            } else {}
+                          },type: TextInputType.number,),
                           SizedBox(height: 10),
                           Costfield(ItemController: value.shopname, width: 296, hight: 50, hintText: "  Shop Name",validator: (value) {
                             if (value!.isEmpty) {
@@ -83,12 +92,146 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                             } else {}
                           },type: TextInputType.emailAddress,),
                           SizedBox(height: 10),
-                          Costfield(ItemController: value.address, width: 296, hight: 50, hintText: "  Place",validator: (value) {
-                            if (value!.isEmpty) {
+                          //
 
-                              return "Enter your Place";
-                            } else {}
-                          },type: TextInputType.text,),
+                          Autocomplete<Placemodel>(
+                            optionsBuilder: (TextEditingValue textEditingValue) {
+                              return value.placelist
+                                  .where((Placemodel item) => item.placename
+                                  .toLowerCase()
+                                  .contains(textEditingValue.text.toLowerCase()))
+                                  .toList();
+                            },
+                            displayStringForOption: (Placemodel option) =>
+                            option.placename,
+                            fieldViewBuilder: (BuildContext context,
+                                TextEditingController fieldTextEditingController,
+                                FocusNode fieldFocusNode,
+                                VoidCallback onFieldSubmitted) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                fieldTextEditingController.text = value.address.text;
+                              });
+
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: SizedBox(
+                                    width: 295,
+                                    height: 50,
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'This Field is Required';
+                                        } else {}
+                                      },
+                                      cursorColor: Colors.brown,
+                                      maxLines: 1,
+
+                                      style: const TextStyle(
+                                          color: Colors.grey, fontSize: 16),
+                                      // decoration: BoxDecoration(
+                                      //   border: Border.all(
+                                      //       width: 1, color: Color(0xff650015)),
+                                      //   borderRadius: BorderRadius.circular(15),
+                                      //   boxShadow: [
+                                      //     BoxShadow(
+                                      //       color: Color(0x3F000000),
+                                      //       blurRadius: 4,
+                                      //       offset: Offset(0, 4),
+                                      //       spreadRadius: 0,
+                                      //     )
+                                      //   ],
+                                      // ),
+                                      decoration:
+                                      InputDecoration(
+
+                                        focusedBorder: OutlineInputBorder(
+
+                                            borderSide: BorderSide(color: Color(0xff650015),),
+                                            borderRadius: BorderRadius.circular(10)),
+
+                                        hintText: "Place",
+                                        hintStyle: const TextStyle(
+                                            color: Colors.black45, fontFamily: 'cantata'),
+                                        border: OutlineInputBorder(
+                                          //borderSide: BorderSide(width: 1,color: Color(0xff650015),),
+                                          borderRadius: BorderRadius.circular(15),
+                                          //  borderSide: BorderSide(color: Colors.white, width: 3.0))
+
+                                        ),
+
+                                      ),
+                                      onChanged: (txt) {},
+                                      controller: fieldTextEditingController,
+                                      focusNode: fieldFocusNode,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            onSelected: (Placemodel selection) {
+                              value.address.text = selection.placename;
+                              value.productSelectedCategoryID = selection.id;
+                            },
+                            optionsViewBuilder: (BuildContext context,
+                                AutocompleteOnSelected<Placemodel> onSelected,
+                                Iterable<Placemodel> options) {
+                              return Align(
+                                alignment: Alignment.topLeft,
+                                child: Material(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        borderRadius: BorderRadius.circular(15)),
+                                    width: 200,
+                                    height: 200,
+                                    child: ListView.builder(
+                                      padding: const EdgeInsets.all(10.0),
+                                      itemCount: options.length,
+                                      itemBuilder: (BuildContext context, int index) {
+                                        final Placemodel option = options.elementAt(index);
+
+                                        return GestureDetector(
+                                          onTap: () {
+                                            onSelected(option);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  // border: Border(left: BorderSide(color: Colors.white,width: .6,
+                                                  // ))
+                                                ),
+                                                height: 30,
+                                                width: 200,
+                                                child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Center(
+                                                        child: Text(option.placename,
+                                                            style: const TextStyle(
+                                                              fontFamily: 'cantata',
+                                                              color: Colors.black,
+                                                            )),
+                                                      ),
+                                                    ]),
+                                              ),
+                                              Divider(
+                                                thickness: 1,
+                                                color: Colors.black,
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+
                           SizedBox(height: 10),
                           Costfield(ItemController: value.shopdetails, width: 296, hight: 50, hintText: "  Shop Details",validator: (value) {
                             if (value!.isEmpty) {
@@ -237,6 +380,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                             ),
                             child: MaterialButton(
                               onPressed: () {
+                                value.getLocation();
                                 final FormState? form =
                                     formKey.currentState;
                                 if (form!.validate()) {

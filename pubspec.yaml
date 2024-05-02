@@ -49,6 +49,7 @@ dependencies:
   file_picker: ^4.0.0
   url_launcher: ^6.0.0
   image_picker: ^1.0.8
+  geolocator: ^8.0.0
 
 dev_dependencies:
   flutter_test:
