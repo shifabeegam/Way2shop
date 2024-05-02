@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,8 @@ class MainProvider extends ChangeNotifier {
   TextEditingController category = TextEditingController();
 
   List <ItemModel> allAdditem = [];
+  List <ItemModel> searchAllitem = [];
+
   TextEditingController addcategory = TextEditingController();
 
   TextEditingController owname = TextEditingController();
@@ -53,6 +56,7 @@ class MainProvider extends ChangeNotifier {
 
   String productSelectedCategoryID="";
   String SelectedShopID="";
+  String SelectedPlaceID="";
 
 // Add item Details
 
@@ -152,7 +156,8 @@ class MainProvider extends ChangeNotifier {
            map["Product Dimensions"].toString(),
            map["Assembly Required"].toString(),
            map["Product Care"].toString(),
-           map["Instructions"].toString(),
+           map["Instructions"].toString(), map["Place"].toString(),
+
             ));
             notifyListeners();
 
@@ -162,6 +167,51 @@ class MainProvider extends ChangeNotifier {
         }
       });
   }
+
+   void getSearchProducts(String productName,String location){
+    db.collection("ITEMS")
+        .where("Item Name",isEqualTo: productName,)
+        .where("Place",isEqualTo: location,)
+        .get().then((value)
+      {
+        searchAllitem.clear();
+       // totalAmount = 0.0;
+        print("object.................");
+        if(value.docs.isNotEmpty){
+          for(var element in value.docs) {
+            Map<dynamic, dynamic> map = element.data() as Map;
+            searchAllitem.add(ItemModel(
+           map["Item Id"].toString(),
+           map["PHOTO"].toString(),
+           map["Item Name"].toString(),
+           map["Price"].toString(),
+           map["Category"].toString(),
+           map["Category_id"].toString(),
+           map["description"].toString(),
+           map["Item Quantity"].toString(),
+           map["Offers"].toString(),
+           map["color"].toString(),
+           map["Brand"].toString(),
+           map["Product Dimensions"].toString(),
+           map["Assembly Required"].toString(),
+           map["Product Care"].toString(),
+           map["Instructions"].toString(),
+              map["Place"].toString(),
+            ));
+            notifyListeners();
+
+          }
+          notifyListeners();
+
+        }
+      });
+  }
+
+  // void searchlocation(){
+  //   db.collection("")
+  //
+  //
+  // }
 
   var q;
   var Uid;
@@ -216,6 +266,7 @@ class MainProvider extends ChangeNotifier {
             map["Assembly Required"].toString(),
             map["Product Care"].toString(),
             map["Instructions"].toString(),
+            map["Place"].toString(),
           ));
           notifyListeners();
 
@@ -252,6 +303,7 @@ class MainProvider extends ChangeNotifier {
             map["Assembly Required"].toString(),
             map["Product Care"].toString(),
             map["Instructions"].toString(),
+            map["Place"].toString(),
           ));
           notifyListeners();
 
@@ -522,6 +574,28 @@ class MainProvider extends ChangeNotifier {
   }
 
 
+  List<Placemodel> placelist=[];
+  void getPlace(){
+    db.collection("PLACE").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        placelist.clear();
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data();
+          placelist.add(Placemodel(
+              map["PLACE_ID"].toString(),
+              map["PLACE_NAME"].toString(),));
+
+
+        }
+       // filtercategorylist=categorylist;
+        notifyListeners();
+
+      }
+      notifyListeners();
+    });
+  }
+
+
   List<ShopModel> shoplist=[];
   void getshop(){
     db.collection("SHOPS").get().then((value) {
@@ -763,6 +837,12 @@ class MainProvider extends ChangeNotifier {
     Map<String, dynamic> dataMap = HashMap();
     dataMap["Status"] = "BLOCKED";
     db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
+  }
+
+  void getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+    print(position.latitude);
+    print(position.longitude);
   }
 
 

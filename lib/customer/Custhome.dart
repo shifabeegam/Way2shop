@@ -59,7 +59,11 @@ class Custhome extends StatelessWidget {
                                            height: 50,
                                            width: 360,
 
-                                           child: const TextField(
+                                           child:  TextField(
+
+                                             onSubmitted: (text){
+                                          //  value.getSearchProducts(text, );
+                                           },
                                              decoration: InputDecoration(
                                                border: OutlineInputBorder(
                                                  borderSide: BorderSide(

@@ -587,6 +587,19 @@ class camera extends StatelessWidget {
                                     );
                                   })),
                               SizedBox(
+                                height: 20,
+                              ),
+                              Costfield(
+                                ItemController: value.itemNm,
+                                width: 296,
+                                hight: 50,
+                                hintText: "Place",validator: (value) {
+                                if (value!.isEmpty) {
+
+                                  return "This Field is required";
+                                } else {}
+                              },type: TextInputType.name,),
+                              SizedBox(
                                 height: 10,
                               ),
                             ],
