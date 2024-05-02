@@ -26,7 +26,7 @@ class Productlist extends StatelessWidget {
         child: Column(
           children: [
             Container(width:double.infinity ,
-              height: 130,
+              height: 80,
               decoration: const BoxDecoration(color: Color(0xff650015)),
               child: Column(
                 children: [
@@ -50,48 +50,48 @@ class Productlist extends StatelessWidget {
                   ),
                   //SizedBox(height: 10,),
                   const SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/img.png")),
-                      ),
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/cart.png")),
-                      ),
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/Order.png")),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //
+                  //           width:30,
+                  //           child: Image.asset("lib/icons/img.png")),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //
+                  //           width:30,
+                  //           child: Image.asset("lib/icons/cart.png")),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //
+                  //           width:30,
+                  //           child: Image.asset("lib/icons/Order.png")),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
 
             ),
-            Container(
-              width:double.infinity ,
-              height: 39,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xff650015), Color(0xff7E0922)],
-
-                  begin: Alignment.bottomCenter, end: Alignment.topCenter,
-                ),
-              ),
-
-            ),
+            // Container(
+            //   width:double.infinity ,
+            //   height: 39,
+            //   decoration: const BoxDecoration(
+            //     gradient: LinearGradient(
+            //       colors: [Color(0xff650015), Color(0xff7E0922)],
+            //
+            //       begin: Alignment.bottomCenter, end: Alignment.topCenter,
+            //     ),
+            //   ),
+            //
+            // ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Text(categoryname,style: TextStyle(fontSize: 20),),

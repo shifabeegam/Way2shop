@@ -382,6 +382,42 @@ class MainProvider extends ChangeNotifier {
    print("upload Successfully");
  }
 
+
+  Future<void> uploadPlace(BuildContext context) async {
+    String id = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    HashMap<String, Object> placemap = HashMap();
+
+    placemap["PLACE_NAME"] = address.text;
+    placemap["PLACE_ID"] = id;
+   // bool placecheck;
+   // placecheck = await checkCategoryExist( address.text);
+    // db.collection("USERS").doc(id).set(categorymap);
+
+
+// if (!placecheck) {
+
+      db.collection("PLACE").doc(id).set(placemap);
+    // }
+    // else{
+    //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    //     backgroundColor: Colors.red,
+    //     content: Center(
+    //       child: Text(
+    //         "Place Already Exists",
+    //         style: TextStyle(fontWeight: FontWeight.w700),
+    //       ),
+    //     ),
+    //   ));
+    // }
+    // getcategoy();
+    notifyListeners();
+    print("upload Successfully");
+  }
+
+
   void setImage(File image) {
     categoryfileimg = image;
     notifyListeners();
@@ -499,6 +535,28 @@ class MainProvider extends ChangeNotifier {
     categoryfileimg=null;
     categoryimg="";
  }
+  List<Placemodel> Placelist=[];
+  void getPlace(){
+    db.collection("PLACE").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        Placelist.clear();
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data();
+          Placelist.add(Placemodel(
+              map["PLACE_ID"].toString(),
+              map["PLACE_NAME"].toString(),
+             // map["PHOTO"].toString()
+              ));
+
+        }
+       // filtercategorylist=categorylist;
+        notifyListeners();
+
+      }
+      notifyListeners();
+    });
+  }
+
 
   List<Categorymodel> categorylist=[];
   void getcategoy(){
@@ -745,6 +803,44 @@ class MainProvider extends ChangeNotifier {
             (a) => a.shopname.toLowerCase().contains(item.toLowerCase())).toList();
     print("gdvsg"+filtershoplist.length.toString());
 
+    notifyListeners();
+  }
+
+  List<ItemModel> Productmodeldata = [];
+  List<ItemModel> filterProductmodeldata=[];
+
+  void getProductfilterdata() {
+    db.collection("ITEMS").get().then((value) {
+      Productmodeldata.clear();
+      if (value.docs.isNotEmpty) {
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> prdctmap = element.data();
+          Productmodeldata.add(ItemModel(
+              prdctmap["Item Id"].toString(),
+              prdctmap["PHOTO"].toString(),
+              prdctmap["Item Name"].toString(),
+              prdctmap["Price"].toString(),
+              prdctmap["Category"].toString(),
+              prdctmap["Category_id"].toString(),
+              prdctmap["description"].toString(),
+              prdctmap["Item Quantity"].toString(),
+              prdctmap["Offers"].toString(),
+              prdctmap["color"].toString(),
+              prdctmap["Brand"].toString(),
+              prdctmap["Product Dimensions"].toString(),
+              prdctmap["Assembly Required"].toString(),
+              prdctmap["Product Care"].toString(),
+              prdctmap["Instructions"].toString()));
+          filterProductmodeldata = Productmodeldata;
+          notifyListeners();
+        }
+      }
+    });
+  }
+
+  void searchProduct(item) {
+    filterProductmodeldata = Productmodeldata.where(
+            (a) => a.itemname.toLowerCase().contains(item.toLowerCase())).toList();
     notifyListeners();
   }
 

@@ -59,28 +59,35 @@ class Custhome extends StatelessWidget {
                                            height: 50,
                                            width: 360,
 
-                                           child: const TextField(
-                                             decoration: InputDecoration(
-                                               border: OutlineInputBorder(
-                                                 borderSide: BorderSide(
-                                                     color: Colors.white10),
-                                                 borderRadius: BorderRadius
-                                                     .only(
-                                                     topLeft: Radius.circular(
-                                                         15),
-                                                     bottomRight: Radius
-                                                         .circular(15)),),
-                                               fillColor: Colors.white10,
-                                               filled: true,
-                                               focusedBorder: InputBorder.none,
-                                               hintText: "Search",
-                                               hintStyle: TextStyle(
-                                                   color: Colors.white),
-                                               prefixIcon: Icon(Icons.search,
-                                                 color: Colors.white,),
-                                               suffixIcon: Icon(Icons.mic,
-                                                 color: Colors.white,),
-                                             ),
+                                           child: Consumer<MainProvider>(
+                                             builder: (context,value1,child) {
+                                               return  TextField(
+                                                 onChanged:(value) {
+                                                   value1.searchProduct(value);
+                                                   },
+                                                 decoration: InputDecoration(
+                                                   border: OutlineInputBorder(
+                                                     borderSide: BorderSide(
+                                                         color: Colors.white10),
+                                                     borderRadius: BorderRadius
+                                                         .only(
+                                                         topLeft: Radius.circular(
+                                                             15),
+                                                         bottomRight: Radius
+                                                             .circular(15)),),
+                                                   fillColor: Colors.white10,
+                                                   filled: true,
+                                                   focusedBorder: InputBorder.none,
+                                                   hintText: "Search",
+                                                   hintStyle: TextStyle(
+                                                       color: Colors.white),
+                                                   prefixIcon: Icon(Icons.search,
+                                                     color: Colors.white,),
+                                                   suffixIcon: Icon(Icons.mic,
+                                                     color: Colors.white,),
+                                                 ),
+                                               );
+                                             }
                                            ),
                                          ),
                                        ),

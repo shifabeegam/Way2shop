@@ -69,7 +69,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                             } else {}
                           },type: TextInputType.name,),
                           SizedBox(height: 10),
-                          Costfield(ItemController: value.phnu, width: 296, hight: 50, hintText: "  Phone No:",validator: (value) {
+                          Costfield(ItemController: value.phnu, width: 296, hight: 50, hintText: "  Phone No",validator: (value) {
                             if (value!.isEmpty) {
 
                               return "Enter Phone number";
@@ -120,7 +120,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                                     children: [
-                                      Text('  Upload Licence                ',style: TextStyle(color: Colors.grey,fontSize: 16),),
+                                      Text('Upload Licence                    ',style: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w300),),
                                       value.licencefileimg!=null?Container(
                                         width: 90,
                                         height: 30,
@@ -160,7 +160,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                                     children: [
-                                      Text('  Tax Payment Receipt                ',style: TextStyle(color: Colors.grey,fontSize: 16),),
+                                      Text('  Tax Payment Receipt        ',style: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w300),),
                                       value.receiptfileimg!=null?Container(
                                         width: 90,
                                         height: 30,
@@ -173,7 +173,13 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                         ),
                                       ):
 
-                                      Icon(Icons.file_upload_outlined,color: Colors.grey,)
+
+
+
+                                      Icon(Icons.file_upload_outlined,color: Colors.grey,),
+
+
+
                                     ],
                                   ),
                                 ),
@@ -202,7 +208,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                                     children: [
-                                      Text('  Upload Id Proof               ',style: TextStyle(color: Colors.grey,fontSize: 16),),
+                                      Text('Upload Id Proof                      ',style: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w300),),
                                   value.prooffileimg!=null?Container(
                                     width: 90,
                                     height: 30,

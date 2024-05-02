@@ -17,8 +17,13 @@ class ItemModel {
   String instruction;
 
   ItemModel(this.itemid,this.photo,this.itemname,this.price,this.category,this.categoryid,this.description,this.itemquartity,this.offers
-      ,this.color,this.brand,this.productdiemension,this.assmbly,this.productcare,this.instruction);
+      ,this.color,this.brand,this.productdiemension,this.assmbly,this.productcare,this.instruction,);
 
+}
+class Placemodel{
+  String id;
+  String name;
+  Placemodel(this.id,this.name);
 }
 
 class Categorymodel {
