@@ -56,6 +56,13 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                               return "This field is required";
                             } else {}
                             },type: TextInputType.number,),
+                          SizedBox(height: 2),
+                          Costfield(ItemController: value.passwordCtrl, width: 296, hight: 50, hintText: "  Password",validator: (value) {
+                            if (value!.isEmpty) {
+
+                              return "This field is required";
+                            } else {}
+                          },type: TextInputType.number,),
                           SizedBox(height: 10),
                           Costfield(ItemController: value.shopname, width: 296, hight: 50, hintText: "  Shop Name",validator: (value) {
                             if (value!.isEmpty) {
@@ -90,13 +97,13 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                           Autocomplete<Placemodel>(
                             optionsBuilder: (TextEditingValue textEditingValue) {
                               return value.placelist
-                                  .where((Placemodel item) => item.Placename
+                                  .where((Placemodel item) => item.placename
                                   .toLowerCase()
                                   .contains(textEditingValue.text.toLowerCase()))
                                   .toList();
                             },
                             displayStringForOption: (Placemodel option) =>
-                            option.Placename,
+                            option.placename,
                             fieldViewBuilder: (BuildContext context,
                                 TextEditingController fieldTextEditingController,
                                 FocusNode fieldFocusNode,
@@ -163,7 +170,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                               );
                             },
                             onSelected: (Placemodel selection) {
-                              value.address.text = selection.Placename;
+                              value.address.text = selection.placename;
                               value.productSelectedCategoryID = selection.id;
                             },
                             optionsViewBuilder: (BuildContext context,
@@ -182,7 +189,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                       padding: const EdgeInsets.all(10.0),
                                       itemCount: options.length,
                                       itemBuilder: (BuildContext context, int index) {
-                                        final Categorymodel option = options.elementAt(index);
+                                        final Placemodel option = options.elementAt(index);
 
                                         return GestureDetector(
                                           onTap: () {
@@ -202,7 +209,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Center(
-                                                        child: Text(option.name,
+                                                        child: Text(option.placename,
                                                             style: const TextStyle(
                                                               fontFamily: 'cantata',
                                                               color: Colors.black,

@@ -47,6 +47,10 @@ class MainProvider extends ChangeNotifier {
   TextEditingController  licence= TextEditingController();
   TextEditingController reciept = TextEditingController();
   TextEditingController licenceid = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController loginLicenceId = TextEditingController();
+  TextEditingController loginpassword = TextEditingController();
+
   TextEditingController offers = TextEditingController();
   TextEditingController brand = TextEditingController();
   TextEditingController diamention = TextEditingController();
@@ -266,7 +270,7 @@ class MainProvider extends ChangeNotifier {
             map["Assembly Required"].toString(),
             map["Product Care"].toString(),
             map["Instructions"].toString(),
-            map["Place"].toString(),
+           map["Place"].toString(),
           ));
           notifyListeners();
 
@@ -587,27 +591,6 @@ class MainProvider extends ChangeNotifier {
     categoryfileimg=null;
     categoryimg="";
  }
-  List<Placemodel> Placelist=[];
-  void getPlace(){
-    db.collection("PLACE").get().then((value) {
-      if (value.docs.isNotEmpty) {
-        Placelist.clear();
-        for (var element in value.docs) {
-          Map<dynamic, dynamic> map = element.data();
-          Placelist.add(Placemodel(
-              map["PLACE_ID"].toString(),
-              map["PLACE_NAME"].toString(),
-             // map["PHOTO"].toString()
-              ));
-
-        }
-       // filtercategorylist=categorylist;
-        notifyListeners();
-
-      }
-      notifyListeners();
-    });
-  }
 
 
   List<Categorymodel> categorylist=[];
@@ -757,6 +740,7 @@ class MainProvider extends ChangeNotifier {
     HashMap<String, Object> shopmap = HashMap();
 
     shopmap["Licence Id"] = licenceid.text;
+    shopmap["Password"] = passwordCtrl.text;
     shopmap["Owner Name"] = owname.text;
     shopmap["Phone No"] = phnu.text;
     shopmap["Email"] = email.text;
@@ -861,6 +845,10 @@ class MainProvider extends ChangeNotifier {
 
 
   List<Categorymodel> filtercategorylist=[];
+  void searchProducts(){
+
+
+  }
 
   void searchCategory(item) {
     filtercategorylist = categorylist.where(
@@ -904,7 +892,9 @@ class MainProvider extends ChangeNotifier {
               prdctmap["Product Dimensions"].toString(),
               prdctmap["Assembly Required"].toString(),
               prdctmap["Product Care"].toString(),
-              prdctmap["Instructions"].toString()));
+              prdctmap["Instructions"].toString(),
+            prdctmap["Place"].toString(),
+          ));
           filterProductmodeldata = Productmodeldata;
           notifyListeners();
         }
