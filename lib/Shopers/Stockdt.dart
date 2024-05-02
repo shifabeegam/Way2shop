@@ -195,7 +195,7 @@ class Stockdt extends StatelessWidget {
                                           );
                                         });
                                       },
-                                      child: HomeButton(textColor: Colors.black, backgroundColor: Colors.blueAccent, boxshadowColor: Colors.grey, borderColor: Colors.blueAccent, text: "Update", hight: 33, width: 126,
+                                      child: HomeButton(textColor: Colors.black, backgroundColor: Colors.orangeAccent, boxshadowColor: Colors.grey, borderColor: Colors.orangeAccent, text: "Update", hight: 33, width: 126,
                                           fondSize: 14),
                                     ),
                                   ],

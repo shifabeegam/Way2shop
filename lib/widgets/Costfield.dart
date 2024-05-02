@@ -35,7 +35,8 @@ class Costfield extends StatelessWidget {
         width: width??296,
         height: hight??50,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Color(0xFF650015),
-        
+
+          border: Border.all(color:Color(0xFF650015),width:BorderSide.strokeAlignCenter),
         
         
           boxShadow: [
@@ -46,6 +47,7 @@ class Costfield extends StatelessWidget {
               spreadRadius: 0,
             )
           ],
+
         ),
         
         child: TextFormField(
@@ -53,7 +55,7 @@ class Costfield extends StatelessWidget {
           keyboardType: type,
           inputFormatters: [
             type== TextInputType.number?FilteringTextInputFormatter.digitsOnly:FilteringTextInputFormatter.allow( RegExp(
-                r'^[a-zA-Z]+$')),
+                r'^[a-zA-Z @]+$')),
             LengthLimitingTextInputFormatter(100)
 
             ],
@@ -72,7 +74,8 @@ class Costfield extends StatelessWidget {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: new BorderSide(color: Color(0xFF650015))),
 
           hintText:hintText,
-          hintStyle:TextStyle(color: Colors.grey),
+          hintStyle:TextStyle(color: Colors.grey,fontWeight: FontWeight.w300),
+
          // prefixIcon: Icon(Icons.search,color: Colors.white,),
          // suffixIcon: Icon(Icons.mic,color: Colors.white,),
         ),

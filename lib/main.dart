@@ -1,4 +1,5 @@
 import 'package:a/Admin/AddCategory.dart';
+import 'package:a/Admin/AddPlace.dart';
 import 'package:a/Shopers/Additem.dart';
 import 'package:a/Shopers/Shopkeeperlogin.dart';
 import 'package:a/Shopers/camera.dart';
@@ -60,9 +61,11 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        // home: Stockdt(),
-       // home: AdmnHome(),
-       home:BottomNavBar()
+        home: AddPlace(),
+      // home: ShopHome(),
+       home:BottomNavBar(),
+        //home:AdmnHome(),
+
         //home: Shopkeeperlogin(),
 
 

@@ -48,25 +48,24 @@ class AddCategory extends StatelessWidget {
                            margin: EdgeInsets.only(top: 100),
                           width: 280,
                           height: 380,
-                          decoration: ShapeDecoration(
-                            color: Colors.white10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            shadows: [
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.all( Radius.circular(15)),
+                            boxShadow: [
                               BoxShadow(
                                 color: Color(0x3F000000),
                                 blurRadius: 4,
-                                offset: Offset(9, 8),
+                                offset: Offset(0, 4),
                                 spreadRadius: 0,
                               )
                             ],
+
                           ),
                           child:
                           Column(
                             children: [
                               SizedBox(height: 20,),
-                              Text("Add Category",style: TextStyle(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),),
+                              Text("Add Category",style: TextStyle(color: Color(0xFF650015),fontSize: 20,fontWeight: FontWeight.bold),),
                               SizedBox(height: 20,),
 
                               Consumer<MainProvider>(

@@ -15,11 +15,15 @@ class ItemModel {
   String assmbly;
   String productcare;
   String instruction;
-  String place;
 
   ItemModel(this.itemid,this.photo,this.itemname,this.price,this.category,this.categoryid,this.description,this.itemquartity,this.offers
-      ,this.color,this.brand,this.productdiemension,this.assmbly,this.productcare,this.instruction,this.place);
+      ,this.color,this.brand,this.productdiemension,this.assmbly,this.productcare,this.instruction,);
 
+}
+class Placemodel{
+  String id;
+  String name;
+  Placemodel(this.id,this.name);
 }
 
 class Categorymodel {
@@ -27,14 +31,6 @@ class Categorymodel {
   String name;
   String photo;
   Categorymodel(this.id,this.name,this.photo);
-
-}
-
-class Placemodel {
-  String id;
-  String Placename;
-
-  Placemodel(this.id,this.Placename);
 
 }
 

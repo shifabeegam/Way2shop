@@ -1,8 +1,10 @@
 import 'package:a/customer/Caccount.dart';
 import 'package:a/customer/Ccategory.dart';
 import 'package:a/customer/Cshops.dart';
+import 'package:a/providers/MainProvider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Ctrending extends StatelessWidget {
   const Ctrending({super.key});
@@ -35,16 +37,25 @@ class Ctrending extends StatelessWidget {
                     height: 50,
                     width:360 ,
 
-                    child: TextField(decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
-                      fillColor: Colors.white24,
-                      filled: true,
-                      focusedBorder: InputBorder.none,
-                      hintText:"Search...",
-                      hintStyle:TextStyle(color: Colors.white),
-                      prefixIcon: Icon(Icons.search,color: Colors.white,),
-                      suffixIcon: Icon(Icons.mic,color: Colors.white,),
-                    ),
+                    child: Consumer<MainProvider>(
+                      builder: (context,value1,child) {
+
+                        return TextField(
+                          onChanged:(value) {
+                            value1.searchProduct(value);
+                            },
+                          decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
+                          fillColor: Colors.white24,
+                          filled: true,
+                          focusedBorder: InputBorder.none,
+                          hintText:"Search...",
+                          hintStyle:TextStyle(color: Colors.white),
+                          prefixIcon: Icon(Icons.search,color: Colors.white,),
+                          suffixIcon: Icon(Icons.mic,color: Colors.white,),
+                        ),
+                        );
+                      }
                     ),
                   ),
                 ),
