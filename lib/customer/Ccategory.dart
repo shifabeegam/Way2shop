@@ -8,6 +8,9 @@ import '../widgets/GradButton.dart';
 import 'Cproductlist.dart';
 import 'Cshops.dart';
 import 'Ctrending.dart';
+import 'Ordersummery.dart';
+import 'Wishlist.dart';
+import 'cartpage.dart';
 
 class Ccategory extends StatelessWidget {
   const Ccategory({super.key});
@@ -70,21 +73,42 @@ class Ccategory extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       InkWell(
-                        onTap: (){},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (
+                                    context) => const Wishlist()),
+                          );
+                        },
                         child: Container(
 
                             width:30,
                             child: Image.asset("lib/icons/img.png")),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (
+                                    context) => const cartpage()),
+                          );
+                        },
                         child: Container(
 
                             width:30,
                             child: Image.asset("lib/icons/cart.png")),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (
+                                    context) => const Ordersummery()),
+                          );
+                        },
                         child: Container(
 
                             width:30,

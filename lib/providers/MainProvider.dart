@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
+import 'dart:typed_data';
 
 
 import 'package:a/Model/ItemModel.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../Shopers/ShopHome.dart';
 
 class MainProvider extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -67,7 +70,7 @@ class MainProvider extends ChangeNotifier {
   File? itemfileimage=null;
   String itemimg="";
 
-  Future<void> upload() async {
+  Future<void> upload(String shopName,String shopPlace) async {
     String id = DateTime
         .now()
         .millisecondsSinceEpoch
@@ -78,7 +81,8 @@ class MainProvider extends ChangeNotifier {
     itemmap["Price"] = price.text;
     itemmap["color"] = color.text;
     itemmap["Category"] = addcategory.text;
-    itemmap["Shop name"] = shopname.text;
+    itemmap["Shop name"] =shopName;
+    itemmap["Shop place"] = shopPlace;
     itemmap["description"] =description.text;
     itemmap["Item Quantity"] = quantity.text;
     itemmap["Item Id"] = id;
@@ -93,13 +97,28 @@ class MainProvider extends ChangeNotifier {
     if (itemfileimage != null) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
-      await ref.putFile(itemfileimage!).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {
-          itemmap ["PHOTO"] = value;
-          notifyListeners();
-        });
-        notifyListeners();
-      });
+
+      List images = [];
+      for(var ele in imageFileList!){
+        Reference reference =
+        FirebaseStorage.instance.ref().child('images/$photoId');
+        await reference.putData(ele as Uint8List).whenComplete(() async {
+          await reference.getDownloadURL().then((value33) {
+            images.add(value33);
+
+            });
+          });
+
+      }
+      itemmap['PHOTOS'] = images;
+      notifyListeners();
+      // await ref.putFile(itemfileimage!).whenComplete(() async {
+      //   await ref.getDownloadURL().then((value) {
+      //     itemmap ["PHOTO"] = value;
+      //     notifyListeners();
+      //   });
+      //   notifyListeners();
+      // });
       notifyListeners();
     } else {
       itemmap['PHOTO'] = itemimg;
@@ -686,11 +705,19 @@ void clearitem(){
 
   List<Placemodel> placelist=[];
 
-  void ShopLogin(String licenceid,String psword){
+  void ShopLogin(String licenceid,String psword,BuildContext context){
     db.collection("SHOPS").where("Licence Id" ,isEqualTo: licenceid)
         .where("Password" ,isEqualTo: psword).get().then((value) {
       if (value.docs.isNotEmpty){
-
+        Map<dynamic,dynamic> shopMap = value.docs.first.data();
+        String shopName = shopMap["Shop_Name"];
+        String shopPlace = shopMap["Place"];
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShopHome(shopName: shopName, placeName: shopPlace,),
+            ));
+        //
       }else{
 
       }
@@ -717,7 +744,9 @@ void clearitem(){
               map["proof"].toString(),
               map["licence"].toString(),
               map["receipt"].toString(),
-            map["Shop_ID"].toString()
+              map["Shop_ID"].toString(),
+              map["LAT"].toString(),
+              map["LONG"].toString(),
           ));
           filtershoplist=shoplist;
 
@@ -747,7 +776,9 @@ void clearitem(){
               map["proof"].toString(),
               map["licence"].toString(),
               map["receipt"].toString(),
-            map["Shop_ID"].toString()
+              map["Shop_ID"].toString(),
+            map["LAT"].toString(),
+            map["LONG"].toString(),
           ));
 
 
@@ -776,7 +807,9 @@ void clearitem(){
               map["proof"].toString(),
               map["licence"].toString(),
               map["receipt"].toString(),
-            map["Shop_ID"].toString()
+            map["Shop_ID"].toString(),
+            map["LAT"].toString(),
+            map["LONG"].toString(),
           ));
 
 
@@ -812,6 +845,10 @@ void clearitem(){
     shopmap["Shop_Details"] = shopdetails.text;
     shopmap["Shop_ID"] = id;
     shopmap["Status"] = "Pending";
+    shopmap["LAT"]=latitude;
+    shopmap["LONG"]=longitude;
+
+
     bool licencecheck;
     licencecheck = await checklicenceExist( addcategory.text);
     if (!licencecheck) {
@@ -988,11 +1025,50 @@ void clearitem(){
     db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
   }
 
-  void getLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    print(position.latitude);
-    print(position.longitude);
-  }
+  String latitude="";
+  String longitude="";
+
+
+
+  Future<void> getCurrentLocation(BuildContext ctx) async {
+    Position position = await Geolocator.getCurrentPosition();
+    //point = Point(x: position.longitude, y: position.latitude);
+    notifyListeners();
+    latitude=  position.latitude.toString();
+    longitude= position.longitude.toString();
+    print( position.latitude);
+    print( position.longitude);
+    // point = Point(y:11.055513,x:76.0815936);
+
+    //print("${point!.x}     BBBBBBBBBBBBBBB     ${point!.y}");
+    }
+  Future<bool> handleLocationPermission(Context) async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(Context).showSnackBar(const SnackBar(
+          content: Text('Location services are disabled. Please enable the services')));
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(Context).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')));
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(Context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.')));
+      return false;
+    }
+    return true;
+    }
 
 
 }
