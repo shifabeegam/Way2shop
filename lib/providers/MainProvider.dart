@@ -644,22 +644,21 @@ if (!placecheck) {
     categoryfileimg=null;
     categoryimg="";
  }
-  List<Placemodel> Placelist=[];
   void getPlace(){
     print("deddd");
     db.collection("PLACE").get().then((value) {
       if (value.docs.isNotEmpty) {
-        Placelist.clear();
+        placelist.clear();
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
-          Placelist.add(Placemodel(
+          placelist.add(Placemodel(
               map["PLACE_ID"].toString(),
               map["PLACE_NAME"].toString(),
              // map["PHOTO"].toString()
               ));
 
         }
-        print(Placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
+        print(placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
        // filtercategorylist=categorylist;
         notifyListeners();
 
@@ -749,8 +748,8 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
               map["Shop_ID"].toString(),
-              map["LAT"].toString(),
-              map["LONG"].toString(),
+              map["LAT"]??0.0,
+              map["LONG"]??0.0,
           ));
           filtershoplist=shoplist;
 
@@ -781,8 +780,8 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
               map["Shop_ID"].toString(),
-            map["LAT"].toString(),
-            map["LONG"].toString(),
+            map["LAT"]??0.0,
+            map["LONG"]??0.0,
           ));
 
 
@@ -812,8 +811,8 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
             map["Shop_ID"].toString(),
-            map["LAT"].toString(),
-            map["LONG"].toString(),
+            map["LAT"]??0.0,
+            map["LONG"]??0.0,
           ));
 
 
@@ -831,9 +830,13 @@ void clearitem(){
 
 
 
+  bool shoploader=false;
 
   void Shopupload(BuildContext context) async{
+    shoploader=true;
+    notifyListeners();
     String id = DateTime
+
         .now()
         .millisecondsSinceEpoch
         .toString();
@@ -844,13 +847,14 @@ void clearitem(){
     shopmap["Owner Name"] = owname.text;
     shopmap["Phone No"] = phnu.text;
     shopmap["Email"] = email.text;
-    shopmap["Place"] = address.text;
+    shopmap["Place"] =address.text;
     shopmap["Shop_Name"] = shopname.text;
     shopmap["Shop_Details"] = shopdetails.text;
     shopmap["Shop_ID"] = id;
     shopmap["Status"] = "Pending";
     shopmap["LAT"]=latitude;
     shopmap["LONG"]=longitude;
+    shopmap["Place_Id"]=SelectedPlaceID;
 
 
     bool licencecheck;
@@ -921,7 +925,9 @@ void clearitem(){
 
 
     db.collection("SHOPS").doc(id.toString()).set(shopmap);
+    shoploader=false;
     notifyListeners();
+    Navigator.pop(context);
     print("Upload Succesfully");
   }
 
@@ -1029,8 +1035,8 @@ void clearitem(){
     db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
   }
 
-  String latitude="";
-  String longitude="";
+  double latitude=0.0;
+  double longitude=0.0;
 
 
 
@@ -1038,8 +1044,8 @@ void clearitem(){
     Position position = await Geolocator.getCurrentPosition();
     //point = Point(x: position.longitude, y: position.latitude);
     notifyListeners();
-    latitude=  position.latitude.toString();
-    longitude= position.longitude.toString();
+    latitude=  position.latitude;
+    longitude= position.longitude;
     print( position.latitude);
     print( position.longitude);
     // point = Point(y:11.055513,x:76.0815936);

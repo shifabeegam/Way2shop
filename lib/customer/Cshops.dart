@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:a/widgets/GradButton.dart';
 import 'package:provider/provider.dart';
 
+import '../IntegrateGoogleMap.dart';
 import '../providers/MainProvider.dart';
 import 'Caccount.dart';
 import 'Ccategory.dart';
@@ -163,8 +164,12 @@ class Cshops extends StatelessWidget {
                       itemBuilder: (BuildContext context, index){
                         return  InkWell(
                           onTap: (){
-                           value.getshopitem(value.filtershoplist[index].id);
-                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
+
+                            MapUtils.openMap(-3.823216,-38.481700);
+
+                            // MapUtils.openMap(value.filtershoplist[index].latitude,value.filtershoplist[index].longitude);
+                           // value.getshopitem(value.filtershoplist[index].id);
+                           // Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10,left: 2),

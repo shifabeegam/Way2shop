@@ -93,7 +93,6 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                           },type: TextInputType.emailAddress,),
                           SizedBox(height: 10),
                           //
-
                           Autocomplete<Placemodel>(
                             optionsBuilder: (TextEditingValue textEditingValue) {
                               return value.placelist
@@ -129,19 +128,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
 
                                       style: const TextStyle(
                                           color: Colors.grey, fontSize: 16),
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(
-                                      //       width: 1, color: Color(0xff650015)),
-                                      //   borderRadius: BorderRadius.circular(15),
-                                      //   boxShadow: [
-                                      //     BoxShadow(
-                                      //       color: Color(0x3F000000),
-                                      //       blurRadius: 4,
-                                      //       offset: Offset(0, 4),
-                                      //       spreadRadius: 0,
-                                      //     )
-                                      //   ],
-                                      // ),
+
                                       decoration:
                                       InputDecoration(
 
@@ -171,7 +158,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                             },
                             onSelected: (Placemodel selection) {
                               value.address.text = selection.placename;
-                              value.productSelectedCategoryID = selection.id;
+                              value.SelectedPlaceID = selection.id;
                             },
                             optionsViewBuilder: (BuildContext context,
                                 AutocompleteOnSelected<Placemodel> onSelected,
@@ -231,6 +218,9 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                               );
                             },
                           ),
+
+
+
 
                           SizedBox(height: 10),
                           Costfield(ItemController: value.shopdetails, width: 296, hight: 50, hintText: "  Shop Details",validator: (value) {
@@ -379,7 +369,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: MaterialButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 value.getCurrentLocation(context);
                                 final FormState? form =
                                     formKey.currentState;
@@ -388,6 +378,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                     if(value.prooffileimg!=null) {
                                       if(value.receiptfileimg!=null) {
                                         mainProvider.Shopupload(context);
+
                                       }
                                       else{
                                         ScaffoldMessenger.of(context)
@@ -423,7 +414,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                                 }
 
                               },
-                              child: const Text("Submit"),
+                              child:value.shoploader?CircularProgressIndicator():const Text("Submit"),
                               highlightColor: Color(0xff0C630A),
                               splashColor: Colors.grey,
                               color: Colors.green,

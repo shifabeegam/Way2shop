@@ -76,7 +76,7 @@ class LoginProvider extends ChangeNotifier {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Verification(),
+              builder: (context) => varification(),
             ));
         ScaffoldMessenger.of(context)
             .showSnackBar( SnackBar(

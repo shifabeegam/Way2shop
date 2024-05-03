@@ -201,195 +201,110 @@ class Custhome extends StatelessWidget {
                                  ),
                                  SingleChildScrollView(
                                    scrollDirection: Axis.horizontal,
+
                                    child: Row(
                                      children: [
-                                       ListView.separated(
-                                        separatorBuilder: (context, index) {
-                                          return SizedBox(width: 3,);
-                                         // return Divider(color:Color(0xff650015),height: 3,);
-                                          },
-                                         itemCount: value.categorylist.length,
-                                          itemBuilder: (context, index) {
-                                          var items = value.categorylist[index].toString();
-                                          Container(
-                                                    height: 220,
-                                                    width: 120,
-                                                    // child: Column(
-                                                    //   children: [
-                                                    //   Container(
-                                                    //           decoration:  BoxDecoration(
-                                                    //            image: DecorationImage(
-                                                    //            image: NetworkImage(value.categorylist[index].photo),
-                                                    //            fit: BoxFit.fill,
-                                                    //            ),
-                                                    //                            // borderRadius: BorderRadius.circular(20)
-                                                    //             ),
-                                                    //             height: 180,
-                                                    //             width: 120,
-                                                    //             ),
-                                                    //     const Text('',
-                                                    //       style: TextStyle(fontSize: 15),),
-                                                    //   ],
-                                                    // ),
-                                                  );
-                                                 // const SizedBox(width: 8),
-                                        }
-                                       )
+
+                                       Container(
+                                         height: 220,
+                                         width: 120,
+                                         child: Column(
+                                           children: [
+                                             Container(
+                                               decoration: const BoxDecoration(
+                                                 image: DecorationImage(
+                                                     fit: BoxFit.fill,
+                                                     image: AssetImage(
+                                                       "assets/kurta1.png",)),
+                                                 // borderRadius: BorderRadius.circular(20)
+                                               ),
+                                               height: 180,
+                                               width: 120,
+
+
+                                             ),
+                                             const Text("kurtas",
+                                               style: TextStyle(fontSize: 15),),
+                                           ],
+                                         ),
+                                       ),
+                                       const SizedBox(width: 8),
+                                       Container(
+                                         height: 220,
+                                         width: 120,
+                                         child: Column(
+                                           children: [
+                                             Container(
+                                               decoration: const BoxDecoration(
+                                                 image: DecorationImage(
+                                                     fit: BoxFit.fill,
+                                                     image: AssetImage(
+                                                       "assets/veg.png",)),
+                                                 border: Border(),
+                                                 // borderRadius: BorderRadius.circular(20)
+                                               ),
+                                               height: 180,
+                                               width: 120,
+
+
+                                             ),
+                                             const Text("vegitable",
+                                               style: TextStyle(fontSize: 15),),
+                                           ],
+                                         ),
+                                       ),
+                                       const SizedBox(width: 8),
+                                       Container(
+                                         height: 220,
+                                         width: 120,
+                                         child: Column(
+                                           children: [
+                                             Container(
+                                               decoration: const BoxDecoration(
+                                                 image: DecorationImage(
+                                                     fit: BoxFit.fill,
+                                                     image: AssetImage(
+                                                       "assets/toys.png",)),
+                                                 // borderRadius: BorderRadius.circular(20)
+                                               ),
+                                               height: 180,
+                                               width: 120,
+
+
+                                             ),
+                                             const Text("Toys",
+                                               style: TextStyle(fontSize: 15),),
+                                           ],
+                                         ),
+                                       ),
+                                       const SizedBox(width: 8),
+                                       Container(
+                                         height: 220,
+                                         width: 120,
+                                         child: Column(
+                                           children: [
+                                             Container(
+                                               decoration: const BoxDecoration(
+                                                 image: DecorationImage(
+                                                     fit: BoxFit.fill,
+                                                     image: AssetImage(
+                                                       "assets/veg.png",)),
+                                                 //borderRadius: BorderRadius.circular(20)
+                                               ),
+                                               height: 180,
+                                               width: 120,
+
+
+                                             ),
+                                             const Text("Vegitables",
+                                               style: TextStyle(fontSize: 15),),
+                                           ],
+                                         ),
+                                       ),
                                      ],
                                    ),
-                                   // child: Row(
-                                   //   children: [
-                                   //     Expanded(
-                                   //       child: Consumer<MainProvider>(
-                                   //         builder: (context,value,child) {
-                                   //           return ListView.separated(
-                                   //             itemCount: value.categorylist.length,
-                                   //               itemBuilder: (context, index) {
-                                   //              var items = value.categorylist[index].toString();
-                                   //              return Container(
-                                   //                height: 220,
-                                   //                  width: 120,
-                                   //                  child: Column(
-                                   //                    children: [
-                                   //                      Container(
-                                   //                        decoration:  BoxDecoration(
-                                   //                          image: DecorationImage(
-                                   //                            image: NetworkImage(value.categorylist[index].photo),
-                                   //                            fit: BoxFit.fill,
-                                   //                          ),
-                                   //                          // borderRadius: BorderRadius.circular(20)
-                                   //                        ),
-                                   //                        height: 180,
-                                   //                        width: 120,
-                                   //                      ),
-                                   //                      // Container(
-                                   //                      //   decoration:  BoxDecoration(
-                                   //                      //     image: DevaluecorationImage(
-                                   //                      //         fit: BoxFit.fill,
-                                   //                      //         Image.network( .allAdditem[index].photo,fit: BoxFit.fill,),
-                                   //                      //        ),
-                                   //                      //     // borderRadius: BorderRadius.circular(20)
-                                   //                      //   ),
-                                   //                      //   height: 180,
-                                   //                      //   width: 120,
-                                   //                      //
-                                   //                      //
-                                   //                      // ),
-                                   //                      const Text("",
-                                   //                        style: TextStyle(fontSize: 15),),
-                                   //                    ],
-                                   //                  ),
-                                   //              );
-                                   //             },
-                                   //               separatorBuilder: (context, index) {
-                                   //             return Divider(color:Color(0xff650015),height: 3,);
-                                   //           },
-                                   //
-                                   //           );
-                                   //         }
-                                   //                                            ),
-                                   //     ),
-                                   //     // Container(
-                                   //     //   height: 220,
-                                   //     //   width: 120,
-                                   //     //   child: Column(
-                                   //     //     children: [
-                                   //     //       Container(
-                                   //     //         decoration: const BoxDecoration(
-                                   //     //           image: DecorationImage(
-                                   //     //               fit: BoxFit.fill,
-                                   //     //               image: AssetImage(
-                                   //     //                 "assets/kurta1.png",)),
-                                   //     //           // borderRadius: BorderRadius.circular(20)
-                                   //     //         ),
-                                   //     //         height: 180,
-                                   //     //         width: 120,
-                                   //     //
-                                   //     //
-                                   //     //       ),
-                                   //     //       const Text("kurtas",
-                                   //     //         style: TextStyle(fontSize: 15),),
-                                   //     //     ],
-                                   //     //   ),
-                                   //     // ),
-                                   //     // const SizedBox(width: 8),
-                                   //     // Container(
-                                   //     //   height: 220,
-                                   //     //   width: 120,
-                                   //     //   child: Column(
-                                   //     //     children: [
-                                   //     //       Container(
-                                   //     //         decoration: const BoxDecoration(
-                                   //     //           image: DecorationImage(
-                                   //     //               fit: BoxFit.fill,
-                                   //     //               image: AssetImage(
-                                   //     //                 "assets/veg.png",)),
-                                   //     //           border: Border(),
-                                   //     //           // borderRadius: BorderRadius.circular(20)
-                                   //     //         ),
-                                   //     //         height: 180,
-                                   //     //         width: 120,
-                                   //     //
-                                   //     //
-                                   //     //       ),
-                                   //     //       const Text("vegitable",
-                                   //     //         style: TextStyle(fontSize: 15),),
-                                   //     //     ],
-                                   //     //   ),
-                                   //     // ),
-                                   //     // const SizedBox(width: 8),
-                                   //     // Container(
-                                   //     //   height: 220,
-                                   //     //   width: 120,
-                                   //     //   child: Column(
-                                   //     //     children: [
-                                   //     //       Container(
-                                   //     //         decoration: const BoxDecoration(
-                                   //     //           image: DecorationImage(
-                                   //     //               fit: BoxFit.fill,
-                                   //     //               image: AssetImage(
-                                   //     //                 "assets/toys.png",)),
-                                   //     //           // borderRadius: BorderRadius.circular(20)
-                                   //     //         ),
-                                   //     //         height: 180,
-                                   //     //         width: 120,
-                                   //     //
-                                   //     //
-                                   //     //       ),
-                                   //     //       const Text("Toys",
-                                   //     //         style: TextStyle(fontSize: 15),),
-                                   //     //     ],
-                                   //     //   ),
-                                   //     // ),
-                                   //     // const SizedBox(width: 8),
-                                   //     // Container(
-                                   //     //   height: 220,
-                                   //     //   width: 120,
-                                   //     //   child: Column(
-                                   //     //     children: [
-                                   //     //       Container(
-                                   //     //         decoration: const BoxDecoration(
-                                   //     //           image: DecorationImage(
-                                   //     //               fit: BoxFit.fill,
-                                   //     //               image: AssetImage(
-                                   //     //                 "assets/veg.png",)),
-                                   //     //           //borderRadius: BorderRadius.circular(20)
-                                   //     //         ),
-                                   //     //         height: 180,
-                                   //     //         width: 120,
-                                   //     //
-                                   //     //
-                                   //     //       ),
-                                   //     //       const Text("Vegitables",
-                                   //     //         style: TextStyle(fontSize: 15),),
-                                   //     //     ],
-                                   //     //   ),
-                                   //     // )
-                                   //   ],
-                                   // ),
                                  ),
                                  const SizedBox(height: 5,),
-
                                  Container(
                                    decoration: const BoxDecoration(
                                      image: DecorationImage(image: AssetImage(

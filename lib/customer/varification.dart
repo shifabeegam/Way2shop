@@ -8,8 +8,8 @@ import '../providers/MainProvider.dart';
 import '../providers/loginprovider.dart';
 import 'Clogin.dart';
 
-class Verification extends StatelessWidget {
-  Verification({Key? key}) : super(key: key);
+class varification extends StatelessWidget {
+  varification({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
