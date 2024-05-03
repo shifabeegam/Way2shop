@@ -131,7 +131,7 @@ class Additem extends StatelessWidget {
                             Container(decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),),
                               child: MaterialButton(onPressed: (){
-                                mainprovider.upload();
+                                // mainprovider.upload();
                               },
                               child: const Text("Submit"),
                               highlightColor: Color(0xff0C630A),

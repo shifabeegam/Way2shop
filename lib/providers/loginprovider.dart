@@ -145,11 +145,12 @@ class LoginProvider extends ChangeNotifier {
             }
             else if(loginUsertype == "SHOPKEEPERS") {
               print("mxnxn");
-
+              String shopName = map['Shop_Name'].toString();
+              String shopPlace = map['Place'].toString();
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ShopHome(),
+                    builder: (context) => ShopHome(shopName:shopName, placeName: shopPlace,),
                   ));
             }else{
               Navigator.pushReplacement(

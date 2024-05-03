@@ -121,11 +121,11 @@ class Shoplogin extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
                             child: Consumer<MainProvider>(
-                                builder: (context,val,child) {
+                                builder: (context3,val,child) {
                                   return SizedBox(
                                     width: double.infinity,
                                     height: 45,
-                                    child: Consumer<LoginProvider>(
+                                    child: Consumer<MainProvider>(
                                       builder: (context, value, child) {
                                         return MaterialButton(
                                           onPressed: () async {
@@ -138,13 +138,14 @@ class Shoplogin extends StatelessWidget {
                                             final FormState? form = formKey.currentState;
                                             if(form!.validate()) {
 
-                                              value.sendotp(context);
-                                              value.controlllerclear();
+                                              // value.sendotp(context);
+                                              // value.controlllerclear();
+                                              value.ShopLogin(value.loginLicenceId.text.trim(), value.loginpassword.text.trim(), context);
 
 
                                             }  },
                                           child: Text(
-                                            "Send the code",
+                                            "Login",
                                             style: TextStyle(color: Colors.white),
                                           ),
                                           color: Color(0xff650015),
