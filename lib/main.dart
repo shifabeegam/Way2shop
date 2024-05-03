@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
         // home: AddPlace(),
           //home: ShopHome(),
-      home:BottomNavBar(),
+      home:SplashScreen(),
       //   home: Caccount(),
       // home: Stockdt(shopName: '', shopPlace: '',),
       // home: camera(shopName: '',shopPlace: ''),

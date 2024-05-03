@@ -1046,6 +1046,7 @@ void clearitem(){
     notifyListeners();
     latitude=  position.latitude;
     longitude= position.longitude;
+    notifyListeners();
     print( position.latitude);
     print( position.longitude);
     // point = Point(y:11.055513,x:76.0815936);

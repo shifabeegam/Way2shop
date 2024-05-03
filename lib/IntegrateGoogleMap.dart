@@ -13,8 +13,10 @@ class MapUtils {
     }
     }
   //import 'package:url_launcher/url_launcher.dart';
-  static Future<void> launchMaps(double latitude, double longitude) async {
-    String googleUrl = 'comgooglemaps://?center=${latitude},${longitude}';
+  static Future<void> launchMaps(double latitude, double longitude,double currentlatitude,double currentlongitude ) async {
+    print(currentlatitude);
+    print(currentlongitude);
+    String googleUrl = 'comgooglemaps://?center=${currentlatitude},${currentlongitude}&destination=$latitude,$longitude&travelmode=driving';
     String appleUrl =
         'https://maps.apple.com/?sll=${latitude},${longitude}';
     if (await canLaunch("comgooglemaps://")) {

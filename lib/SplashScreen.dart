@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:a/customer/Custhome.dart';
+import 'package:a/providers/MainProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer? _timer;
     final FirebaseFirestore db = FirebaseFirestore.instance;
     String type= '';
+    MainProvider provider = Provider.of<MainProvider>(context,listen: false);
+    provider.handleLocationPermission(context);
+    provider.getCurrentLocation(context);
 
     FirebaseAuth auth = FirebaseAuth.instance;
     var loginUser = auth.currentUser;

@@ -40,6 +40,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    // MainProvider provider = Provider.of<MainProvider>(context,listen: true);
+    // provider.handleLocationPermission(context);
+    // provider.getCurrentLocation(context);
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     MainProvider provider = Provider.of<MainProvider>(context,listen: true);
     return Scaffold(
