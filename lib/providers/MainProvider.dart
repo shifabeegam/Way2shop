@@ -94,15 +94,16 @@ class MainProvider extends ChangeNotifier {
     itemmap["Instructions"] =instruction.text;
     itemmap["Category_id"] =productSelectedCategoryID;
     itemmap["Shop_id"] =SelectedShopID;
-    if (itemfileimage != null) {
+    if (imageFileList.isNotEmpty) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
 
       List images = [];
-      for(var ele in imageFileList!){
+      for(var ele in imageFileList){
+        File file = File(ele.path);
         Reference reference =
         FirebaseStorage.instance.ref().child('images/$photoId');
-        await reference.putData(ele as Uint8List).whenComplete(() async {
+        await reference.putFile(file).whenComplete(() async {
           await reference.getDownloadURL().then((value33) {
             images.add(value33);
 
@@ -155,15 +156,16 @@ class MainProvider extends ChangeNotifier {
   }
 
   final ImagePicker imagePicker = ImagePicker();
-  List<XFile>? imageFileList = [];
+  List<XFile> imageFileList = [];
 
   void selectImages() async {
     final List<XFile>? selectedImages = await
     imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
-      imageFileList!.addAll(selectedImages);
+      imageFileList.addAll(selectedImages);
     }
-    print("Image List Length:" + imageFileList!.length.toString());
+    notifyListeners();
+    print("Image List Length:" + imageFileList.length.toString());
 
   }
 
@@ -643,6 +645,7 @@ if (!placecheck) {
     categoryimg="";
  }
   void getPlace(){
+    print("deddd");
     db.collection("PLACE").get().then((value) {
       if (value.docs.isNotEmpty) {
         placelist.clear();
@@ -655,6 +658,7 @@ if (!placecheck) {
               ));
 
         }
+        print(Placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
        // filtercategorylist=categorylist;
         notifyListeners();
 
@@ -663,7 +667,7 @@ if (!placecheck) {
     });
   }
 void clearitem(){
-  imageFileList =[];
+  imageFileList = [];
   itemNm.clear();
   price.clear();
   addcategory.clear();
@@ -676,6 +680,8 @@ void clearitem(){
   requirements.clear();
   productcare.clear();
   instruction.clear();
+  notifyListeners();
+  print(imageFileList!.length.toString()+"tuutiuut");
 }
 
   List<Categorymodel> categorylist=[];

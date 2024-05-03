@@ -228,15 +228,16 @@ bottomNavigationBar:
       height: 50,
       decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),),
-      child: MaterialButton(onPressed: (){ Navigator.push(
+      child: MaterialButton(onPressed: (){
+        mainProvider.clearitem();
+        mainProvider.getcategoy();
+        mainProvider.getshop();
+        print("fun.............................................");
+        Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>  camera(shopName: shopName, shopPlace: shopPlace,)),
       );
-        mainProvider.getcategoy();
-        mainProvider.getshop();
-        mainProvider.clearitem();
-        print("fun.............................................");
 
       },
         child: const Text("Add New"),
