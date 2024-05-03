@@ -54,8 +54,8 @@ class ShopModel{
   String licenceproof;
   String receipt;
   String id;
-  String latitude;
-  String longitude;
+  double latitude;
+  double longitude;
 
   ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id,this.latitude,this.longitude);
 

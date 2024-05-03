@@ -5,6 +5,7 @@ import 'package:a/Shopers/Shopkeeperlogin.dart';
 import 'package:a/Shopers/Shoplogin.dart';
 import 'package:a/Shopers/camera.dart';
 import 'package:a/customer/Cproduct.dart';
+import 'package:a/customer/Ordersummery.dart';
 import 'package:a/customer/Wishlist.dart';
 import 'package:a/customer/cartpage.dart';
 import 'package:a/providers/MainProvider.dart';
@@ -64,17 +65,17 @@ class MyApp extends StatelessWidget {
         ),
 
 
-       // home: AddPlace(),
+        // home: AddPlace(),
           //home: ShopHome(),
-       home:BottomNavBar(),
-        //home: Shopkeeperlogin(),
+      home:BottomNavBar(),
+      //   home: Caccount(),
       //home: Stockdt(shopName: '', shopPlace: '',),
       //home: camera(),
        // home:AdmnHome(),
         //home
 
 
-      // home: Shoplogin(),
+     // home: BottomNavigationBar(items: items),
 
 
 

@@ -1,4 +1,5 @@
 import 'package:a/Shopers/Shoplog.dart';
+import 'package:a/customer/varification.dart';
 import 'package:a/providers/MainProvider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:provider/provider.dart';
 
+import '../Shopers/ShopHome.dart';
 import '../Shopers/Shopkeeperlogin.dart';
+import '../Shopers/Shoplogin.dart';
 import 'Ordersummery.dart';
 import 'Wishlist.dart';
 import 'cartpage.dart';
@@ -143,10 +146,40 @@ class Caccount extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xff650015),
                   ),
-                  child: Center(child: Text("Next",style: TextStyle(fontSize: 18,color: Colors.white),)),
+                  child: Center(child: Text("Add Shop",style: TextStyle(fontSize: 18,color: Colors.white),)),
+
                 ),
               );
             }
+          ),
+          SizedBox(height: 10,),
+          Consumer<MainProvider>(
+              builder: (context,value,child) {
+                return InkWell(
+                  onTap: () {
+                   // value.getPlace();
+                    //value.handleLocationPermission(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  Shoplogin()),
+                    );
+
+
+                  },
+                  child: Container(
+                    height: 45,
+                    width: 140,
+                    decoration: BoxDecoration(border: Border.all(
+                        color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xff650015),
+                    ),
+                    child: Center(child: Text("Sign In Shop",style: TextStyle(fontSize: 18,color: Colors.white),)),
+
+                  ),
+                );
+              }
           ),
 
 
