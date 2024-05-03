@@ -65,10 +65,10 @@ class MyApp extends StatelessWidget {
 
        // home: Stockdt(),
       //home: ShopHome(),
-       //home:BottomNavBar(),
+       home:BottomNavBar(),
         //home:AdmnHome(),
 
-        home: Shoplogin(),
+       // home: AdmnHome(),
 
 
 

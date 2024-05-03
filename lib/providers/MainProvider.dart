@@ -625,6 +625,7 @@ if (!placecheck) {
  }
   List<Placemodel> Placelist=[];
   void getPlace(){
+    print("deddd");
     db.collection("PLACE").get().then((value) {
       if (value.docs.isNotEmpty) {
         Placelist.clear();
@@ -637,6 +638,7 @@ if (!placecheck) {
               ));
 
         }
+        print(Placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
        // filtercategorylist=categorylist;
         notifyListeners();
 
