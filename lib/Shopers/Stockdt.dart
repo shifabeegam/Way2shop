@@ -232,6 +232,7 @@ bottomNavigationBar:
       );
         mainProvider.getcategoy();
         mainProvider.getshop();
+        mainProvider.clearitem();
         print("fun.............................................");
 
       },

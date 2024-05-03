@@ -63,9 +63,15 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
 
+
        // home: AddPlace(),
           //home: ShopHome(),
        home:BottomNavBar(),
+
+       // home: Stockdt(),
+      //home: ShopHome(),
+       //home:BottomNavBar(),
+
         //home:AdmnHome(),
 
        // home: Shoplogin(),

@@ -69,24 +69,7 @@ class camera extends StatelessWidget {
                               onTap: () {
                                 showBottomSheet(context);
                               },
-                              child: value.itemfileimage != null
-                                  ? Container(
-                                      width: 100,
-                                      height: 100,
-                                      decoration: ShapeDecoration(
-                                          color: Colors.white,
-                                          shape: OvalBorder(
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: Color(0xFF650015)),
-                                          ),
-                                          image: DecorationImage(
-                                              image: FileImage(
-                                                value.itemfileimage!,
-                                              ),
-                                              fit: BoxFit.fill)),
-                                    )
-                                  : Container(
+                              child: Container(
                                       width: 100,
                                       height: 100,
                                       decoration: ShapeDecoration(
@@ -97,7 +80,7 @@ class camera extends StatelessWidget {
                                         ),
                                       ),
                                       child: Icon(
-                                        Icons.add_a_photo_outlined,
+                                        value.imageFileList != null? Icons.photo:Icons.add_a_photo_outlined,
                                         color: Colors.grey,
                                         size: 40,
                                       ),
@@ -139,102 +122,7 @@ class camera extends StatelessWidget {
                                   return "This Field is required";
                                 } else {}
                               },type: TextInputType.number,),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                  height: 50,
-                                  width: 296,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 1, color: Color(0xff650015)),
-                                    borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0x3F000000),
-                                        blurRadius: 4,
-                                        offset: Offset(0, 4),
-                                        spreadRadius: 0,
-                                      )
-                                    ],
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "  color",
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 18),
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
 
-
-                                      Container(
-                                        width: 30,
-                                        height: 30,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.white,
-                                          shape: OvalBorder(
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: Color(0xFF650015)),
-                                          ),
-                                        ),
-                                        child: InkWell(
-                                            onTap: () {},
-                                            child: Icon(
-                                              Icons.add_a_photo_outlined,
-                                              color: Colors.grey,
-                                              size: 20,
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        width: 30,
-                                        height: 30,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.white,
-                                          shape: OvalBorder(
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: Color(0xFF650015)),
-                                          ),
-                                        ),
-                                        child: InkWell(
-                                            onTap: () {},
-                                            child: Icon(
-                                              Icons.add_a_photo_outlined,
-                                              color: Colors.grey,
-                                              size: 20,
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        width: 30,
-                                        height: 30,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.white,
-                                          shape: OvalBorder(
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: Color(0xFF650015)),
-                                          ),
-                                        ),
-                                        child: InkWell(
-                                            onTap: () {},
-                                            child: Icon(
-                                              Icons.add_a_photo_outlined,
-                                              color: Colors.grey,
-                                              size: 20,
-                                            )),
-                                      ),
-                                    ],
-                                  )),
 
                               SizedBox(
                                 height: 10,
@@ -733,18 +621,18 @@ class camera extends StatelessWidget {
                               return InkWell(onTap: () {
                               final FormState? form = formKey.currentState;
                                 if (form!.validate()) {
-                                  if (value.imageFile!= null) {
+                                  // if (value.imageFile!= null) {
                                     value.upload();
-                                  }
-                                  else{
+                                  // }
+                                  // else{
 
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(
-                                      const SnackBar(backgroundColor: Colors.red,
-                                          content: Text(
-                                              "Upload Image ")),
-                                    );
-                                  }
+                                  //   ScaffoldMessenger.of(context)
+                                  //       .showSnackBar(
+                                  //     const SnackBar(backgroundColor: Colors.red,
+                                  //         content: Text(
+                                  //             "Upload Image ")),
+                                  //   );
+                                  // }
                                 }
 
                               },
@@ -796,14 +684,14 @@ class camera extends StatelessWidget {
                     'Camera',
                   ),
                   onTap: () =>
-                      {provider.getitemImagecamera(), Navigator.pop(context)}),
+                      {provider.takePicture(), Navigator.pop(context)}),
               ListTile(
                   leading: Icon(Icons.photo, color: Colors.red),
                   title: const Text(
                     'Gallery',
                   ),
                   onTap: () =>
-                      {provider.getitemImagegallery(), Navigator.pop(context)}),
+                      {provider.selectImages(), Navigator.pop(context)}),
             ],
           );
         });
