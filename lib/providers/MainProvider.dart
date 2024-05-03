@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
+import 'dart:typed_data';
 
 
 import 'package:a/Model/ItemModel.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../Shopers/ShopHome.dart';
 
 class MainProvider extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -67,7 +70,7 @@ class MainProvider extends ChangeNotifier {
   File? itemfileimage=null;
   String itemimg="";
 
-  Future<void> upload() async {
+  Future<void> upload(String shopName,String shopPlace) async {
     String id = DateTime
         .now()
         .millisecondsSinceEpoch
@@ -78,7 +81,8 @@ class MainProvider extends ChangeNotifier {
     itemmap["Price"] = price.text;
     itemmap["color"] = color.text;
     itemmap["Category"] = addcategory.text;
-    itemmap["Shop name"] = shopname.text;
+    itemmap["Shop name"] =shopName;
+    itemmap["Shop place"] = shopPlace;
     itemmap["description"] =description.text;
     itemmap["Item Quantity"] = quantity.text;
     itemmap["Item Id"] = id;
@@ -93,13 +97,28 @@ class MainProvider extends ChangeNotifier {
     if (itemfileimage != null) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
-      await ref.putFile(itemfileimage!).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {
-          itemmap ["PHOTO"] = value;
-          notifyListeners();
-        });
-        notifyListeners();
-      });
+
+      List images = [];
+      for(var ele in imageFileList!){
+        Reference reference =
+        FirebaseStorage.instance.ref().child('images/$photoId');
+        await reference.putData(ele as Uint8List).whenComplete(() async {
+          await reference.getDownloadURL().then((value33) {
+            images.add(value33);
+
+            });
+          });
+
+      }
+      itemmap['PHOTOS'] = images;
+      notifyListeners();
+      // await ref.putFile(itemfileimage!).whenComplete(() async {
+      //   await ref.getDownloadURL().then((value) {
+      //     itemmap ["PHOTO"] = value;
+      //     notifyListeners();
+      //   });
+      //   notifyListeners();
+      // });
       notifyListeners();
     } else {
       itemmap['PHOTO'] = itemimg;
@@ -684,11 +703,19 @@ void clearitem(){
 
   List<Placemodel> placelist=[];
 
-  void ShopLogin(String licenceid,String psword){
+  void ShopLogin(String licenceid,String psword,BuildContext context){
     db.collection("SHOPS").where("Licence Id" ,isEqualTo: licenceid)
         .where("Password" ,isEqualTo: psword).get().then((value) {
       if (value.docs.isNotEmpty){
-
+        Map<dynamic,dynamic> shopMap = value.docs.first.data();
+        String shopName = shopMap["Shop_Name"];
+        String shopPlace = shopMap["Place"];
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShopHome(shopName: shopName, placeName: shopPlace,),
+            ));
+        //
       }else{
 
       }

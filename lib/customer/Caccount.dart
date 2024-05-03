@@ -7,6 +7,9 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:provider/provider.dart';
 
 import '../Shopers/Shopkeeperlogin.dart';
+import 'Ordersummery.dart';
+import 'Wishlist.dart';
+import 'cartpage.dart';
 
 class Caccount extends StatelessWidget {
   const Caccount({super.key});
@@ -57,21 +60,38 @@ class Caccount extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (
+                                  context) => const Wishlist()),
+                        );
+                      },
                       child: Container(
 
                           width:30,
                           child: Image.asset("lib/icons/img.png")),
                     ),
                     InkWell(
-                      onTap: (){},
+                      onTap: (){Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (
+                                context) => const cartpage()),
+                      );},
                       child: Container(
 
                           width:30,
                           child: Image.asset("lib/icons/cart.png")),
                     ),
                     InkWell(
-                      onTap: (){},
+                      onTap: (){Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (
+                                context) => const Ordersummery()),
+                      );},
                       child: Container(
 
                           width:30,

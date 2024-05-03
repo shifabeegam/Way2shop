@@ -7,7 +7,9 @@ import 'package:a/widgets/Lists.dart';
 import 'package:provider/provider.dart';
 
 class ShopHome extends StatelessWidget {
-   ShopHome({super.key});
+  String shopName;
+  String placeName;
+   ShopHome({super.key,required this.shopName,required this.placeName,});
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -47,7 +49,7 @@ class ShopHome extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Shop Name',
+                      shopName,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -80,7 +82,7 @@ class ShopHome extends StatelessWidget {
                             Navigator.push(
                               context,
                                MaterialPageRoute(
-                                builder: (context) => const Stockdt()),
+                                builder: (context) =>  Stockdt(shopName: shopName, shopPlace: placeName,)),
                              );
                           },
                           child: HomeButton(

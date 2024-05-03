@@ -13,7 +13,9 @@ import '../Model/ItemModel.dart';
 import '../widgets/Costfield.dart';
 
 class camera extends StatelessWidget {
-   camera({Key? key}) : super(key: key);
+  String shopName;
+  String shopPlace;
+   camera({Key? key,required this.shopName,required this.shopPlace}) : super(key: key);
    final formKey = GlobalKey<FormState>();
 
   var validator;
@@ -308,128 +310,6 @@ class camera extends StatelessWidget {
                               ),
 
                               SizedBox(height: 10,),
-                              Autocomplete<ShopModel>(
-                                  optionsBuilder: (TextEditingValue textEditingValue) {
-                                    return value.shoplist
-                                        .where((ShopModel item) => item.shopname
-                                        .toLowerCase()
-                                        .contains(textEditingValue.text.toLowerCase()))
-                                        .toList();
-                                  },
-                                  displayStringForOption: (ShopModel option) =>
-                                  option.shopname,
-                                  fieldViewBuilder: (BuildContext context,
-                                      TextEditingController fieldSTextEditingController,
-                                      FocusNode fieldFocusNode,
-                                      VoidCallback onFieldSubmitted) {
-                                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                                      fieldSTextEditingController.text = value.shopname.text;
-                                    });
-
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        child: SizedBox(
-                                          width: 295,
-                                          height: 50,
-                                          child: TextFormField(
-
-                                            cursorColor: Colors.brown,
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                                color: Colors.grey, fontSize: 16),
-
-                                            decoration:
-                                            InputDecoration(
-
-                                              focusedBorder: OutlineInputBorder(
-
-                                                  borderSide: BorderSide(color: Color(0xff650015),),
-                                                  borderRadius: BorderRadius.circular(10)),
-
-                                              hintText: "Shop name",
-                                              hintStyle: const TextStyle(
-                                                  color: Colors.black45, fontFamily: 'cantata'),
-                                              border: OutlineInputBorder(
-                                                //borderSide: BorderSide(width: 1,color: Color(0xff650015),),
-                                                borderRadius: BorderRadius.circular(15),
-                                                //  borderSide: BorderSide(color: Colors.white, width: 3.0))
-
-                                              ),
-
-                                            ),
-                                            onChanged: (txt) {
-                                              // value.shopname.text = txt;
-                                            },
-                                            controller: fieldSTextEditingController,
-                                            focusNode: fieldFocusNode,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  onSelected: (ShopModel selection) {
-                                    value.shopname.text = selection.shopname;
-                                    value.SelectedShopID = selection.id;
-                                  },
-                                  optionsViewBuilder: (BuildContext context,
-                                      AutocompleteOnSelected<ShopModel> onSelected,
-                                      Iterable<ShopModel> options) {
-                                    return Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Material(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey,
-                                              borderRadius: BorderRadius.circular(15)),
-                                          width: 200,
-                                          height: 200,
-                                          child: ListView.builder(
-                                            padding: const EdgeInsets.all(10.0),
-                                            itemCount: options.length,
-                                            itemBuilder: (BuildContext context, int index) {
-                                              final ShopModel option = options.elementAt(index);
-
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  onSelected(option);
-                                                },
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        // border: Border(left: BorderSide(color: Colors.white,width: .6,
-                                                        // ))
-                                                      ),
-                                                      height: 30,
-                                                      width: 200,
-                                                      child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: [
-                                                            Center(
-                                                              child: Text(option.shopname,
-                                                                  style: const TextStyle(
-                                                                    fontFamily: 'cantata',
-                                                                    color: Colors.black,
-                                                                  )),
-                                                            ),
-                                                          ]),
-                                                    ),
-                                                    Divider(
-                                                      thickness: 1,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                 ),
 
 
 
@@ -601,19 +481,7 @@ class camera extends StatelessWidget {
                               SizedBox(
                                 height: 20,
                               ),
-                              Costfield(
-                                ItemController: value.itemNm,
-                                width: 296,
-                                hight: 50,
-                                hintText: "Place",validator: (value) {
-                                if (value!.isEmpty) {
 
-                                  return "This Field is required";
-                                } else {}
-                              },type: TextInputType.name,),
-                              SizedBox(
-                                height: 10,
-                              ),
                             ],
                           ),
                           Consumer<MainProvider>(
@@ -622,7 +490,7 @@ class camera extends StatelessWidget {
                               final FormState? form = formKey.currentState;
                                 if (form!.validate()) {
                                   // if (value.imageFile!= null) {
-                                    value.upload();
+                                    value.upload(shopName, shopPlace);
                                   // }
                                   // else{
 
