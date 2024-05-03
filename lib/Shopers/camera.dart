@@ -82,7 +82,7 @@ class camera extends StatelessWidget {
                                         ),
                                       ),
                                       child: Icon(
-                                        value.imageFileList != null? Icons.photo:Icons.add_a_photo_outlined,
+                                        value.imageFileList.length != 0 ? Icons.photo:Icons.add_a_photo_outlined,
                                         color: Colors.grey,
                                         size: 40,
                                       ),
