@@ -165,9 +165,9 @@ class Cshops extends StatelessWidget {
                         return  InkWell(
                           onTap: (){
 
-                            MapUtils.openMap(-3.823216,-38.481700);
+                            // MapUtils.launchMaps(-3.823216,-38.481700);
 
-                            // MapUtils.openMap(value.filtershoplist[index].latitude,value.filtershoplist[index].longitude);
+                            MapUtils.launchMaps(value.filtershoplist[index].latitude,value.filtershoplist[index].longitude);
                            // value.getshopitem(value.filtershoplist[index].id);
                            // Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
                           },

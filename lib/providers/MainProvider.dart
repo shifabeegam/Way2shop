@@ -658,7 +658,7 @@ if (!placecheck) {
               ));
 
         }
-        print(Placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
+        print(placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
        // filtercategorylist=categorylist;
         notifyListeners();
 
