@@ -380,7 +380,7 @@ class _ShopkeeperloginState extends State<Shopkeeperlogin> {
                             ),
                             child: MaterialButton(
                               onPressed: () {
-                                value.getLocation();
+                                value.getCurrentLocation(context);
                                 final FormState? form =
                                     formKey.currentState;
                                 if (form!.validate()) {
