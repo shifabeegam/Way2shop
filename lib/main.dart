@@ -64,11 +64,11 @@ class MyApp extends StatelessWidget {
         ),
 
        // home: AddPlace(),
-      //home: ShopHome(),
-       //home:BottomNavBar(),
+          //home: ShopHome(),
+       home:BottomNavBar(),
         //home:AdmnHome(),
 
-        home: Shoplogin(),
+       // home: Shoplogin(),
 
 
 
