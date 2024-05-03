@@ -27,6 +27,7 @@ class Placemodel{
   Placemodel(this.id,this.placename);
 }
 
+
 class Categorymodel {
   String id;
   String name;
@@ -53,7 +54,9 @@ class ShopModel{
   String licenceproof;
   String receipt;
   String id;
+  String latitude;
+  String longitude;
 
-  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id);
+  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id,this.latitude,this.longitude);
 
 }

@@ -126,6 +126,7 @@ class Caccount extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   value.getPlace();
+                  value.handleLocationPermission(context);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
