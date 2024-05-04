@@ -1,7 +1,7 @@
 
 class ItemModel {
   String itemid;
-  String photo;
+  List photo;
   String itemname;
   String price;
   String category;

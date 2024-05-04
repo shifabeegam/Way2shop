@@ -134,6 +134,7 @@ class Cshops extends StatelessWidget {
             Container(
               width:double.infinity ,
               height: 39,
+
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Color(0xff650015), Color(0xff7E0922)],
@@ -174,7 +175,7 @@ class Cshops extends StatelessWidget {
 
 
                            value.getshopitem(value.filtershoplist[index].id);
-                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
+                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,latitude:value.filtershoplist[index].latitude,longitude: value.filtershoplist[index].longitude ,) ,));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10,left: 2),

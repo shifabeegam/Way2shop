@@ -49,7 +49,8 @@ class Productlist extends StatelessWidget {
                     ),
                   ),
                   //SizedBox(height: 10,),
-                  const SizedBox(height: 30,),
+                  //const SizedBox(height: 30,),
+
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   //   children: [
@@ -92,6 +93,7 @@ class Productlist extends StatelessWidget {
             //   ),
             //
             // ),
+
             Padding(
               padding: const EdgeInsets.all(10),
               child: Text(categoryname,style: TextStyle(fontSize: 20),),
@@ -157,7 +159,7 @@ class Productlist extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Image.network(
-                                        value.allAdditem[index].photo,
+                                        value.allAdditem[index].photo.first,
                                         height: 120,
                                         width: 120,
                                       ),
@@ -171,15 +173,7 @@ class Productlist extends StatelessWidget {
                                         height: 0,
                                       ),
                                     ),
-                                    Text(value.allAdditem[index].description,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                      ),
-                                    ),
+
                                   ],
                                 ),
                               ) ,

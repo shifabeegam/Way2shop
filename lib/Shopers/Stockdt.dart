@@ -101,7 +101,7 @@ class Stockdt extends StatelessWidget {
                                     side: BorderSide(width: 1, color: Color(0xff650015)),
                                   ),
                                 ),
-                                 child:Image.network( value.allAdditem[index].photo,fit: BoxFit.fill,),
+                                 child:Image.network( value.allAdditem[index].photo.first,fit: BoxFit.fill,),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(10),

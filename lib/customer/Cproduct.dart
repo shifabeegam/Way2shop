@@ -15,7 +15,7 @@ import 'Ctrending.dart';
 
 class Cproduct extends StatelessWidget {
   String itemid;
-  String photo;
+  List photo;
   String itemname;
   String price;
   String category;
@@ -109,46 +109,23 @@ class Cproduct extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                   Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                          child: CarouselSlider(
-                            options: CarouselOptions(height: 400.0),
-                            items: [Image.network(photo),].map((i) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                      decoration: BoxDecoration(
-                                          color: Colors.amber
-                                      ),
-                                      child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-                                  );
-                                },
-                              );
-                            }).toList(),
-                          )
-                      ),
-                    ],
+
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: CarouselSlider.builder(
+                      itemBuilder: (context, index, realIndex) {
+                       return  Image.network(photo[index]);
+                      },
+                     
+                      options: CarouselOptions(
+                      height: 250,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 5),
+                    ), itemCount: photo.length,
+                    ),
                   ),
-
-
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 8.0),
-                  //   child: CarouselSlider(
-                  //     items: [
-                  //        Image.network(photo),
-                  //
-                  //     ],
-                  //     options: CarouselOptions(
-                  //     height: 250,
-                  //     autoPlay: true,
-                  //     autoPlayInterval: Duration(seconds: 5),
-                  //   ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Container(
