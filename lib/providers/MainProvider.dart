@@ -96,17 +96,21 @@ class MainProvider extends ChangeNotifier {
     itemmap["Category_id"] =productSelectedCategoryID;
     itemmap["Shop_id"] =shopid;
     if (imageFileList.isNotEmpty) {
-      String photoId = DateTime.now().millisecondsSinceEpoch.toString();
-      ref = FirebaseStorage.instance.ref().child(photoId);
+
+      // ref = FirebaseStorage.instance.ref().child(photoId);
+
+      print(imageFileList.toString()+"oijiujiujiuuhn");
 
       List images = [];
       for(var ele in imageFileList){
-        File file = File(ele.path);
-        Reference reference =
-        FirebaseStorage.instance.ref().child('images/$photoId');
-        await reference.putFile(file).whenComplete(() async {
+        String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+        Uint8List file = await ele.readAsBytes();
+        print(file.toString()+"kkkk");
+        Reference reference = FirebaseStorage.instance.ref().child('images/$photoId new');
+        await reference.putData(file).whenComplete(() async {
           await reference.getDownloadURL().then((value33) {
             images.add(value33);
+
 
             });
           });
@@ -123,7 +127,7 @@ class MainProvider extends ChangeNotifier {
       // });
       notifyListeners();
     } else {
-      itemmap['PHOTO'] = itemimg;
+      itemmap['PHOTOS'] = itemimg;
       // editMap['IMAGE_URL'] = imageUrl;
     }
     db.collection("ITEMS").doc(id).set(itemmap);
@@ -161,9 +165,9 @@ class MainProvider extends ChangeNotifier {
 
   void selectImages() async {
     final List<XFile>? selectedImages = await
-    imagePicker.pickMultiImage();
+    imagePicker.pickMultiImage(requestFullMetadata: true,imageQuality: 95);
     if (selectedImages!.isNotEmpty) {
-      imageFileList.addAll(selectedImages);
+      imageFileList = selectedImages;
     }
     notifyListeners();
     print("Image List Length:" + imageFileList.length.toString());
@@ -190,7 +194,7 @@ class MainProvider extends ChangeNotifier {
             Map<dynamic, dynamic> map = element.data() as Map;
             allAdditem.add(ItemModel(
            map["Item Id"].toString(),
-           map["PHOTO"].toString(),
+           map["PHOTOS"],
            map["Item Name"].toString(),
            map["Price"].toString(),
            map["Category"].toString(),
@@ -230,7 +234,7 @@ class MainProvider extends ChangeNotifier {
             Map<dynamic, dynamic> map = element.data() as Map;
             allAdditem.add(ItemModel(
            map["Item Id"].toString(),
-           map["PHOTO"].toString(),
+           map["PHOTOS"],
            map["Item Name"].toString(),
            map["Price"].toString(),
            map["Category"].toString(),
@@ -311,7 +315,7 @@ class MainProvider extends ChangeNotifier {
              Map<dynamic, dynamic> map = element.data() as Map;
              searchAllitem.add(ItemModel(
                map["Item Id"].toString(),
-               map["PHOTO"].toString(),
+               map["PHOTOS"],
                map["Item Name"].toString(),
                map["Price"].toString(),
                map["Category"].toString(),
@@ -349,7 +353,6 @@ class MainProvider extends ChangeNotifier {
              ),
            ));
          }
-
 
 
 
@@ -398,7 +401,7 @@ class MainProvider extends ChangeNotifier {
           Map<dynamic, dynamic> map = element.data() as Map;
           allAdditem.add(ItemModel(
             map["Item Id"].toString(),
-            map["PHOTO"].toString(),
+            map["PHOTOS"],
             map["Item Name"].toString(),
             map["Price"].toString(),
             map["Category"].toString(),
@@ -439,7 +442,7 @@ class MainProvider extends ChangeNotifier {
           Map<dynamic, dynamic> map = element.data() as Map;
           allAdditem.add(ItemModel(
             map["Item Id"].toString(),
-            map["PHOTO"].toString(),
+            map["PHOTOS"],
             map["Item Name"].toString(),
             map["Price"].toString(),
             map["Category"].toString(),
@@ -568,14 +571,14 @@ class MainProvider extends ChangeNotifier {
        ref = FirebaseStorage.instance.ref().child(photoId);
        await ref.putFile(categoryfileimg!).whenComplete(() async {
          await ref.getDownloadURL().then((value) {
-           categorymap["PHOTO"] = value;
+           categorymap["PHOTOS"] = value;
            notifyListeners();
          });
          notifyListeners();
        });
        notifyListeners();
      } else {
-       categorymap['PHOTO'] = categoryimg;
+       categorymap['PHOTOS'] = categoryimg;
        // editMap['IMAGE_URL'] = imageUrl;
      }
    if (!categorycheck) {
@@ -761,7 +764,7 @@ if (!placecheck) {
           placelist.add(Placemodel(
               map["PLACE_ID"].toString(),
               map["PLACE_NAME"].toString(),
-             // map["PHOTO"].toString()
+             // map["PHOTOS"].toString()
               ));
 
         }
@@ -1150,7 +1153,7 @@ void clearitem(){
           Map<dynamic, dynamic> prdctmap = element.data();
           Productmodeldata.add(ItemModel(
               prdctmap["Item Id"].toString(),
-              prdctmap["PHOTO"].toString(),
+              prdctmap["PHOTOS"],
               prdctmap["Item Name"].toString(),
               prdctmap["Price"].toString(),
               prdctmap["Category"].toString(),

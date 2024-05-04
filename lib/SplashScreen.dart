@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
     Timer(const Duration(seconds: 5), () {
-       Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
 
       // if (loginUser == null) {
       //   callNextReplacement(context, Custhome());
@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 380,),
+            Spacer(),
             Container(
               height: 120,
               width: 120,
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Image(image: AssetImage(
                 "assets/new_app_icon.png",)),
             ),
-            SizedBox(height: 300,),
+            Spacer(),
             Text("Way2Shop",
               style: TextStyle(color: Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold)),
           ],

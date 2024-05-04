@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../IntegrateGoogleMap.dart';
 import '../providers/MainProvider.dart';
 import 'Cproduct.dart';
 
 class ShopProducts extends StatelessWidget {
   String shopid,Shopname;
+  double latitude,longitude;
 
-  ShopProducts({super.key,required this.shopid,required this.Shopname});
+  ShopProducts({super.key,required this.shopid,required this.Shopname,required this.latitude,required this.longitude});
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,33 @@ class ShopProducts extends StatelessWidget {
                 ],
               ),
 
+            ),
+            Consumer<MainProvider>(
+              builder: (context,value,child) {
+                return InkWell(
+                  onTap: (){
+                    MapUtils.launchMaps(latitude,longitude,value.latitude,value.longitude);
+                  },
+                  child: Container(
+                    width:double.infinity ,
+                    height: 39,
+                    child: Row(
+                      children: [
+                        Icon(Icons.location_on_outlined,color: Colors.white,),
+                        Text("View Location",style: TextStyle(color: Colors.white,fontSize: 18),),
+                      ],
+                    ),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xff650015), Color(0xff7E0922)],
+
+                        begin: Alignment.bottomCenter, end: Alignment.topCenter,
+                      ),
+                    ),
+
+                  ),
+                );
+              }
             ),
             Container(
               width:double.infinity ,
@@ -157,7 +186,7 @@ class ShopProducts extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Image.network(
-                                        value.allAdditem[index].photo,
+                                        value.allAdditem[index].photo.first,
                                         height: 120,
                                         width: 120,
                                       ),

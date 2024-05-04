@@ -119,10 +119,29 @@ class Caccount extends StatelessWidget {
             ),
 
           ),
+         Center(
+             child: SingleChildScrollView(
+               child: Padding(
+                 padding: const EdgeInsets.all(20),
+                 child: Column(
+                   children: [
+                     Padding(
+                 padding: const EdgeInsets.only(top: 20,bottom: 10),
+                 child: Container(
+                   child :Image(
+                     image: AssetImage("assets/WhatsApp Image 2024-05-04 at 11.53.50_40e0b95a.jpg"),
+                     width: 100,
+                   ),
+                 ),
 
-          SizedBox(height: 50,),
+               ),
+                   ],
+                 ),
+               ),
+             )),
+          SizedBox(height: 10,),
 
-          Text("Do you want to Add your Shop", style: TextStyle(color: Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold),),
+          Text("Do you want to Add your Shop", style: TextStyle(color: Color(0xff650015),fontSize: 10,fontWeight: FontWeight.bold),),
           SizedBox(height: 30,),
           Consumer<MainProvider>(
             builder: (context,value,child) {
