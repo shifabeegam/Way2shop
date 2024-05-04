@@ -283,7 +283,7 @@ class MainProvider extends ChangeNotifier {
            Map<dynamic, dynamic> map = element.data() as Map;
            searchAllitem.add(ItemModel(
              map["Item Id"].toString(),
-             map["PHOTO"].toString(),
+             map["PHOTO"],
              map["Item Name"].toString(),
              map["Price"].toString(),
              map["Category"].toString(),
@@ -301,6 +301,8 @@ class MainProvider extends ChangeNotifier {
              map["Shop_Details"].toString(),
              map["Place"].toString(),
            ));
+           searchAllitem.sort((a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
+
 
          }
          notifyListeners();
@@ -333,6 +335,9 @@ class MainProvider extends ChangeNotifier {
                map["Shop_Details"].toString(),
                map["Place"].toString(),
              ));
+
+             searchAllitem.sort((a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
+
            }
            notifyListeners();
            ScaffoldMessenger.of(context).showSnackBar( SnackBar(

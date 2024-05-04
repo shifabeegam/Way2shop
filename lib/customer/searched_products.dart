@@ -157,7 +157,7 @@ class SearchedProducts extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Image.network(
-                                        value.searchAllitem[index].photo,
+                                        value.searchAllitem[index].photo.first,
                                         height: 120,
                                         width: 120,
                                       ),

@@ -9,8 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 
 
+import '../providers/MainProvider.dart';
+import '../widgets/HomeButton.dart';
 import 'Ctrending.dart';
 
 class Cproduct extends StatelessWidget {
@@ -395,16 +398,79 @@ class Cproduct extends StatelessWidget {
               ),
               child: Center(child: Text("Add To Cart",style: TextStyle(fontSize: 18),)),
             ),
-            Container(
-              height: 45,
-              width: 140,
-              decoration: BoxDecoration(border: Border.all(
-                  color: Colors.black26),
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.yellow[600]
+
+            InkWell(
+              onTap: (){
+                showDialog(context: context, builder: (context){
+                  return Container(
+                    child: AlertDialog(backgroundColor: Colors.white,
+                      elevation: 0,
+
+                      actions: [
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15),
+
+
+
+                            ),
+
+                            Text("Do you want to Confirm your order ? "),
+                            Row(
+                              children: [
+                                MaterialButton(onPressed: (){ Navigator.pop(
+                                  context,
+                                  /* MaterialPageRoute(
+                                                          builder: (context) => const Additem()),*/
+                                );
+
+                                },
+                                  child: const Text("cancel"),
+                                  highlightColor: Color(0xff0C630A),
+                                  splashColor: Colors.grey,
+                                  color: Colors.red,
+                                ),
+
+                                SizedBox(width: 10,),
+
+                                MaterialButton(onPressed: (){ Navigator.pop(
+                                  context,
+                                  /* MaterialPageRoute(
+                                                          builder: (context) => const Additem()),*/
+                                );
+
+                                },
+                                  child: const Text("ok"),
+                                  highlightColor: Color(0xff0C630A),
+                                  splashColor: Colors.grey,
+                                  color: Colors.green,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                      ],
+
+                    ),
+                  );
+                });
+              },
+              child: Container(
+                height: 45,
+                width: 140,
+                decoration: BoxDecoration(border: Border.all(
+                    color: Colors.black26),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.yellow[600]
+                ),
+                child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
               ),
-              child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
             ),
+
+
+
           ],
         ),
       ),
