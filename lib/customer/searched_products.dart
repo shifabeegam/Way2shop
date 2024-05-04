@@ -6,9 +6,12 @@ import '../providers/MainProvider.dart';
 import 'Cproduct.dart';
 
 class SearchedProducts extends StatelessWidget {
+  String userId;
+  String userName;
+  String userPhone;
 
-
-  SearchedProducts({super.key});
+  SearchedProducts({super.key,required this.userId,required this.userName,
+    required this.userPhone});
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +121,9 @@ class SearchedProducts extends StatelessWidget {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Cproduct(itemid: item.itemid,
                               photo: item.photo,itemname: item.itemname,price: item.price,category: item.category,categoryid: item.categoryid,
                               description: item.description,itemquartity: item.itemquartity,offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
-                              assmbly: item.assmbly,instruction: item.instruction,shopname: item.shopname,phone: item.shopname,shopdetails: item.shopdetails,place: item.place, userId: '', shopid: '',
+                              assmbly: item.assmbly,instruction: item.instruction,
+                              shopname: item.shopname,phone: item.shopname,shopdetails: item.shopdetails,
+                              place: item.place,  userId: userId, shopid: '', userName: userName, userPhone: userPhone,
                             ),));
                           },
                           child: Padding(

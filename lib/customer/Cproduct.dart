@@ -37,17 +37,28 @@ class Cproduct extends StatelessWidget {
   String shopdetails;
   String place;
   String userId;
+  String userName;
+  String userPhone;
   String shopid;
 
 
   String instruction;
    Cproduct({super.key,required this.itemid,required this.photo,required this.itemname,required this.price,
-     required this.category,required this.categoryid,required this.description,required this.itemquartity,required this.offers,required this.color,required this.brand,required this.productdiemension,required this.assmbly,
-     required this.instruction,required this.shopname,required this.phone,required this.shopdetails,required this.place,required this.userId,required this.shopid
+     required this.category,required this.categoryid,required this.description,
+     required this.itemquartity,required this.offers,required this.color,required this.brand,
+     required this.productdiemension,required this.assmbly,
+     required this.instruction,required this.shopname,required this.phone,
+     required this.shopdetails,required this.place,required this.userId,required this.userName,
+     required this.userPhone,required this.shopid
    });
 
   @override
   Widget build(BuildContext context) {
+
+    print("rrrrrrrrrrrrrrrrrrr $userName");
+    print("ffff $userId");
+    print("ffff $userPhone");
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
@@ -451,7 +462,9 @@ class Cproduct extends StatelessWidget {
                                     MaterialButton(
                                       onPressed: (){
 
-                                        provider.addConfirmOrder(itemname, price, itemid,"1234",shopid,"fareed","9539039327");
+                                        print(userPhone+userName+userId+"hhhhhhhhh");
+
+                                        provider.addConfirmOrder(itemname, price, itemid,userId,shopid,userName,userPhone);
 
 
 

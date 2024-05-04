@@ -263,7 +263,7 @@ class ShopHome extends StatelessWidget {
               builder: (context,value,child) {
                 return Container(
 
-                  height: 200,
+                  height: 400,
                   child: ListView.builder(
                       itemCount:value.shopOrderModelList.length ,
                       itemBuilder: (context, index) {
@@ -285,6 +285,10 @@ class ShopHome extends StatelessWidget {
                                     Text(items.customerName,style: TextStyle(fontSize: 16,color: Colors.red),),
                                     SizedBox(height: 7,),
                                     Text(items.productPrice,style: TextStyle(fontSize: 16,color: Colors.red),),
+                                    Text(items.phone,style: TextStyle(fontSize: 16,color: Colors.red),),
+                                    SizedBox(height: 7,),
+                                    Text(items.productName,style: TextStyle(fontSize: 16,color: Colors.red),),
+
                                   ],
                                 ),
                               ),

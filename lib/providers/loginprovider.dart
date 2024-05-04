@@ -64,6 +64,7 @@ class LoginProvider extends ChangeNotifier {
   }
   String loginedUserName = "";
   String loginedUserNumber = "";
+  String loginedUserId = "";
   void passwordverify(String username,String password,BuildContext context){
 
     db.collection("USERS")
@@ -76,8 +77,10 @@ class LoginProvider extends ChangeNotifier {
 
         loginedUserName=map["USER_NAME"] ??"";
         loginedUserNumber=map["PHONE_NUMBER"] ??"";
+        loginedUserId=map["USER_ID"] ??"";
         notifyListeners();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
+              BottomNavBar(userId: loginedUserId, userName: loginedUserName, userPhone: loginedUserNumber,),));
 
       }else{
         ScaffoldMessenger.of(context)
@@ -224,7 +227,7 @@ class LoginProvider extends ChangeNotifier {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Custhome(),
+                    builder: (context) => Custhome(userId: userId, userName: loginUsername, userPhone: loginphno,),
                   ));
 
             }

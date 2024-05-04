@@ -13,7 +13,11 @@ import 'Wishlist.dart';
 import 'cartpage.dart';
 
 class Ccategory extends StatelessWidget {
-  const Ccategory({super.key});
+  String userId;
+  String userName;
+  String userPhone;
+   Ccategory({super.key,required this.userId,required this.userName,
+  required this.userPhone});
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +159,10 @@ class Ccategory extends StatelessWidget {
                       return  InkWell(
                         onTap: (){
                           value.getItem(value.filtercategorylist[index].id);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.filtercategorylist[index].id ,categoryname: value.filtercategorylist[index].name, userID: '', shopId: '',) ,));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              Productlist(categoryid:value.filtercategorylist[index].id ,
+                                categoryname: value.filtercategorylist[index].name,
+                                userId: userId, shopId: '', userName: userName, userPhone: userPhone,) ,));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10,left: 2),
