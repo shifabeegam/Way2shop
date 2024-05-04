@@ -98,41 +98,19 @@ class Clogin extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Row(
                                 children: [
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  SizedBox(
-                                    width: 40,
-                                    child: TextField(
-                                      style: TextStyle(color: Colors.black),
-                                      keyboardType: TextInputType.phone,
-                                      decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: "+91",
-                                          hintStyle: TextStyle(
-                                              fontSize: 14, color: Colors.grey)),
-                                    ),
-                                  ),
-                                  Text(
-                                    "|",
-                                    style: TextStyle(
-                                        fontSize: 33, color: Color(0xff650015)),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
+
                                   Expanded(
                                     child: Consumer<LoginProvider>(
                                       builder: (context,value,child) {
                                         return TextFormField(
                                           inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                                          controller: value.Loginphnnumber,
+                                          controller: value.loginuserPassword,
                                           style: TextStyle(color: Colors.black),
                                           // controller:value.phoneotp ,
                                           keyboardType: TextInputType.phone,
                                           decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: "Enter your phone number",
+                                              hintText: "Enter your Password",
                                               hintStyle: TextStyle(
                                                   fontSize: 14, color: Colors.grey)),
                                           validator: (value) {
@@ -171,13 +149,13 @@ class Clogin extends StatelessWidget {
                                           final FormState? form = formKey.currentState;
                                           if(form!.validate()) {
 
-                                          value.sendotp(context);
-                                          value.controlllerclear();
+                                          value.passwordverify(value.loginusername.text,value.loginuserPassword.text,context);
+                                          // value.controlllerclear();
 
 
                                       }  },
                                         child: Text(
-                                          "Send the code",
+                                          "LOGIN",
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         color: Color(0xff650015),

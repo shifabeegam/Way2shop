@@ -129,8 +129,8 @@ class Caccount extends StatelessWidget {
                  padding: const EdgeInsets.only(top: 20,bottom: 10),
                  child: Container(
                    child :Image(
-                     image: AssetImage("assets/WhatsApp Image 2024-05-04 at 11.53.50_40e0b95a.jpg"),
-                     width: 100,
+                     image: AssetImage("assets/loogoo.jpg"),
+                     width: 150,
                    ),
                  ),
 
@@ -143,35 +143,38 @@ class Caccount extends StatelessWidget {
 
           Text("Do you want to Add your Shop", style: TextStyle(color: Color(0xff650015),fontSize: 10,fontWeight: FontWeight.bold),),
           SizedBox(height: 30,),
-          Consumer<MainProvider>(
-            builder: (context,value,child) {
-              return InkWell(
-                onTap: () {
-                  value.getPlace();
-                  value.handleLocationPermission(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-              builder: (context) =>  Shopkeeperlogin()),
+          Row(
+            children: [
+              Consumer<MainProvider>(
+                builder: (context,value,child) {
+                  return InkWell(
+                    onTap: () {
+                      value.getPlace();
+                      value.handleLocationPermission(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                  builder: (context) =>  Shopkeeperlogin()),
+                      );
+
+
+                    },
+                    child: Container(
+                      height: 45,
+                      width: 140,
+                      decoration: BoxDecoration(border: Border.all(
+                          color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xff650015),
+                      ),
+                      child: Center(child: Text("Add Shop",style: TextStyle(fontSize: 18,color: Colors.white),)),
+
+                    ),
                   );
+                }
+              ),
 
 
-                },
-                child: Container(
-                  height: 45,
-                  width: 140,
-                  decoration: BoxDecoration(border: Border.all(
-                      color: Colors.white),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xff650015),
-                  ),
-                  child: Center(child: Text("Add Shop",style: TextStyle(fontSize: 18,color: Colors.white),)),
-
-                ),
-              );
-            }
-          ),
-          SizedBox(height: 10,),
           Consumer<MainProvider>(
               builder: (context,value,child) {
                 return InkWell(
@@ -191,7 +194,7 @@ class Caccount extends StatelessWidget {
                     width: 140,
                     decoration: BoxDecoration(border: Border.all(
                         color: Colors.white),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       color: Color(0xff650015),
                     ),
                     child: Center(child: Text("Sign In Shop",style: TextStyle(fontSize: 18,color: Colors.white),)),
@@ -199,6 +202,8 @@ class Caccount extends StatelessWidget {
                   ),
                 );
               }
+          ),
+            ],
           ),
 
 

@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../Admin/AdmnHome.dart';
 import '../Shopers/ShopHome.dart';
+import '../bottamnavigationbar.dart';
 import '../customer/Custhome.dart';
 import '../customer/varification.dart';
 import 'MainProvider.dart';
@@ -22,8 +23,25 @@ class LoginProvider extends ChangeNotifier {
 
 
   TextEditingController loginusername=TextEditingController();
+  TextEditingController loginuserPassword=TextEditingController();
   TextEditingController Loginphnnumber=TextEditingController();
   TextEditingController otpverifycontroller = TextEditingController();
+  void passwordverify(String username,String password,BuildContext context){
+
+    db.collection("USERS").where("USER_NAME",isEqualTo: username).get().then((value) {
+      if(value.docs.isNotEmpty){
+        Map<dynamic,dynamic>map=value.docs as Map;
+        String password="";
+
+        password=map["PASSWORD"] ??"";
+
+        if(password==loginuserPassword.text){
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+        }
+      }
+    });
+  }
+
   void controlllerclear(){
     loginusername.clear();
     Loginphnnumber.clear();
