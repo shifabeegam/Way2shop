@@ -444,11 +444,13 @@ class Cproduct extends StatelessWidget {
 
                                 SizedBox(width: 10,),
 
-                                MaterialButton(onPressed: (){ Navigator.pop(
-                                  context,
-                                  /* MaterialPageRoute(
-                                                          builder: (context) => const Additem()),*/
-                                );
+                                MaterialButton(onPressed: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (
+                                            context) => const Ordersummery()),
+                                  );
 
                                 },
                                   child: const Text("ok"),
