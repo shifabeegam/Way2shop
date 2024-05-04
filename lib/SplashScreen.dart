@@ -40,16 +40,16 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
-    // MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
+    MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
 
 
     // mainProvider.lockApp();
   //  mainProvider.getCarouselimg();
 
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 1), () {
        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-
+       mainProvider.getPlace();
       // if (loginUser == null) {
       //   callNextReplacement(context, Custhome());
       // }
@@ -63,6 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Color(0xff650015),
       body: Center(
         child: Column(
           children: [
@@ -72,12 +73,13 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border(
-                  left: BorderSide(color:Color(0xff650015)),
-                  top: BorderSide(color:Color(0xff650015)),
-                  right: BorderSide(color:Color(0xff650015)),
-                  bottom: BorderSide(width: 1.20, color: Color(0xff650015)),
-                ),
+                // border: Border(
+                //   left: BorderSide(color:Color(0xff650015)),
+                //   top: BorderSide(color:Color(0xff650015)),
+                //   right: BorderSide(color:Color(0xff650015)),
+                //   bottom: BorderSide(width: 1.20, color: Color(0xff650015)),
+                // ),
+                image: DecorationImage(image: AssetImage("assets/new_app_icon.png")),
                 boxShadow: [
                   BoxShadow(color: Colors.grey,
                     blurRadius: 4,
@@ -86,12 +88,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   )
                 ],),
 
-              child: Image(image: AssetImage(
-                "assets/new_app_icon.png",)),
+
             ),
             Spacer(),
             Text("Way2Shop",
-              style: TextStyle(color: Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold)),
+              style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold)),
           ],
         ),
       ),

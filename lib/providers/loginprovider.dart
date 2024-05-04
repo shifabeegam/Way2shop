@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 
 import '../Admin/AdmnHome.dart';
 import '../Shopers/ShopHome.dart';
+import '../bottamnavigationbar.dart';
+import '../customer/Clogin.dart';
 import '../customer/Custhome.dart';
 import '../customer/varification.dart';
 import 'MainProvider.dart';
@@ -22,8 +24,73 @@ class LoginProvider extends ChangeNotifier {
 
 
   TextEditingController loginusername=TextEditingController();
+  TextEditingController registerUserName=TextEditingController();
+  TextEditingController registerUserPassword=TextEditingController();
+  TextEditingController registerUserPhoneNumber=TextEditingController();
+  TextEditingController loginuserPassword=TextEditingController();
   TextEditingController Loginphnnumber=TextEditingController();
   TextEditingController otpverifycontroller = TextEditingController();
+
+  void clearRegControlls(){
+    registerUserName.clear();
+    registerUserPassword.clear();
+    registerUserPhoneNumber.clear();
+
+  }
+
+  void userRegistration(BuildContext context){
+    String userId = DateTime.now().millisecondsSinceEpoch.toString();
+    db.collection("USERS").doc(userId)
+        .set({
+      "PHONE_NUMBER":registerUserPhoneNumber.text.trim(),
+      "USER_NAME":registerUserName.text.trim(),
+      "PASSWORD":registerUserPassword.text.trim(),
+      "STATUS":"ACTIVE",
+      "TYPE":"USER",
+      "USER_ID":userId,
+        });
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(
+      content:
+      Text("Registration successful, Please login"),
+      duration: Duration(milliseconds: 3000),
+    ));
+
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Clogin(),
+        ));
+  }
+  String loginedUserName = "";
+  String loginedUserNumber = "";
+  void passwordverify(String username,String password,BuildContext context){
+
+    db.collection("USERS")
+        .where("PHONE_NUMBER",isEqualTo: username)
+        .where("PASSWORD",isEqualTo: password)
+        .get().then((value) {
+      if(value.docs.isNotEmpty){
+        Map<dynamic,dynamic>map=value.docs.first.data() as Map;
+
+
+        loginedUserName=map["USER_NAME"] ??"";
+        loginedUserNumber=map["PHONE_NUMBER"] ??"";
+        notifyListeners();
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+
+      }else{
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(
+          content:
+          Text("Sorry , No user found"),
+          duration: Duration(milliseconds: 3000),
+        ));
+
+      }
+    });
+  }
+
   void controlllerclear(){
     loginusername.clear();
     Loginphnnumber.clear();

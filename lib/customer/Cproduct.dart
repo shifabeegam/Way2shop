@@ -1,6 +1,8 @@
 import 'package:a/customer/Caccount.dart';
 import 'package:a/customer/Ccategory.dart';
 import 'package:a/customer/Cshops.dart';
+import 'package:a/customer/Ordersummery.dart';
+import 'package:a/customer/cartpage.dart';
 import 'package:a/widgets/GradButton.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -391,14 +393,22 @@ class Cproduct extends StatelessWidget {
               ),
               child: Icon(Icons.messenger_outline,),
             ),
-            Container(
-              height: 45,
-              width: 120,
-              decoration: BoxDecoration(border: Border.all(
-                  color: Colors.black26),
-                  borderRadius: BorderRadius.circular(10)
+            InkWell(
+              onTap: (){Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (
+                        context) => const cartpage()),
+              );},
+              child: Container(
+                height: 45,
+                width: 120,
+                decoration: BoxDecoration(border: Border.all(
+                    color: Colors.black26),
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: Center(child: Text("Add To Cart",style: TextStyle(fontSize: 18),)),
               ),
-              child: Center(child: Text("Add To Cart",style: TextStyle(fontSize: 18),)),
             ),
 
             Consumer<MainProvider>(
