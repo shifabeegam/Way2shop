@@ -2,6 +2,7 @@ import 'package:a/customer/Ordersummery.dart';
 import 'package:a/customer/Wishlist.dart';
 import 'package:a/customer/cartpage.dart';
 import 'package:a/customer/searched_products.dart';
+import 'package:a/customer/user_registration.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../Model/ItemModel.dart';
 import '../providers/MainProvider.dart';
+import '../providers/loginprovider.dart';
+import 'Clogin.dart';
 
 
 class Custhome extends StatelessWidget {
@@ -31,6 +34,7 @@ class Custhome extends StatelessWidget {
     int myInteger ;
     int scode;
 
+    LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
@@ -42,13 +46,26 @@ class Custhome extends StatelessWidget {
 
         ),
         actions: [
-          Container(
-            margin: EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white)
+          InkWell(
+            onTap: (){
+              if(loginProvider.loginedUserName.isEmpty){
+                loginProvider.clearRegControlls();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserRegistration(),
+                    ));
+              }
+
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: 10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white)
+              ),
+                child: Icon(Icons.person_outline,color: Colors.white)
             ),
-              child: Icon(Icons.person_outline,color: Colors.white)
           )
         ],
       ),

@@ -331,10 +331,10 @@ class Cproduct extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Align(alignment:Alignment.centerLeft ,child: Text("kidoNex",)),
+                                Align(alignment:Alignment.centerLeft ,child: Text(shopname,)),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15.0),
-                                  child: Align(alignment:Alignment.centerLeft ,child: Text("Phone: "+"123456789"),),
+                                  child: Align(alignment:Alignment.centerLeft ,child: Text("Phone: "+phone),),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15.0),
@@ -347,7 +347,7 @@ class Cproduct extends StatelessWidget {
                                     Icon(Icons.location_on_outlined,size: 36,color: Colors.black38,),
                                     Column(
                                       children: [
-                                        Text("SH 72, Down Hill, Malappuram, Kerala 676505",style: TextStyle(fontSize: 12),),
+                                        Text(shopdetails,style: TextStyle(fontSize: 12),),
                                         Align(alignment:Alignment.centerLeft ,
                                           child: Text("Show Map",style: TextStyle(fontSize: 12,color: Colors.black38)),),
 
@@ -453,7 +453,54 @@ class Cproduct extends StatelessWidget {
                                   );
 
                                 },
-                                  child: const Text("ok"),
+                                  child: InkWell(
+                                    onTap: (){
+                                      showDialog(context: context, builder: (context){
+                                        return Container(
+                                          child: AlertDialog(backgroundColor: Colors.white,
+                                            elevation: 0,
+
+                                            actions: [
+                                              Column(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(15),
+
+
+
+                                                  ),
+
+                                                  Text("Ordered Successfully"),
+                                                  Row(
+                                                    children: [
+                                                      MaterialButton(onPressed: (){ Navigator.pop(
+                                                        context,
+                                                        /* MaterialPageRoute(
+                                                          builder: (context) => const Additem()),*/
+                                                      );
+
+                                                      },
+                                                        child: const Text("cancel"),
+                                                        highlightColor: Color(0xff0C630A),
+                                                        splashColor: Colors.grey,
+                                                        color: Colors.red,
+                                                      ),
+
+
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+
+                                            ],
+
+                                          ),
+                                        );
+                                      });
+                                    },
+                                    child: const Text("ok",
+                                    ),
+                                  ),
                                   highlightColor: Color(0xff0C630A),
                                   splashColor: Colors.grey,
                                   color: Colors.green,
@@ -480,7 +527,6 @@ class Cproduct extends StatelessWidget {
                 child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
               ),
             ),
-
 
 
           ],

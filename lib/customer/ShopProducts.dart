@@ -183,6 +183,7 @@ class ShopProducts extends StatelessWidget {
                               child: Center(
                                 child: Column(
                                   children: [
+                                    SizedBox(height: 20,),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Image.network(
@@ -200,15 +201,7 @@ class ShopProducts extends StatelessWidget {
                                         height: 0,
                                       ),
                                     ),
-                                    Text(value.allAdditem[index].description,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                      ),
-                                    ),
+
                                   ],
                                 ),
                               ) ,
