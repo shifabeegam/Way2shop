@@ -425,7 +425,7 @@ class camera extends StatelessWidget {
                                   ItemController: value.requirements,
                                   width: 296,
                                   hight: 50,
-                                  hintText: "Assembly Required",validator: (value) {
+                                  hintText: "Addition Informations",validator: (value) {
                                 if (value!.isEmpty) {
 
                                   return "This Field is required";
@@ -434,16 +434,7 @@ class camera extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Costfield(
-                                  ItemController: value.productcare,
-                                  width: 296,
-                                  hight: 50,
-                                  hintText: "Product Care",validator: (value) {
-                                if (value!.isEmpty) {
 
-                                  return "This Field is required";
-                                } else {}
-                              },type: TextInputType.text,),
                               SizedBox(
                                 height: 10,
                               ),
@@ -473,7 +464,7 @@ class camera extends StatelessWidget {
                                       controller: mainProvider.instruction,
                                       maxLines: 10,
                                       decoration: InputDecoration(
-                                          hintText: "  Instructions",hintStyle: TextStyle(color: Colors.grey),),
+                                          hintText: "  About this item",hintStyle: TextStyle(color: Colors.grey),),
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 18),
                                     );

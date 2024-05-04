@@ -55,7 +55,7 @@ class Costfield extends StatelessWidget {
           keyboardType: type,
           inputFormatters: [
             type== TextInputType.number?FilteringTextInputFormatter.digitsOnly:FilteringTextInputFormatter.allow( RegExp(
-                r'^[a-zA-Z @.,1234567890$]+$')),
+                r'^[a-zA-Z @.,1234567890""$-_+=|?/]+$')),
             LengthLimitingTextInputFormatter(100)
 
             ],

@@ -201,8 +201,12 @@ class MainProvider extends ChangeNotifier {
            map["Brand"].toString(),
            map["Product Dimensions"].toString(),
            map["Assembly Required"].toString(),
-           map["Product Care"].toString(),
-           map["Instructions"].toString(), map["Place"].toString(),
+
+           map["Instructions"].toString(),
+              map["Shop_Name"].toString(),
+              map["Phone No"].toString(),
+              map["Shop_Details"].toString(),
+              map["Place"].toString(),
 
             ));
             notifyListeners();
@@ -240,8 +244,11 @@ class MainProvider extends ChangeNotifier {
            map["Brand"].toString(),
            map["Product Dimensions"].toString(),
            map["Assembly Required"].toString(),
-           map["Product Care"].toString(),
+
            map["Instructions"].toString(),
+              map["Shop_Name"].toString(),
+              map["Phone No"].toString(),
+              map["Shop_Details"].toString(),
               map["Place"].toString(),
             ));
             notifyListeners();
@@ -310,8 +317,12 @@ class MainProvider extends ChangeNotifier {
             map["Brand"].toString(),
             map["Product Dimensions"].toString(),
             map["Assembly Required"].toString(),
-            map["Product Care"].toString(),
+
             map["Instructions"].toString(),
+            map["Shop_Name"].toString(),
+            map["Phone No"].toString(),
+            map["Shop_Details"].toString(),
+
            map["Place"].toString(),
           ));
           notifyListeners();
@@ -347,8 +358,11 @@ class MainProvider extends ChangeNotifier {
             map["Brand"].toString(),
             map["Product Dimensions"].toString(),
             map["Assembly Required"].toString(),
-            map["Product Care"].toString(),
+
             map["Instructions"].toString(),
+            map["Shop_Name"].toString(),
+            map["Phone No"].toString(),
+            map["Shop_Details"].toString(),
             map["Place"].toString(),
           ));
           notifyListeners();
@@ -678,7 +692,7 @@ void clearitem(){
   brand.clear();
   diamention.clear();
   requirements.clear();
-  productcare.clear();
+
   instruction.clear();
   notifyListeners();
   print(imageFileList!.length.toString()+"tuutiuut");
@@ -1001,8 +1015,10 @@ void clearitem(){
               prdctmap["Brand"].toString(),
               prdctmap["Product Dimensions"].toString(),
               prdctmap["Assembly Required"].toString(),
-              prdctmap["Product Care"].toString(),
               prdctmap["Instructions"].toString(),
+            prdctmap["Shop_Name"].toString(),
+            prdctmap["Phone No"].toString(),
+            prdctmap["Shop_Details"].toString(),
             prdctmap["Place"].toString(),
           ));
           filterProductmodeldata = Productmodeldata;
@@ -1046,6 +1062,7 @@ void clearitem(){
     notifyListeners();
     latitude=  position.latitude;
     longitude= position.longitude;
+    notifyListeners();
     print( position.latitude);
     print( position.longitude);
     // point = Point(y:11.055513,x:76.0815936);

@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 
 import 'Ctrending.dart';
@@ -26,11 +27,16 @@ class Cproduct extends StatelessWidget {
   String brand;
   String productdiemension;
   String assmbly;
-  String productcare;
+  String shopname;
+  String phone;
+  String shopdetails;
+  String place;
+
+
   String instruction;
    Cproduct({super.key,required this.itemid,required this.photo,required this.itemname,required this.price,
-     required this.category,required this.categoryid,required this.description,required this.itemquartity,required this.offers,required this.color,required this.brand,required this.productdiemension,required this.assmbly,required this.productcare,
-     required this.instruction,
+     required this.category,required this.categoryid,required this.description,required this.itemquartity,required this.offers,required this.color,required this.brand,required this.productdiemension,required this.assmbly,
+     required this.instruction,required this.shopname,required this.phone,required this.shopdetails,required this.place
    });
 
   @override
@@ -103,17 +109,37 @@ class Cproduct extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  Container(
-                    child: Image.network(photo),
+                   Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                          child: CarouselSlider(
+                            options: CarouselOptions(height: 400.0),
+                            items: [Image.network(photo),].map((i) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                      decoration: BoxDecoration(
+                                          color: Colors.amber
+                                      ),
+                                      child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          )
+                      ),
+                    ],
                   ),
-                  
+
+
                   // Padding(
                   //   padding: const EdgeInsets.only(top: 8.0),
                   //   child: CarouselSlider(
                   //     items: [
-                  //       imgSlide(Pruduct_image: AssetImage("assets/img_1.png"),img_number: "2/5",),
-                  //       imgSlide(Pruduct_image: AssetImage("assets/kurta1.png"),img_number: "3/5",),
-                  //       imgSlide(Pruduct_image: AssetImage("assets/toys.png"),img_number: "4/5",)
+                  //        Image.network(photo),
                   //
                   //     ],
                   //     options: CarouselOptions(
@@ -133,7 +159,7 @@ class Cproduct extends StatelessWidget {
                           Container(
                               width: double.infinity,
                               child: Text("",style: TextStyle(fontSize: 24,color: Colors.black54),)),
-                          Text(description
+                          Text(itemname
                               // "House of Quirk Electric Baby Rocker,Bassinet on Bed , "
                               // "Height Adjustable Cot Bed with Comfortable Mattress,"
                               // "Portable Baby Nursey with 82 cm Sleeping Basket and 5 Swing Speeds(Grey)"
@@ -236,9 +262,9 @@ class Cproduct extends StatelessWidget {
                       Container(
                         width: double.infinity,
                           color: Colors.white
-                          ,child: Text("Product Details",style: TextStyle(fontSize:25),)),
+                          ,child: Text("   Product Details",style: TextStyle(fontSize:25),)),
                       Container(
-                        height: 130,
+                        //height: 130,
                         width: double.infinity,
                         color: Colors.white,
                         child: Padding(
@@ -246,16 +272,28 @@ class Cproduct extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("dataColour           "+color),
-                              Text("Brand                "+brand),
-                              Text("Product Dimensions   "+productdiemension),
-                              Text("Assembly Required    "+assmbly),
-                              Text("Product Care         "+productcare),
+                              Text("Item Name           "+itemname),
+                              SizedBox(height: 4,),
+                              // Text("Item Quandity          "+itemquartity),
+                              // SizedBox(height: 4,),
+                              Text("Colour  :  "+color),
+                              SizedBox(height: 4,),
+                              Text("Brand : "+brand),
+                              SizedBox(height: 4,),
+                              Text("Product Dimensions   : "+productdiemension),
+                              SizedBox(height: 4,),
+                             // Text("Description     "+description),
+                              //Text("Product Care         "+productcare),
 
                             ],
                           ),
                         ),
                       ),
+                      Divider(),
+                      Container(
+                          width: double.infinity,
+                          color: Colors.white
+                          ,child: Text("  About this item",style: TextStyle(fontSize:25),)),
                       Container(
                         width: double.infinity,
                         color: Colors.white,
@@ -269,8 +307,26 @@ class Cproduct extends StatelessWidget {
                           ],),
                         ),
                       ),
-                     
+
                     ],),
+                  ),
+                  Divider(),
+                  Container(
+                      width: double.infinity,
+                      color: Colors.white
+                      ,child: Text("Additional Informations",style: TextStyle(fontSize:25),)),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(children: [
+                        Text(assmbly),
+                        // Text("\u2022  "+"Space-saving and portable: this baby swing has a very strong folding function and saves space."),
+                        // Text("\u2022  "+"ADJUSTABLE HEIGHT: Simply change the height of the baby bed according to your needs."),
+                        // Text("\u2022  "+"Music: Can Be Connected to the Mobile Phone to Play the Baby‘s Favorite Music"),
+                      ],),
+                    ),
                   ),
                   Divider(),
                   Container(
