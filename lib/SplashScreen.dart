@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
-    // MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
+    MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
 
 
     // mainProvider.lockApp();
@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(const Duration(seconds: 5), () {
        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-
+       mainProvider.getPlace();
       // if (loginUser == null) {
       //   callNextReplacement(context, Custhome());
       // }

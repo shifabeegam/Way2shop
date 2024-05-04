@@ -41,6 +41,16 @@ class Custhome extends StatelessWidget {
 
 
         ),
+        actions: [
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white)
+            ),
+              child: Icon(Icons.person_outline,color: Colors.white)
+          )
+        ],
       ),
       body:
                 Column(

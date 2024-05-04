@@ -85,7 +85,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               provider.getshop();
               break;
             case 3:
-              provider.getPlace();
+              // provider.getPlace();
             // Call a function for index 3
             // Function4();
               break;
