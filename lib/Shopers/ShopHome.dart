@@ -7,9 +7,10 @@ import 'package:a/widgets/Lists.dart';
 import 'package:provider/provider.dart';
 
 class ShopHome extends StatelessWidget {
+  String shopid;
   String shopName;
   String placeName;
-   ShopHome({super.key,required this.shopName,required this.placeName,});
+   ShopHome({super.key,required this.shopid,required this.shopName,required this.placeName,});
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -73,7 +74,7 @@ class ShopHome extends StatelessWidget {
                       builder: (context,value,child) {
                         return InkWell(
                           onTap: () {
-                            value.getallItems();
+                            value.getItemshop(shopid);
 
                             print('clicled');
 
@@ -82,7 +83,7 @@ class ShopHome extends StatelessWidget {
                             Navigator.push(
                               context,
                                MaterialPageRoute(
-                                builder: (context) =>  Stockdt(shopName: shopName, shopPlace: placeName,)),
+                                builder: (context) =>  Stockdt(shopid:shopid,shopName: shopName, shopPlace: placeName,)),
                              );
                           },
                           child: HomeButton(

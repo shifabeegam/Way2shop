@@ -167,9 +167,14 @@ class Cshops extends StatelessWidget {
 
                             // MapUtils.launchMaps(-3.823216,-38.481700);
 
-                            MapUtils.launchMaps(value.filtershoplist[index].latitude,value.filtershoplist[index].longitude,value.latitude,value.longitude);
-                           // value.getshopitem(value.filtershoplist[index].id);
-                           // Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
+                            ///getroutrmap
+                            // MapUtils.launchMaps(value.filtershoplist[index].latitude,value.filtershoplist[index].longitude,value.latitude,value.longitude);
+
+
+
+
+                           value.getshopitem(value.filtershoplist[index].id);
+                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,) ,));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10,left: 2),

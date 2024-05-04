@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 
@@ -70,7 +71,7 @@ class MainProvider extends ChangeNotifier {
   File? itemfileimage=null;
   String itemimg="";
 
-  Future<void> upload(String shopName,String shopPlace) async {
+  Future<void> upload(String shopid,String shopName,String shopPlace) async {
     String id = DateTime
         .now()
         .millisecondsSinceEpoch
@@ -93,7 +94,7 @@ class MainProvider extends ChangeNotifier {
     itemmap["Product Care"] = productcare.text;
     itemmap["Instructions"] =instruction.text;
     itemmap["Category_id"] =productSelectedCategoryID;
-    itemmap["Shop_id"] =SelectedShopID;
+    itemmap["Shop_id"] =shopid;
     if (imageFileList.isNotEmpty) {
       String photoId = DateTime.now().millisecondsSinceEpoch.toString();
       ref = FirebaseStorage.instance.ref().child(photoId);
@@ -180,6 +181,46 @@ class MainProvider extends ChangeNotifier {
   // View the Items
    void getItem(String catid){
     db.collection("ITEMS").where("Category_id",isEqualTo: catid).get().then((value)
+      {
+        allAdditem.clear();
+       // totalAmount = 0.0;
+        print("object.................");
+        if(value.docs.isNotEmpty){
+          for(var element in value.docs) {
+            Map<dynamic, dynamic> map = element.data() as Map;
+            allAdditem.add(ItemModel(
+           map["Item Id"].toString(),
+           map["PHOTO"].toString(),
+           map["Item Name"].toString(),
+           map["Price"].toString(),
+           map["Category"].toString(),
+           map["Category_id"].toString(),
+           map["description"].toString(),
+           map["Item Quantity"].toString(),
+           map["Offers"].toString(),
+           map["color"].toString(),
+           map["Brand"].toString(),
+           map["Product Dimensions"].toString(),
+           map["Assembly Required"].toString(),
+
+           map["Instructions"].toString(),
+              map["Shop_Name"].toString(),
+              map["Phone No"].toString(),
+              map["Shop_Details"].toString(),
+              map["Place"].toString(),
+
+            ));
+            notifyListeners();
+
+          }
+          notifyListeners();
+
+        }
+      });
+  }
+
+  void getItemshop(String shopid,){
+    db.collection("ITEMS").where("Shop_id",isEqualTo: shopid).get().then((value)
       {
         allAdditem.clear();
        // totalAmount = 0.0;
@@ -727,12 +768,13 @@ void clearitem(){
         .where("Password" ,isEqualTo: psword).get().then((value) {
       if (value.docs.isNotEmpty){
         Map<dynamic,dynamic> shopMap = value.docs.first.data();
+        String shopid = shopMap['Shop_ID'].toString();
         String shopName = shopMap["Shop_Name"];
         String shopPlace = shopMap["Place"];
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => ShopHome(shopName: shopName, placeName: shopPlace,),
+              builder: (context) => ShopHome(shopid:shopid ,shopName: shopName, placeName: shopPlace,),
             ));
         //
       }else{
@@ -743,6 +785,23 @@ void clearitem(){
 
   }
 
+  double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+    const double earthRadius = 6371; // in kilometers
+
+    // Convert degrees to radians
+    double dLat = (lat2 - lat1) * (pi / 180);
+    double dLon = (lon2 - lon1) * (pi / 180);
+
+    // Calculate distances using Haversine formula
+    double a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(lat1 * (pi / 180)) * cos(lat2 * (pi / 180)) *
+            sin(dLon / 2) * sin(dLon / 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    double distance = earthRadius * c;
+
+    return distance; // in kilometers
+  }
+
 
   List<ShopModel> shoplist=[];
   void getshop(){
@@ -751,6 +810,12 @@ void clearitem(){
         shoplist.clear();
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
+
+          double shopLat = map["LAT"] ?? 0.0;
+          double shopLong = map["LONG"] ?? 0.0;
+          double distance = calculateDistance(
+              latitude, longitude, shopLat, shopLong);
+
           shoplist.add(ShopModel(
               map["Licence Id"].toString(),
               map["Shop_Name"].toString(),
@@ -762,13 +827,18 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
               map["Shop_ID"].toString(),
-              map["LAT"]??0.0,
-              map["LONG"]??0.0,
+            shopLat,
+            shopLong,
+              distance
           ));
-          filtershoplist=shoplist;
+          // filtershoplist=shoplist;
 
 
               }
+
+
+
+        shoplist.sort((a, b) => a.distance.compareTo(b.distance));
         filtershoplist=shoplist;
           notifyListeners();
 
@@ -783,6 +853,12 @@ void clearitem(){
         shoplist.clear();
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
+
+          double shopLat = map["LAT"] ?? 0.0;
+          double shopLong = map["LONG"] ?? 0.0;
+          double distance = calculateDistance(
+              latitude, longitude, shopLat, shopLong);
+
           shoplist.add(ShopModel(
               map["Licence Id"].toString(),
               map["Shop_Name"].toString(),
@@ -794,12 +870,15 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
               map["Shop_ID"].toString(),
-            map["LAT"]??0.0,
-            map["LONG"]??0.0,
+              shopLat,
+              shopLong,
+              distance
           ));
 
 
               }
+
+        shoplist.sort((a, b) => a.distance.compareTo(b.distance));
         filtershoplist=shoplist;
           notifyListeners();
 
@@ -814,6 +893,11 @@ void clearitem(){
         shoplist.clear();
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
+          double shopLat = map["LAT"] ?? 0.0;
+          double shopLong = map["LONG"] ?? 0.0;
+          double distance = calculateDistance(
+              latitude, longitude, shopLat, shopLong);
+
           shoplist.add(ShopModel(
               map["Licence Id"].toString(),
               map["Shop_Name"].toString(),
@@ -825,12 +909,15 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
             map["Shop_ID"].toString(),
-            map["LAT"]??0.0,
-            map["LONG"]??0.0,
+              shopLat,
+              shopLong,
+              distance
           ));
 
 
               }
+
+        shoplist.sort((a, b) => a.distance.compareTo(b.distance));
         filtershoplist=shoplist;
           notifyListeners();
 
