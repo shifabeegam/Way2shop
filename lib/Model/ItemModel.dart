@@ -13,12 +13,18 @@ class ItemModel {
   String brand;
   String productdiemension;
   String assmbly;
-  String productcare;
+
   String instruction;
   String place;
+  String shopname;
+
+  String phone;
+  String shopdetails;
+
+
 
   ItemModel(this.itemid,this.photo,this.itemname,this.price,this.category,this.categoryid,this.description,this.itemquartity,this.offers
-      ,this.color,this.brand,this.productdiemension,this.assmbly,this.productcare,this.instruction,this.place);
+      ,this.color,this.brand,this.productdiemension,this.assmbly,this.instruction,this.place,this.shopname,this.phone,this.shopdetails);
 
 }
 class Placemodel{
