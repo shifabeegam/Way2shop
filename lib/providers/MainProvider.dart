@@ -822,6 +822,7 @@ void clearitem(){
 
 
   List<Placemodel> placelist=[];
+  List<shopOrderModel> shopOrderModelList=[];
 
   void ShopLogin(String licenceid,String psword,BuildContext context){
     db.collection("SHOPS").where("Licence Id" ,isEqualTo: licenceid)
@@ -831,11 +832,47 @@ void clearitem(){
         String shopid = shopMap['Shop_ID'].toString();
         String shopName = shopMap["Shop_Name"];
         String shopPlace = shopMap["Place"];
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ShopHome(shopid:shopid ,shopName: shopName, placeName: shopPlace,),
-            ));
+
+        print(shopid.toString()+"avnada");
+        
+        
+        db.collection("Orders").where("shopID",isEqualTo:shopid ).get().then((value) {
+
+          if(value.docs.isNotEmpty){
+            print("sabvdnvds111");
+
+
+            for (var element in value.docs) {
+
+              print("sabvdnvds222");
+
+
+              shopOrderModelList.add(shopOrderModel(element.get("CustomerName"),element.get("userID"),element.get("Phone"),element.get("Item Name"),element.get("Price"),element.get("itemId")));
+
+              print(shopOrderModelList.length.toString()+"zsbhsjhs");
+
+              notifyListeners();
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShopHome(shopid:shopid ,shopName: shopName, placeName: shopPlace,),
+                  ));
+
+
+
+
+
+            }
+
+
+
+          }
+
+
+
+        });
+        
+
         //
       }else{
 
@@ -1252,6 +1289,26 @@ void clearitem(){
     return true;
     }
 
+void addConfirmOrder(String itemName,String itemPrice,String itemId,String userId,String shopid,String name,String phone){
 
+  String orderId = DateTime.now().millisecondsSinceEpoch.toString();
+
+  HashMap<String, Object> orderMap = HashMap();
+
+  orderMap["Item Name"] = itemName;
+  orderMap["Price"] = itemPrice;
+  orderMap["itemId"] =itemId;
+  orderMap["orderId"] =orderId;
+  orderMap["userID"] =userId;
+  orderMap["shopID"] =shopid;
+  orderMap["CustomerName"] =name;
+  orderMap["Phone"] =phone;
+  
+
+    db.collection("Orders").doc(orderId).set(orderMap);
+
+
+
+}
 }
 

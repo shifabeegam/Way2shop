@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:a/Shopers/Stockdt.dart';
 import 'package:a/widgets/HomeButton.dart';
 import 'package:a/widgets/Lists.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
+
+import '../Admin/ViewRequest.dart';
 
 class ShopHome extends StatelessWidget {
   String shopid;
@@ -210,51 +213,95 @@ class ShopHome extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
           ),
-          ListView(
-            shrinkWrap: true,
-            children: [
-              Lists(
-                width: double.infinity,
-                hight: 66,
-                custNm: 'anees',
-                custPh: '8923541289',
-                itemName: 'Red bag ',
-                itemPrice: '680',
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Lists(
-                width: double.infinity,
-                hight: 66,
-                custNm: 'anees',
-                custPh: '8923541289',
-                itemName: 'Red bag ',
-                itemPrice: '680',
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Lists(
-                width: double.infinity,
-                hight: 66,
-                custNm: 'anees',
-                custPh: '8923541289',
-                itemName: 'Red bag ',
-                itemPrice: '680',
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Lists(
-                width: double.infinity,
-                hight: 66,
-                custNm: 'anees',
-                custPh: '8923541289',
-                itemName: 'Red bag ',
-                itemPrice: '680',
-              ),
-            ],
+          // ListView(
+          //   shrinkWrap: true,
+          //   children: [
+          //     Lists(
+          //       width: double.infinity,
+          //       hight: 66,
+          //       custNm: 'anees',
+          //       custPh: '8923541289',
+          //       itemName: 'Red bag ',
+          //       itemPrice: '680',
+          //     ),
+          //     SizedBox(
+          //       height: 1,
+          //     ),
+          //     Lists(
+          //       width: double.infinity,
+          //       hight: 66,
+          //       custNm: 'anees',
+          //       custPh: '8923541289',
+          //       itemName: 'Red bag ',
+          //       itemPrice: '680',
+          //     ),
+          //     SizedBox(
+          //       height: 1,
+          //     ),
+          //     Lists(
+          //       width: double.infinity,
+          //       hight: 66,
+          //       custNm: 'anees',
+          //       custPh: '8923541289',
+          //       itemName: 'Red bag ',
+          //       itemPrice: '680',
+          //     ),
+          //     SizedBox(
+          //       height: 1,
+          //     ),
+          //     Lists(
+          //       width: double.infinity,
+          //       hight: 66,
+          //       custNm: 'anees',
+          //       custPh: '8923541289',
+          //       itemName: 'Red bag ',
+          //       itemPrice: '680',
+          //     ),
+          //   ],
+          // ),
+          Consumer<MainProvider>(
+              builder: (context,value,child) {
+                return Container(
+
+                  height: 200,
+                  child: ListView.builder(
+                      itemCount:value.shopOrderModelList.length ,
+                      itemBuilder: (context, index) {
+                        var items = value.shopOrderModelList[index];
+
+                        print(value.shopOrderModelList.length.toString()+"jhbhv");
+
+                        return
+                          Row(
+
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+
+
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Text(items.customerName,style: TextStyle(fontSize: 16,color: Colors.red),),
+                                    SizedBox(height: 7,),
+                                    Text(items.productPrice,style: TextStyle(fontSize: 16,color: Colors.red),),
+                                  ],
+                                ),
+                              ),
+
+
+                            ],
+
+                          );
+                      }
+                    // SizedBox(height: 0.5,);
+
+
+
+
+                  ),
+                );
+              }
           ),
           /*Stack(children: [
       SizedBox(height: 1,),

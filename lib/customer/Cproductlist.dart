@@ -6,9 +6,9 @@ import '../providers/MainProvider.dart';
 import 'Cproduct.dart';
 
 class Productlist extends StatelessWidget {
-  String categoryid,categoryname;
+  String categoryid,categoryname,userID,shopId;
 
-   Productlist({super.key,required this.categoryid,required this.categoryname});
+   Productlist({super.key,required this.categoryid,required this.categoryname,required this.userID,required this.shopId});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,7 @@ class Productlist extends StatelessWidget {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Cproduct(itemid: item.itemid,
                                 photo: item.photo,itemname: item.itemname,price: item.price,category: item.category,categoryid: item.categoryid,
                                 description: item.description,itemquartity: item.itemquartity,offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
-                             assmbly: item.assmbly,instruction: item.instruction,shopname: item.shopname,phone: item.shopname,shopdetails: item.shopdetails,place: item.place,
+                             assmbly: item.assmbly,instruction: item.instruction,shopname: item.shopname,phone: item.shopname,shopdetails: item.shopdetails,place: item.place, userId: '234', shopid: '',
                             ),));
                           },
                           child: Padding(

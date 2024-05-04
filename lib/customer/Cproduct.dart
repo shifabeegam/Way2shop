@@ -34,12 +34,14 @@ class Cproduct extends StatelessWidget {
   String phone;
   String shopdetails;
   String place;
+  String userId;
+  String shopid;
 
 
   String instruction;
    Cproduct({super.key,required this.itemid,required this.photo,required this.itemname,required this.price,
      required this.category,required this.categoryid,required this.description,required this.itemquartity,required this.offers,required this.color,required this.brand,required this.productdiemension,required this.assmbly,
-     required this.instruction,required this.shopname,required this.phone,required this.shopdetails,required this.place
+     required this.instruction,required this.shopname,required this.phone,required this.shopdetails,required this.place,required this.userId,required this.shopid
    });
 
   @override
@@ -399,74 +401,80 @@ class Cproduct extends StatelessWidget {
               child: Center(child: Text("Add To Cart",style: TextStyle(fontSize: 18),)),
             ),
 
-            InkWell(
-              onTap: (){
-                showDialog(context: context, builder: (context){
-                  return Container(
-                    child: AlertDialog(backgroundColor: Colors.white,
-                      elevation: 0,
+            Consumer<MainProvider>(
+              builder: (context,provider,_) {
+                return InkWell(
+                  onTap: (){
+                    showDialog(context: context, builder: (context){
+                      return Container(
+                        child: AlertDialog(backgroundColor: Colors.white,
+                          elevation: 0,
 
-                      actions: [
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-
-
-
-                            ),
-
-                            Text("Do you want to Confirm your order ? "),
-                            Row(
+                          actions: [
+                            Column(
                               children: [
-                                MaterialButton(onPressed: (){ Navigator.pop(
-                                  context,
-                                  /* MaterialPageRoute(
-                                                          builder: (context) => const Additem()),*/
-                                );
+                                Padding(
+                                  padding: const EdgeInsets.all(15),
 
-                                },
-                                  child: const Text("cancel"),
-                                  highlightColor: Color(0xff0C630A),
-                                  splashColor: Colors.grey,
-                                  color: Colors.red,
+
+
                                 ),
 
-                                SizedBox(width: 10,),
+                                Text("Do you want to Confirm your order ? "),
+                                Row(
+                                  children: [
+                                    MaterialButton(onPressed: (){ Navigator.pop(
+                                      context,
+                                      /* MaterialPageRoute(
+                                                              builder: (context) => const Additem()),*/
+                                    );
 
-                                MaterialButton(onPressed: (){ Navigator.pop(
-                                  context,
-                                  /* MaterialPageRoute(
-                                                          builder: (context) => const Additem()),*/
-                                );
+                                    },
+                                      child: const Text("cancel"),
+                                      highlightColor: Color(0xff0C630A),
+                                      splashColor: Colors.grey,
+                                      color: Colors.red,
+                                    ),
 
-                                },
-                                  child: const Text("ok"),
-                                  highlightColor: Color(0xff0C630A),
-                                  splashColor: Colors.grey,
-                                  color: Colors.green,
+                                    SizedBox(width: 10,),
+
+                                    MaterialButton(
+                                      onPressed: (){
+
+                                        provider.addConfirmOrder(itemname, price, itemid,"1234",shopid,"fareed","9539039327");
+
+
+
+
+                                    },
+                                      child: const Text("ok"),
+                                      highlightColor: Color(0xff0C630A),
+                                      splashColor: Colors.grey,
+                                      color: Colors.green,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
+
                           ],
+
                         ),
-
-                      ],
-
+                      );
+                    });
+                  },
+                  child: Container(
+                    height: 45,
+                    width: 140,
+                    decoration: BoxDecoration(border: Border.all(
+                        color: Colors.black26),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.yellow[600]
                     ),
-                  );
-                });
-              },
-              child: Container(
-                height: 45,
-                width: 140,
-                decoration: BoxDecoration(border: Border.all(
-                    color: Colors.black26),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.yellow[600]
-                ),
-                child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
-              ),
+                    child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
+                  ),
+                );
+              }
             ),
 
 

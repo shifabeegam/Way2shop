@@ -155,7 +155,7 @@ class Ccategory extends StatelessWidget {
                       return  InkWell(
                         onTap: (){
                           value.getItem(value.filtercategorylist[index].id);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.filtercategorylist[index].id ,categoryname: value.filtercategorylist[index].name,) ,));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Productlist(categoryid:value.filtercategorylist[index].id ,categoryname: value.filtercategorylist[index].name, userID: '', shopId: '',) ,));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10,left: 2),
