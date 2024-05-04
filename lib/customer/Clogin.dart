@@ -41,20 +41,12 @@ class Clogin extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "What is your phone number ?",
+                            "LOGIN",
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(color: Color(0xff650015), fontSize: 20),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25, bottom: 40),
-                            child: Text(
-                              "Please confirm your country code and enter your Mobile Number",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color(0xff650015), fontSize: 14),
-                            ),
-                          ),
+
                           Consumer<LoginProvider>(
                               builder: (context, value, child) {
                             return Container(
@@ -67,11 +59,11 @@ class Clogin extends StatelessWidget {
                                 child: TextFormField(
                                   controller: value.loginusername,
                                   style: TextStyle(color: Colors.black),
-                                  keyboardType: TextInputType.name,
+                                  keyboardType: TextInputType.phone,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
                                       border: InputBorder.none,
-                                      hintText: "   User name",
+                                      hintText: "   Phone number",
                                       hintStyle: TextStyle(
                                           fontSize: 14, color: Colors.grey)),
                                   validator: (value) {
@@ -107,10 +99,10 @@ class Clogin extends StatelessWidget {
                                           controller: value.loginuserPassword,
                                           style: TextStyle(color: Colors.black),
                                           // controller:value.phoneotp ,
-                                          keyboardType: TextInputType.phone,
+                                          keyboardType: TextInputType.text,
                                           decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: "Enter your Password",
+                                              hintText: "   Enter your Password",
                                               hintStyle: TextStyle(
                                                   fontSize: 14, color: Colors.grey)),
                                           validator: (value) {
@@ -140,16 +132,10 @@ class Clogin extends StatelessWidget {
                                     builder: (context, value, child) {
                                       return MaterialButton(
                                         onPressed: () async {
-                                          /*  await FirebaseAuth.instance.verifyPhoneNumber(
-                                            phoneNumber:value.phonecont.text+value.phoneotp.text,
-                                            verificationCompleted: (PhoneAuthCredential credential) {},
-                                            verificationFailed: (FirebaseAuthException e) {},
-                                            codeSent: (String verificationId, int? resendToken) {
-                                              Login.verify=verificationId;*/
                                           final FormState? form = formKey.currentState;
                                           if(form!.validate()) {
 
-                                          value.passwordverify(value.loginusername.text,value.loginuserPassword.text,context);
+                                          value.passwordverify(value.loginusername.text.trim(),value.loginuserPassword.text.trim(),context);
                                           // value.controlllerclear();
 
 

@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   //  mainProvider.getCarouselimg();
 
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 1), () {
        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
        mainProvider.getPlace();
       // if (loginUser == null) {
