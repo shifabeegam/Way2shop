@@ -259,53 +259,105 @@ class MainProvider extends ChangeNotifier {
       });
   }
 
-   void getSearchProducts(String productName,String location){
-    db.collection("ITEMS")
+   Future<void> getSearchProducts(String productName,BuildContext context) async {
+    print("hhereeeeeee");
+     searchAllitem.clear();
+     String? selectedSearchPlace = "";
+     if(selectedValue!=null){
+       selectedSearchPlace=selectedValue?.placename;
+       notifyListeners();
+     }
+    var selectedItems = await db.collection("ITEMS")
         .where("Item Name",isEqualTo: productName,)
-        .where("Place",isEqualTo: location,)
-        .get().then((value)
-      {
-        searchAllitem.clear();
-       // totalAmount = 0.0;
-        print("object.................");
-        if(value.docs.isNotEmpty){
-          for(var element in value.docs) {
-            Map<dynamic, dynamic> map = element.data() as Map;
-            searchAllitem.add(ItemModel(
-           map["Item Id"].toString(),
-           map["PHOTO"].toString(),
-           map["Item Name"].toString(),
-           map["Price"].toString(),
-           map["Category"].toString(),
-           map["Category_id"].toString(),
-           map["description"].toString(),
-           map["Item Quantity"].toString(),
-           map["Offers"].toString(),
-           map["color"].toString(),
-           map["Brand"].toString(),
-           map["Product Dimensions"].toString(),
-           map["Assembly Required"].toString(),
+        .where("Place",isEqualTo: selectedSearchPlace)
+        .get();
 
-           map["Instructions"].toString(),
-              map["Shop_Name"].toString(),
-              map["Phone No"].toString(),
-              map["Shop_Details"].toString(),
-              map["Place"].toString(),
-            ));
-            notifyListeners();
+       if(selectedItems.docs.isNotEmpty){
+         print("location not emptyyy");
 
-          }
-          notifyListeners();
+         for(var element in selectedItems.docs) {
+           Map<dynamic, dynamic> map = element.data() as Map;
+           searchAllitem.add(ItemModel(
+             map["Item Id"].toString(),
+             map["PHOTO"].toString(),
+             map["Item Name"].toString(),
+             map["Price"].toString(),
+             map["Category"].toString(),
+             map["Category_id"].toString(),
+             map["description"].toString(),
+             map["Item Quantity"].toString(),
+             map["Offers"].toString(),
+             map["color"].toString(),
+             map["Brand"].toString(),
+             map["Product Dimensions"].toString(),
+             map["Assembly Required"].toString(),
+             map["Instructions"].toString(),
+             map["Shop_Name"].toString(),
+             map["Phone No"].toString(),
+             map["Shop_Details"].toString(),
+             map["Place"].toString(),
+           ));
 
-        }
-      });
+         }
+         notifyListeners();
+       }else{
+         print("location isss emptyyy");
+         var selectedItems2 = await db.collection("ITEMS")
+             .where("Item Name",isEqualTo: productName,)
+             .get();
+         if(selectedItems2.docs.isNotEmpty){
+           print("$productName available on other location");
+           for(var element in selectedItems2.docs) {
+             Map<dynamic, dynamic> map = element.data() as Map;
+             searchAllitem.add(ItemModel(
+               map["Item Id"].toString(),
+               map["PHOTO"].toString(),
+               map["Item Name"].toString(),
+               map["Price"].toString(),
+               map["Category"].toString(),
+               map["Category_id"].toString(),
+               map["description"].toString(),
+               map["Item Quantity"].toString(),
+               map["Offers"].toString(),
+               map["color"].toString(),
+               map["Brand"].toString(),
+               map["Product Dimensions"].toString(),
+               map["Assembly Required"].toString(),
+               map["Instructions"].toString(),
+               map["Shop_Name"].toString(),
+               map["Phone No"].toString(),
+               map["Shop_Details"].toString(),
+               map["Place"].toString(),
+             ));
+           }
+           notifyListeners();
+           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+             backgroundColor: Colors.red,
+             content: Center(
+               child: Text(selectedValue!=null?"Searched item not found on selected location!":"Searched item not found!",
+                 style: TextStyle(fontWeight: FontWeight.w700),
+               ),
+             ),
+           ));
+         }else{
+           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+             backgroundColor: Colors.red,
+             content: Center(
+               child: Text("Searched item not found!",
+                 style: TextStyle(fontWeight: FontWeight.w700),
+               ),
+             ),
+           ));
+         }
+
+
+
+
+
+       }
+
   }
 
-  // void searchlocation(){
-  //   db.collection("")
-  //
-  //
-  // }
 
   var q;
   var Uid;
@@ -735,7 +787,7 @@ void clearitem(){
   requirements.clear();
 
   instruction.clear();
-  notifyListeners();
+    notifyListeners();
   print(imageFileList!.length.toString()+"tuutiuut");
 }
 
@@ -928,6 +980,14 @@ void clearitem(){
   }
 
 
+  final List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+  ];
+  Placemodel? selectedValue;
+  Placemodel? selectedValueList;
 
 
 

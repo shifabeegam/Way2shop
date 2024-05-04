@@ -34,6 +34,7 @@ import 'customer/Custhome.dart';
 import 'customer/search.dart';
 import 'Shopers/Shopkeeperlogin.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -65,9 +66,9 @@ class MyApp extends StatelessWidget {
         ),
 
 
-        // home: AddPlace(),
+        home:BottomNavBar(),
           //home: ShopHome(),
-        home:SplashScreen(),
+       // home:SplashScreen(),
         //home: Caccount(),
      // home: Stockdt(shopName: '', shopPlace: '',),
       //home: camera(shopName: '',shopPlace: ''),

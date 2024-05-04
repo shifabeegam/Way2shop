@@ -1,6 +1,7 @@
 import 'package:a/customer/Ordersummery.dart';
 import 'package:a/customer/Wishlist.dart';
 import 'package:a/customer/cartpage.dart';
+import 'package:a/customer/searched_products.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,18 @@ import 'package:a/customer/Cshops.dart';
 import 'package:a/customer/Ctrending.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../Model/ItemModel.dart';
 import '../providers/MainProvider.dart';
 
 
 class Custhome extends StatelessWidget {
-  const Custhome({super.key});
+  Custhome({super.key});
 
   //get mainProvider => null;
+
+
 
 
   @override
@@ -45,7 +50,7 @@ class Custhome extends StatelessWidget {
                       flex: 5,
 
                       child: Consumer<MainProvider>(
-                         builder: (context,value,child) {
+                         builder: (context5,value,child) {
                            return  SingleChildScrollView(
                              child: Column(
                                children: [
@@ -63,7 +68,12 @@ class Custhome extends StatelessWidget {
                                            child:  TextField(
 
                                              onSubmitted: (text){
-                                          //  value.getSearchProducts(text, );
+                                           value.getSearchProducts(text,context );
+                                           Navigator.pushReplacement(
+                                               context,
+                                               MaterialPageRoute(
+                                                 builder: (context) => SearchedProducts(),
+                                               ));
                                            },
                                              decoration: InputDecoration(
                                                border: OutlineInputBorder(
@@ -162,6 +172,75 @@ class Custhome extends StatelessWidget {
                                        end: Alignment.topCenter,
                                      ),
                                    ),
+                                   child: Consumer<MainProvider>(
+                                     builder: (context, value, child) {
+                                       return DropdownButton<Placemodel>(
+                                         value: value.selectedValue,
+                                         onChanged: (Placemodel? newValue) {
+                                           value.selectedValue = newValue; // Assign the selected Placemodel directly
+                                           value.notifyListeners();
+                                         },
+                                         underline: Container(
+                                           height: 0,
+                                         ),
+                                         items: value.placelist.map((Placemodel item) {
+                                           return DropdownMenuItem<Placemodel>(
+                                             value: item,
+                                             child: SizedBox(
+                                               width: 300,
+                                               child: Row(
+                                                 children: [
+                                                   Icon(Icons.location_on_outlined, color: Colors.black, size: 18,), // Set your icon here
+                                                   SizedBox(width: 12),
+                                                   Text(
+                                                     item.placename,
+                                                     style: TextStyle(
+                                                       fontWeight: FontWeight.w600,
+                                                       fontSize: 14,
+                                                       color: Colors.black, // Set text color to black for list items
+                                                     ),
+                                                     overflow: TextOverflow.ellipsis,
+                                                   ),
+                                                 ],
+                                               ),
+                                             ),
+                                           );
+                                         }).toList(),
+                                         hint: Text(
+                                           'Select Location',
+                                           style: TextStyle(
+                                             fontFamily: 'PoppinsRegular',
+                                             fontSize: 12,
+                                             color: Colors.white, // Set text color to white for heading
+                                             fontWeight: FontWeight.w400,
+                                           ),
+                                         ),
+                                         isExpanded: true,
+                                         style: TextStyle(color: Colors.white), // Set text color to white for heading
+                                         dropdownColor: Colors.grey[200], // Background color of the dropdown menu
+                                         selectedItemBuilder: (BuildContext context) {
+                                           return value.placelist.map<Widget>((Placemodel item) {
+                                             return  Row(
+                                               children: [
+                                                 Icon(Icons.location_on_outlined, color: Colors.white, size: 18,), // Set your icon here
+                                                 SizedBox(width: 12),
+                                                 Text(
+                                                   item.placename,
+                                                   style: TextStyle(
+                                                     fontWeight: FontWeight.w600,
+                                                     fontSize: 14,
+                                                     color: Colors.white, // Set text color to black for list items
+                                                   ),
+                                                   overflow: TextOverflow.ellipsis,
+                                                 ),
+                                               ],
+                                             );
+                                           }).toList();
+                                         },
+                                       );
+                                     },
+                                   ),
+
 
                                  ),
                                  Consumer<MainProvider>(
