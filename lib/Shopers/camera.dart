@@ -13,9 +13,10 @@ import '../Model/ItemModel.dart';
 import '../widgets/Costfield.dart';
 
 class camera extends StatelessWidget {
+  String shopid;
   String shopName;
   String shopPlace;
-   camera({Key? key,required this.shopName,required this.shopPlace}) : super(key: key);
+   camera({Key? key,required this.shopid,required this.shopName,required this.shopPlace}) : super(key: key);
    final formKey = GlobalKey<FormState>();
 
   var validator;
@@ -481,7 +482,7 @@ class camera extends StatelessWidget {
                               final FormState? form = formKey.currentState;
                                 if (form!.validate()) {
                                   // if (value.imageFile!= null) {
-                                    value.upload(shopName, shopPlace);
+                                    value.upload(shopid,shopName, shopPlace);
                                   // }
                                   // else{
 

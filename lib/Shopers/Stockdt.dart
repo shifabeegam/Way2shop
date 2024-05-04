@@ -11,10 +11,10 @@ import '../providers/MainProvider.dart';
 import '../widgets/HomeButton.dart';
 
 class Stockdt extends StatelessWidget {
-
+  String shopid;
   String shopName;
   String shopPlace;
-   Stockdt({super.key,required this.shopName,required this.shopPlace});
+   Stockdt({super.key,required this.shopid,required this.shopName,required this.shopPlace});
 
 
 
@@ -236,7 +236,7 @@ bottomNavigationBar:
         Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>  camera(shopName: shopName, shopPlace: shopPlace,)),
+            builder: (context) =>  camera(shopid: shopid,shopName: shopName, shopPlace: shopPlace,)),
       );
 
       },

@@ -62,7 +62,8 @@ class ShopModel{
   String id;
   double latitude;
   double longitude;
+  double distance;
 
-  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id,this.latitude,this.longitude);
+  ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id,this.latitude,this.longitude,this.distance);
 
 }
