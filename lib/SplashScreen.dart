@@ -48,8 +48,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
     Timer(const Duration(seconds: 1), () {
-       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-       mainProvider.getPlace();
+      mainProvider.getPlace();
+      mainProvider.  fetchHomeScreenMainItems();
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(userId: '', userName: '', userPhone: '',),));
+
       // if (loginUser == null) {
       //   callNextReplacement(context, Custhome());
       // }

@@ -14,6 +14,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 
 
+import '../IntegrateGoogleMap.dart';
 import '../providers/MainProvider.dart';
 import '../widgets/HomeButton.dart';
 import 'Ctrending.dart';
@@ -36,16 +37,30 @@ class Cproduct extends StatelessWidget {
   String phone;
   String shopdetails;
   String place;
+  String userId;
+  String userName;
+  String userPhone;
+  String shopid;
+  double latitude,longitude;
 
 
   String instruction;
    Cproduct({super.key,required this.itemid,required this.photo,required this.itemname,required this.price,
-     required this.category,required this.categoryid,required this.description,required this.itemquartity,required this.offers,required this.color,required this.brand,required this.productdiemension,required this.assmbly,
-     required this.instruction,required this.shopname,required this.phone,required this.shopdetails,required this.place
+     required this.category,required this.categoryid,required this.description,
+     required this.itemquartity,required this.offers,required this.color,required this.brand,
+     required this.productdiemension,required this.assmbly,
+     required this.instruction,required this.shopname,required this.phone,
+     required this.shopdetails,required this.place,required this.userId,required this.userName,
+     required this.userPhone,required this.shopid, required this.latitude,required this.longitude
    });
 
   @override
   Widget build(BuildContext context) {
+
+    print("rrrrrrrrrrrrrrrrrrr $userName");
+    print("ffff $userId");
+    print("ffff $userPhone");
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
@@ -315,52 +330,60 @@ class Cproduct extends StatelessWidget {
                     width: double.infinity,
                     color: Colors.black12,
                     child: Column(children: [
-                      Container(
-                        width: double.infinity,
-                        color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
+                      Consumer<MainProvider>(
+                        builder: (context,value,child) {
+                          return Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
 
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Align(alignment:Alignment.centerLeft ,
-                                    child: Text("Shop Details",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                ),
-                                Align(alignment:Alignment.centerLeft ,child: Text("kidoNex",)),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Align(alignment:Alignment.centerLeft ,child: Text("Phone: "+"123456789"),),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Align(alignment:Alignment.centerLeft ,child: Text("Hours: "+"Open.Closes 9 pm"),),
-                                ),
-
-
-                                Row(
                                   children: [
-                                    Icon(Icons.location_on_outlined,size: 36,color: Colors.black38,),
-                                    Column(
-                                      children: [
-                                        Text("SH 72, Down Hill, Malappuram, Kerala 676505",style: TextStyle(fontSize: 12),),
-                                        Align(alignment:Alignment.centerLeft ,
-                                          child: Text("Show Map",style: TextStyle(fontSize: 12,color: Colors.black38)),),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8.0),
+                                      child: Align(alignment:Alignment.centerLeft ,
+                                        child: Text("Shop Details",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                    Align(alignment:Alignment.centerLeft ,child: Text(shopname,)),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15.0),
+                                      child: Align(alignment:Alignment.centerLeft ,child: Text("Phone: "+value.shopPhone),),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15.0),
+                                      child: Align(alignment:Alignment.centerLeft ,child: Text("Hours: "+"Open.Closes 9 pm"),),
+                                    ),
 
+
+                                    Row(
+                                      children: [
+                                        Icon(Icons.location_on_outlined,size: 36,color: Colors.black38,),
+                                        Column(
+                                          children: [
+                                            Text(value.shopDetails,style: TextStyle(fontSize: 12),),
+                                            Align(alignment:Alignment.centerLeft ,
+                                              child: InkWell(
+                                                onTap: (){
+                                                  MapUtils.launchMaps(latitude,longitude,value.latitude,value.longitude);
+                                                },
+                                                  child: Text("Show Map",style: TextStyle(fontSize: 12,color: Colors.black38))),),
+
+                                          ],
+                                        ),
                                       ],
                                     ),
+
+
                                   ],
                                 ),
+                              ),
 
-
-                              ],
-                            ),
-                          ),
-
+                          );
+                        }
                       ),
 
 
@@ -409,78 +432,88 @@ class Cproduct extends StatelessWidget {
               ),
             ),
 
-            InkWell(
-              onTap: (){
-                showDialog(context: context, builder: (context){
-                  return Container(
-                    child: AlertDialog(backgroundColor: Colors.white,
-                      elevation: 0,
+            Consumer<MainProvider>(
+              builder: (context,provider,_) {
+                return InkWell(
+                  onTap: (){
+                    showDialog(context: context, builder: (context){
+                      return AlertDialog(backgroundColor: Colors.white,
+                        elevation: 0,
 
-                      actions: [
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(15),
+                        actions: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15),
 
 
 
-                            ),
+                              ),
 
-                            Text("Do you want to Confirm your order ? "),
-                            Row(
-                              children: [
-                                MaterialButton(onPressed: (){ Navigator.pop(
-                                  context,
-                                  /* MaterialPageRoute(
-                                                          builder: (context) => const Additem()),*/
-                                );
-
-                                },
-                                  child: const Text("cancel"),
-                                  highlightColor: Color(0xff0C630A),
-                                  splashColor: Colors.grey,
-                                  color: Colors.red,
-                                ),
-
-                                SizedBox(width: 10,),
-
-                                MaterialButton(onPressed: (){
-                                  Navigator.push(
+                              Text("Do you want to Confirm your order ? "),
+                              Row(
+                                children: [
+                                  MaterialButton(onPressed: (){ Navigator.pop(
                                     context,
-                                    MaterialPageRoute(
-                                        builder: (
-                                            context) => const Ordersummery()),
+                                    /* MaterialPageRoute(
+                                                            builder: (context) => const Additem()),*/
                                   );
 
-                                },
-                                  child: const Text("ok"),
-                                  highlightColor: Color(0xff0C630A),
-                                  splashColor: Colors.grey,
-                                  color: Colors.green,
+                                  },
+                                    child: const Text("cancel"),
+                                    highlightColor: Color(0xff0C630A),
+                                    splashColor: Colors.grey,
+                                    color: Colors.red,
+                                  ),
+
+                                  SizedBox(width: 10,),
+
+                                  MaterialButton(
+                                    onPressed: (){
+
+                                      print(userPhone+userName+userId+"hhhhhhhhh");
+
+                                      provider.addConfirmOrder(itemname, price, itemid,userId,shopid,userName,userPhone);
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content:
+                                        Text("Ordered Successfully"),
+                                        duration: Duration(milliseconds: 3000),
+                                      ));
+
+
+
+                              },
+                                child: const Text("ok",
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                                highlightColor: Color(0xff0C630A),
+                                splashColor: Colors.grey,
+                                color: Colors.green,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
 
-                      ],
+                        ],
 
+                      );
+                    });
+                  },
+                  child: Container(
+                    height: 45,
+                    width: 140,
+                    decoration: BoxDecoration(border: Border.all(
+                        color: Colors.black26),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.yellow[600]
                     ),
-                  );
-                });
-              },
-              child: Container(
-                height: 45,
-                width: 140,
-                decoration: BoxDecoration(border: Border.all(
-                    color: Colors.black26),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.yellow[600]
-                ),
-                child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
-              ),
+                    child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
+                  ),
+                );
+              }
             ),
-
 
 
           ],

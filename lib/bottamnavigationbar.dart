@@ -13,6 +13,12 @@ import 'customer/Custhome.dart';
 
 
 class BottomNavBar extends StatefulWidget {
+
+  String userId;
+  String userName;
+  String userPhone;
+  BottomNavBar({Key?key,required this.userId,required this.userName,
+    required this.userPhone}):super(key: key);
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
@@ -23,14 +29,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final navigationanKey = GlobalKey<CurvedNavigationBarState>();
 
 
-  final Screen = [
-
-    Custhome(),
-    Ccategory(),
-    Cshops(),
-    Caccount()
-
-  ];
 
   final  items= <Widget>[
     Icon(Icons.trending_up,color: Colors.white,),
@@ -51,6 +49,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Screen = [
+
+      Custhome(userId: widget.userId, userName: widget.userName, userPhone: widget.userPhone),
+      Ccategory(userId: widget.userId, userName: widget.userName, userPhone: widget.userPhone,),
+      Cshops(userId: widget.userId, userName: widget.userName, userPhone: widget.userPhone,),
+      Caccount()
+
+    ];
     MainProvider provider = Provider.of<MainProvider>(context,listen: true);
     return Scaffold(
       backgroundColor: Colors.transparent,
