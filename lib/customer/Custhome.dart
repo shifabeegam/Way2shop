@@ -38,7 +38,7 @@ class Custhome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:const Color(0xff650015),
+        backgroundColor:const Color(0xffFFD7A9 ),
 
         title: const Text("Way2Shop",
           style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
@@ -83,8 +83,19 @@ class Custhome extends StatelessWidget {
                                children: [
                                  Container(width: double.infinity,
                                    height: 130,
-                                   decoration: const BoxDecoration(color: Color(
-                                       0xff650015)),
+                                   decoration: const BoxDecoration(gradient: LinearGradient(
+                                     colors: [
+
+
+                                       Color(0xffE46767),
+                                       Color(0xffFFD7A9),
+
+
+                                     ],
+
+                                     begin: Alignment.bottomCenter,
+                                     end: Alignment.topCenter,
+                                   ),),
                                    child: Column(
                                      children: [
                                        Center(
@@ -127,149 +138,88 @@ class Custhome extends StatelessWidget {
                                          ),
                                        ),
                                        //SizedBox(height: 10,),
-                                       const SizedBox(height: 30,),
-                                       Row(
-                                         mainAxisAlignment: MainAxisAlignment
-                                             .spaceAround,
-                                         children: [
-                                           InkWell(
-                                             onTap: () {
-                                               Navigator.push(
-                                                 context,
-                                                 MaterialPageRoute(
-                                                     builder: (
-                                                         context) => const Wishlist()),
-                                               );
-                                             },
-                                             child: Container(
+                                       SizedBox(height: 20,),
+                                       Container(
 
-                                                 width: 30,
-                                                 child: Image.asset(
-                                                     "lib/icons/img.png")),
-                                           ),
-                                           InkWell(
-                                             onTap: () {
-                                               Navigator.push(
-                                                 context,
-                                                 MaterialPageRoute(
-                                                     builder: (
-                                                         context) => const cartpage()),
-                                               );
-                                             },
-                                             child: Container(
+                                         child: Consumer<MainProvider>(
+                                           builder: (context, value, child) {
+                                             return DropdownButton<Placemodel>(
+                                               value: value.selectedValue,
+                                               onChanged: (Placemodel? newValue) {
+                                                 value.selectedValue = newValue; // Assign the selected Placemodel directly
+                                                 value.notifyListeners();
+                                               },
+                                               underline: Container(
+                                                 height: 0,
+                                               ),
+                                               items: value.placelist.map((Placemodel item) {
+                                                 return DropdownMenuItem<Placemodel>(
+                                                   value: item,
+                                                   child: SizedBox(
+                                                     width: 300,
+                                                     child: Row(
+                                                       children: [
+                                                         Icon(Icons.location_on_outlined, color: Colors.black, size: 18,), // Set your icon here
+                                                         SizedBox(width: 12),
+                                                         Text(
+                                                           item.placename,
+                                                           style: TextStyle(
+                                                             fontWeight: FontWeight.w600,
+                                                             fontSize: 14,
+                                                             color: Colors.black, // Set text color to black for list items
+                                                           ),
+                                                           overflow: TextOverflow.ellipsis,
+                                                         ),
+                                                       ],
+                                                     ),
+                                                   ),
+                                                 );
+                                               }).toList(),
+                                               hint: Text(
+                                                 'Select Location',
+                                                 style: TextStyle(
+                                                   fontFamily: 'PoppinsRegular',
+                                                   fontSize: 12,
+                                                   color: Colors.white, // Set text color to white for heading
+                                                   fontWeight: FontWeight.w400,
+                                                 ),
+                                               ),
+                                               isExpanded: true,
+                                               style: TextStyle(color: Colors.white), // Set text color to white for heading
+                                               dropdownColor: Colors.grey[200], // Background color of the dropdown menu
+                                               selectedItemBuilder: (BuildContext context) {
+                                                 return value.placelist.map<Widget>((Placemodel item) {
+                                                   return  Row(
+                                                     children: [
+                                                       Icon(Icons.location_on_outlined, color: Colors.white, size: 18,), // Set your icon here
+                                                       SizedBox(width: 12),
+                                                       Text(
+                                                         item.placename,
+                                                         style: TextStyle(
+                                                           fontWeight: FontWeight.w600,
+                                                           fontSize: 14,
+                                                           color: Colors.white, // Set text color to black for list items
+                                                         ),
+                                                         overflow: TextOverflow.ellipsis,
+                                                       ),
+                                                     ],
+                                                   );
+                                                 }).toList();
+                                               },
+                                             );
+                                           },
+                                         ),
 
-                                                 width: 30,
-                                                 child: Image.asset(
-                                                     "lib/icons/cart.png")),
-                                           ),
-                                           InkWell(
-                                             onTap: () {
-                                               Navigator.push(
-                                                 context,
-                                                 MaterialPageRoute(
-                                                     builder: (
-                                                         context) => const Ordersummery()),
-                                               );
-                                             },
-                                             child: Container(
 
-                                                 width: 30,
-                                                 child: Image.asset(
-                                                     "lib/icons/Order.png")),
-                                           ),
-                                         ],
                                        ),
+
 
 
                                      ],
                                    ),
 
                                  ),
-                                 Container(
-                                   width: double.infinity,
-                                   height: 39,
-                                   decoration: const BoxDecoration(
-                                     gradient: LinearGradient(
-                                       colors: [
-                                         Color(0xff650015),
-                                         Color(0xff7E0922)
-                                       ],
 
-                                       begin: Alignment.bottomCenter,
-                                       end: Alignment.topCenter,
-                                     ),
-                                   ),
-                                   child: Consumer<MainProvider>(
-                                     builder: (context, value, child) {
-                                       return DropdownButton<Placemodel>(
-                                         value: value.selectedValue,
-                                         onChanged: (Placemodel? newValue) {
-                                           value.selectedValue = newValue; // Assign the selected Placemodel directly
-                                           value.notifyListeners();
-                                         },
-                                         underline: Container(
-                                           height: 0,
-                                         ),
-                                         items: value.placelist.map((Placemodel item) {
-                                           return DropdownMenuItem<Placemodel>(
-                                             value: item,
-                                             child: SizedBox(
-                                               width: 300,
-                                               child: Row(
-                                                 children: [
-                                                   Icon(Icons.location_on_outlined, color: Colors.black, size: 18,), // Set your icon here
-                                                   SizedBox(width: 12),
-                                                   Text(
-                                                     item.placename,
-                                                     style: TextStyle(
-                                                       fontWeight: FontWeight.w600,
-                                                       fontSize: 14,
-                                                       color: Colors.black, // Set text color to black for list items
-                                                     ),
-                                                     overflow: TextOverflow.ellipsis,
-                                                   ),
-                                                 ],
-                                               ),
-                                             ),
-                                           );
-                                         }).toList(),
-                                         hint: Text(
-                                           'Select Location',
-                                           style: TextStyle(
-                                             fontFamily: 'PoppinsRegular',
-                                             fontSize: 12,
-                                             color: Colors.white, // Set text color to white for heading
-                                             fontWeight: FontWeight.w400,
-                                           ),
-                                         ),
-                                         isExpanded: true,
-                                         style: TextStyle(color: Colors.white), // Set text color to white for heading
-                                         dropdownColor: Colors.grey[200], // Background color of the dropdown menu
-                                         selectedItemBuilder: (BuildContext context) {
-                                           return value.placelist.map<Widget>((Placemodel item) {
-                                             return  Row(
-                                               children: [
-                                                 Icon(Icons.location_on_outlined, color: Colors.white, size: 18,), // Set your icon here
-                                                 SizedBox(width: 12),
-                                                 Text(
-                                                   item.placename,
-                                                   style: TextStyle(
-                                                     fontWeight: FontWeight.w600,
-                                                     fontSize: 14,
-                                                     color: Colors.white, // Set text color to black for list items
-                                                   ),
-                                                   overflow: TextOverflow.ellipsis,
-                                                 ),
-                                               ],
-                                             );
-                                           }).toList();
-                                         },
-                                       );
-                                     },
-                                   ),
-
-
-                                 ),
                                  Consumer<MainProvider>(
                                    builder: (context,value,child) {
                                      return  Padding(

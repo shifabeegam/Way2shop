@@ -104,7 +104,7 @@ class AdmnHome extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(//color: Color(0xff650015),
         gradient: LinearGradient(
-          colors: [ Colors.white,Color(0xff650015)],
+          colors: [Color(0xff996082),Color(0xff6FFA0D9)],
 
           begin: Alignment.bottomCenter, end: Alignment.topCenter,
         ),
