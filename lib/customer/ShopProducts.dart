@@ -7,13 +7,22 @@ import '../providers/MainProvider.dart';
 import 'Cproduct.dart';
 
 class ShopProducts extends StatelessWidget {
-  String shopid,Shopname;
+  String shopid,Shopname,userId,userName,userPhone;
+
+
   double latitude,longitude;
 
-  ShopProducts({super.key,required this.shopid,required this.Shopname,required this.latitude,required this.longitude});
+  ShopProducts({super.key,required this.shopid,required this.Shopname,
+    required this.latitude,required this.longitude,required this.userId,required this.userName,
+    required this.userPhone});
 
   @override
   Widget build(BuildContext context) {
+
+    print("ttttttttttttttt $userName");
+    print("ffff $userId");
+    print("ffff $userPhone");
+
     return Scaffold(
       appBar:   AppBar(centerTitle: false,
         backgroundColor:const Color(0xff650015),
@@ -146,8 +155,11 @@ class ShopProducts extends StatelessWidget {
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Cproduct(itemid: item.itemid,
                               photo: item.photo,itemname: item.itemname,price: item.price,category: item.category,categoryid: item.categoryid,
-                              description: item.description,itemquartity: item.itemquartity,offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
-                              assmbly: item.assmbly,     instruction: item.instruction,shopname: item.shopname,phone: item.shopname,shopdetails: item.shopdetails,place: item.place,
+                              description: item.description,itemquartity: item.itemquartity,offers: item.offers,color: item.color,brand: item.brand,
+                              productdiemension: item.productdiemension,
+                              assmbly: item.assmbly,     instruction: item.instruction,
+                              shopname: item.shopname,phone: item.shopname,shopdetails: item.shopdetails,
+                              place: item.place, userId: userId, shopid: shopid, userName: userName, userPhone: userPhone,
                             ),));
                           },
                           child: Padding(

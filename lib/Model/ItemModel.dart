@@ -67,3 +67,16 @@ class ShopModel{
   ShopModel(this.licence,this.shopname,this.ownername,this.phone,this.email,this.place,this.idproof,this.licenceproof,this.receipt,this.id,this.latitude,this.longitude,this.distance);
 
 }
+class shopOrderModel{
+
+  String customerName;
+  String customerId;
+  String phone;
+  String productName;
+  String productPrice;
+  String productId;
+
+
+  shopOrderModel(this.customerName,this.customerId,this.phone,this.productName,this.productPrice,this.productId);
+
+}

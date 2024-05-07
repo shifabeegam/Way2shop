@@ -15,12 +15,20 @@ import 'Wishlist.dart';
 import 'cartpage.dart';
 
 class Cshops extends StatelessWidget {
-  const Cshops({super.key});
+
+  String userId;
+  String userName;
+  String userPhone;
+   Cshops({super.key,required this.userId,required this.userName,
+    required this.userPhone});
 
   @override
   Widget build(BuildContext context) {
     MainProvider provider = Provider.of<MainProvider>(context,listen: true);
     // provider.getshop();
+    print("eeee $userName");
+    print("eee $userId");
+    print("eeee $userPhone");
 
     return Scaffold(
 
@@ -175,7 +183,13 @@ class Cshops extends StatelessWidget {
 
 
                            value.getshopitem(value.filtershoplist[index].id);
-                           Navigator.push(context, MaterialPageRoute(builder: (context) =>ShopProducts(shopid:value.filtershoplist[index].id ,Shopname:value.filtershoplist[index].shopname ,latitude:value.filtershoplist[index].latitude,longitude: value.filtershoplist[index].longitude ,) ,));
+                           Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                               ShopProducts(shopid:value.filtershoplist[index].id ,
+                                 Shopname:value.filtershoplist[index].shopname ,
+                                 latitude:value.filtershoplist[index].latitude,
+                                 longitude: value.filtershoplist[index].longitude,
+                                 userId: userId, userName: userName, userPhone: userPhone,
+                               ) ,));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10,left: 2),

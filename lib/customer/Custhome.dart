@@ -21,7 +21,11 @@ import 'Clogin.dart';
 
 
 class Custhome extends StatelessWidget {
-  Custhome({super.key});
+  String userId;
+  String userName;
+  String userPhone;
+  Custhome({super.key,required this.userId,required this.userName,
+    required this.userPhone});
 
   //get mainProvider => null;
 
@@ -33,6 +37,9 @@ class Custhome extends StatelessWidget {
    // mainProvider.getItem();
     int myInteger ;
     int scode;
+    print("ffff $userName");
+    print("ffff $userId");
+    print("ffff $userPhone");
 
     LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
@@ -99,7 +106,7 @@ class Custhome extends StatelessWidget {
                                            Navigator.pushReplacement(
                                                context,
                                                MaterialPageRoute(
-                                                 builder: (context) => SearchedProducts(),
+                                                 builder: (context) => SearchedProducts(userId: userId, userName: userId, userPhone: userId,),
                                                ));
                                            },
                                              decoration: InputDecoration(
@@ -293,7 +300,7 @@ class Custhome extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (
-                                                        context) => const Ccategory()),
+                                                        context) =>  Ccategory(userId: userId, userName: userId, userPhone: userId,)),
                                               );
                                             },
                                              child: Text("View All",
