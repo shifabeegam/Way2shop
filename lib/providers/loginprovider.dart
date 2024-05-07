@@ -79,7 +79,11 @@ class LoginProvider extends ChangeNotifier {
         loginedUserNumber=map["PHONE_NUMBER"] ??"";
         loginedUserId=map["USER_ID"] ??"";
         notifyListeners();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
+        MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
+
+        mainProvider.  fetchHomeScreenMainItems();
+
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
               BottomNavBar(userId: loginedUserId, userName: loginedUserName, userPhone: loginedUserNumber,),));
 
       }else{
@@ -224,6 +228,7 @@ class LoginProvider extends ChangeNotifier {
                     builder: (context) => ShopHome(shopid: shopid,shopName:shopName, placeName: shopPlace,),
                   ));
             }else{
+              mainProvider.  fetchHomeScreenMainItems();
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

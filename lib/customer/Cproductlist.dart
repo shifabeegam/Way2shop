@@ -119,14 +119,18 @@ class Productlist extends StatelessWidget {
                         var item=value.allAdditem[index];
                         return  InkWell(
                           onTap: (){
+                            value.fetchShopDetails(item.shopId);
+
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Cproduct(itemid: item.itemid,
                                 photo: item.photo,itemname: item.itemname,price: item.price,
                               category: item.category,categoryid: item.categoryid,
                                 description: item.description,itemquartity: item.itemquartity,
                               offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
                              assmbly: item.assmbly,instruction: item.instruction,
-                              shopname: item.shopname,phone: item.shopname,
-                              shopdetails: item.shopdetails,place: item.place, userId: userId, shopid: '', userName: userName, userPhone: userName,
+                              shopname: item.shopname,phone: value.shopPhone,
+                              shopdetails: value.shopDetails,place: item.place, userId: userId, shopid: item.shopId, userName: userName, userPhone: userPhone,
+                              latitude:value.latShop,
+                              longitude: value.longShop,
                             ),));
                           },
                           child: Padding(
