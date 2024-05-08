@@ -36,10 +36,10 @@ class Cshops extends StatelessWidget {
 
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:const Color(0xff650015),
+        backgroundColor:const Color(0xffFFFFFF),
 
         title: const Text("Way2Shop",
-          style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
+          style: TextStyle(color:Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold),
 
 
         ),
@@ -49,8 +49,19 @@ class Cshops extends StatelessWidget {
         child: Column(
           children: [
             Container(width:double.infinity ,
-              height: 130,
-              decoration: const BoxDecoration(color: Color(0xff650015)),
+              height: 90,
+              decoration: const BoxDecoration(                        gradient: LinearGradient(
+                colors: [Color(0xffBDBBBB), Colors.white,],
+
+                begin: Alignment.bottomCenter, end: Alignment.topCenter,
+
+              ),
+                border: Border(
+                  bottom: BorderSide(
+                    color:  Color(0xffD6D6D6), // Change this color to the desired bottom border color
+                    width: 2, // Change this width to the desired bottom border width
+                  ),
+                ),),
               child: Column(
                 children: [
                   Center(
@@ -69,9 +80,8 @@ class Cshops extends StatelessWidget {
                             filled: true,
                             focusedBorder: InputBorder.none,
                             hintText:"Search",
-                            hintStyle:TextStyle(color: Colors.white),
-                            prefixIcon: Icon(Icons.search,color: Colors.white,),
-                            suffixIcon: Icon(Icons.mic,color: Colors.white,),
+                            hintStyle:TextStyle(color:  Color(0xffBDBBBB)),
+                            suffixIcon: Icon(Icons.search,color:  Color(0xffBDBBBB),),
                           ),
                           );
                         }
@@ -80,53 +90,7 @@ class Cshops extends StatelessWidget {
                   ),
                   //SizedBox(height: 10,),
                   const SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (
-                                    context) => const Wishlist()),
-                          );
-                        },
-                        child: Container(
 
-                            width:30,
-                            child: Image.asset("lib/icons/img.png")),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (
-                                    context) => const cartpage()),
-                          );
-                        },
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/cart.png")),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (
-                                    context) => const Ordersummery()),
-                          );
-                        },
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/Order.png")),
-                      ),
-                    ],
-                  ),
 
 
 
@@ -139,19 +103,7 @@ class Cshops extends StatelessWidget {
               ),
 
             ),
-            Container(
-              width:double.infinity ,
-              height: 39,
 
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xff650015), Color(0xff7E0922)],
-
-                  begin: Alignment.bottomCenter, end: Alignment.topCenter,
-                ),
-              ),
-
-            ),
                 Padding(
                 padding: const EdgeInsets.all(10),
     child: Text("Shops",style: TextStyle(fontSize: 20),),
@@ -197,14 +149,7 @@ class Cshops extends StatelessWidget {
                               width: 100,
                               height: 20,
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [Color(0xffB99AA0), Colors.white],
-
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-
-                                //color: backgroundColor,
+                                color:  Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border(
                                   left: BorderSide(color:Colors.white),
