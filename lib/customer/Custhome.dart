@@ -46,14 +46,14 @@ class Custhome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-
+        backgroundColor:const Color(0xff650015),
         centerTitle: false,
 
 
         title: const Text(
           "Way2Shop",
           style: TextStyle(
-              color: Color(0xff5C0013), fontSize: 20, fontWeight: FontWeight.bold),
+              color: Color(0xffFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
           InkWell(
@@ -71,8 +71,8 @@ class Custhome extends StatelessWidget {
                 margin: EdgeInsets.only(right: 10),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color:Color(0xff5C0013))),
-                child: Icon(Icons.person_outline, color: Color(0xff5C0013))),
+                    border: Border.all(color:Colors.white)),
+                child: Icon(Icons.person_outline, color: Colors.white)),
           )
         ],
       ),
@@ -80,10 +80,15 @@ class Custhome extends StatelessWidget {
         children: [
           Expanded(
             flex: 5,
+
             child: Consumer<MainProvider>(builder: (context5, value, child) {
+
               return SingleChildScrollView(
                 child: Column(
+
                   children: [
+
+                    SizedBox(height: 10,),
                     Container(
                       width: double.infinity,
                       height: 120,
@@ -101,7 +106,7 @@ class Custhome extends StatelessWidget {
                           Center(
                             child: Container(
                               height: 50,
-                              width: 360,
+                              width: 340,
 
                               child: TextField(
                                 onSubmitted: (text) {
@@ -186,7 +191,7 @@ class Custhome extends StatelessWidget {
                                   );
                                 }).toList(),
                                 hint: Text(
-                                  'Select Location',
+                                  '       Select Location',
                                   style: TextStyle(
                                     fontFamily: 'PoppinsRegular',
                                     fontSize: 12,

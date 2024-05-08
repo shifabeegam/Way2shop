@@ -27,15 +27,16 @@ class Productlist extends StatelessWidget {
       body:  SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 10,),
             Container(width:double.infinity ,
               height: 80,
-              decoration: const BoxDecoration(color: Color(0xff650015)),
+              decoration: const BoxDecoration(color: Colors.white),
               child: Column(
                 children: [
                   Center(
                     child: Container(
                       height: 50,
-                      width:360 ,
+                      width:340 ,
 
                       child: const TextField(decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
@@ -43,9 +44,9 @@ class Productlist extends StatelessWidget {
                         filled: true,
                         focusedBorder: InputBorder.none,
                         hintText:"Search",
-                        hintStyle:TextStyle(color: Colors.white),
-                        prefixIcon: Icon(Icons.search,color: Colors.white,),
-                        suffixIcon: Icon(Icons.mic,color: Colors.white,),
+                        hintStyle:TextStyle(color: Colors.black),
+                        suffixIcon: Icon(Icons.search,color: Colors.black,),
+
                       ),
                       ),
                     ),
@@ -140,7 +141,7 @@ class Productlist extends StatelessWidget {
                               height: 70,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [Color(0xffB99AA0), Colors.white],
+                                  colors: [Colors.white, Colors.white],
 
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -149,10 +150,10 @@ class Productlist extends StatelessWidget {
                                 //color: backgroundColor,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border(
-                                  left: BorderSide(color:Colors.white),
-                                  top: BorderSide(color:Colors.white),
-                                  right: BorderSide(color:Colors.white),
-                                  bottom: BorderSide(width: 1.20, color: Colors.white),
+                                  left: BorderSide(color:Color(0xffBDBBBB)),
+                                  top: BorderSide(color:Color(0xffBDBBBB)),
+                                  right: BorderSide(color:Color(0xffBDBBBB)),
+                                  bottom: BorderSide(width: 1.20, color: Color(0xffBDBBBB)),
                                 ),
                                 boxShadow: [
                                   BoxShadow(

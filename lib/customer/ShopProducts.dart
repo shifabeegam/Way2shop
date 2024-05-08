@@ -36,15 +36,44 @@ class ShopProducts extends StatelessWidget {
       body:  SingleChildScrollView(
         child: Column(
           children: [
+            Consumer<MainProvider>(
+                builder: (context,value,child) {
+                  return InkWell(
+                    onTap: (){
+                      MapUtils.launchMaps(latitude,longitude,value.latitude,value.longitude);
+                    },
+                    child: Container(
+                      width:double.infinity ,
+                      height: 39,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 3,),
+                          Icon(Icons.location_on_outlined,color: Colors.white,),
+                          Text("View Location",style: TextStyle(color: Colors.white,fontSize: 16),),
+                        ],
+                      ),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xff650015), Color(0xff7E0922)],
+
+                          begin: Alignment.bottomCenter, end: Alignment.topCenter,
+                        ),
+                      ),
+
+                    ),
+                  );
+                }
+            ),
+            SizedBox(height: 10,),
             Container(width:double.infinity ,
-              height: 130,
-              decoration: const BoxDecoration(color: Color(0xff650015)),
+              height: 80,
+              decoration: const BoxDecoration(color: Colors.white),
               child: Column(
                 children: [
                   Center(
                     child: Container(
                       height: 50,
-                      width:360 ,
+                      width:340 ,
 
                       child: const TextField(decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
@@ -52,84 +81,46 @@ class ShopProducts extends StatelessWidget {
                         filled: true,
                         focusedBorder: InputBorder.none,
                         hintText:"Search",
-                        hintStyle:TextStyle(color: Colors.white),
-                        prefixIcon: Icon(Icons.search,color: Colors.white,),
-                        suffixIcon: Icon(Icons.mic,color: Colors.white,),
+                        hintStyle:TextStyle(color: Colors.black),
+                        suffixIcon: Icon(Icons.search,color: Colors.black),
                       ),
                       ),
                     ),
                   ),
                   //SizedBox(height: 10,),
-                  const SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/img.png")),
-                      ),
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/cart.png")),
-                      ),
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-
-                            width:30,
-                            child: Image.asset("lib/icons/Order.png")),
-                      ),
-                    ],
-                  ),
+                  //const SizedBox(height: 30,),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //
+                  //           width:30,
+                  //           child: Image.asset("lib/icons/img.png")),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //
+                  //           width:30,
+                  //           child: Image.asset("lib/icons/cart.png")),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: (){},
+                  //       child: Container(
+                  //
+                  //           width:30,
+                  //           child: Image.asset("lib/icons/Order.png")),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
 
             ),
-            Consumer<MainProvider>(
-              builder: (context,value,child) {
-                return InkWell(
-                  onTap: (){
-                    MapUtils.launchMaps(latitude,longitude,value.latitude,value.longitude);
-                  },
-                  child: Container(
-                    width:double.infinity ,
-                    height: 39,
-                    child: Row(
-                      children: [
-                        Icon(Icons.location_on_outlined,color: Colors.white,),
-                        Text("View Location",style: TextStyle(color: Colors.white,fontSize: 18),),
-                      ],
-                    ),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xff650015), Color(0xff7E0922)],
 
-                        begin: Alignment.bottomCenter, end: Alignment.topCenter,
-                      ),
-                    ),
 
-                  ),
-                );
-              }
-            ),
-            Container(
-              width:double.infinity ,
-              height: 39,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xff650015), Color(0xff7E0922)],
-
-                  begin: Alignment.bottomCenter, end: Alignment.topCenter,
-                ),
-              ),
-
-            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Text(Shopname,style: TextStyle(fontSize: 20),),
@@ -175,7 +166,7 @@ class ShopProducts extends StatelessWidget {
                               height: 70,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [Color(0xffB99AA0), Colors.white],
+                                  colors: [Colors.white, Colors.white],
 
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -184,10 +175,10 @@ class ShopProducts extends StatelessWidget {
                                 //color: backgroundColor,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border(
-                                  left: BorderSide(color:Colors.white),
-                                  top: BorderSide(color:Colors.white),
-                                  right: BorderSide(color:Colors.white),
-                                  bottom: BorderSide(width: 1.20, color: Colors.white),
+                                  left: BorderSide(color:Color(0xffBDBBBB)),
+                                  top: BorderSide(color:Color(0xffBDBBBB)),
+                                  right: BorderSide(color:Color(0xffBDBBBB)),
+                                  bottom: BorderSide(width: 1.20, color: Color(0xffBDBBBB)),
                                 ),
                                 boxShadow: [
                                   BoxShadow(
@@ -206,8 +197,8 @@ class ShopProducts extends StatelessWidget {
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Image.network(
                                         value.allAdditem[index].photo.first,
-                                        height: 120,
-                                        width: 120,
+                                        height: 130,
+                                        width: 130,
                                       ),
                                     ),
                                     Text(value.allAdditem[index].itemname,
