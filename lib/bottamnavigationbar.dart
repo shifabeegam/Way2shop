@@ -31,10 +31,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 
   final  items= <Widget>[
-    Icon(Icons.trending_up,color: Colors.white,),
-    Icon(Icons.category_outlined,color: Colors.white),
-    Icon(Icons.shop_2_outlined,color: Colors.white),
-    Icon(Icons.add_home_work_outlined,color: Colors.white)
+    Icon(Icons.trending_up,color: Color(0xffE46767),),
+    Icon(Icons.category_outlined,color:Color(0xffE46767)),
+    Icon(Icons.shop_2_outlined,color:Color(0xffE46767)),
+    Icon(Icons.add_home_work_outlined,color:Color(0xffE46767))
   ];
 
   @override
@@ -63,10 +63,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
       backgroundColor: Colors.transparent,
       bottomNavigationBar: CurvedNavigationBar(
         items: [
-          Icon(Icons.trending_up, color: Colors.white),
-          Icon(Icons.category_outlined, color: Colors.white),
-          Icon(Icons.shop_2_outlined, color: Colors.white),
-          Icon(Icons.add_home_work_outlined, color: Colors.white)
+          Icon(Icons.trending_up, color: Color(0xff5C0013)),
+          Icon(Icons.category_outlined, color:Color(0xff5C0013)),
+          Icon(Icons.shop_2_outlined, color: Color(0xff5C0013)),
+          Icon(Icons.add_home_work_outlined, color: Color(0xff5C0013))
         ],
         index: index,
         height: 60.0,
@@ -100,7 +100,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               break;
           }
         },
-        color: Color(0xff650015),
+
+        color: Color(0xffD6D6D6),
         backgroundColor: Colors.white,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),

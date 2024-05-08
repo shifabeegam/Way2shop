@@ -33,7 +33,7 @@ class camera extends StatelessWidget {
 
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFF650015),
+        backgroundColor: Color(0xFFFFFF),
       ),
       body: Form(
         key: formKey,
@@ -41,12 +41,7 @@ class camera extends StatelessWidget {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white, Color(0xff650015)],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-          ),
+              color:  Colors.white         ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -317,6 +312,7 @@ class camera extends StatelessWidget {
                               Container(
                                   width: 296,
                                   decoration: BoxDecoration(
+                                    color:Colors.white,
                                     border: Border.all(
                                         width: 1, color: Color(0xff650015)),
                                     borderRadius: BorderRadius.circular(15),
@@ -442,6 +438,7 @@ class camera extends StatelessWidget {
                               Container(
                                   width: 296,
                                   decoration: BoxDecoration(
+                                    color:Colors.white,
                                     border: Border.all(
                                         width: 1, color: Color(0xff650015)),
                                     borderRadius: BorderRadius.circular(15),

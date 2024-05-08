@@ -13,7 +13,7 @@ class ViewRequest extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xff650015),
+        backgroundColor:Color(0xff800026),
 
         title: Text("Shops Request",
           style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),
@@ -31,11 +31,10 @@ class ViewRequest extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(//color: Color(0xff650015),
-          gradient: LinearGradient(
-            colors: [ Colors.white,Color(0xff650015)],
-
-            begin: Alignment.bottomCenter, end: Alignment.topCenter,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/img_3.png"),
+            fit: BoxFit.cover,
           ),
         ),
         child: ListView(
@@ -194,7 +193,7 @@ class ViewRequest extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: 150,
+                      width: 190,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -213,7 +212,7 @@ class ViewRequest extends StatelessWidget {
 
 
                     Container(
-                      width: 150,
+                      width: 190,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),

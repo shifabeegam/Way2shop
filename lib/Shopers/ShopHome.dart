@@ -30,11 +30,11 @@ class ShopHome extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: false,
-        backgroundColor: Color(0xff650015),
+        backgroundColor: Color(0xffFFFF),
         title: const Text(
           "Way2Shop",
           style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+              color: Color(0xff800026), fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -43,7 +43,7 @@ class ShopHome extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 280,
-              decoration: BoxDecoration(color: Color(0xff650015)),
+              decoration: BoxDecoration(color: Color(0xffFFFF)),
               child: Column(
                 children: [
                   SizedBox(
@@ -98,27 +98,44 @@ class ShopHome extends StatelessWidget {
                                       )),
                             );
                           },
-                          child: HomeButton(
-                            textColor: Colors.white,
-                            backgroundColor: Colors.black26,
-                            boxshadowColor: Colors.black12,
-                            borderColor: Colors.black26,
-                            text: "Stock details",
-                            hight: 61,
-                            width: 147,
-                            fondSize: 18,
+                          child:
+                          Container(
+                            height:61,
+                            width:150,
+                            decoration: BoxDecoration(border: Border.all(
+                                color: Colors.white),
+                              borderRadius: BorderRadius.circular(15),
+
+                              gradient: LinearGradient(
+                                colors: [Color(0xff800026), Color(0xffCB470F),Color(0xff800026)],
+
+                                begin: Alignment.bottomLeft, end: Alignment.topRight,
+
+                              ),
+                            ),
+                            child: Center(child: Text( "Stock details",style: TextStyle(fontSize: 18,color: Colors.white),)),
+
                           ),
+
+
                         );
                       }),
-                      HomeButton(
-                        textColor: Colors.white,
-                        backgroundColor: Colors.black26,
-                        boxshadowColor: Colors.black12,
-                        borderColor: Colors.black26,
-                        text: "Posters",
-                        hight: 61,
-                        width: 147,
-                        fondSize: 18,
+                      Container(
+                        height:61,
+                        width:150,
+                        decoration: BoxDecoration(border: Border.all(
+                            color: Colors.white),
+                          borderRadius: BorderRadius.circular(15),
+
+                          gradient: LinearGradient(
+                            colors: [Color(0xff800026), Color(0xffCB470F),Color(0xff800026)],
+
+                            begin: Alignment.bottomLeft, end: Alignment.topRight,
+
+                          ),
+                        ),
+                        child: Center(child: Text( "Posters",style: TextStyle(fontSize: 18,color: Colors.white),)),
+
                       ),
                       SizedBox(
                         width: 12,
@@ -223,52 +240,7 @@ class ShopHome extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-            // ListView(
-            //   shrinkWrap: true,
-            //   children: [
-            //     Lists(
-            //       width: double.infinity,
-            //       hight: 66,
-            //       custNm: 'anees',
-            //       custPh: '8923541289',
-            //       itemName: 'Red bag ',
-            //       itemPrice: '680',
-            //     ),
-            //     SizedBox(
-            //       height: 1,
-            //     ),
-            //     Lists(
-            //       width: double.infinity,
-            //       hight: 66,
-            //       custNm: 'anees',
-            //       custPh: '8923541289',
-            //       itemName: 'Red bag ',
-            //       itemPrice: '680',
-            //     ),
-            //     SizedBox(
-            //       height: 1,
-            //     ),
-            //     Lists(
-            //       width: double.infinity,
-            //       hight: 66,
-            //       custNm: 'anees',
-            //       custPh: '8923541289',
-            //       itemName: 'Red bag ',
-            //       itemPrice: '680',
-            //     ),
-            //     SizedBox(
-            //       height: 1,
-            //     ),
-            //     Lists(
-            //       width: double.infinity,
-            //       hight: 66,
-            //       custNm: 'anees',
-            //       custPh: '8923541289',
-            //       itemName: 'Red bag ',
-            //       itemPrice: '680',
-            //     ),
-            //   ],
-            // ),
+
             Consumer<MainProvider>(builder: (context, value, child) {
               return Container(
                 width: double.infinity,
@@ -289,87 +261,105 @@ class ShopHome extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
+                              Container(
 
-                                      Text(
-                                        items.customerName,
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.red),
-                                      ),
-                                      Text(
-                                        items.phone,
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.red),
-                                      ),
+                          width: double.infinity,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0x3F000000),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 4),
+                                  spreadRadius: 0,
+                                )
+                              ],
 
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
+                            ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+
+                                        Text(
+                                          items.customerName,
+                                          style: TextStyle(
+                                              fontSize: 16, color: Colors.red),
+                                        ),
+                                        Text(
+                                          items.phone,
+                                          style: TextStyle(
+                                              fontSize: 16, color: Colors.red),
+                                        ),
+
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
 
 
-                                      Text(
-                                        items.productName,
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.red),
-                                      ),
-                                      Text(
-                                        items.productPrice,
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.red),
-                                      ),
-                                    ],
-                                  ),
-                                  Consumer<MainProvider>(
-                                    builder: (context,mainPro,_) {
-                                      return items.status!="DISPATCHED"&&items.status!="CANCELED" ?Row(
-                                        children: [
-                                          // InkWell(
-                                          //   onTap:(){
-                                          //
-                                          //     if(items.duration.inHours > 24){
-                                          //       print("fhefgr");
-                                          //     }else{
-                                          //       print("kerhgfiehd");
-                                          //
-                                          //     }
-                                          //
-                                          //   },
-                                          //   child: Container(
-                                          //     width: 60,
-                                          //     height: 30,
-                                          //     color: Colors.red,
-                                          //     child: Text("Cancel",style: TextStyle(color: Colors.white)),
-                                          //   ),
-                                          // ),
-                                          InkWell(
-                                            onTap: (){
-                                      mainPro.dispatchFunction(items.productId,items.orderId,shopid);
-                                            },
-                                            child: Container(
-                                              width: 60,
-                                              height: 30,
-                                              color: Colors.green,
-                                              child: Text("Dispatch",style: TextStyle(color: Colors.white),),
+                                        Text(
+                                          items.productName,
+                                          style: TextStyle(
+                                              fontSize: 16, color: Colors.red),
+                                        ),
+                                        Text(
+                                          items.productPrice,
+                                          style: TextStyle(
+                                              fontSize: 16, color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                    Consumer<MainProvider>(
+                                      builder: (context,mainPro,_) {
+                                        return items.status!="DISPATCHED"&&items.status!="CANCELED" ?Row(
+                                          children: [
+                                            // InkWell(
+                                            //   onTap:(){
+                                            //
+                                            //     if(items.duration.inHours > 24){
+                                            //       print("fhefgr");
+                                            //     }else{
+                                            //       print("kerhgfiehd");
+                                            //
+                                            //     }
+                                            //
+                                            //   },
+                                            //   child: Container(
+                                            //     width: 60,
+                                            //     height: 30,
+                                            //     color: Colors.red,
+                                            //     child: Text("Cancel",style: TextStyle(color: Colors.white)),
+                                            //   ),
+                                            // ),
+                                            InkWell(
+                                              onTap: (){
+                                        mainPro.dispatchFunction(items.productId,items.orderId,shopid);
+                                              },
+                                              child: Container(
+                                                width: 60,
+                                                height: 30,
+                                                color: Colors.green,
+                                                child: Text("Dispatch",style: TextStyle(color: Colors.white),),
 
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ):Text(items.status);
-                                    }
-                                  )
+                                          ],
+                                        ):Text(items.status);
+                                      }
+                                    )
 
-                                ],
+                                  ],
+                                ),
                               ),
                               Divider(
                                 height: 2,
@@ -385,13 +375,7 @@ class ShopHome extends StatelessWidget {
                     ),
               );
             }),
-            /*Stack(children: [
-        SizedBox(height: 1,),
-        Lists(width: double.infinity,
-          hight: 66,
-          custNm: 'anees', custPh: '8923541289', itemName: 'Red bag ', itemPrice: '680',),
-        
-            ],)*/
+
           ],
         ),
       ),
