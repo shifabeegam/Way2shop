@@ -34,21 +34,10 @@ class Costfield extends StatelessWidget {
         child: Container(
         width: width??296,
         height: hight??50,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Color(0xFF650015),
-
-          border: Border.all(color:Color(0xFF650015),width:BorderSide.strokeAlignCenter),
-        
-        
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x3F000000),
-              blurRadius: 4,
-              offset: Offset(0, 4),
-              spreadRadius: 0,
-            )
-          ],
-
-        ),
+          decoration: BoxDecoration(
+              border: Border.all(
+                  width: 1, color: Color(0xff650015)),
+              borderRadius: BorderRadius.circular(15)),
         
         child: TextFormField(
 

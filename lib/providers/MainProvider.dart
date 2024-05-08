@@ -65,45 +65,6 @@ class MainProvider extends ChangeNotifier {
   String SelectedPlaceID = "";
 
 // Add item Details
-  File? posterimage=null;
-  String posterimg="";
-
-  Future<void> uploadposter(String shopid, String shopName, String shopPlace) async {
-    HashMap<String, Object> postermap = HashMap();
-    if (imageFileList.isNotEmpty) {
-      // ref = FirebaseStorage.instance.ref().child(photoId);
-
-      print(imageFileList.toString() + "oijiujiujiuuhn");
-
-      List images = [];
-      for (var ele in imageFileList) {
-        String photoId = DateTime.now().millisecondsSinceEpoch.toString();
-        Uint8List file = await ele.readAsBytes();
-        print(file.toString() + "kkkk");
-        Reference reference =
-        FirebaseStorage.instance.ref().child('images/$photoId new');
-        await reference.putData(file).whenComplete(() async {
-          await reference.getDownloadURL().then((value33) {
-            images.add(value33);
-          });
-        });
-      }
-      postermap['POSTER'] = images;
-      notifyListeners();
-      // await ref.putFile(itemfileimage!).whenComplete(() async {
-      //   await ref.getDownloadURL().then((value) {
-      //     itemmap ["PHOTO"] = value;
-      //     notifyListeners();
-      //   });
-      //   notifyListeners();
-      // });
-      notifyListeners();
-    } else {
-      postermap['POSTER'] = posterimg;
-      // editMap['IMAGE_URL'] = imageUrl;
-    }
-
-  }
 
   File? itemfileimage = null;
   String itemimg = "";
@@ -194,25 +155,6 @@ class MainProvider extends ChangeNotifier {
   }
 
   final ImagePicker imagePicker = ImagePicker();
-  List<XFile> PosterFileList = [];
-  void selectPosters() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage(
-        requestFullMetadata: true, imageQuality: 95);
-    if (selectedImages!.isNotEmpty) {
-      PosterFileList = selectedImages;
-    }
-    notifyListeners();
-    print("Image List Length:" + PosterFileList.length.toString());
-  }
-  void takePosterPicture() async {
-    final XFile? picture =
-    await imagePicker.pickImage(source: ImageSource.camera);
-    if (picture != null) {
-      PosterFileList!.add(picture);
-    }
-    print("Image List Length: ${PosterFileList!.length}");
-  }
-
   List<XFile> imageFileList = [];
 
   void selectImages() async {
@@ -480,7 +422,6 @@ class MainProvider extends ChangeNotifier {
     // notifyListeners();
     print("Upload Succesfully");
   }
-  void getposter(){}
 
   void getallItems() {
     db.collection("ITEMS").get().then((value) {
@@ -682,7 +623,6 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
     print("upload Successfully");
   }
-
 
   Future<void> uploadPlace(BuildContext context) async {
     String id = DateTime.now().millisecondsSinceEpoch.toString();
