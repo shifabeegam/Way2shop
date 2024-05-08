@@ -36,10 +36,10 @@ class Cshops extends StatelessWidget {
 
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:const Color(0xffFFFFFF),
+        backgroundColor:const Color(0xff650015),
 
         title: const Text("Way2Shop",
-          style: TextStyle(color:Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold),
+          style: TextStyle(color:Color(0xffFFFFFF),fontSize: 20,fontWeight: FontWeight.bold),
 
 
         ),
@@ -48,10 +48,11 @@ class Cshops extends StatelessWidget {
       SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 10,),
             Container(width:double.infinity ,
               height: 90,
               decoration: const BoxDecoration(                        gradient: LinearGradient(
-                colors: [Color(0xffBDBBBB), Colors.white,],
+                colors: [Colors.white, Colors.white,],
 
                 begin: Alignment.bottomCenter, end: Alignment.topCenter,
 
@@ -67,7 +68,7 @@ class Cshops extends StatelessWidget {
                   Center(
                     child: Container(
                       height: 50,
-                      width:360 ,
+                      width:340 ,
 
                       child:  Consumer<MainProvider>(
                         builder: (context,val,child) {
@@ -152,10 +153,10 @@ class Cshops extends StatelessWidget {
                                 color:  Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border(
-                                  left: BorderSide(color:Colors.white),
-                                  top: BorderSide(color:Colors.white),
-                                  right: BorderSide(color:Colors.white),
-                                  bottom: BorderSide(width: 1.20, color: Colors.white),
+                                  left: BorderSide(color:Color(0xffBDBBBB)),
+                                  top: BorderSide(color:Color(0xffBDBBBB)),
+                                  right: BorderSide(color:Color(0xffBDBBBB)),
+                                  bottom: BorderSide(width: 1.20, color: Color(0xffBDBBBB)),
                                 ),
                                 boxShadow: [
                                   BoxShadow(
@@ -163,6 +164,8 @@ class Cshops extends StatelessWidget {
                                     blurRadius: 4,
                                     offset: Offset(0, 4),
                                     spreadRadius: 0,
+
+
                                   )
                                 ],
                               ),

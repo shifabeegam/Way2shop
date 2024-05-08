@@ -28,10 +28,10 @@ class Ccategory extends StatelessWidget {
 
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:const Color(0xffFFFFFF),
+        backgroundColor:const Color(0xff650015),
 
         title: const Text("Way2Shop",
-          style: TextStyle(color:Color(0xff650015),fontSize: 20,fontWeight: FontWeight.bold),
+          style: TextStyle(color:Color(0xffFFFFFF),fontSize: 20,fontWeight: FontWeight.bold),
 
 
         ),
@@ -40,11 +40,12 @@ class Ccategory extends StatelessWidget {
       SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 10,),
             Container(width:double.infinity ,
               height: 90,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xffBDBBBB), Colors.white,],
+                  colors: [Colors.white, Colors.white,],
 
                   begin: Alignment.bottomCenter, end: Alignment.topCenter,
 
@@ -62,7 +63,7 @@ class Ccategory extends StatelessWidget {
                   Center(
                     child: Container(
                       height: 50,
-                      width:360 ,
+                      width:340 ,
 
                       child: Consumer<MainProvider>(
                         builder: (context,val,child) {
@@ -72,7 +73,7 @@ class Ccategory extends StatelessWidget {
                             },
                             decoration: InputDecoration(
                             border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white10), borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomRight: Radius.circular(15)),),
-                            fillColor: Colors.white10,
+                            fillColor: Colors.white,
                             filled: true,
                             focusedBorder: InputBorder.none,
                             hintText:"Search",
@@ -124,8 +125,8 @@ class Ccategory extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10,left: 2),
                           child: Container(
-                            width: 100,
-                            height: 70,
+                            width: 50,
+                            height: 50,
                             decoration: BoxDecoration(
                               color:Colors.white ,
 

@@ -149,7 +149,7 @@ class Cproduct extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Container(
-                      height: 200,
+                      //height: 200,
                       width: double.infinity,
                       child: Column(
                         children: [
@@ -197,56 +197,57 @@ class Cproduct extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Align(alignment: Alignment.centerLeft,child: Text("Variations",style: TextStyle(fontSize: 15,color: Colors.black38),)),
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                child: Container(
-                                  height: 100,
-                                  width: 80,
-                                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
-                                  borderRadius:  BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
-                                      Text("Pink",style: TextStyle(fontSize: 18),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                child: Container(
-                                  height: 100,
-                                  width: 80,
-                                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
-                                      borderRadius:  BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Image(image: AssetImage("assets/blue_kidnox.png"),width: 70,),
-                                      Text("Pink",style: TextStyle(fontSize: 18),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                child: Container(
-                                  height: 100,
-                                  width: 80,
-                                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
-                                      borderRadius:  BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
-                                      Text("Pink",style: TextStyle(fontSize: 18),)
-                                    ],
-                                  ),
-                                ),
-                              ),
 
-                            ],
-                          )
+                          // Row(
+                          //   children: [
+                          //     Padding(
+                          //       padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          //       child: Container(
+                          //         height: 100,
+                          //         width: 80,
+                          //         decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                          //         borderRadius:  BorderRadius.circular(20)),
+                          //         child: Column(
+                          //           children: [
+                          //             Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
+                          //             Text("Pink",style: TextStyle(fontSize: 18),)
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     Padding(
+                          //       padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          //       child: Container(
+                          //         height: 100,
+                          //         width: 80,
+                          //         decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                          //             borderRadius:  BorderRadius.circular(20)),
+                          //         child: Column(
+                          //           children: [
+                          //             Image(image: AssetImage("assets/blue_kidnox.png"),width: 70,),
+                          //             Text("Pink",style: TextStyle(fontSize: 18),)
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     Padding(
+                          //       padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          //       child: Container(
+                          //         height: 100,
+                          //         width: 80,
+                          //         decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                          //             borderRadius:  BorderRadius.circular(20)),
+                          //         child: Column(
+                          //           children: [
+                          //             Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
+                          //             Text("Pink",style: TextStyle(fontSize: 18),)
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //
+                          //   ],
+                          // )
                         ],
                       ),
                     ),
