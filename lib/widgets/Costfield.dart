@@ -34,10 +34,7 @@ class Costfield extends StatelessWidget {
         child: Container(
         width: width??296,
         height: hight??50,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  width: 1, color: Color(0xff650015)),
-              borderRadius: BorderRadius.circular(15)),
+
         
         child: TextFormField(
 
@@ -59,8 +56,8 @@ class Costfield extends StatelessWidget {
           fillColor:Colors.white, //Color(0xFF650015).withOpacity(0.8),
 
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-          enabledBorder:OutlineInputBorder(borderRadius: BorderRadius.circular(15)) ,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: new BorderSide(color: Color(0xFF650015))),
+         enabledBorder:OutlineInputBorder(borderRadius: BorderRadius.circular(15)) ,
+         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: new BorderSide(color: Color(0xff800026))),
 
           hintText:hintText,
           hintStyle:TextStyle(color: Colors.grey,fontWeight: FontWeight.w300),

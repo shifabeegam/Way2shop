@@ -56,7 +56,7 @@ class Shoplogin extends StatelessWidget {
                                   height: 50,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          width: 1, color: Color(0xff650015)),
+                                          width: 1, color: Color(0xff800026)),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Center(
                                     child: TextFormField(
@@ -90,7 +90,7 @@ class Shoplogin extends StatelessWidget {
                                   height: 50,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          width: 1, color: Color(0xff650015)),
+                                          width: 1, color: Color(0xff800026)),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Center(
                                     child: TextFormField(
@@ -120,44 +120,57 @@ class Shoplogin extends StatelessWidget {
 
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
-                            child: Consumer<MainProvider>(
-                                builder: (context3,val,child) {
-                                  return SizedBox(
-                                    width: double.infinity,
-                                    height: 45,
-                                    child: Consumer<MainProvider>(
-                                      builder: (context, value, child) {
-                                        return MaterialButton(
-                                          onPressed: () async {
-                                            /*  await FirebaseAuth.instance.verifyPhoneNumber(
-                                            phoneNumber:value.phonecont.text+value.phoneotp.text,
-                                            verificationCompleted: (PhoneAuthCredential credential) {},
-                                            verificationFailed: (FirebaseAuthException e) {},
-                                            codeSent: (String verificationId, int? resendToken) {
-                                              Login.verify=verificationId;*/
-                                            final FormState? form = formKey.currentState;
-                                            if(form!.validate()) {
+                            child: Container(
+                              decoration: BoxDecoration(border: Border.all(
+                                  color: Colors.white),
+                                borderRadius: BorderRadius.circular(15),
 
-                                              // value.sendotp(context);
-                                              // value.controlllerclear();
-                                              value.ShopLogin(value.loginLicenceId.text.trim(), value.loginpassword.text.trim(), context);
+                                gradient: LinearGradient(
+                                  colors: [Color(0xff800026), Color(0xffCB470F),Color(0xff800026)],
+
+                                  begin: Alignment.bottomLeft, end: Alignment.topRight,
+
+                                ),
+                              ),
+                              child: Consumer<MainProvider>(
+                                  builder: (context3,val,child) {
+                                    return SizedBox(
+                                      width: double.infinity,
+                                      height: 45,
+                                      child: Consumer<MainProvider>(
+                                        builder: (context, value, child) {
+                                          return MaterialButton(
+                                            onPressed: () async {
+                                              /*  await FirebaseAuth.instance.verifyPhoneNumber(
+                                              phoneNumber:value.phonecont.text+value.phoneotp.text,
+                                              verificationCompleted: (PhoneAuthCredential credential) {},
+                                              verificationFailed: (FirebaseAuthException e) {},
+                                              codeSent: (String verificationId, int? resendToken) {
+                                                Login.verify=verificationId;*/
+                                              final FormState? form = formKey.currentState;
+                                              if(form!.validate()) {
+
+                                                // value.sendotp(context);
+                                                // value.controlllerclear();
+                                                value.ShopLogin(value.loginLicenceId.text.trim(), value.loginpassword.text.trim(), context);
 
 
-                                            }  },
-                                          child: Text(
-                                            "Login",
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                          color: Color(0xff650015),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(15)),
+                                              }  },
+                                            child: Text(
+                                              "Login",
+                                              style: TextStyle(color: Colors.white),
+                                            ),
+                                           // color: Color(0xff650015),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(15)),
 
-                                          //   codeAutoRetrievalTimeout: (String verificationId) {},
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }
+                                            //   codeAutoRetrievalTimeout: (String verificationId) {},
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  }
+                              ),
                             ),
                           ),
                         ],

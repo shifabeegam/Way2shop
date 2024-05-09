@@ -257,7 +257,7 @@ class MainProvider extends ChangeNotifier {
             map["Product Dimensions"].toString(),
             map["Assembly Required"].toString(),
             map["Instructions"].toString(),
-            map["Shop name"].toString(),
+            map["Shop_Name"].toString(),
             map["Phone No"].toString(),
             map["Shop place"].toString(),
             map["Shop_Details"].toString(),
@@ -274,20 +274,21 @@ class MainProvider extends ChangeNotifier {
 
   Future<void> getSearchProducts(
       String productName, BuildContext context) async {
-    print("hhereeeeeee");
+
     searchAllitem.clear();
     String? selectedSearchPlace = "";
     if (selectedValue != null) {
       selectedSearchPlace = selectedValue?.placename;
       notifyListeners();
     }
+    print("hhereeeeeee  $selectedSearchPlace");
     var selectedItems = await db
         .collection("ITEMS")
         .where(
           "Item Name",
           isEqualTo: productName,
         )
-        .where("Place", isEqualTo: selectedSearchPlace)
+        .where("Shop place", isEqualTo: selectedSearchPlace)
         .get();
 
     if (selectedItems.docs.isNotEmpty) {
@@ -314,9 +315,9 @@ class MainProvider extends ChangeNotifier {
           map["Product Dimensions"].toString(),
           map["Assembly Required"].toString(),
           map["Instructions"].toString(),
-          map["Shop_Name"].toString(),
+          map["Shop name"].toString(),
           map["Phone No"].toString(),
-          map["Place"].toString(),
+          map["Shop place"].toString(),
           map["Shop_Details"].toString(),
           map["Shop_id"].toString(),
           pon,
@@ -326,7 +327,8 @@ class MainProvider extends ChangeNotifier {
             (a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
       }
       notifyListeners();
-    } else {
+    }
+    else {
       print("location isss emptyyy");
       var selectedItems2 = await db
           .collection("ITEMS")
@@ -1366,8 +1368,8 @@ class MainProvider extends ChangeNotifier {
   String shopDetails = '';
   String shopPhone = '';
   double latShop = 0;
-
   double longShop = 0;
+
 
   void fetchShopDetails(String shopId) {
     db.collection("SHOPS").doc(shopId).get().then((value) {
@@ -1389,6 +1391,12 @@ class MainProvider extends ChangeNotifier {
     });
   }
 
+
+  void fetchUsers(){
+
+
+
+  }
 
   List<ItemModel> listMainImages=[];
   void fetchHomeScreenMainItems(){

@@ -64,7 +64,7 @@ class Cproduct extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xff650015),
+        backgroundColor:Color(0xff800026),
 
 
         title: Text("Way2Shop",

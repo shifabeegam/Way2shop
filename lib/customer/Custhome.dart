@@ -46,7 +46,7 @@ class Custhome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor:const Color(0xff650015),
+        backgroundColor:const Color(0xff800026),
         centerTitle: false,
 
 
@@ -111,7 +111,7 @@ class Custhome extends StatelessWidget {
                               child: TextField(
                                 onSubmitted: (text) {
                                   value.getSearchProducts(text, context);
-                                  Navigator.pushReplacement(
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => SearchedProducts(
@@ -131,7 +131,7 @@ class Custhome extends StatelessWidget {
                                         bottomRight: Radius.circular(15),
                                       ),
                                     ),
-                                    fillColor: Colors.white10,
+                                    fillColor: Colors.white60,
                                     filled: true,
                                     focusedBorder: InputBorder.none,
                                     hintText: "Search",
@@ -237,7 +237,49 @@ class Custhome extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Wishlist()),
+                            );
+                          },
+                          child: Container(
+                              width: 30,
 
+                              child: Image.asset("lib/icons/img.png")),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const cartpage()),
+                            );
+                          },
+                          child: Container(
+                              width: 30,
+                              child: Image.asset("lib/icons/cart.png")),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const Ordersummery()),
+                            );
+                          },
+                          child: Container(
+                              width: 30,
+                              child: Image.asset("lib/icons/Order.png")),
+                        ),
+                      ],
+                    ),
                     Consumer<MainProvider>(builder: (context, value, child) {
                       return Padding(
                         padding: EdgeInsets.all(15),
@@ -312,8 +354,8 @@ class Custhome extends StatelessWidget {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
-                          "assets/img_1.png",
-                        )),
+                          "assets/728e9ce499f8d60c039bcad8912069c7.png",
+                        ),fit:BoxFit.fill ),
                       ),
                       width: double.infinity,
                       height: 359,

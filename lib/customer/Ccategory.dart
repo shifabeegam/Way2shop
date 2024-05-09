@@ -28,7 +28,7 @@ class Ccategory extends StatelessWidget {
 
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:const Color(0xff650015),
+        backgroundColor:const Color(0xff800026),
 
         title: const Text("Way2Shop",
           style: TextStyle(color:Color(0xffFFFFFF),fontSize: 20,fontWeight: FontWeight.bold),
@@ -101,86 +101,89 @@ class Ccategory extends StatelessWidget {
             //ListView(
             // children: [
 
-            Consumer<MainProvider>(
-              builder: (context,value,child) {
-                return GridView.builder(
-                    itemCount: value.filtercategorylist.length,
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.9
-                    ),
-                    itemBuilder: (BuildContext context, index){
-                      return  InkWell(
-                        onTap: (){
-                          value.getItem(value.filtercategorylist[index].id);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                              Productlist(categoryid:value.filtercategorylist[index].id ,
-                                categoryname: value.filtercategorylist[index].name,
-                                userId: userId, shopId: '', userName: userName, userPhone: userPhone,) ,));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10,left: 2),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color:Colors.white ,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Consumer<MainProvider>(
+                builder: (context,value,child) {
+                  return GridView.builder(
+                      itemCount: value.filtercategorylist.length,
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 4,
+                          mainAxisSpacing: 3,
+                          childAspectRatio: 0.9
+                      ),
+                      itemBuilder: (BuildContext context, index){
+                        return  InkWell(
+                          onTap: (){
+                            value.getItem(value.filtercategorylist[index].id);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                Productlist(categoryid:value.filtercategorylist[index].id ,
+                                  categoryname: value.filtercategorylist[index].name,
+                                  userId: userId, shopId: '', userName: userName, userPhone: userPhone,) ,));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10,left: 2),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color:Colors.white ,
 
 
 
-                              //color: backgroundColor,
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border(
-                                left: BorderSide(color:Color(0xffBDBBBB)),
-                                top: BorderSide(color:Color(0xffBDBBBB)),
-                                right: BorderSide(color:Color(0xffBDBBBB)),
-                                bottom: BorderSide(width: 1.20, color: Color(0xffBDBBBB)),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4),
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Image.network(
-                                      value.filtercategorylist[index].photo,
-                                      height: 120,
-                                      width: 120,
-                                    ),
-                                  ),
-                                  Text(value.filtercategorylist[index].name,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
+                                //color: backgroundColor,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border(
+                                  left: BorderSide(color:Color(0xffBDBBBB)),
+                                  top: BorderSide(color:Color(0xffBDBBBB)),
+                                  right: BorderSide(color:Color(0xffBDBBBB)),
+                                  bottom: BorderSide(width: 1.20, color: Color(0xffBDBBBB)),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                    spreadRadius: 0,
+                                  )
                                 ],
                               ),
-                            ) ,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Image.network(
+                                        value.filtercategorylist[index].photo,
+                                        height: 120,
+                                        width: 120,
+                                      ),
+                                    ),
+                                    Text(value.filtercategorylist[index].name,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ) ,
 
 
 
+                            ),
                           ),
-                        ),
-                      );
+                        );
 
-                    });
-              }
+                      });
+                }
+              ),
             ),
 
             SizedBox(height: 10,),
