@@ -31,10 +31,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 
   final  items= <Widget>[
-    Icon(Icons.trending_up,color: Colors.white,),
+    Icon(Icons.trending_up,color: Colors.white),
     Icon(Icons.category_outlined,color: Colors.white),
     Icon(Icons.shop_2_outlined,color: Colors.white),
-    Icon(Icons.add_home_work_outlined,color: Colors.white)
+    Icon(Icons.add_home_work_outlined,color: Colors.white),
   ];
 
   @override
@@ -66,7 +66,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Icon(Icons.trending_up, color: Colors.white),
           Icon(Icons.category_outlined, color: Colors.white),
           Icon(Icons.shop_2_outlined, color: Colors.white),
-          Icon(Icons.add_home_work_outlined, color: Colors.white)
+          Icon(Icons.add_home_work_outlined, color: Colors.white),
         ],
         index: index,
         height: 60.0,
@@ -100,7 +100,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               break;
           }
         },
-        color: Color(0xff650015),
+
+        color: Color(0xff800026),
         backgroundColor: Colors.white,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),

@@ -3,6 +3,8 @@ import 'package:a/customer/Ccategory.dart';
 import 'package:a/customer/Cshops.dart';
 import 'package:a/customer/Ordersummery.dart';
 import 'package:a/customer/cartpage.dart';
+import 'package:a/customer/user_registration.dart';
+import 'package:a/providers/loginprovider.dart';
 import 'package:a/widgets/GradButton.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -14,6 +16,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 
 
+import '../IntegrateGoogleMap.dart';
 import '../providers/MainProvider.dart';
 import '../widgets/HomeButton.dart';
 import 'Ctrending.dart';
@@ -40,6 +43,7 @@ class Cproduct extends StatelessWidget {
   String userName;
   String userPhone;
   String shopid;
+  double latitude,longitude;
 
 
   String instruction;
@@ -49,7 +53,7 @@ class Cproduct extends StatelessWidget {
      required this.productdiemension,required this.assmbly,
      required this.instruction,required this.shopname,required this.phone,
      required this.shopdetails,required this.place,required this.userId,required this.userName,
-     required this.userPhone,required this.shopid
+     required this.userPhone,required this.shopid, required this.latitude,required this.longitude
    });
 
   @override
@@ -62,7 +66,7 @@ class Cproduct extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xff650015),
+        backgroundColor:Color(0xff800026),
 
 
         title: Text("Way2Shop",
@@ -147,7 +151,7 @@ class Cproduct extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Container(
-                      height: 200,
+                      //height: 200,
                       width: double.infinity,
                       child: Column(
                         children: [
@@ -195,56 +199,57 @@ class Cproduct extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Align(alignment: Alignment.centerLeft,child: Text("Variations",style: TextStyle(fontSize: 15,color: Colors.black38),)),
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                child: Container(
-                                  height: 100,
-                                  width: 80,
-                                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
-                                  borderRadius:  BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
-                                      Text("Pink",style: TextStyle(fontSize: 18),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                child: Container(
-                                  height: 100,
-                                  width: 80,
-                                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
-                                      borderRadius:  BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Image(image: AssetImage("assets/blue_kidnox.png"),width: 70,),
-                                      Text("Pink",style: TextStyle(fontSize: 18),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                child: Container(
-                                  height: 100,
-                                  width: 80,
-                                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
-                                      borderRadius:  BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
-                                      Text("Pink",style: TextStyle(fontSize: 18),)
-                                    ],
-                                  ),
-                                ),
-                              ),
 
-                            ],
-                          )
+                          // Row(
+                          //   children: [
+                          //     Padding(
+                          //       padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          //       child: Container(
+                          //         height: 100,
+                          //         width: 80,
+                          //         decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                          //         borderRadius:  BorderRadius.circular(20)),
+                          //         child: Column(
+                          //           children: [
+                          //             Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
+                          //             Text("Pink",style: TextStyle(fontSize: 18),)
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     Padding(
+                          //       padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          //       child: Container(
+                          //         height: 100,
+                          //         width: 80,
+                          //         decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                          //             borderRadius:  BorderRadius.circular(20)),
+                          //         child: Column(
+                          //           children: [
+                          //             Image(image: AssetImage("assets/blue_kidnox.png"),width: 70,),
+                          //             Text("Pink",style: TextStyle(fontSize: 18),)
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     Padding(
+                          //       padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          //       child: Container(
+                          //         height: 100,
+                          //         width: 80,
+                          //         decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                          //             borderRadius:  BorderRadius.circular(20)),
+                          //         child: Column(
+                          //           children: [
+                          //             Image(image: AssetImage("assets/Pink_kidnox.png"),width: 70,),
+                          //             Text("Pink",style: TextStyle(fontSize: 18),)
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //
+                          //   ],
+                          // )
                         ],
                       ),
                     ),
@@ -328,52 +333,60 @@ class Cproduct extends StatelessWidget {
                     width: double.infinity,
                     color: Colors.black12,
                     child: Column(children: [
-                      Container(
-                        width: double.infinity,
-                        color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
+                      Consumer<MainProvider>(
+                        builder: (context,value,child) {
+                          return Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
 
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Align(alignment:Alignment.centerLeft ,
-                                    child: Text("Shop Details",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                ),
-                                Align(alignment:Alignment.centerLeft ,child: Text("kidoNex",)),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Align(alignment:Alignment.centerLeft ,child: Text("Phone: "+"123456789"),),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Align(alignment:Alignment.centerLeft ,child: Text("Hours: "+"Open.Closes 9 pm"),),
-                                ),
-
-
-                                Row(
                                   children: [
-                                    Icon(Icons.location_on_outlined,size: 36,color: Colors.black38,),
-                                    Column(
-                                      children: [
-                                        Text("SH 72, Down Hill, Malappuram, Kerala 676505",style: TextStyle(fontSize: 12),),
-                                        Align(alignment:Alignment.centerLeft ,
-                                          child: Text("Show Map",style: TextStyle(fontSize: 12,color: Colors.black38)),),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8.0),
+                                      child: Align(alignment:Alignment.centerLeft ,
+                                        child: Text("Shop Details",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                    Align(alignment:Alignment.centerLeft ,child: Text(shopname,)),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15.0),
+                                      child: Align(alignment:Alignment.centerLeft ,child: Text("Phone: "+value.shopPhone),),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15.0),
+                                      child: Align(alignment:Alignment.centerLeft ,child: Text("Hours: "+"Open.Closes 9 pm"),),
+                                    ),
 
+
+                                    Row(
+                                      children: [
+                                        Icon(Icons.location_on_outlined,size: 36,color: Colors.black38,),
+                                        Column(
+                                          children: [
+                                            Text(value.shopDetails,style: TextStyle(fontSize: 12),),
+                                            Align(alignment:Alignment.centerLeft ,
+                                              child: InkWell(
+                                                onTap: (){
+                                                  MapUtils.launchMaps(latitude,longitude,value.latitude,value.longitude);
+                                                },
+                                                  child: Text("Show Map",style: TextStyle(fontSize: 12,color: Colors.black38))),),
+
+                                          ],
+                                        ),
                                       ],
                                     ),
+
+
                                   ],
                                 ),
+                              ),
 
-
-                              ],
-                            ),
-                          ),
-
+                          );
+                        }
                       ),
 
 
@@ -423,83 +436,108 @@ class Cproduct extends StatelessWidget {
             ),
 
             Consumer<MainProvider>(
-              builder: (context,provider,_) {
-                return InkWell(
-                  onTap: (){
-                    showDialog(context: context, builder: (context){
-                      return Container(
-                        child: AlertDialog(backgroundColor: Colors.white,
-                          elevation: 0,
+              builder: (context3,provider,_) {
+                return  Consumer<LoginProvider>(
+                    builder: (context4,log,_) {
+                    return InkWell(
+                      onTap: (){
+                        if (log.loginedUserName.isEmpty) {
+                          log.clearRegControlls();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserRegistration(),
+                              ));
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content:
+                            Text("Sorry , Login to your account to place an order!"),
 
-                          actions: [
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(15),
+                          ));
+                        }else{
+                          print(userPhone+userName+userId+"hhhhhhhhh");
+                          showDialog(context: context, builder: (context){
+                            return AlertDialog(backgroundColor: Colors.white,
+                              elevation: 0,
 
-
-
-                                ),
-
-                                Text("Do you want to Confirm your order ? "),
-                                Row(
+                              actions: [
+                                Column(
                                   children: [
-                                    MaterialButton(onPressed: (){ Navigator.pop(
-                                      context,
-                                      /* MaterialPageRoute(
-                                                              builder: (context) => const Additem()),*/
-                                    );
+                                    Padding(
+                                      padding: const EdgeInsets.all(15),
 
-                                    },
-                                      child: const Text("cancel"),
-                                      highlightColor: Color(0xff0C630A),
-                                      splashColor: Colors.grey,
-                                      color: Colors.red,
+
+
                                     ),
 
-                                    SizedBox(width: 10,),
+                                    Text("Do you want to Confirm your order ? "),
+                                    Row(
+                                      children: [
+                                        MaterialButton(onPressed: (){ Navigator.pop(
+                                          context,
+                                          /* MaterialPageRoute(
+                                                                builder: (context) => const Additem()),*/
+                                        );
 
-                                    MaterialButton(
-                                      onPressed: (){
+                                        },
+                                          child: const Text("cancel"),
+                                          highlightColor: Color(0xff0C630A),
+                                          splashColor: Colors.grey,
+                                          color: Colors.red,
+                                        ),
 
-                                        print(userPhone+userName+userId+"hhhhhhhhh");
+                                        SizedBox(width: 10,),
 
-                                        provider.addConfirmOrder(itemname, price, itemid,userId,shopid,userName,userPhone);
+                                        MaterialButton(
+                                          onPressed: (){
+
+                                            print(userPhone+userName+userId+"hhhhhhhhh");
+
+                                            provider.addConfirmOrder(itemname, price, itemid,userId,shopid,userName,userPhone);
+                                            Navigator.pop(context);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                              content:
+                                              Text("Ordered Successfully"),
+                                              duration: Duration(milliseconds: 3000),
+                                            ));
 
 
 
-
-                                    },
-                                      child: const Text("ok"),
-                                      highlightColor: Color(0xff0C630A),
-                                      splashColor: Colors.grey,
-                                      color: Colors.green,
+                                          },
+                                          child: const Text("ok",
+                                          ),
+                                          highlightColor: Color(0xff0C630A),
+                                          splashColor: Colors.grey,
+                                          color: Colors.green,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
+
                               ],
-                            ),
 
-                          ],
+                            );
+                          });
+                        }
 
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 140,
+                        decoration: BoxDecoration(border: Border.all(
+                            color: Colors.black26),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.yellow[600]
                         ),
-                      );
-                    });
-                  },
-                  child: Container(
-                    height: 45,
-                    width: 140,
-                    decoration: BoxDecoration(border: Border.all(
-                        color: Colors.black26),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.yellow[600]
-                    ),
-                    child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
-                  ),
+                        child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
+                      ),
+                    );
+                  }
                 );
               }
             ),
-
 
 
           ],

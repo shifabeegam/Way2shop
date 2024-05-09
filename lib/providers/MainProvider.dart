@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-
+import 'package:intl/intl.dart';
 
 import 'package:a/Model/ItemModel.dart';
 import 'package:a/providers/loginprovider.dart';
@@ -14,6 +14,7 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Shopers/ShopHome.dart';
 
@@ -21,7 +22,6 @@ class MainProvider extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   Reference ref = FirebaseStorage.instance.ref("IMAGE URL");
-
 
   TextEditingController itemNm = TextEditingController();
   TextEditingController itemCd = TextEditingController();
@@ -36,8 +36,8 @@ class MainProvider extends ChangeNotifier {
 
   TextEditingController category = TextEditingController();
 
-  List <ItemModel> allAdditem = [];
-  List <ItemModel> searchAllitem = [];
+  List<ItemModel> allAdditem = [];
+  List<ItemModel> searchAllitem = [];
 
   TextEditingController addcategory = TextEditingController();
 
@@ -47,8 +47,8 @@ class MainProvider extends ChangeNotifier {
   TextEditingController address = TextEditingController();
   TextEditingController shopname = TextEditingController();
   TextEditingController shopdetails = TextEditingController();
-  TextEditingController  idprooof= TextEditingController();
-  TextEditingController  licence= TextEditingController();
+  TextEditingController idprooof = TextEditingController();
+  TextEditingController licence = TextEditingController();
   TextEditingController reciept = TextEditingController();
   TextEditingController licenceid = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
@@ -62,29 +62,26 @@ class MainProvider extends ChangeNotifier {
   TextEditingController productcare = TextEditingController();
   TextEditingController instruction = TextEditingController();
 
-  String productSelectedCategoryID="";
-  String SelectedShopID="";
-  String SelectedPlaceID="";
+  String productSelectedCategoryID = "";
+  String SelectedShopID = "";
+  String SelectedPlaceID = "";
 
 // Add item Details
 
-  File? itemfileimage=null;
-  String itemimg="";
+  File? itemfileimage = null;
+  String itemimg = "";
 
-  Future<void> upload(String shopid,String shopName,String shopPlace) async {
-    String id = DateTime
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+  Future<void> upload(String shopid, String shopName, String shopPlace) async {
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> itemmap = HashMap();
 
     itemmap["Item Name"] = itemNm.text;
     itemmap["Price"] = price.text;
     itemmap["color"] = color.text;
     itemmap["Category"] = addcategory.text;
-    itemmap["Shop name"] =shopName;
+    itemmap["Shop name"] = shopName;
     itemmap["Shop place"] = shopPlace;
-    itemmap["description"] =description.text;
+    itemmap["description"] = description.text;
     itemmap["Item Quantity"] = quantity.text;
     itemmap["Item Id"] = id;
     itemmap["Offers"] = offers.text;
@@ -92,29 +89,26 @@ class MainProvider extends ChangeNotifier {
     itemmap["Product Dimensions"] = diamention.text;
     itemmap["Assembly Required"] = requirements.text;
     itemmap["Product Care"] = productcare.text;
-    itemmap["Instructions"] =instruction.text;
-    itemmap["Category_id"] =productSelectedCategoryID;
-    itemmap["Shop_id"] =shopid;
+    itemmap["Instructions"] = instruction.text;
+    itemmap["Category_id"] = productSelectedCategoryID;
+    itemmap["Shop_id"] = shopid;
     if (imageFileList.isNotEmpty) {
-
       // ref = FirebaseStorage.instance.ref().child(photoId);
 
-      print(imageFileList.toString()+"oijiujiujiuuhn");
+      print(imageFileList.toString() + "oijiujiujiuuhn");
 
       List images = [];
-      for(var ele in imageFileList){
+      for (var ele in imageFileList) {
         String photoId = DateTime.now().millisecondsSinceEpoch.toString();
         Uint8List file = await ele.readAsBytes();
-        print(file.toString()+"kkkk");
-        Reference reference = FirebaseStorage.instance.ref().child('images/$photoId new');
+        print(file.toString() + "kkkk");
+        Reference reference =
+            FirebaseStorage.instance.ref().child('images/$photoId new');
         await reference.putData(file).whenComplete(() async {
           await reference.getDownloadURL().then((value33) {
             images.add(value33);
-
-
-            });
           });
-
+        });
       }
       itemmap['PHOTOS'] = images;
       notifyListeners();
@@ -134,6 +128,7 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
     print("Upload Succesfully");
   }
+
   void setImage1(File image) {
     itemfileimage = image;
     notifyListeners();
@@ -141,7 +136,8 @@ class MainProvider extends ChangeNotifier {
 
   Future getitemImagegallery() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       setImage1(File(pickedImage.path));
@@ -164,213 +160,250 @@ class MainProvider extends ChangeNotifier {
   List<XFile> imageFileList = [];
 
   void selectImages() async {
-    final List<XFile>? selectedImages = await
-    imagePicker.pickMultiImage(requestFullMetadata: true,imageQuality: 95);
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage(
+        requestFullMetadata: true, imageQuality: 95);
     if (selectedImages!.isNotEmpty) {
       imageFileList = selectedImages;
     }
     notifyListeners();
     print("Image List Length:" + imageFileList.length.toString());
-
   }
 
-
   void takePicture() async {
-    final XFile? picture = await imagePicker.pickImage(source: ImageSource.camera);
+    final XFile? picture =
+        await imagePicker.pickImage(source: ImageSource.camera);
     if (picture != null) {
       imageFileList!.add(picture);
     }
     print("Image List Length: ${imageFileList!.length}");
   }
+
   // View the Items
-   void getItem(String catid){
-    db.collection("ITEMS").where("Category_id",isEqualTo: catid).get().then((value)
-      {
-        allAdditem.clear();
-       // totalAmount = 0.0;
-        print("object.................");
-        if(value.docs.isNotEmpty){
-          for(var element in value.docs) {
-            Map<dynamic, dynamic> map = element.data() as Map;
-            allAdditem.add(ItemModel(
-           map["Item Id"].toString(),
-           map["PHOTOS"],
-           map["Item Name"].toString(),
-           map["Price"].toString(),
-           map["Category"].toString(),
-           map["Category_id"].toString(),
-           map["description"].toString(),
-           map["Item Quantity"].toString(),
-           map["Offers"].toString(),
-           map["color"].toString(),
-           map["Brand"].toString(),
-           map["Product Dimensions"].toString(),
-           map["Assembly Required"].toString(),
-
-           map["Instructions"].toString(),
-              map["Shop_Name"].toString(),
-              map["Phone No"].toString(),
-              map["Shop_Details"].toString(),
-              map["Place"].toString(),
-
-            ));
-            notifyListeners();
-
+  void getItem(String catid) {
+    db
+        .collection("ITEMS")
+        .where("Category_id", isEqualTo: catid)
+        .get()
+        .then((value) {
+      allAdditem.clear();
+      // totalAmount = 0.0;
+      print("object.................");
+      if (value.docs.isNotEmpty) {
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data() as Map;
+          String pon="0";
+          if(   map["POINT"]!=null){
+            pon= map["POINT"].toString();
           }
-          notifyListeners();
+          allAdditem.add(ItemModel(
+            map["Item Id"].toString(),
+            map["PHOTOS"],
+            map["Item Name"].toString(),
+            map["Price"].toString(),
+            map["Category"].toString(),
+            map["Category_id"].toString(),
+            map["description"].toString(),
+            map["Item Quantity"].toString(),
+            map["Offers"].toString(),
+            map["color"].toString(),
+            map["Brand"].toString(),
+            map["Product Dimensions"].toString(),
+            map["Assembly Required"].toString(),
+            map["Instructions"].toString(),
+            map["Shop name"].toString(),
+            map["Phone No"].toString(),
+            map["Shop place"].toString(),
+            map["Shop_Details"].toString(),
+            map["Shop_id"].toString(),
+            pon,
 
+          ));
+          notifyListeners();
         }
-      });
+        notifyListeners();
+      }
+    });
   }
 
-  void getItemshop(String shopid,){
-    db.collection("ITEMS").where("Shop_id",isEqualTo: shopid).get().then((value)
-      {
+  void getItemshop(
+    String shopid,
+  ) {
+    db
+        .collection("ITEMS")
+        .where("Shop_id", isEqualTo: shopid)
+        .get()
+        .then((value) {
+      allAdditem.clear();
+      // totalAmount = 0.0;
+      print("object.................");
+      if (value.docs.isNotEmpty) {
         allAdditem.clear();
-       // totalAmount = 0.0;
-        print("object.................");
-        if(value.docs.isNotEmpty){
-          for(var element in value.docs) {
-            Map<dynamic, dynamic> map = element.data() as Map;
-            allAdditem.add(ItemModel(
-           map["Item Id"].toString(),
-           map["PHOTOS"],
-           map["Item Name"].toString(),
-           map["Price"].toString(),
-           map["Category"].toString(),
-           map["Category_id"].toString(),
-           map["description"].toString(),
-           map["Item Quantity"].toString(),
-           map["Offers"].toString(),
-           map["color"].toString(),
-           map["Brand"].toString(),
-           map["Product Dimensions"].toString(),
-           map["Assembly Required"].toString(),
-
-           map["Instructions"].toString(),
-              map["Shop_Name"].toString(),
-              map["Phone No"].toString(),
-              map["Shop_Details"].toString(),
-              map["Place"].toString(),
-
-            ));
-            notifyListeners();
-
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data() as Map;
+          String pon="0";
+          if(   map["POINT"]!=null){
+            pon= map["POINT"].toString();
           }
-          notifyListeners();
+          allAdditem.add(ItemModel(
+            map["Item Id"].toString(),
+            map["PHOTOS"],
+            map["Item Name"].toString(),
+            map["Price"].toString(),
+            map["Category"].toString(),
+            map["Category_id"].toString(),
+            map["description"].toString(),
+            map["Item Quantity"].toString(),
+            map["Offers"].toString(),
+            map["color"].toString(),
+            map["Brand"].toString(),
+            map["Product Dimensions"].toString(),
+            map["Assembly Required"].toString(),
+            map["Instructions"].toString(),
+            map["Shop_Name"].toString(),
+            map["Phone No"].toString(),
+            map["Shop place"].toString(),
+            map["Shop_Details"].toString(),
+            map["Shop_id"].toString(),
+            pon,
 
+          ));
+          notifyListeners();
         }
-      });
+        notifyListeners();
+      }
+    });
   }
 
-   Future<void> getSearchProducts(String productName,BuildContext context) async {
-    print("hhereeeeeee");
-     searchAllitem.clear();
-     String? selectedSearchPlace = "";
-     if(selectedValue!=null){
-       selectedSearchPlace=selectedValue?.placename;
-       notifyListeners();
-     }
-    var selectedItems = await db.collection("ITEMS")
-        .where("Item Name",isEqualTo: productName,)
-        .where("Place",isEqualTo: selectedSearchPlace)
+  Future<void> getSearchProducts(
+      String productName, BuildContext context) async {
+
+    searchAllitem.clear();
+    String? selectedSearchPlace = "";
+    if (selectedValue != null) {
+      selectedSearchPlace = selectedValue?.placename;
+      notifyListeners();
+    }
+    print("hhereeeeeee  $selectedSearchPlace");
+    var selectedItems = await db
+        .collection("ITEMS")
+        .where(
+          "Item Name",
+          isEqualTo: productName,
+        )
+        .where("Shop place", isEqualTo: selectedSearchPlace)
         .get();
 
-       if(selectedItems.docs.isNotEmpty){
-         print("location not emptyyy");
+    if (selectedItems.docs.isNotEmpty) {
+      print("location not emptyyy");
 
-         for(var element in selectedItems.docs) {
-           Map<dynamic, dynamic> map = element.data() as Map;
-           searchAllitem.add(ItemModel(
-             map["Item Id"].toString(),
-             map["PHOTO"],
-             map["Item Name"].toString(),
-             map["Price"].toString(),
-             map["Category"].toString(),
-             map["Category_id"].toString(),
-             map["description"].toString(),
-             map["Item Quantity"].toString(),
-             map["Offers"].toString(),
-             map["color"].toString(),
-             map["Brand"].toString(),
-             map["Product Dimensions"].toString(),
-             map["Assembly Required"].toString(),
-             map["Instructions"].toString(),
-             map["Shop_Name"].toString(),
-             map["Phone No"].toString(),
-             map["Shop_Details"].toString(),
-             map["Place"].toString(),
-           ));
-           searchAllitem.sort((a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
+      for (var element in selectedItems.docs) {
+        Map<dynamic, dynamic> map = element.data() as Map;
+        String pon="0";
+        if(   map["POINT"]!=null){
+          pon= map["POINT"].toString();
+        }
+        searchAllitem.add(ItemModel(
+          map["Item Id"].toString(),
+          map["PHOTOS"],
+          map["Item Name"].toString(),
+          map["Price"].toString(),
+          map["Category"].toString(),
+          map["Category_id"].toString(),
+          map["description"].toString(),
+          map["Item Quantity"].toString(),
+          map["Offers"].toString(),
+          map["color"].toString(),
+          map["Brand"].toString(),
+          map["Product Dimensions"].toString(),
+          map["Assembly Required"].toString(),
+          map["Instructions"].toString(),
+          map["Shop name"].toString(),
+          map["Phone No"].toString(),
+          map["Shop place"].toString(),
+          map["Shop_Details"].toString(),
+          map["Shop_id"].toString(),
+          pon,
 
+        ));
+        searchAllitem.sort(
+            (a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
+      }
+      notifyListeners();
+    }
+    else {
+      print("location isss emptyyy");
+      var selectedItems2 = await db
+          .collection("ITEMS")
+          .where(
+            "Item Name",
+            isEqualTo: productName,
+          )
+          .get();
+      if (selectedItems2.docs.isNotEmpty) {
+        print("$productName available on other location");
+        for (var element in selectedItems2.docs) {
+          Map<dynamic, dynamic> map = element.data() as Map;
+          String pon="0";
+          if(   map["POINT"]!=null){
+            pon= map["POINT"].toString();
+          }
+          searchAllitem.add(ItemModel(
+            map["Item Id"].toString(),
+            map["PHOTOS"],
+            map["Item Name"].toString(),
+            map["Price"].toString(),
+            map["Category"].toString(),
+            map["Category_id"].toString(),
+            map["description"].toString(),
+            map["Item Quantity"].toString(),
+            map["Offers"].toString(),
+            map["color"].toString(),
+            map["Brand"].toString(),
+            map["Product Dimensions"].toString(),
+            map["Assembly Required"].toString(),
+            map["Instructions"].toString(),
+            map["Shop_Name"].toString(),
+            map["Phone No"].toString(),
+            map["Place"].toString(),
+            map["Shop_Details"].toString(),
+            map["Shop_id"].toString(),
+            pon,
 
-         }
-         notifyListeners();
-       }else{
-         print("location isss emptyyy");
-         var selectedItems2 = await db.collection("ITEMS")
-             .where("Item Name",isEqualTo: productName,)
-             .get();
-         if(selectedItems2.docs.isNotEmpty){
-           print("$productName available on other location");
-           for(var element in selectedItems2.docs) {
-             Map<dynamic, dynamic> map = element.data() as Map;
-             searchAllitem.add(ItemModel(
-               map["Item Id"].toString(),
-               map["PHOTOS"],
-               map["Item Name"].toString(),
-               map["Price"].toString(),
-               map["Category"].toString(),
-               map["Category_id"].toString(),
-               map["description"].toString(),
-               map["Item Quantity"].toString(),
-               map["Offers"].toString(),
-               map["color"].toString(),
-               map["Brand"].toString(),
-               map["Product Dimensions"].toString(),
-               map["Assembly Required"].toString(),
-               map["Instructions"].toString(),
-               map["Shop_Name"].toString(),
-               map["Phone No"].toString(),
-               map["Shop_Details"].toString(),
-               map["Place"].toString(),
-             ));
+          ));
 
-             searchAllitem.sort((a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
-
-           }
-           notifyListeners();
-           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-             backgroundColor: Colors.red,
-             content: Center(
-               child: Text(selectedValue!=null?"Searched item not found on selected location!":"Searched item not found!",
-                 style: TextStyle(fontWeight: FontWeight.w700),
-               ),
-             ),
-           ));
-         }else{
-           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-             backgroundColor: Colors.red,
-             content: Center(
-               child: Text("Searched item not found!",
-                 style: TextStyle(fontWeight: FontWeight.w700),
-               ),
-             ),
-           ));
-         }
-
-
-
-
-       }
-
+          searchAllitem.sort(
+              (a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
+        }
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Center(
+            child: Text(
+              selectedValue != null
+                  ? "Searched item not found on selected location!"
+                  : "Searched item not found!",
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Center(
+            child: Text(
+              "Searched item not found!",
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+        ));
+      }
+    }
   }
-
 
   var q;
   var Uid;
-  void incrementInteger() {
 
+  void incrementInteger() {
     print('function called');
     print(Upquantity);
     q = int.tryParse(Upquantity.text);
@@ -389,21 +422,23 @@ class MainProvider extends ChangeNotifier {
     //
     // };
 
-
     // db.collection("ITEMS").doc(itemCd.text.toString()).set(user);
     // notifyListeners();
     print("Upload Succesfully");
   }
 
-  void getallItems(){
-    db.collection("ITEMS").get().then((value)
-    {
+  void getallItems() {
+    db.collection("ITEMS").get().then((value) {
       allAdditem.clear();
       // totalAmount = 0.0;
       print("object.................");
-      if(value.docs.isNotEmpty){
-        for(var element in value.docs) {
+      if (value.docs.isNotEmpty) {
+        for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data() as Map;
+          String pon="0";
+          if(   map["POINT"]!=null){
+            pon= map["POINT"].toString();
+          }
           allAdditem.add(ItemModel(
             map["Item Id"].toString(),
             map["PHOTOS"],
@@ -418,33 +453,38 @@ class MainProvider extends ChangeNotifier {
             map["Brand"].toString(),
             map["Product Dimensions"].toString(),
             map["Assembly Required"].toString(),
-
             map["Instructions"].toString(),
-            map["Shop_Name"].toString(),
+            map["Shop name"].toString(),
             map["Phone No"].toString(),
+            map["Shop place"].toString(),
             map["Shop_Details"].toString(),
+            map["Shop_id"].toString(),
+            pon,
 
-           map["Place"].toString(),
           ));
           notifyListeners();
-
         }
         notifyListeners();
-
       }
     });
   }
 
-
-  void getshopitem(String shopid){
-    db.collection("ITEMS").where('Shop_id',isEqualTo :shopid ).get().then((value)
-    {
+  void getshopitem(String shopid) {
+    db
+        .collection("ITEMS")
+        .where('Shop_id', isEqualTo: shopid)
+        .get()
+        .then((value) {
       allAdditem.clear();
       // totalAmount = 0.0;
       print("object.................");
-      if(value.docs.isNotEmpty){
-        for(var element in value.docs) {
+      if (value.docs.isNotEmpty) {
+        for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data() as Map;
+          String pon="0";
+          if(   map["POINT"]!=null){
+            pon= map["POINT"].toString();
+          }
           allAdditem.add(ItemModel(
             map["Item Id"].toString(),
             map["PHOTOS"],
@@ -459,72 +499,58 @@ class MainProvider extends ChangeNotifier {
             map["Brand"].toString(),
             map["Product Dimensions"].toString(),
             map["Assembly Required"].toString(),
-
             map["Instructions"].toString(),
-            map["Shop_Name"].toString(),
+            map["Shop name"].toString(),
             map["Phone No"].toString(),
+            map["Shop place"].toString(),
             map["Shop_Details"].toString(),
-            map["Place"].toString(),
+            map["Shop_id"].toString(),
+            pon,
+
           ));
           notifyListeners();
-
         }
         notifyListeners();
-
       }
     });
   }
 
   void stupload() {
-
-
     final user = <String, dynamic>{
-
       "Item Name": itemNm.text,
       "item Code": itemCd.text,
       "Price": price.text,
       "Item Quantity": quantity.text,
       "Category": category.text,
-
-
     };
-
 
     db.collection("ITEMS").doc(itemCd.text.toString()).set(user);
     notifyListeners();
     print("Upload Succesfully");
   }
 
+  void adduser(BuildContext context, String type) {
+    LoginProvider loginProvider =
+        Provider.of<LoginProvider>(context, listen: false);
 
-  void adduser(BuildContext context,String type){
-    LoginProvider loginProvider = Provider.of<LoginProvider>(context, listen: false);
-
-    String id = DateTime
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> usermap = HashMap();
-    usermap["USER_ID"]= id;
-    usermap["USER_NAME"]= loginProvider.loginusername.text;
-    usermap["PHONE_NUMBER"]= "+91"+loginProvider.Loginphnnumber.text;
-    usermap["TYPE"]= type;
-    usermap["STATUS"]= "ACTIVE";
+    usermap["USER_ID"] = id;
+    usermap["USER_NAME"] = loginProvider.loginusername.text;
+    usermap["PHONE_NUMBER"] = "+91" + loginProvider.Loginphnnumber.text;
+    usermap["TYPE"] = type;
+    usermap["STATUS"] = "ACTIVE";
     db.collection("USERS").doc(id).set(usermap);
-
   }
 
-
-
-
-
-
-
-
   File? categoryfileimg;
-  String categoryimg  ="";
+  String categoryimg = "";
+
   Future<bool> checkPlaceExist(String place) async {
-    var data =
-    await db.collection("PLACE").where("PLACE_NAME", isEqualTo: place).get();
+    var data = await db
+        .collection("PLACE")
+        .where("PLACE_NAME", isEqualTo: place)
+        .get();
     if (data.docs.isNotEmpty) {
       // print("ndfjsdbf$checkNumber");
       return true;
@@ -534,18 +560,10 @@ class MainProvider extends ChangeNotifier {
   }
 
   Future<bool> checkCategoryExist(String name) async {
-    var data =
-    await db.collection("CATEGORIES").where("CATEGORY_NAME", isEqualTo: name).get();
-    if (data.docs.isNotEmpty) {
-     // print("ndfjsdbf$checkNumber");
-      return true;
-    } else {
-      return false;
-    }
-  }
-  Future<bool> checklicenceExist(String phone) async {
-    var data =
-    await db.collection("SHOPS").where("Licence Id", isEqualTo: phone).get();
+    var data = await db
+        .collection("CATEGORIES")
+        .where("CATEGORY_NAME", isEqualTo: name)
+        .get();
     if (data.docs.isNotEmpty) {
       // print("ndfjsdbf$checkNumber");
       return true;
@@ -554,78 +572,75 @@ class MainProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> checklicenceExist(String phone) async {
+    var data = await db
+        .collection("SHOPS")
+        .where("Licence Id", isEqualTo: phone)
+        .get();
+    if (data.docs.isNotEmpty) {
+      // print("ndfjsdbf$checkNumber");
+      return true;
+    } else {
+      return false;
+    }
+  }
 
- Future<void> uploadcatergory(BuildContext context) async {
-   String id = DateTime
-       .now()
-       .millisecondsSinceEpoch
-       .toString();
-   HashMap<String, Object> categorymap = HashMap();
+  Future<void> uploadcatergory(BuildContext context) async {
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
+    HashMap<String, Object> categorymap = HashMap();
 
-   categorymap["CATEGORY_NAME"] = addcategory.text;
-   categorymap["CATEGORY_ID"] = id;
-   bool categorycheck;
-   categorycheck = await checkCategoryExist( addcategory.text);
-     // db.collection("USERS").doc(id).set(categorymap);
+    categorymap["CATEGORY_NAME"] = addcategory.text;
+    categorymap["CATEGORY_ID"] = id;
+    bool categorycheck;
+    categorycheck = await checkCategoryExist(addcategory.text);
+    // db.collection("USERS").doc(id).set(categorymap);
 
-     if (categoryfileimg != null) {
-       String photoId = DateTime
-           .now()
-           .millisecondsSinceEpoch
-           .toString();
-       ref = FirebaseStorage.instance.ref().child(photoId);
-       await ref.putFile(categoryfileimg!).whenComplete(() async {
-         await ref.getDownloadURL().then((value) {
-           categorymap["PHOTOS"] = value;
-           notifyListeners();
-         });
-         notifyListeners();
-       });
-       notifyListeners();
-     } else {
-       categorymap['PHOTOS'] = categoryimg;
-       // editMap['IMAGE_URL'] = imageUrl;
-     }
-   if (!categorycheck) {
-
-     db.collection("CATEGORIES").doc(id).set(categorymap);
-   }
-   else{
-     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-         backgroundColor: Colors.red,
-         content: Center(
-             child: Text(
-               "Category Already Exists",
-               style: TextStyle(fontWeight: FontWeight.w700),
-             ),
-             ),
-         ));
-   }
-   getcategoy();
-   notifyListeners();
-   print("upload Successfully");
- }
-
+    if (categoryfileimg != null) {
+      String photoId = DateTime.now().millisecondsSinceEpoch.toString();
+      ref = FirebaseStorage.instance.ref().child(photoId);
+      await ref.putFile(categoryfileimg!).whenComplete(() async {
+        await ref.getDownloadURL().then((value) {
+          categorymap["PHOTOS"] = value;
+          notifyListeners();
+        });
+        notifyListeners();
+      });
+      notifyListeners();
+    } else {
+      categorymap['PHOTOS'] = categoryimg;
+      // editMap['IMAGE_URL'] = imageUrl;
+    }
+    if (!categorycheck) {
+      db.collection("CATEGORIES").doc(id).set(categorymap);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: Colors.red,
+        content: Center(
+          child: Text(
+            "Category Already Exists",
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ));
+    }
+    getcategoy();
+    notifyListeners();
+    print("upload Successfully");
+  }
 
   Future<void> uploadPlace(BuildContext context) async {
-    String id = DateTime
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> placemap = HashMap();
 
     placemap["PLACE_NAME"] = address.text;
     placemap["PLACE_ID"] = id;
-   bool placecheck;
-    placecheck = await checkPlaceExist( address.text);
+    bool placecheck;
+    placecheck = await checkPlaceExist(address.text);
     // db.collection("PLACE").doc(id).set(placemap);
 
-
-if (!placecheck) {
-
+    if (!placecheck) {
       db.collection("PLACE").doc(id).set(placemap);
-     }
-    else{
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.red,
         content: Center(
@@ -641,16 +656,15 @@ if (!placecheck) {
     print("upload Successfully");
   }
 
-
   void setImage(File image) {
     categoryfileimg = image;
     notifyListeners();
   }
 
-
   Future getImagegallery() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       setImage(File(pickedImage.path));
@@ -668,8 +682,10 @@ if (!placecheck) {
       print('No image selected.');
     }
   }
+
   File? prooffileimg;
-  String proofimg  ="";
+  String proofimg = "";
+
   void setImageproof(File image) {
     prooffileimg = image;
     notifyListeners();
@@ -684,9 +700,11 @@ if (!placecheck) {
       print('No image selected.');
     }
   }
+
   Future getImagegalleryProof() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       setImageproof(File(pickedImage.path));
@@ -696,7 +714,8 @@ if (!placecheck) {
   }
 
   File? receiptfileimg;
-  String receiptimg  ="";
+  String receiptimg = "";
+
   void setImagereceipt(File image) {
     receiptfileimg = image;
     notifyListeners();
@@ -711,9 +730,11 @@ if (!placecheck) {
       print('No image selected.');
     }
   }
+
   Future getImagegalleryReceipt() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       setImagereceipt(File(pickedImage.path));
@@ -722,12 +743,9 @@ if (!placecheck) {
     }
   }
 
-
-
-
-
   File? licencefileimg;
-  String licenceimg  ="";
+  String licenceimg = "";
+
   void setImagelicence(File image) {
     licencefileimg = image;
     notifyListeners();
@@ -742,9 +760,11 @@ if (!placecheck) {
       print('No image selected.');
     }
   }
+
   Future getImagegalleryLicence() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       setImagelicence(File(pickedImage.path));
@@ -753,13 +773,13 @@ if (!placecheck) {
     }
   }
 
-
-  void categoryclear(){
+  void categoryclear() {
     addcategory.clear();
-    categoryfileimg=null;
-    categoryimg="";
- }
-  void getPlace(){
+    categoryfileimg = null;
+    categoryimg = "";
+  }
+
+  void getPlace() {
     print("deddd");
     db.collection("PLACE").get().then((value) {
       if (value.docs.isNotEmpty) {
@@ -767,119 +787,139 @@ if (!placecheck) {
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
           placelist.add(Placemodel(
-              map["PLACE_ID"].toString(),
-              map["PLACE_NAME"].toString(),
-             // map["PHOTOS"].toString()
-              ));
-
+            map["PLACE_ID"].toString(),
+            map["PLACE_NAME"].toString(),
+            // map["PHOTOS"].toString()
+          ));
         }
-        print(placelist.length.toString()+"skfjhdgjdfhsdfjbsdh");
-       // filtercategorylist=categorylist;
+        print(placelist.length.toString() + "skfjhdgjdfhsdfjbsdh");
+        // filtercategorylist=categorylist;
         notifyListeners();
-
       }
       notifyListeners();
     });
   }
-void clearitem(){
-  imageFileList = [];
-  itemNm.clear();
-  price.clear();
-  addcategory.clear();
-  description.clear();
-  quantity.clear();
-  offers.clear();
-  color.clear();
-  brand.clear();
-  diamention.clear();
-  requirements.clear();
 
-  instruction.clear();
+  void clearitem() {
+    imageFileList = [];
+    itemNm.clear();
+    price.clear();
+    addcategory.clear();
+    description.clear();
+    quantity.clear();
+    offers.clear();
+    color.clear();
+    brand.clear();
+    diamention.clear();
+    requirements.clear();
+
+    instruction.clear();
     notifyListeners();
-  print(imageFileList!.length.toString()+"tuutiuut");
-}
+    print(imageFileList!.length.toString() + "tuutiuut");
+  }
 
-  List<Categorymodel> categorylist=[];
-  void getcategoy(){
+  List<Categorymodel> categorylist = [];
+
+  void getcategoy() {
     db.collection("CATEGORIES").get().then((value) {
       if (value.docs.isNotEmpty) {
         categorylist.clear();
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
-          categorylist.add(Categorymodel(
-              map["CATEGORY_ID"].toString(),
-               map["CATEGORY_NAME"].toString(),
-              map["PHOTO"].toString()));
-
+          categorylist.add(Categorymodel(map["CATEGORY_ID"].toString(),
+              map["CATEGORY_NAME"].toString(), map["PHOTO"].toString()));
         }
-        filtercategorylist=categorylist;
+        filtercategorylist = categorylist;
         notifyListeners();
-
       }
       notifyListeners();
     });
   }
 
+  List<Placemodel> placelist = [];
+  List<shopOrderModel> shopOrderModelList = [];
 
-  List<Placemodel> placelist=[];
-  List<shopOrderModel> shopOrderModelList=[];
-
-  void ShopLogin(String licenceid,String psword,BuildContext context){
-    db.collection("SHOPS").where("Licence Id" ,isEqualTo: licenceid)
-        .where("Password" ,isEqualTo: psword).get().then((value) {
-      if (value.docs.isNotEmpty){
-        Map<dynamic,dynamic> shopMap = value.docs.first.data();
+  void ShopLogin(String licenceid, String psword, BuildContext context) {
+    db
+        .collection("SHOPS")
+        .where("Licence Id", isEqualTo: licenceid)
+        .where("Password", isEqualTo: psword)
+        .get()
+        .then((value) async {
+      if (value.docs.isNotEmpty) {
+        print("skedjshb");
+        Map<dynamic, dynamic> shopMap = value.docs.first.data();
         String shopid = shopMap['Shop_ID'].toString();
         String shopName = shopMap["Shop_Name"];
         String shopPlace = shopMap["Place"];
 
-        print(shopid.toString()+"avnada");
-        
-        
-        db.collection("Orders").where("shopID",isEqualTo:shopid ).get().then((value) {
+        print(shopid.toString() + "avnada");
 
-          if(value.docs.isNotEmpty){
+      await  db
+            .collection("Orders")
+            .where("shopID", isEqualTo: shopid)
+            .get()
+            .then((value) {
+          if (value.docs.isNotEmpty) {
             print("sabvdnvds111");
-
-
+            shopOrderModelList.clear();
             for (var element in value.docs) {
-
               print("sabvdnvds222");
+              Timestamp timestamp = element.get("ORDER_TIME"); // Assuming "orderDate" is the timestamp field
+              DateTime orderDate = timestamp.toDate();
+              DateTime now = DateTime.now();
+              Duration difference = now.difference(orderDate);
 
-
-              shopOrderModelList.add(shopOrderModel(element.get("CustomerName"),element.get("userID"),element.get("Phone"),element.get("Item Name"),element.get("Price"),element.get("itemId")));
-
-              print(shopOrderModelList.length.toString()+"zsbhsjhs");
-
+              if(difference.inHours<24){
+              shopOrderModelList.add(shopOrderModel(
+                  element.get("CustomerName"),
+                  element.get("userID"),
+                  element.get("Phone"),
+                  element.get("Item Name"),
+                  element.get("Price"),
+                  element.get("itemId"),
+                  element.id,
+                  element.get("STATUS"),
+                  orderDate,
+                difference
+              ),
+              );
+              }else{
+                shopOrderModelList.add(shopOrderModel(
+                    element.get("CustomerName"),
+                    element.get("userID"),
+                    element.get("Phone"),
+                    element.get("Item Name"),
+                    element.get("Price"),
+                    element.get("itemId"),
+                    element.id,
+                    "CANCELED",
+                    orderDate,
+                    difference
+                ),
+                );
+                HashMap<String, Object> orderMap = HashMap();
+                orderMap["STATUS"] = "CANCELED";
+                db.collection("Orders").doc(element.id).set(orderMap, SetOptions(merge: true));
+              }
               notifyListeners();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ShopHome(shopid:shopid ,shopName: shopName, placeName: shopPlace,),
-                  ));
-
-
-
-
-
             }
-
-
-
           }
-
-
-
         });
-        
+
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShopHome(
+                shopid: shopid,
+                shopName: shopName,
+                placeName: shopPlace,
+              ),
+            ));
 
         //
-      }else{
-
-      }
-
+      } else {}
     });
-
   }
 
   double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
@@ -891,17 +931,19 @@ void clearitem(){
 
     // Calculate distances using Haversine formula
     double a = sin(dLat / 2) * sin(dLat / 2) +
-        cos(lat1 * (pi / 180)) * cos(lat2 * (pi / 180)) *
-            sin(dLon / 2) * sin(dLon / 2);
+        cos(lat1 * (pi / 180)) *
+            cos(lat2 * (pi / 180)) *
+            sin(dLon / 2) *
+            sin(dLon / 2);
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     double distance = earthRadius * c;
 
     return distance; // in kilometers
   }
 
+  List<ShopModel> shoplist = [];
 
-  List<ShopModel> shoplist=[];
-  void getshop(){
+  void getshop() {
     db.collection("SHOPS").get().then((value) {
       if (value.docs.isNotEmpty) {
         shoplist.clear();
@@ -910,8 +952,8 @@ void clearitem(){
 
           double shopLat = map["LAT"] ?? 0.0;
           double shopLong = map["LONG"] ?? 0.0;
-          double distance = calculateDistance(
-              latitude, longitude, shopLat, shopLong);
+          double distance =
+              calculateDistance(latitude, longitude, shopLat, shopLong);
 
           shoplist.add(ShopModel(
               map["Licence Id"].toString(),
@@ -924,28 +966,26 @@ void clearitem(){
               map["licence"].toString(),
               map["receipt"].toString(),
               map["Shop_ID"].toString(),
-            shopLat,
-            shopLong,
-              distance
-          ));
+              shopLat,
+              shopLong,
+              distance));
           // filtershoplist=shoplist;
-
-
-              }
-
-
+        }
 
         shoplist.sort((a, b) => a.distance.compareTo(b.distance));
-        filtershoplist=shoplist;
-          notifyListeners();
-
-
+        filtershoplist = shoplist;
+        notifyListeners();
       }
       notifyListeners();
     });
   }
-  void getshopPending(){
-    db.collection("SHOPS").where("Status", isEqualTo: "Pending").get().then((value) {
+
+  void getshopPending() {
+    db
+        .collection("SHOPS")
+        .where("Status", isEqualTo: "Pending")
+        .get()
+        .then((value) {
       if (value.docs.isNotEmpty) {
         shoplist.clear();
         for (var element in value.docs) {
@@ -953,8 +993,8 @@ void clearitem(){
 
           double shopLat = map["LAT"] ?? 0.0;
           double shopLong = map["LONG"] ?? 0.0;
-          double distance = calculateDistance(
-              latitude, longitude, shopLat, shopLong);
+          double distance =
+              calculateDistance(latitude, longitude, shopLat, shopLong);
 
           shoplist.add(ShopModel(
               map["Licence Id"].toString(),
@@ -969,31 +1009,31 @@ void clearitem(){
               map["Shop_ID"].toString(),
               shopLat,
               shopLong,
-              distance
-          ));
-
-
-              }
+              distance));
+        }
 
         shoplist.sort((a, b) => a.distance.compareTo(b.distance));
-        filtershoplist=shoplist;
-          notifyListeners();
-
-
+        filtershoplist = shoplist;
+        notifyListeners();
       }
       notifyListeners();
     });
   }
-  void getshopAccept(){
-    db.collection("SHOPS").where("Status", isEqualTo: "ACCEPTED").get().then((value) {
+
+  void getshopAccept() {
+    db
+        .collection("SHOPS")
+        .where("Status", isEqualTo: "ACCEPTED")
+        .get()
+        .then((value) {
       if (value.docs.isNotEmpty) {
         shoplist.clear();
         for (var element in value.docs) {
           Map<dynamic, dynamic> map = element.data();
           double shopLat = map["LAT"] ?? 0.0;
           double shopLong = map["LONG"] ?? 0.0;
-          double distance = calculateDistance(
-              latitude, longitude, shopLat, shopLong);
+          double distance =
+              calculateDistance(latitude, longitude, shopLat, shopLong);
 
           shoplist.add(ShopModel(
               map["Licence Id"].toString(),
@@ -1005,25 +1045,19 @@ void clearitem(){
               map["proof"].toString(),
               map["licence"].toString(),
               map["receipt"].toString(),
-            map["Shop_ID"].toString(),
+              map["Shop_ID"].toString(),
               shopLat,
               shopLong,
-              distance
-          ));
-
-
-              }
+              distance));
+        }
 
         shoplist.sort((a, b) => a.distance.compareTo(b.distance));
-        filtershoplist=shoplist;
-          notifyListeners();
-
-
+        filtershoplist = shoplist;
+        notifyListeners();
       }
       notifyListeners();
     });
   }
-
 
   final List<String> items = [
     'Item1',
@@ -1034,18 +1068,12 @@ void clearitem(){
   Placemodel? selectedValue;
   Placemodel? selectedValueList;
 
+  bool shoploader = false;
 
-
-  bool shoploader=false;
-
-  void Shopupload(BuildContext context) async{
-    shoploader=true;
+  void Shopupload(BuildContext context) async {
+    shoploader = true;
     notifyListeners();
-    String id = DateTime
-
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> shopmap = HashMap();
 
     shopmap["Licence Id"] = licenceid.text;
@@ -1053,23 +1081,20 @@ void clearitem(){
     shopmap["Owner Name"] = owname.text;
     shopmap["Phone No"] = phnu.text;
     shopmap["Email"] = email.text;
-    shopmap["Place"] =address.text;
+    shopmap["Place"] = address.text;
     shopmap["Shop_Name"] = shopname.text;
     shopmap["Shop_Details"] = shopdetails.text;
     shopmap["Shop_ID"] = id;
     shopmap["Status"] = "Pending";
-    shopmap["LAT"]=latitude;
-    shopmap["LONG"]=longitude;
-    shopmap["Place_Id"]=SelectedPlaceID;
-
+    shopmap["LAT"] = latitude;
+    shopmap["LONG"] = longitude;
+    shopmap["Place_Id"] = SelectedPlaceID;
 
     bool licencecheck;
-    licencecheck = await checklicenceExist( addcategory.text);
+    licencecheck = await checklicenceExist(addcategory.text);
     if (!licencecheck) {
-
       db.collection("SHOPS").doc(id).set(shopmap);
-    }
-    else{
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.red,
         content: Center(
@@ -1128,10 +1153,8 @@ void clearitem(){
       // editMap['IMAGE_URL'] = imageUrl;
     }
 
-
-
     db.collection("SHOPS").doc(id.toString()).set(shopmap);
-    shoploader=false;
+    shoploader = false;
     notifyListeners();
     Navigator.pop(context);
     print("Upload Succesfully");
@@ -1147,45 +1170,44 @@ void clearitem(){
     _pdfDownloadURL = url;
     notifyListeners(); // Notify listeners that the state has changed
   }
+
   File? _imageFile;
 
   File? get imageFile => _imageFile;
 
-  void setImageFile(File ?file) {
+  void setImageFile(File? file) {
     _imageFile = file;
     notifyListeners();
   }
 
-  List <ItemModel> filteritem = [];
+  List<ItemModel> filteritem = [];
 
+  List<Categorymodel> filtercategorylist = [];
 
-
-  List<Categorymodel> filtercategorylist=[];
-  void searchProducts(){
-
-
-  }
+  void searchProducts() {}
 
   void searchCategory(item) {
-    filtercategorylist = categorylist.where(
-            (a) => a.name.toLowerCase().contains(item.toLowerCase())).toList();
-    print("gdvsg"+filtercategorylist.length.toString());
+    filtercategorylist = categorylist
+        .where((a) => a.name.toLowerCase().contains(item.toLowerCase()))
+        .toList();
+    print("gdvsg" + filtercategorylist.length.toString());
 
     notifyListeners();
   }
-  List<ShopModel> filtershoplist=[];
 
+  List<ShopModel> filtershoplist = [];
 
   void searchShop(item) {
-    filtershoplist = shoplist.where(
-            (a) => a.shopname.toLowerCase().contains(item.toLowerCase())).toList();
-    print("gdvsg"+filtershoplist.length.toString());
+    filtershoplist = shoplist
+        .where((a) => a.shopname.toLowerCase().contains(item.toLowerCase()))
+        .toList();
+    print("gdvsg" + filtershoplist.length.toString());
 
     notifyListeners();
   }
 
   List<ItemModel> Productmodeldata = [];
-  List<ItemModel> filterProductmodeldata=[];
+  List<ItemModel> filterProductmodeldata = [];
 
   void getProductfilterdata() {
     db.collection("ITEMS").get().then((value) {
@@ -1193,25 +1215,32 @@ void clearitem(){
       if (value.docs.isNotEmpty) {
         for (var element in value.docs) {
           Map<dynamic, dynamic> prdctmap = element.data();
+          String pon="0";
+          if(   prdctmap["POINT"]!=null){
+            pon= prdctmap["POINT"].toString();
+          }
           Productmodeldata.add(ItemModel(
-              prdctmap["Item Id"].toString(),
-              prdctmap["PHOTOS"],
-              prdctmap["Item Name"].toString(),
-              prdctmap["Price"].toString(),
-              prdctmap["Category"].toString(),
-              prdctmap["Category_id"].toString(),
-              prdctmap["description"].toString(),
-              prdctmap["Item Quantity"].toString(),
-              prdctmap["Offers"].toString(),
-              prdctmap["color"].toString(),
-              prdctmap["Brand"].toString(),
-              prdctmap["Product Dimensions"].toString(),
-              prdctmap["Assembly Required"].toString(),
-              prdctmap["Instructions"].toString(),
-            prdctmap["Shop_Name"].toString(),
+            prdctmap["Item Id"].toString(),
+            prdctmap["PHOTOS"],
+            prdctmap["Item Name"].toString(),
+            prdctmap["Price"].toString(),
+            prdctmap["Category"].toString(),
+            prdctmap["Category_id"].toString(),
+            prdctmap["description"].toString(),
+            prdctmap["Item Quantity"].toString(),
+            prdctmap["Offers"].toString(),
+            prdctmap["color"].toString(),
+            prdctmap["Brand"].toString(),
+            prdctmap["Product Dimensions"].toString(),
+            prdctmap["Assembly Required"].toString(),
+            prdctmap["Instructions"].toString(),
+            prdctmap["Shop name"].toString(),
             prdctmap["Phone No"].toString(),
+            prdctmap["Shop place"].toString(),
             prdctmap["Shop_Details"].toString(),
-            prdctmap["Place"].toString(),
+            prdctmap["Shop_id"].toString(),
+            pon
+
           ));
           filterProductmodeldata = Productmodeldata;
           notifyListeners();
@@ -1222,45 +1251,45 @@ void clearitem(){
 
   void searchProduct(item) {
     filterProductmodeldata = Productmodeldata.where(
-            (a) => a.itemname.toLowerCase().contains(item.toLowerCase())).toList();
+        (a) => a.itemname.toLowerCase().contains(item.toLowerCase())).toList();
     notifyListeners();
   }
 
   void statusDecln(String id) {
     Map<String, dynamic> dataMap = HashMap();
     dataMap["Status"] = "DECLINED";
-    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
+    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge: true));
   }
 
   void statusApprove(String id) {
     Map<String, dynamic> dataMap = HashMap();
     dataMap["Status"] = "ACCEPTED";
-    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
+    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge: true));
   }
+
   void statusblocked(String id) {
     Map<String, dynamic> dataMap = HashMap();
     dataMap["Status"] = "BLOCKED";
-    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge:true));
+    db.collection("SHOPS").doc(id).set(dataMap, SetOptions(merge: true));
   }
 
-  double latitude=0.0;
-  double longitude=0.0;
-
-
+  double latitude = 0.0;
+  double longitude = 0.0;
 
   Future<void> getCurrentLocation(BuildContext ctx) async {
     Position position = await Geolocator.getCurrentPosition();
     //point = Point(x: position.longitude, y: position.latitude);
     notifyListeners();
-    latitude=  position.latitude;
-    longitude= position.longitude;
+    latitude = position.latitude;
+    longitude = position.longitude;
     notifyListeners();
-    print( position.latitude);
-    print( position.longitude);
+    print(position.latitude);
+    print(position.longitude);
     // point = Point(y:11.055513,x:76.0815936);
 
     //print("${point!.x}     BBBBBBBBBBBBBBB     ${point!.y}");
-    }
+  }
+
   Future<bool> handleLocationPermission(Context) async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -1268,7 +1297,8 @@ void clearitem(){
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       ScaffoldMessenger.of(Context).showSnackBar(const SnackBar(
-          content: Text('Location services are disabled. Please enable the services')));
+          content: Text(
+              'Location services are disabled. Please enable the services')));
       return false;
     }
     permission = await Geolocator.checkPermission();
@@ -1287,28 +1317,232 @@ void clearitem(){
       return false;
     }
     return true;
-    }
+  }
 
-void addConfirmOrder(String itemName,String itemPrice,String itemId,String userId,String shopid,String name,String phone){
+  void addConfirmOrder(String itemName, String itemPrice, String itemId,
+      String userId, String shopid, String name, String phone) {
+    String orderId = DateTime.now().millisecondsSinceEpoch.toString();
 
-  String orderId = DateTime.now().millisecondsSinceEpoch.toString();
+    HashMap<String, Object> orderMap = HashMap();
 
-  HashMap<String, Object> orderMap = HashMap();
-
-  orderMap["Item Name"] = itemName;
-  orderMap["Price"] = itemPrice;
-  orderMap["itemId"] =itemId;
-  orderMap["orderId"] =orderId;
-  orderMap["userID"] =userId;
-  orderMap["shopID"] =shopid;
-  orderMap["CustomerName"] =name;
-  orderMap["Phone"] =phone;
-  
+    orderMap["Item Name"] = itemName;
+    orderMap["Price"] = itemPrice;
+    orderMap["itemId"] = itemId;
+    orderMap["orderId"] = orderId;
+    orderMap["userID"] = userId;
+    orderMap["shopID"] = shopid;
+    orderMap["CustomerName"] = name;
+    orderMap["Phone"] = phone;
+    orderMap["ORDER_TIME"] = DateTime.now();
+    orderMap["STATUS"] ="ORDERED" ;
 
     db.collection("Orders").doc(orderId).set(orderMap);
+  }
+
+  Future<void> dispatchFunction(String productId, String orderId,String shopId) async {
+    HashMap<String, Object> orderMap = HashMap();
+    print(productId);
+    print(orderId);
+    print("lsshbed");
+    shopOrderModelList.forEach((element) {
+      if(element.orderId==orderId){
+        element.status="DISPATCHED";
+        notifyListeners();
+      }
+    });
+
+    orderMap["STATUS"] = "DISPATCHED";
+    db.collection("Orders").doc(orderId).set(orderMap, SetOptions(merge: true));
+    try {
+      await db.collection('ITEMS').doc(productId).update({
+        'POINT': FieldValue.increment(1),
+      });
+      await db.collection('SHOPS').doc(shopId).update({
+        'POINT': FieldValue.increment(1),
+      });
+      print('Field value incremented successfully.');
+    } catch (e) {
+      print('Error incrementing field value: $e');
+    }
+    notifyListeners();
+  }
+
+  String shopDetails = '';
+  String shopPhone = '';
+  double latShop = 0;
+  double longShop = 0;
 
 
+  void fetchShopDetails(String shopId) {
+    db.collection("SHOPS").doc(shopId).get().then((value) {
+      if (value.exists) {
+        print("rhfierbvk");
+        Map<dynamic, dynamic> map = value.data() as Map;
+
+        shopDetails = map["Shop_Details"].toString();
+        shopPhone = map["Phone No"].toString();
+        latShop = double.parse(map["LAT"].toString());
+        longShop = double.parse(map["LONG"].toString());
+        print(shopDetails);
+        print(shopPhone);
+        print(latShop);
+        print(longShop);
+        print("wehiewbhfiwn");
+        notifyListeners();
+      }
+    });
+  }
+
+
+  void blockUser(String userId,String status){
+    db.collection("USERS").doc(userId).set({"STATUS":status},SetOptions(merge: true));
+    adminUsersList.where((element) => element.id==userId).first.status=status;
+    notifyListeners();
+  }
+  void fetchUsers(){
+    adminUsersList.clear();
+          db.collection("USERS").where("TYPE",isEqualTo: "USER").get().then((value) {
+            if(value.docs.isNotEmpty){
+              for(var elements in value.docs){
+                Map<dynamic,dynamic> userMap = elements.data();
+                String userName = userMap["USER_NAME"]??"";
+                String userNumber = userMap["PHONE_NUMBER"]??"";
+                String userStatus = userMap["STATUS"]??"";
+                adminUsersList.add(UsersModel(userName, userNumber, userStatus, elements.id));
+              }
+              notifyListeners();
+            }
+          });
+  }
+
+  List<String> waypoints = [];
+
+  Future<void> fetchMyOrders(String userId) async {
+    print("user id $userId");
+    userOrdersList.clear();
+    waypoints.clear();
+    String currentLatLong = "${latitude},${longitude}";
+    waypoints.add(currentLatLong);
+          var orderDoc = await db.collection("Orders")
+              .where("userID",isEqualTo: userId)
+              .where("STATUS",isEqualTo: "ORDERED")
+              .get();
+            if(orderDoc.docs.isNotEmpty){
+              for(var elements in orderDoc.docs){
+                String itemShopName = "";
+                String itemShopPlace = "";
+                String shopLat = "";
+                String shopLong = "";
+                Map<dynamic,dynamic> userMap = elements.data();
+                String itemId = userMap["itemId"]??"noId";
+                var itemDoc = await db.collection("ITEMS").doc(itemId).get();
+
+                String itemImage = "";
+                if(itemDoc.exists){
+                  Map<dynamic,dynamic> itemMap = itemDoc.data() as Map;
+                  List<dynamic> image = itemMap["PHOTOS"];
+                  itemImage = image[0];
+                  itemShopName = itemMap["Shop name"]??"";
+                  String shopId = itemMap["Shop_id"]??"noShop";
+                  notifyListeners();
+                  var shpDoc = await db.collection("SHOPS").doc(shopId).get();
+                  if(shpDoc.exists){
+                    Map<dynamic,dynamic> shpMap = shpDoc.data() as Map;
+                    shopLat = shpMap["LAT"].toString();
+                    shopLong = shpMap["LONG"].toString();
+                    itemShopPlace = shpMap ["Place"]??"";
+                    String latLong = shopLat + "," + shopLong;
+                    if(!waypoints.contains(latLong)){
+                      waypoints.add(latLong);
+                    }
+                    print("lat long list $waypoints");
+                    notifyListeners();
+                  }
+                }
+                String itemName = userMap["Item Name"]??"";
+                String price = userMap["Price"]??"";
+                String status = userMap["STATUS"]??"";
+                String orderId = elements.id;
+                DateTime dateTime = DateTime.now();
+                if(userMap["ORDER_TIME"]!=null){
+                  dateTime = userMap["ORDER_TIME"].toDate();
+                }
+                String orderTime = DateFormat('dd-MM-yyyy – hh:mm').format(dateTime);
+                userOrdersList.add(OrdersModel(itemName, orderTime, price, status,
+                    itemId, orderId,itemImage,itemShopName,shopLat,shopLong,itemShopPlace));
+              }
+              notifyListeners();
+            }
+
+  }
+
+
+  goToMap(){
+    Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/");
+    for (String waypoint in waypoints) {
+      gmmIntentUri = gmmIntentUri.replace(path: gmmIntentUri.path + waypoint + "/");
+    }
+    gmmIntentUri = gmmIntentUri.replace(path: gmmIntentUri.path.substring(0, gmmIntentUri.path.length - 1)); // Remove trailing slash
+
+    // Open Google Maps URL
+    _launchMapsUrl(gmmIntentUri.toString());
+
+    return Container();
+  }
+  void _launchMapsUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
+  List<UsersModel> adminUsersList=[];
+  List<OrdersModel> userOrdersList=[];
+  List<ItemModel> listMainImages=[];
+  void fetchHomeScreenMainItems(){
+    print("wejfciweb");
+    db.collection("ITEMS").orderBy("POINT", descending: true).limit(10).get().then((value) {
+      if(value.docs.isNotEmpty){
+        print("shfihbkf");
+        for (var element in value.docs) {
+          Map<dynamic, dynamic> map = element.data() as Map;
+          String pon="0";
+          if(   map["POINT"]!=null){
+            pon= map["POINT"].toString();
+          }
+
+
+          listMainImages.add(ItemModel(
+            map["Item Id"].toString(),
+            map["PHOTOS"],
+            map["Item Name"].toString(),
+            map["Price"].toString(),
+            map["Category"].toString(),
+            map["Category_id"].toString(),
+            map["description"].toString(),
+            map["Item Quantity"].toString(),
+            map["Offers"].toString(),
+            map["color"].toString(),
+            map["Brand"].toString(),
+            map["Product Dimensions"].toString(),
+            map["Assembly Required"].toString(),
+            map["Instructions"].toString(),
+            map["Shop name"].toString(),
+            map["Phone No"].toString(),
+            map["Shop place"].toString(),
+            map["Shop_Details"].toString(),
+            map["Shop_id"].toString(),
+              pon          ));
+          notifyListeners();
+        }
+
+        print(listMainImages.length);
+        print("sedhiwewse");
+        notifyListeners();
+      }
+    });
+  }
 
 }
-}
-

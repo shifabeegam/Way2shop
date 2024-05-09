@@ -66,17 +66,17 @@ class MyApp extends StatelessWidget {
         ),
 
 
-        // home:BottomNavBar(),
-          //home: ShopHome(),
-       // home:Clogin(),
+//          home: Custhome(),
+        //home:AdmnHome(),
         //home: Caccount(),
      // home: Stockdt(shopName: '', shopPlace: '',),
       //home: camera(shopName: '',shopPlace: ''),
-       //home:AdmnHome(),
+
         //home
 
-      home:  SplashScreen(),
-     // home: BottomNavigationBar(items: items),
+
+       home: SplashScreen(),
+
 
 
 

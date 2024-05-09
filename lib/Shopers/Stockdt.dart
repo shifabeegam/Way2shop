@@ -76,9 +76,8 @@ class Stockdt extends StatelessWidget {
                           width: double.infinity,
                           height: 115,
                           decoration: BoxDecoration(
-                            color: Color(0xffDED6D7),
-
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
                             boxShadow: [
                               BoxShadow(
                                 color: Color(0x3F000000),
@@ -209,6 +208,7 @@ class Stockdt extends StatelessWidget {
 
                           ),
                         );
+
                       },
                       separatorBuilder: (context, index) {
                         return Divider(color:Color(0xff650015),height: 3,);

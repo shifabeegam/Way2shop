@@ -45,7 +45,7 @@ class UserRegistration extends StatelessWidget {
                             "User registration",
                             textAlign: TextAlign.center,
                             style:
-                            TextStyle(color: Color(0xff650015), fontSize: 20),
+                            TextStyle(color: Color(0xff800026), fontSize: 20),
                           ),
 
                           Consumer<LoginProvider>(
@@ -54,7 +54,7 @@ class UserRegistration extends StatelessWidget {
                                   height: 50,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          width: 1, color: Color(0xff650015)),
+                                          width: 1, color: Color(0xff800026)),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Center(
                                     child: TextFormField(
@@ -87,7 +87,7 @@ class UserRegistration extends StatelessWidget {
                                   height: 50,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          width: 1, color: Color(0xff650015)),
+                                          width: 1, color: Color(0xff800026)),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Row(
                                     children: [
@@ -131,7 +131,7 @@ class UserRegistration extends StatelessWidget {
                                   height: 50,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          width: 1, color: Color(0xff650015)),
+                                          width: 1, color: Color(0xff800026)),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Row(
                                     children: [
@@ -169,43 +169,56 @@ class UserRegistration extends StatelessWidget {
 
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
-                            child: Consumer<MainProvider>(
-                                builder: (context3,val,child) {
-                                  return SizedBox(
-                                    width: double.infinity,
-                                    height: 45,
-                                    child: Consumer<LoginProvider>(
-                                      builder: (context4, value, child) {
-                                        return MaterialButton(
-                                          onPressed: () async {
-                                            /*  await FirebaseAuth.instance.verifyPhoneNumber(
-                                            phoneNumber:value.phonecont.text+value.phoneotp.text,
-                                            verificationCompleted: (PhoneAuthCredential credential) {},
-                                            verificationFailed: (FirebaseAuthException e) {},
-                                            codeSent: (String verificationId, int? resendToken) {
-                                              Login.verify=verificationId;*/
-                                            final FormState? form = formKey.currentState;
-                                            if(form!.validate()) {
+                            child: Container(
+                              decoration: BoxDecoration(border: Border.all(
+                                  color: Colors.white),
+                                borderRadius: BorderRadius.circular(15),
 
-                                              value.userRegistration(context);
-                                              // value.controlllerclear();
+                                gradient: LinearGradient(
+                                  colors: [Color(0xff800026), Color(0xffCB470F),Color(0xff800026)],
+
+                                  begin: Alignment.bottomLeft, end: Alignment.topRight,
+
+                                ),
+                              ),
+                              child: Consumer<MainProvider>(
+                                  builder: (context3,val,child) {
+                                    return SizedBox(
+                                      width: double.infinity,
+                                      height: 45,
+                                      child: Consumer<LoginProvider>(
+                                        builder: (context4, value, child) {
+                                          return MaterialButton(
+                                            onPressed: () async {
+                                              /*  await FirebaseAuth.instance.verifyPhoneNumber(
+                                              phoneNumber:value.phonecont.text+value.phoneotp.text,
+                                              verificationCompleted: (PhoneAuthCredential credential) {},
+                                              verificationFailed: (FirebaseAuthException e) {},
+                                              codeSent: (String verificationId, int? resendToken) {
+                                                Login.verify=verificationId;*/
+                                              final FormState? form = formKey.currentState;
+                                              if(form!.validate()) {
+
+                                                value.userRegistration(context);
+                                                // value.controlllerclear();
 
 
-                                            }  },
-                                          child: Text(
-                                            "REGISTER",
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                          color: Color(0xff650015),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(15)),
+                                              }  },
+                                            child: Text(
+                                              "REGISTER",
+                                              style: TextStyle(color: Colors.white),
+                                            ),
+                                           // color: Color(0xff650015),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(15)),
 
-                                          //   codeAutoRetrievalTimeout: (String verificationId) {},
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }
+                                            //   codeAutoRetrievalTimeout: (String verificationId) {},
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  }
+                              ),
                             ),
                           ),
                           SizedBox(

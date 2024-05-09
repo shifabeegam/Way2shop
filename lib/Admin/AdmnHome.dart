@@ -19,7 +19,7 @@ class AdmnHome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(centerTitle: false,
-        backgroundColor:Color(0xff650015),
+        backgroundColor:Color(0xff800026),
 
         title: Text("Way2Shop",
           style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
@@ -102,13 +102,12 @@ class AdmnHome extends StatelessWidget {
       Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(//color: Color(0xff650015),
-        gradient: LinearGradient(
-          colors: [ Colors.white,Color(0xff650015)],
-
-          begin: Alignment.bottomCenter, end: Alignment.topCenter,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/img_3.png"),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
 
         child:
         Column(
@@ -148,10 +147,10 @@ class AdmnHome extends StatelessWidget {
                           builder: (context) =>  Shoprequest()),
                     );
                   },
-                  child: HomeButton(textColor: Colors.white,
-                    backgroundColor: Colors.white10,
+                  child: HomeButton(textColor: Color(0xff800026),
+                    backgroundColor:  Colors.white70,
                     boxshadowColor: Color(0x3F000000) ,
-                    borderColor: Colors.white10 ,
+                    borderColor:  Colors.white10 ,
                     text: "Shop Requests",
                     hight:65,
                     width:230, fondSize: 20,),
@@ -171,10 +170,10 @@ class AdmnHome extends StatelessWidget {
                           builder: (context) =>  ViewShops()),
                     );
                   },
-                  child: HomeButton(textColor: Colors.white,
-                    backgroundColor: Colors.white10,
+                  child: HomeButton(textColor:  Color(0xff800026),
+                    backgroundColor: Colors.white70,
                     boxshadowColor: Color(0x3F000000) ,
-                    borderColor: Colors.white10 ,
+                    borderColor: Colors.white70 ,
                     text: "Shops",
                     hight:65,
                     width:230, fondSize: 20,),
@@ -182,21 +181,26 @@ class AdmnHome extends StatelessWidget {
               }
             ),
             SizedBox(height: 30 ,),
-            InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ViewUsers()),
+            Consumer<MainProvider>(
+              builder: (context5,value3,child) {
+                return InkWell(
+                  onTap: (){
+                    value3.fetchUsers();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ViewUsers()),
+                    );
+                  },
+                  child: HomeButton(textColor: Color(0xff800026),
+                    backgroundColor:  Colors.white70,
+                    boxshadowColor: Color(0x3F000000) ,
+                    borderColor:  Colors.white10 ,
+                    text: "Users",
+                    hight:65,
+                    width:230, fondSize: 20,),
                 );
-              },
-              child: HomeButton(textColor: Colors.white,
-                backgroundColor:  Colors.white10,
-                boxshadowColor: Color(0x3F000000) ,
-                borderColor:  Colors.white10 ,
-                text: "Users",
-                hight:65,
-                width:230, fondSize: 20,),
+              }
             ),
             SizedBox(height: 30 ,),
             Consumer<MainProvider>(
@@ -211,8 +215,8 @@ class AdmnHome extends StatelessWidget {
                     );
                   },
 
-                  child: HomeButton(textColor: Colors.white,
-                    backgroundColor:  Colors.white10,
+                  child: HomeButton(textColor: Color(0xff800026),
+                    backgroundColor:  Colors.white70,
                     boxshadowColor: Color(0x3F000000) ,
                     borderColor:  Colors.white10 ,
                     text: "Category",

@@ -24,7 +24,7 @@ class CategoryList extends StatelessWidget {
       child: Scaffold(
         floatingActionButton: Consumer<MainProvider>(
           builder: (context,value,child) {
-            return FloatingActionButton(backgroundColor: Color(0xff650015),shape: CircleBorder(),
+            return FloatingActionButton(backgroundColor: Color(0xff800026),shape: CircleBorder(),
               child:Icon(Icons.add,color: Colors.white) ,
               onPressed: () {
               value.categoryclear();

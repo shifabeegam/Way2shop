@@ -14,7 +14,7 @@ class AddCategory extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar( backgroundColor:Color(0xFF650015),
+        appBar: AppBar( backgroundColor:Color(0xff800026),
           /*leading:InkWell(
         onTap: (){},
 
@@ -31,11 +31,10 @@ class AddCategory extends StatelessWidget {
           child: Container(
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(//color: Color(0xff650015),
-              gradient: LinearGradient(
-                colors: [ Colors.white,Color(0xff650015)],
-
-                begin: Alignment.bottomCenter, end: Alignment.topCenter,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/img_3.png"),
+                fit: BoxFit.cover,
               ),
             ),
             child: SingleChildScrollView(
