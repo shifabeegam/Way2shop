@@ -123,3 +123,20 @@ class UsersModel{
 
 
 }
+class OrdersModel{
+
+  String itemName;
+  String itemImage;
+  String orderTime;
+  String price ;
+  String status;
+  String itemId;
+  String orderId;
+  String shopName;
+  String lat;
+  String long;
+  String shopPlace;
+
+  OrdersModel(this.itemName, this.orderTime, this.price, this.status,
+      this.itemId, this.orderId, this.itemImage, this.shopName, this.lat, this.long, this.shopPlace);
+}

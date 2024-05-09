@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
+import 'package:intl/intl.dart';
 
 import 'package:a/Model/ItemModel.dart';
 import 'package:a/providers/loginprovider.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Shopers/ShopHome.dart';
 
@@ -1400,9 +1402,7 @@ class MainProvider extends ChangeNotifier {
   void fetchUsers(){
     adminUsersList.clear();
           db.collection("USERS").where("TYPE",isEqualTo: "USER").get().then((value) {
-
             if(value.docs.isNotEmpty){
-
               for(var elements in value.docs){
                 Map<dynamic,dynamic> userMap = elements.data();
                 String userName = userMap["USER_NAME"]??"";
@@ -1411,16 +1411,95 @@ class MainProvider extends ChangeNotifier {
                 adminUsersList.add(UsersModel(userName, userNumber, userStatus, elements.id));
               }
               notifyListeners();
-
             }
-
-
           });
+  }
 
+  List<String> waypoints = [];
+
+  Future<void> fetchMyOrders(String userId) async {
+    print("user id $userId");
+    userOrdersList.clear();
+    waypoints.clear();
+    String currentLatLong = "${latitude},${longitude}";
+    waypoints.add(currentLatLong);
+          var orderDoc = await db.collection("Orders")
+              .where("userID",isEqualTo: userId)
+              .where("STATUS",isEqualTo: "ORDERED")
+              .get();
+            if(orderDoc.docs.isNotEmpty){
+              for(var elements in orderDoc.docs){
+                String itemShopName = "";
+                String itemShopPlace = "";
+                String shopLat = "";
+                String shopLong = "";
+                Map<dynamic,dynamic> userMap = elements.data();
+                String itemId = userMap["itemId"]??"noId";
+                var itemDoc = await db.collection("ITEMS").doc(itemId).get();
+
+                String itemImage = "";
+                if(itemDoc.exists){
+                  Map<dynamic,dynamic> itemMap = itemDoc.data() as Map;
+                  List<dynamic> image = itemMap["PHOTOS"];
+                  itemImage = image[0];
+                  itemShopName = itemMap["Shop name"]??"";
+                  String shopId = itemMap["Shop_id"]??"noShop";
+                  notifyListeners();
+                  var shpDoc = await db.collection("SHOPS").doc(shopId).get();
+                  if(shpDoc.exists){
+                    Map<dynamic,dynamic> shpMap = shpDoc.data() as Map;
+                    shopLat = shpMap["LAT"].toString();
+                    shopLong = shpMap["LONG"].toString();
+                    itemShopPlace = shpMap ["Place"]??"";
+                    String latLong = shopLat + "," + shopLong;
+                    if(!waypoints.contains(latLong)){
+                      waypoints.add(latLong);
+                    }
+                    print("lat long list $waypoints");
+                    notifyListeners();
+                  }
+                }
+                String itemName = userMap["Item Name"]??"";
+                String price = userMap["Price"]??"";
+                String status = userMap["STATUS"]??"";
+                String orderId = elements.id;
+                DateTime dateTime = DateTime.now();
+                if(userMap["ORDER_TIME"]!=null){
+                  dateTime = userMap["ORDER_TIME"].toDate();
+                }
+                String orderTime = DateFormat('dd-MM-yyyy – hh:mm').format(dateTime);
+                userOrdersList.add(OrdersModel(itemName, orderTime, price, status,
+                    itemId, orderId,itemImage,itemShopName,shopLat,shopLong,itemShopPlace));
+              }
+              notifyListeners();
+            }
 
   }
 
+
+  goToMap(){
+    Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/");
+    for (String waypoint in waypoints) {
+      gmmIntentUri = gmmIntentUri.replace(path: gmmIntentUri.path + waypoint + "/");
+    }
+    gmmIntentUri = gmmIntentUri.replace(path: gmmIntentUri.path.substring(0, gmmIntentUri.path.length - 1)); // Remove trailing slash
+
+    // Open Google Maps URL
+    _launchMapsUrl(gmmIntentUri.toString());
+
+    return Container();
+  }
+  void _launchMapsUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
   List<UsersModel> adminUsersList=[];
+  List<OrdersModel> userOrdersList=[];
   List<ItemModel> listMainImages=[];
   void fetchHomeScreenMainItems(){
     print("wejfciweb");

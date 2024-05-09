@@ -18,6 +18,7 @@ import '../Model/ItemModel.dart';
 import '../providers/MainProvider.dart';
 import '../providers/loginprovider.dart';
 import 'Clogin.dart';
+import 'Cproduct.dart';
 
 class Custhome extends StatelessWidget {
   String userId;
@@ -59,6 +60,7 @@ class Custhome extends StatelessWidget {
           InkWell(
             onTap: () {
               if (loginProvider.loginedUserName.isEmpty) {
+
                 loginProvider.clearRegControlls();
                 Navigator.push(
                     context,
@@ -66,6 +68,7 @@ class Custhome extends StatelessWidget {
                       builder: (context) => UserRegistration(),
                     ));
               }
+              print("loggggg ${loginProvider.loginedUserName}");
             },
             child: Container(
                 margin: EdgeInsets.only(right: 10),
@@ -116,8 +119,8 @@ class Custhome extends StatelessWidget {
                                       MaterialPageRoute(
                                         builder: (context) => SearchedProducts(
                                           userId: userId,
-                                          userName: userId,
-                                          userPhone: userId,
+                                          userName: userName,
+                                          userPhone: userPhone,
                                         ),
                                       ));
                                 },
@@ -237,46 +240,59 @@ class Custhome extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Wishlist()),
-                            );
-                          },
-                          child: Container(
-                              width: 30,
 
-                              child: Image.asset("lib/icons/img.png")),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const cartpage()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => const Wishlist()),
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //       width: 30,
+                        //         child:Icon(Icons.shopping_cart_sharp),
+                        //      // child: Image.asset("lib/icons/img.png")
+                        //     ),
+                        // ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => const cartpage()),
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //       width: 30,
+                        //     child:Icon(Icons.shopping_cart_sharp),
+                        //      // child: Image.asset("lib/icons/cart.png")
+                        //   ),
+                        // ),
+                        Consumer<MainProvider>(
+                          builder: (context3,value4,child) {
+                            return InkWell(
+                              onTap: () {
+                                value4.fetchMyOrders(userId);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                       Ordersummery(
+
+                                      )),
+                                );
+                              },
+                              child: Container(
+                                  width: 30,
+                               // child:Icon(Icons),
+                                 child: Image.asset("lib/icons/Order.png",color: Colors.black,)
+                              ),
                             );
-                          },
-                          child: Container(
-                              width: 30,
-                              child: Image.asset("lib/icons/cart.png")),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                  const Ordersummery()),
-                            );
-                          },
-                          child: Container(
-                              width: 30,
-                              child: Image.asset("lib/icons/Order.png")),
+                          }
                         ),
                       ],
                     ),
@@ -300,8 +316,8 @@ class Custhome extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) => Ccategory(
                                             userId: userId,
-                                            userName: userId,
-                                            userPhone: userId,
+                                            userName: userName,
+                                            userPhone: userPhone,
                                           )),
                                 );
                               },
@@ -325,18 +341,38 @@ class Custhome extends StatelessWidget {
 
                                           child: Column(
                                             children: [
-                                              Container(
-                                                decoration:  BoxDecoration(
-                                                  image: DecorationImage(
-                                                      fit: BoxFit.fill,
-                                                      image: NetworkImage(
-                                                        item.photo[0].toString(),)),
-                                                  // borderRadius: BorderRadius.circular(20)
+                                              InkWell(
+                                                onTap: (){
+                                                  print(userPhone+userName+userId+"jhjhfjhfjhgfh");
+                                                    value.fetchShopDetails(item.shopId);
+
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Cproduct(itemid: item.itemid,
+                                                      photo: item.photo,itemname: item.itemname,price: item.price,
+                                                      category: item.category,categoryid: item.categoryid,
+                                                      description: item.description,itemquartity: item.itemquartity,
+                                                      offers: item.offers,color: item.color,brand: item.brand,productdiemension: item.productdiemension,
+                                                      assmbly: item.assmbly,instruction: item.instruction,
+                                                      shopname: item.shopname,phone: value.shopPhone,
+                                                      shopdetails: value.shopDetails,place: item.place, userId: userId, shopid: item.shopId, userName: userName, userPhone: userPhone,
+                                                      latitude:value.latShop,
+                                                      longitude: value.longShop,
+                                                    ),));
+
+                                                },
+                                                child: Container(
+
+                                                  decoration:  BoxDecoration(
+                                                    image: DecorationImage(
+                                                        fit: BoxFit.fill,
+                                                        image: NetworkImage(
+                                                          item.photo[0].toString(),)),
+                                                    // borderRadius: BorderRadius.circular(20)
+                                                  ),
+                                                  height: 180,
+                                                  width: 120,
+
+
                                                 ),
-                                                height: 180,
-                                                width: 120,
-
-
                                               ),
                                                Text(item.itemname,
                                                 style: TextStyle(fontSize: 15),),

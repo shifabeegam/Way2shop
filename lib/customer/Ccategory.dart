@@ -158,8 +158,8 @@ class Ccategory extends StatelessWidget {
                                       padding: const EdgeInsets.all(20),
                                       child: Image.network(
                                         value.filtercategorylist[index].photo,
-                                        height: 120,
-                                        width: 120,
+                                        height: 100,
+                                        width: 100,
                                       ),
                                     ),
                                     Text(value.filtercategorylist[index].name,
@@ -186,7 +186,7 @@ class Ccategory extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 10,),
+            //SizedBox(height: 10,),
 
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceAround,
