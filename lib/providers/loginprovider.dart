@@ -67,6 +67,7 @@ class LoginProvider extends ChangeNotifier {
   String loginedUserId = "";
   void passwordverify(String username,String password,BuildContext context){
 
+    String userStatus=  "";
     db.collection("USERS")
         .where("PHONE_NUMBER",isEqualTo: username)
         .where("PASSWORD",isEqualTo: password)
@@ -78,20 +79,31 @@ class LoginProvider extends ChangeNotifier {
         loginedUserName=map["USER_NAME"] ??"";
         loginedUserNumber=map["PHONE_NUMBER"] ??"";
         loginedUserId=map["USER_ID"] ??"";
+        userStatus = map["STATUS"]??"ACTIVE";
         notifyListeners();
-        MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
+        if(userStatus=="ACTIVE"){
+          MainProvider mainProvider = Provider.of<MainProvider>(context, listen: false);
 
-        mainProvider.  fetchHomeScreenMainItems();
+          mainProvider.  fetchHomeScreenMainItems();
 
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>
               BottomNavBar(userId: loginedUserId, userName: loginedUserName, userPhone: loginedUserNumber,),));
+
+        }else{
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(
+            content:
+            Text("Sorry , Your number has been blocked!"),
+
+          ));
+
+        }
 
       }else{
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(
           content:
           Text("Sorry , No user found"),
-          duration: Duration(milliseconds: 3000),
         ));
 
       }

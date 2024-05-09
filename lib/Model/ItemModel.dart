@@ -111,3 +111,15 @@ class shopOrderModel {
   shopOrderModel(this.customerName, this.customerId, this.phone,
       this.productName, this.productPrice, this.productId, this.orderId,this.status,this.orderDate,this.duration);
 }
+
+class UsersModel{
+
+  String userName;
+  String phoneNumber;
+  String status;
+  String id;
+  UsersModel(this.userName, this.phoneNumber, this.status, this.id);
+
+
+
+}

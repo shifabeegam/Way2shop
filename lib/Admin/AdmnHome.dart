@@ -181,21 +181,26 @@ class AdmnHome extends StatelessWidget {
               }
             ),
             SizedBox(height: 30 ,),
-            InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ViewUsers()),
+            Consumer<MainProvider>(
+              builder: (context5,value3,child) {
+                return InkWell(
+                  onTap: (){
+                    value3.fetchUsers();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ViewUsers()),
+                    );
+                  },
+                  child: HomeButton(textColor: Color(0xff800026),
+                    backgroundColor:  Colors.white70,
+                    boxshadowColor: Color(0x3F000000) ,
+                    borderColor:  Colors.white10 ,
+                    text: "Users",
+                    hight:65,
+                    width:230, fondSize: 20,),
                 );
-              },
-              child: HomeButton(textColor: Color(0xff800026),
-                backgroundColor:  Colors.white70,
-                boxshadowColor: Color(0x3F000000) ,
-                borderColor:  Colors.white10 ,
-                text: "Users",
-                hight:65,
-                width:230, fondSize: 20,),
+              }
             ),
             SizedBox(height: 30 ,),
             Consumer<MainProvider>(

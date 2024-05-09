@@ -3,6 +3,8 @@ import 'package:a/customer/Ccategory.dart';
 import 'package:a/customer/Cshops.dart';
 import 'package:a/customer/Ordersummery.dart';
 import 'package:a/customer/cartpage.dart';
+import 'package:a/customer/user_registration.dart';
+import 'package:a/providers/loginprovider.dart';
 import 'package:a/widgets/GradButton.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -434,84 +436,104 @@ class Cproduct extends StatelessWidget {
             ),
 
             Consumer<MainProvider>(
-              builder: (context,provider,_) {
-                return InkWell(
-                  onTap: (){
-                    showDialog(context: context, builder: (context){
-                      return AlertDialog(backgroundColor: Colors.white,
-                        elevation: 0,
+              builder: (context3,provider,_) {
+                return  Consumer<LoginProvider>(
+                    builder: (context4,log,_) {
+                    return InkWell(
+                      onTap: (){
+                        if (log.loginedUserName.isEmpty) {
+                          log.clearRegControlls();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserRegistration(),
+                              ));
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content:
+                            Text("Sorry , Login to your account to place an order!"),
 
-                        actions: [
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(15),
+                          ));
+                        }else{
+                          showDialog(context: context, builder: (context){
+                            return AlertDialog(backgroundColor: Colors.white,
+                              elevation: 0,
 
-
-
-                              ),
-
-                              Text("Do you want to Confirm your order ? "),
-                              Row(
-                                children: [
-                                  MaterialButton(onPressed: (){ Navigator.pop(
-                                    context,
-                                    /* MaterialPageRoute(
-                                                            builder: (context) => const Additem()),*/
-                                  );
-
-                                  },
-                                    child: const Text("cancel"),
-                                    highlightColor: Color(0xff0C630A),
-                                    splashColor: Colors.grey,
-                                    color: Colors.red,
-                                  ),
-
-                                  SizedBox(width: 10,),
-
-                                  MaterialButton(
-                                    onPressed: (){
-
-                                      print(userPhone+userName+userId+"hhhhhhhhh");
-
-                                      provider.addConfirmOrder(itemname, price, itemid,userId,shopid,userName,userPhone);
-                                      Navigator.pop(context);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content:
-                                        Text("Ordered Successfully"),
-                                        duration: Duration(milliseconds: 3000),
-                                      ));
+                              actions: [
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(15),
 
 
 
-                              },
-                                child: const Text("ok",
+                                    ),
+
+                                    Text("Do you want to Confirm your order ? "),
+                                    Row(
+                                      children: [
+                                        MaterialButton(onPressed: (){ Navigator.pop(
+                                          context,
+                                          /* MaterialPageRoute(
+                                                                builder: (context) => const Additem()),*/
+                                        );
+
+                                        },
+                                          child: const Text("cancel"),
+                                          highlightColor: Color(0xff0C630A),
+                                          splashColor: Colors.grey,
+                                          color: Colors.red,
+                                        ),
+
+                                        SizedBox(width: 10,),
+
+                                        MaterialButton(
+                                          onPressed: (){
+
+                                            print(userPhone+userName+userId+"hhhhhhhhh");
+
+                                            provider.addConfirmOrder(itemname, price, itemid,userId,shopid,userName,userPhone);
+                                            Navigator.pop(context);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                              content:
+                                              Text("Ordered Successfully"),
+                                              duration: Duration(milliseconds: 3000),
+                                            ));
+
+
+
+                                          },
+                                          child: const Text("ok",
+                                          ),
+                                          highlightColor: Color(0xff0C630A),
+                                          splashColor: Colors.grey,
+                                          color: Colors.green,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                highlightColor: Color(0xff0C630A),
-                                splashColor: Colors.grey,
-                                color: Colors.green,
-                              ),
-                            ],
-                          ),
-                        ],
+
+                              ],
+
+                            );
+                          });
+                        }
+
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 140,
+                        decoration: BoxDecoration(border: Border.all(
+                            color: Colors.black26),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.yellow[600]
+                        ),
+                        child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
                       ),
-
-                        ],
-
-                      );
-                    });
-                  },
-                  child: Container(
-                    height: 45,
-                    width: 140,
-                    decoration: BoxDecoration(border: Border.all(
-                        color: Colors.black26),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.yellow[600]
-                    ),
-                    child: Center(child: Text("Place Order",style: TextStyle(fontSize: 18),)),
-                  ),
+                    );
+                  }
                 );
               }
             ),

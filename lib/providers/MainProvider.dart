@@ -1392,12 +1392,35 @@ class MainProvider extends ChangeNotifier {
   }
 
 
+  void blockUser(String userId,String status){
+    db.collection("USERS").doc(userId).set({"STATUS":status},SetOptions(merge: true));
+    adminUsersList.where((element) => element.id==userId).first.status=status;
+    notifyListeners();
+  }
   void fetchUsers(){
+    adminUsersList.clear();
+          db.collection("USERS").where("TYPE",isEqualTo: "USER").get().then((value) {
 
+            if(value.docs.isNotEmpty){
+
+              for(var elements in value.docs){
+                Map<dynamic,dynamic> userMap = elements.data();
+                String userName = userMap["USER_NAME"]??"";
+                String userNumber = userMap["PHONE_NUMBER"]??"";
+                String userStatus = userMap["STATUS"]??"";
+                adminUsersList.add(UsersModel(userName, userNumber, userStatus, elements.id));
+              }
+              notifyListeners();
+
+            }
+
+
+          });
 
 
   }
 
+  List<UsersModel> adminUsersList=[];
   List<ItemModel> listMainImages=[];
   void fetchHomeScreenMainItems(){
     print("wejfciweb");
