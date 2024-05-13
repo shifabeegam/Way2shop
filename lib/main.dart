@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
         //home
 
 
-       home: SplashScreen(),
+       home: AdmnHome (),
 
 
 

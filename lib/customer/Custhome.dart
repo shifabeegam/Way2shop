@@ -57,6 +57,30 @@ class Custhome extends StatelessWidget {
               color: Color(0xffFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
+          Consumer<MainProvider>(
+              builder: (context3,value4,child) {
+                return InkWell(
+                  onTap: () {
+                    value4.fetchMyOrders(userId);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Ordersummery(
+
+                              )),
+                    );
+                  },
+                  child: Container(
+                      width: 30,
+                      // child:Icon(Icons),
+                      child: Image.asset("lib/icons/Order.png",color: Colors.white,)
+                  ),
+                );
+              }
+          ),
+          SizedBox(width: 20,),
+
           InkWell(
             onTap: () {
               if (loginProvider.loginedUserName.isEmpty) {
@@ -76,7 +100,7 @@ class Custhome extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color:Colors.white)),
                 child: Icon(Icons.person_outline, color: Colors.white)),
-          )
+          ),
         ],
       ),
       body: Column(
@@ -272,28 +296,7 @@ class Custhome extends StatelessWidget {
                         //      // child: Image.asset("lib/icons/cart.png")
                         //   ),
                         // ),
-                        Consumer<MainProvider>(
-                          builder: (context3,value4,child) {
-                            return InkWell(
-                              onTap: () {
-                                value4.fetchMyOrders(userId);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                       Ordersummery(
 
-                                      )),
-                                );
-                              },
-                              child: Container(
-                                  width: 30,
-                               // child:Icon(Icons),
-                                 child: Image.asset("lib/icons/Order.png",color: Colors.black,)
-                              ),
-                            );
-                          }
-                        ),
                       ],
                     ),
                     Consumer<MainProvider>(builder: (context, value, child) {

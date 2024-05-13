@@ -13,14 +13,12 @@ class CategoryList extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      decoration: BoxDecoration(//color: Color(0xff650015),
-        gradient: LinearGradient(
-          colors: [ Colors.white,Color(0xff650015)],
-
-          begin: Alignment.bottomCenter, end: Alignment.topCenter,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/img_3.png"),
+          fit: BoxFit.cover,
         ),
       ),
-
       child: Scaffold(
         floatingActionButton: Consumer<MainProvider>(
           builder: (context,value,child) {
@@ -39,18 +37,21 @@ class CategoryList extends StatelessWidget {
             return ListView.builder(
               itemCount: value.categorylist.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    width: 180,
-                    height: 180,
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Image.network(value.categorylist[index].photo,scale: 5,),
-                        Text(value.categorylist[index].name)
-                      ],
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(
+                      width: 180,
+                      height: 180,
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Image.network(value.categorylist[index].photo,scale: 5,),
+                          Text(value.categorylist[index].name)
+                        ],
+                      ),
+
+
                     ),
-
-
                   );
 
                 },);
